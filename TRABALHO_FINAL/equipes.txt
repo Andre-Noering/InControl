@@ -1,0 +1,9 @@
+EQ1 - Maykon, João, André S, Nathan, Luan = Venda de ingresso / Avaliação - CINEMA
+
+EQ2 - Maria, Felipe , Marlon, Gabriela, Eder = Transportadora (controle de frota e status de pedido)
+
+EQ3 - Matheus, Riciéri, Murilo, William, Samuel = despesas???
+
+EQ4 - Julia, Thais, Cristian, Eduardo, André F = pets????
+
+EQ5 - Ana, Débora, Geovane, Giovani, Larissa = voluntarios
