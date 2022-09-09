@@ -1,4 +1,9 @@
-package trabalhofinal.model.entity;
+package com.entra21.LojaSimulator.model.entity;
+
+import lombok.Data;
+
+import javax.persistence.*;
+
 @Data
 @Entity
 @Table(name="item")

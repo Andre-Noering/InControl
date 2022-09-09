@@ -1,4 +1,9 @@
-package trabalhofinal.model.entity;
+package com.entra21.LojaSimulator.model.entity;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -10,5 +15,5 @@ public class PedidoCompraEntity {
 	private Long id;
 	
 	@Column(name="data")
-	private Date data;
+	private LocalDate data;
 }
