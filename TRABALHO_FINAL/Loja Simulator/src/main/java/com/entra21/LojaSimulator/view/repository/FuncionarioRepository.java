@@ -1,4 +1,4 @@
-package com.entra21.LojaSimulator;
+package com.entra21.LojaSimulator.view.repository;
 
 import com.entra21.LojaSimulator.model.entity.FuncionarioEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
