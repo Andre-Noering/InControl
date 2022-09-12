@@ -2,8 +2,6 @@ package com.entra21.LojaSimulator.model.entity;
 
 import lombok.Data;
 
-import trabalhofinal.model.entity.ItemEntity;
-
 import javax.persistence.*;
 
 @Data
