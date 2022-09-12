@@ -2,7 +2,7 @@ package com.entra21.LojaSimulator.model.entity;
 
 import lombok.Data;
 
-import trabalhofinal.model.entity.PedidoCompraEntity;
+
 
 import javax.persistence.*;
 
