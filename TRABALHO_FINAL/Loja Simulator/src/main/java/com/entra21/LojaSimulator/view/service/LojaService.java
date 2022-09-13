@@ -8,6 +8,8 @@ import com.entra21.LojaSimulator.model.entity.LojaEntity;
 import com.entra21.LojaSimulator.model.entity.PessoaEntity;
 import com.entra21.LojaSimulator.view.repository.FornecedorRepository;
 import com.entra21.LojaSimulator.view.repository.FuncionarioRepository;
+import com.entra21.LojaSimulator.model.dto.LojaDTO;
+import com.entra21.LojaSimulator.model.entity.LojaEntity;
 import com.entra21.LojaSimulator.view.repository.LojaRepository;
 import com.entra21.LojaSimulator.view.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class LojaService {
+
     @Autowired
     private LojaRepository lojaRepository;
     @Autowired
@@ -60,12 +63,4 @@ public class LojaService {
         }
         return listaNomes;
     }
-
-
-
-
-
-
-
-
 }

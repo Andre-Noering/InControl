@@ -21,11 +21,11 @@ public class PedidoCompraItemFornecedorEntity {
     @Column(name = "qtde")
     private Integer quantidade;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn (name = "id_item_fornecedor", referencedColumnName = "id")
     private ItemFornecedorEntity idItemFornecedor;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_pedido_compra", referencedColumnName = "id")
     private PedidoCompraEntity idPedidoCompra;
 }
