@@ -14,13 +14,4 @@ public class LojaSimulatorApplication {
 		SpringApplication.run(LojaSimulatorApplication.class, args);
 	}
 
-	@Configuration
-	public static class SecurityConfi {
-
-		@Bean
-		public static PasswordEncoder passwordEncoder() {
-			return NoOpPasswordEncoder.getInstance();
-		}
-	}
-
 }

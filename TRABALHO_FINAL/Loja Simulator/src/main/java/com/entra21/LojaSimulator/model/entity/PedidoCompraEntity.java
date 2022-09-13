@@ -16,4 +16,9 @@ public class PedidoCompraEntity {
 	
 	@Column(name="data")
 	private LocalDate data;
+
+	@OneToOne
+	@JoinColumn(name = "id_funcionario", referencedColumnName = "id")
+	private FuncionarioEntity funcionario;
+
 }
