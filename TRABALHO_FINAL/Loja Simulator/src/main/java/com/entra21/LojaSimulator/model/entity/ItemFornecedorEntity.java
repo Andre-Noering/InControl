@@ -17,11 +17,11 @@ public class ItemFornecedorEntity {
     @Column(name = "valor_compra")
     private Double valorCompra;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn (name = "id_item", referencedColumnName = "id")
     private ItemEntity idItem;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "id_fornecedor", referencedColumnName = "id")
     private FornecedorEntity idFornecedor;
 
