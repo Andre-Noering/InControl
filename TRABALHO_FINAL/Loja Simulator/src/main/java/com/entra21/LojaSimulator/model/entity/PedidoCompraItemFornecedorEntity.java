@@ -26,8 +26,6 @@ public class PedidoCompraItemFornecedorEntity {
     private ItemFornecedorEntity idItemFornecedor;
 
     @ManyToOne
-
-
     @JoinColumn(name = "id_pedido_compra", referencedColumnName = "id")
     private PedidoCompraEntity idPedidoCompra;
 }
