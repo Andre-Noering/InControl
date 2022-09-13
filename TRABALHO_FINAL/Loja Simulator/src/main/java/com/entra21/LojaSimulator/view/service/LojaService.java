@@ -57,8 +57,8 @@ public class LojaService {
         List<PessoaPayloadDTO> listaNomes = null;
         for(FuncionarioEntity f : getLoja(id).getFuncionarios()){
             PessoaPayloadDTO p = new PessoaPayloadDTO();
-            p.setNome(f.getFuncionarioPessoa().getNome());
-            p.setSobrenome(f.getFuncionarioPessoa().getSobrenome());
+            p.setNome(f.getNome());
+            p.setSobrenome(f.getSobrenome());
             listaNomes.add(p);
         }
         return listaNomes;
