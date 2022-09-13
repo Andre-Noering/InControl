@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0d72c8b1-ba1e-4d7a-abf0-c6f77be03b4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PROJETO-FINAL-ENTRA21.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PROJETO-FINAL-ENTRA21.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/FornecedorEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/FornecedorEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/VendaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/VendaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/LojaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/LojaService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/PessoaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/PessoaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

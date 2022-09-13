@@ -1,12 +1,15 @@
 package com.entra21.LojaSimulator.view.service;
 
+import com.entra21.LojaSimulator.model.dto.PessoaDTO;
 import com.entra21.LojaSimulator.model.entity.PessoaEntity;
 import com.entra21.LojaSimulator.view.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +22,7 @@ public class PessoaService {
     public List<PessoaDTO> getAll() {
         return pessoaRepository.findAll().stream().map(fr -> {
             PessoaDTO dto = new PessoaDTO();
-            dto.setId(fr.getId());
+            dto.setIdPessoa(fr.getId());
             dto.setNome(fr.getNome());
             dto.setSobrenome(fr.getSobrenome());
             dto.setTelefone(fr.getTelefone());
@@ -28,31 +31,31 @@ public class PessoaService {
         }).collect(Collectors.toList());
     }
 
-    public void save( "//"  input) {
+    public void save(@RequestBody PessoaDTO input) {
         PessoaEntity newEntity = new PessoaEntity();
         newEntity.setNome(input.getNome());
         pessoaRepository.save(newEntity);
     }
 
     public PessoaDTO getById(Long id) {
-        PessoaEntity e = PessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado!"));
+        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado!"));
         PessoaDTO dto = new PessoaDTO();
-        dto.setId(e.getId());
+        dto.setIdPessoa(e.getId());
         dto.setNome(e.getNome());
         return dto;
     }
 
     public void delete(Long id) {
-        pessoaRepository.deleteAllById(id);
+        pessoaRepository.deleteAllById(Collections.singleton(id));
     }
 
     public PessoaDTO update(Long id, String novoNome) {
-        PessoaEntityEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado!"));
+        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado!"));
         e.setNome(novoNome);
         e = pessoaRepository.save(e);
         PessoaDTO dto = new PessoaDTO();
         dto.setNome(e.getNome());
-        dto.setId(e.getId());
+        dto.setIdPessoa(e.getId());
         return dto;
     }
 }
