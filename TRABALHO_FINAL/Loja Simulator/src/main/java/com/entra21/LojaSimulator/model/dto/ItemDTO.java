@@ -1,7 +1,6 @@
 package com.entra21.LojaSimulator.model.dto;
 
 import lombok.Data;
-
 import javax.persistence.Column;
 
 @Data

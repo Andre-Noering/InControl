@@ -20,11 +20,9 @@ public class ItemVendaEntity {
     @Column(name = "valor_unitario")
     private Double valor_unitario;
 
-    @OneToMany
-    @JoinColumn(name="id_venda",referencedColumnName = "id")
-    private Set<ItemEntity> itens;
+    @OneToMany(mappedBy = "itens")
+    private ItemEntity item;
 
-    @OneToMany
-    @JoinColumn(name="id_item",referencedColumnName = "id")
-    private Set<VendaEntity> vendas;
+    @OneToMany(mappedBy = "vendas")
+    private VendaEntity venda;
 }
