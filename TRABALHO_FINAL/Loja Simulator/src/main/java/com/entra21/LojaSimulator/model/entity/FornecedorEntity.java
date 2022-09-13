@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name="fornecedor")
+
 public class FornecedorEntity {
     @Column(name = "id", nullable = false)
     @Id
