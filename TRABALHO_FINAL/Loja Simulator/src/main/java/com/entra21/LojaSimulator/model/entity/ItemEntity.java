@@ -20,9 +20,9 @@ public class ItemEntity {
 	private Double valor;
 	
 	@Column(name="qtde_estoque", nullable = false)
-	private int qtde_estoque;
+	private Integer qtde_estoque;
 
 	@Column(name="qtde_alerta_estoque", nullable = false)
-	private int qtde_alerta_estoque;
+	private Integer qtde_alerta_estoque;
 
 }
