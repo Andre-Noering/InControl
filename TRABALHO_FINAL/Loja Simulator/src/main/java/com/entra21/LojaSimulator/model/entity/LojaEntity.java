@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -24,4 +25,13 @@ public class LojaEntity {
 
     @Column(name="valor_caixa")
     private Double valor_caixa;
+
+    @OneToMany
+    @JoinColumn(name="id_funcionario", referencedColumnName = "id")
+    private List<FuncionarioEntity> funcionarios;
+
+    @OneToMany
+    @JoinColumn(name="id_funcionario", referencedColumnName = "id")
+    private List<FuncionarioEntity> funcionarios;
+
 }

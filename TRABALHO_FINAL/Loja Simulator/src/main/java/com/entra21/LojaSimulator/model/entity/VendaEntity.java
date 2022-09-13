@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -24,4 +25,10 @@ public class VendaEntity {
     @ManyToOne
     @JoinColumn(name = "id_vendedor",referencedColumnName = "id")
     private FuncionarioEntity funcionario;
+
+    @ManyToOne
+    @JoinColumn(name = "id", referencedColumnName = "id_venda")
+    private List<ItemVendaEntity> itens;
+
+
 }
