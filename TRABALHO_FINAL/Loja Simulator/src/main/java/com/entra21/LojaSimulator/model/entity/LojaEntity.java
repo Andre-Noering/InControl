@@ -30,8 +30,5 @@ public class LojaEntity {
     @JoinColumn(name="id_funcionario", referencedColumnName = "id")
     private List<FuncionarioEntity> funcionarios;
 
-    @OneToMany
-    @JoinColumn(name="id_funcionario", referencedColumnName = "id")
-    private List<FuncionarioEntity> funcionarios;
 
 }
