@@ -81,7 +81,7 @@ public class VendaService {
         i.setId(itemVendaDTO.getId());
         i.setVenda(v);
         i.setQtde(itemVendaDTO.getQtde());
-        i.setItem(itemService.getItemById(itemVendaDTO.getId_item()));
+        //i.setItem(itemService.getItemById(itemVendaDTO.getId_item()));
         v.getItens().add(i);
     }
 
