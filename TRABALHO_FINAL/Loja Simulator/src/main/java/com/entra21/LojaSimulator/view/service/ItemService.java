@@ -29,6 +29,15 @@ public class ItemService {
 		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
 		itemRepository.save(newEntity);
 	}
+	public ItemEntity build(ItemDTO input){
+		ItemEntity newEntity = new ItemEntity();
+		newEntity.setId(input.getId());
+		newEntity.setNome(input.getNome());
+		newEntity.setValor(input.getValor());
+		newEntity.setQtde_estoque(input.getQtde_estoque());
+		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		return newEntity;
+	}
 
 	public void delete(Long id) {
 		itemRepository.deleteById(id);
