@@ -7,12 +7,11 @@ import com.entra21.LojaSimulator.model.dto.VendaPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
 import com.entra21.LojaSimulator.view.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class VendaService {
@@ -71,9 +70,9 @@ public class VendaService {
     //Retorna o valor total da Venda
     public Double getValorTotal(Long id){
         VendaEntity v = getVenda(id);
-        Double valorTotal= 0.0;
-        v.getItens().forEach(i -> valorTotal+=i.getValor_unitario()*i.getQtde());
-        return valorTotal;
+        AtomicReference<Double> valorTotal= new AtomicReference<>(0.0);
+        v.getItens().forEach(i -> valorTotal.updateAndGet(v1 -> v1 + i.getValor_unitario() * i.getQtde()));
+        return valorTotal.get();
     }
 
     //Retorna os dados do cliente daquela venda

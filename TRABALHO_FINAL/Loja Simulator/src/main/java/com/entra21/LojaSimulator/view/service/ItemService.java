@@ -57,8 +57,7 @@ public class ItemService {
 		if (novaQtdeAlerta != null) {
 			i.setQtde_alerta_estoque(novaQtdeAlerta);
 		}
-		ItemDTO dto = new ItemDTO(i.getId(),i.getNome(),i.getValor(),i.getQtde_estoque(),i.getQtde_alerta_estoque());
-		return dto;
+		return new ItemDTO(i.getId(),i.getNome(),i.getValor(),i.getQtde_estoque(),i.getQtde_alerta_estoque());
 	}
 
 	//Retorna todos os itens de uma loja

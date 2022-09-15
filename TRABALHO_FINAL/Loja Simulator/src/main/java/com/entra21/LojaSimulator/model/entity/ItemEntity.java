@@ -32,5 +32,9 @@ public class ItemEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "id", referencedColumnName = "id_item")
-	private List<VendaEntity> vendas;
+	private List<ItemVendaEntity> vendas;
+
+	@ManyToOne
+	@JoinColumn(name = "id", referencedColumnName = "id_item")
+	private List<ItemFornecedorEntity> fornecedores;
 }
