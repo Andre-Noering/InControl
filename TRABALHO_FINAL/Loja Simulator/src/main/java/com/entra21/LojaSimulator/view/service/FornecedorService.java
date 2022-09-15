@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class FornecedorService {
     @Autowired
@@ -31,15 +34,39 @@ public class FornecedorService {
     }
 
     public FornecedorDTO update(Long id, String novaRazaoSocial, String novoContato) {
-        FornecedorEntity i = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+        FornecedorEntity i = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
         if (novaRazaoSocial != null) {
             i.setRazao_social(novaRazaoSocial);
         }
         if (novoContato != null) {
             i.setContato(novoContato);
         }
-        FornecedorDTO dto = new FornecedorDTO(i.getId(),i.getRazao_social(),i.getCnpj(),i.getContato(),i.getLoja());
-        return dto;
+        return new FornecedorDTO(i.getId(),i.getRazao_social(),i.getCnpj(),i.getContato(),i.getLoja());
     }
 
+    public FornecedorDTO getById(Long id) {
+        FornecedorEntity f = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
+        return new FornecedorDTO(f.getId(),f.getRazao_social(),f.getCnpj(),f.getContato(),f.getLoja());
+    }
+
+    public List<FornecedorDTO> getAllByLoja(Long idLoja) {
+        List<FornecedorEntity> list = fornecedorRepository.findAllByLoja_Id(idLoja);
+        return list.stream().map(f -> new Fornecedor
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                DTO(f.getId(), f.getRazao_social(), f.getCnpj(), f.getContato(), f.getLoja())).collect(Collectors.toList());
+    }
 }

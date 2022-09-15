@@ -1,11 +1,11 @@
 package com.entra21.LojaSimulator.view.service;
 
-import com.entra21.LojaSimulator.model.dto.*;
-import com.entra21.LojaSimulator.model.entity.*;
-import com.entra21.LojaSimulator.view.repository.FuncionarioRepository;
-import com.entra21.LojaSimulator.view.repository.PessoaRepository;
+import com.entra21.LojaSimulator.model.dto.ItemPayloadDTO;
+import com.entra21.LojaSimulator.model.dto.ItemVendaDTO;
+import com.entra21.LojaSimulator.model.dto.PessoaPayloadDTO;
+import com.entra21.LojaSimulator.model.dto.VendaPayloadDTO;
+import com.entra21.LojaSimulator.model.entity.VendaEntity;
 import com.entra21.LojaSimulator.view.repository.VendaRepository;
-import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -20,62 +20,76 @@ public class VendaService {
     private VendaRepository vendaRepository;
 
     @Autowired
-    private FuncionarioRepository funcionarioRepository;
+    private FuncionarioService funcionarioService;
 
     @Autowired
     private ItemService itemService;
     @Autowired
-    private PessoaRepository pessoaRepository;
+    private PessoaService pessoaService;
+
+    @Autowired
+    private ItemVendaService itemVendaService;
+
     public VendaEntity getVenda(Long id){ //Retorna a loja com aquele ID
         return vendaRepository.findById(id).orElseThrow();
     }
-    public List<ItemPayloadDTO> getItens(Long id){ //Retorna nome, valor e qtde de cada item naquela venda
-        List<ItemVendaEntity> i= getVenda(id).getItens();
+
+    public void save(VendaPayloadDTO vendaDTO){
+        VendaEntity venda = new VendaEntity();
+        venda.setData(vendaDTO.getData());
+        venda.setPessoa(pessoaService.createPessoa(pessoaService.findPessoaById(vendaDTO.getId_cliente())));
+        venda.setFuncionario(funcionarioService.createFuncionario(funcionarioService.findFuncById(vendaDTO.getId_vendedor())));
+        vendaRepository.save(venda);
+    }
+
+    public void delete(Long id){
+        vendaRepository.deleteById(id);
+    }
+
+    //Retorna nome, valor e qtde de cada item naquela venda
+    public List<ItemPayloadDTO> getItens(Long id){
         List<ItemPayloadDTO> listaItens = null;
-        for(ItemVendaEntity f:i){
+        getVenda(id).getItens().forEach( f -> {
             ItemPayloadDTO a = new ItemPayloadDTO();
             a.setNome(f.getItem().getNome());
             a.setValor(f.getValor_unitario());
             a.setQtde(f.getQtde());
             listaItens.add(a);
-        }
+        });
         return listaItens;
     }
 
-    public PessoaPayloadDTO getVendedor(Long id){ //Retorna o vendedor que efetuou a venda
+    //Retorna o vendedor que efetuou a venda
+    public PessoaPayloadDTO getVendedor(Long id){
         VendaEntity v = getVenda(id);
-        PessoaEntity f = pessoaRepository.findById(v.getFuncionario().getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
         PessoaPayloadDTO p = new PessoaPayloadDTO();
-        p.setNome(f.getNome());
-        p.setSobrenome(f.getSobrenome());
+        p.setNome(funcionarioService.createFuncionario(funcionarioService.findFuncById(v.getFuncionario().getId()).getNome());
+        p.setSobrenome(funcionarioService.createFuncionario(funcionarioService.findFuncById(v.getFuncionario().getId())).getSobrenome());
         return p;
     }
 
+    //Retorna o valor total da Venda
     public Double getValorTotal(Long id){
         VendaEntity v = getVenda(id);
         Double valorTotal= 0.0;
-        for(ItemVendaEntity i:v.getItens()){
-            valorTotal+=i.getValor_unitario()*i.getQtde();
-        }
+        v.getItens().forEach(i -> valorTotal+=i.getValor_unitario()*i.getQtde());
         return valorTotal;
     }
+
+    //Retorna os dados do cliente daquela venda
     public PessoaPayloadDTO getCliente(Long id){
         VendaEntity v = getVenda(id);
-        PessoaEntity p = v.getPessoa();
         PessoaPayloadDTO pessoa = new PessoaPayloadDTO();
-        pessoa.setNome(p.getNome());
-        pessoa.setSobrenome(p.getSobrenome());
-        pessoa.setCpf(p.getCpf());
-        pessoa.setTelefone(p.getTelefone());
+        pessoa.setNome(v.getPessoa().getNome());
+        pessoa.setSobrenome(v.getPessoa().getSobrenome());
+        pessoa.setCpf(v.getPessoa().getCpf());
+        pessoa.setTelefone(v.getPessoa().getTelefone());
         return pessoa;
     }
-    public void createVenda(VendaPayloadDTO vendaDTO){
-        VendaEntity venda = new VendaEntity();
-        venda.setData(vendaDTO.getData());
-        venda.setPessoa(pessoaRepository.findById(vendaDTO.getId_cliente()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado!")));
-        venda.setFuncionario(funcionarioRepository.findById(vendaDTO.getId_vendedor()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!")));
-    }
+
+    //Adiciona um itemVenda na lista de itens daquela venda
     public void addItemVenda(@RequestBody ItemVendaDTO itemVendaDTO){ //Adiciona um item na lista de itens daquela venda
+<<<<<<< HEAD
         VendaEntity v = getVenda(itemVendaDTO.getId_venda());
         ItemVendaEntity i = new ItemVendaEntity();
         i.setId(itemVendaDTO.getId());
@@ -83,14 +97,18 @@ public class VendaService {
         i.setQtde(itemVendaDTO.getQtde());
 //        i.setItem(itemService.getItemById(itemVendaDTO.getId_item())); Método do Item Venda
         v.getItens().add(i);
+=======
+        itemVendaService.save(itemVendaDTO);
+>>>>>>> 1c5b52cfe6470a26a8270908bbd7d37be579a3c6
     }
 
-    public void updateQtde(Long id_item, Long id_venda, int qtde_nova){ //Muda a quantidade do item (id_item) na venda (id_venda) para (qtde_nova)
-        VendaEntity v = getVenda(id_venda);
-        v.getItens().stream().filter(i -> i.getId()==id_item).findFirst().orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!")).setQtde(qtde_nova);
+    //Muda a quantidade do item
+    public void updateQtde(Long id_item, int qtde_nova){ //Muda a quantidade do item (id_item) na venda (id_venda) para (qtde_nova)
+        itemVendaService.getById(id_item).setQtde(qtde_nova);
     }
-    public void deleteItemVenda(Long id_item, Long id_venda){ //Remove o item com o id(id_item) da venda com o id(id_venda)
-        VendaEntity v = getVenda(id_venda);
-        v.getItens().removeIf( i -> i.getId()==id_item);
+
+
+    public void deleteItemVenda(Long id_item){ //Remove o item com o id(id_item) da venda com o id(id_venda)
+        itemVendaService.delete(id_item);
     }
 }
