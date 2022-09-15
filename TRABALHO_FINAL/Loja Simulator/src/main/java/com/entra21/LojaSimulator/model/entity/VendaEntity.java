@@ -26,7 +26,7 @@ public class VendaEntity {
     private PessoaEntity pessoa;
 
     @ManyToOne
-    @JoinColumn(name = "id_vendedor",referencedColumnName = "id_pessoa")
+    @JoinColumn(name = "id_venda",referencedColumnName = "id_pessoa")
     @JsonIgnore
     private FuncionarioEntity funcionario;
 

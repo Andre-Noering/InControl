@@ -70,8 +70,8 @@ public class VendaService {
     public void createVenda(VendaPayloadDTO vendaDTO){
         VendaEntity venda = new VendaEntity();
         venda.setData(vendaDTO.getData());
-        venda.setPessoa(pessoaService.createPessoa(pessoaService.findPessoaById(vendaDTO.getId_cliente())));
-        venda.setFuncionario(funcionarioService.createFuncionario(funcionarioService.findFuncById(vendaDTO.getId_vendedor())));
+        venda.setPessoa(pessoaService.createPessoa(pessoaService.getById(vendaDTO.getId_cliente())));
+        venda.setFuncionario(funcionarioService.createFuncionario(findFuncById(vendaDTO.getId_vendedor())));
     }
     public void addItemVenda(@RequestBody ItemVendaDTO itemVendaDTO){ //Adiciona um item na lista de itens daquela venda
         VendaEntity v = getVenda(itemVendaDTO.getId_venda());
