@@ -23,9 +23,9 @@ public class PedidoCompraItemFornecedorEntity {
 
     @ManyToOne
     @JoinColumn (name = "id_item_fornecedor", referencedColumnName = "id")
-    private ItemFornecedorEntity idItemFornecedor;
+    private ItemFornecedorEntity itemFornecedor;
 
     @ManyToOne
     @JoinColumn(name = "id_pedido_compra", referencedColumnName = "id")
-    private PedidoCompraEntity idPedidoCompra;
+    private PedidoCompraEntity pedidoCompra;
 }
