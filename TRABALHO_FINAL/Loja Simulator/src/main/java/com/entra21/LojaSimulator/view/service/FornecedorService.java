@@ -1,5 +1,6 @@
 package com.entra21.LojaSimulator.view.service;
 
+import com.entra21.LojaSimulator.model.dto.FornecedorContatoDTO;
 import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
@@ -11,10 +12,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class FornecedorService {
     @Autowired
     private FornecedorRepository fornecedorRepository;
+
+    @Autowired
+    private ItemFornecedorService itemFornecedorService;
 
     public void save(FornecedorDTO input) {
         FornecedorEntity newEntity = new FornecedorEntity();
@@ -31,7 +38,7 @@ public class FornecedorService {
     }
 
     public FornecedorDTO update(Long id, String novaRazaoSocial, String novoContato) {
-        FornecedorEntity i = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+        FornecedorEntity i = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
         if (novaRazaoSocial != null) {
             i.setRazao_social(novaRazaoSocial);
         }
@@ -42,4 +49,21 @@ public class FornecedorService {
         return dto;
     }
 
+    public List<FornecedorEntity> getItensById(Long id) {
+        FornecedorEntity fornecedor = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
+        return fornecedor.getItens().stream().map(i -> {
+            return itemFornecedorService.getItemById(i.getIdItem());
+        }).collect(Collectors.toList());
+    }
+
+    public List<FornecedorDTO> getAllByLoja(Long idLoja) {
+        List<FornecedorEntity> list = fornecedorRepository.findAllByLoja_Id(idLoja);
+        return list.stream().map(f -> new FornecedorDTO(f.getId(),f.getRazao_social(),f.getCnpj(),f.getContato(),f.getLoja())).collect(Collectors.toList());
+    }
+
+    public String getContatoById(Long id) {
+        FornecedorEntity fornecedor = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
+        String contato = fornecedor.getContato();
+        return new FornecedorContatoDTO(contato).getContato();
+    }
 }

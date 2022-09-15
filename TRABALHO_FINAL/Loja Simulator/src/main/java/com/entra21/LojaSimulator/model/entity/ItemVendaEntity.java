@@ -20,9 +20,11 @@ public class ItemVendaEntity {
     @Column(name = "valor_unitario")
     private Double valor_unitario;
 
-    @OneToMany(mappedBy = "itens")
+    @ManyToOne
+    @JoinColumn(name="id_item",referencedColumnName = "id")
     private ItemEntity item;
 
-    @OneToMany(mappedBy = "vendas")
+    @ManyToOne
+    @JoinColumn(name="id_venda",referencedColumnName = "id")
     private VendaEntity venda;
 }
