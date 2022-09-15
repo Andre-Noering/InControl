@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -26,4 +27,8 @@ public class FornecedorEntity {
     @ManyToOne
     @JoinColumn(name="id_loja", referencedColumnName = "id", nullable = false)
     private LojaEntity loja;
+
+    @OneToMany
+    @JoinColumn(name = "id" , referencedColumnName = "id_fornecedor", nullable = false)
+    private List<ItemFornecedorEntity> itens;
 }
