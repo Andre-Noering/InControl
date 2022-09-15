@@ -36,8 +36,8 @@ public class VendaService {
     public void save(VendaPayloadDTO vendaDTO){
         VendaEntity venda = new VendaEntity();
         venda.setData(vendaDTO.getData());
-        venda.setPessoa(pessoaService.createPessoa(pessoaService.findPessoaById(vendaDTO.getId_cliente())));
-        venda.setFuncionario(funcionarioService.createFuncionario(funcionarioService.findFuncById(vendaDTO.getId_vendedor())));
+        venda.setPessoa(pessoaService.createPessoa(pessoaService.finPessoaById(vendaDTO.getId_cliente())));
+        venda.setFuncionario(funcionarioService.build(funcionarioService.finFuncById(vendaDTO.getId_vendedor())));
         vendaRepository.save(venda);
     }
 
@@ -62,8 +62,8 @@ public class VendaService {
     public PessoaPayloadDTO getVendedor(Long id){
         VendaEntity v = getVenda(id);
         PessoaPayloadDTO p = new PessoaPayloadDTO();
-        p.setNome(funcionarioService.createFuncionario(funcionarioService.findFuncById(v.getFuncionario().getId()).getNome());
-        p.setSobrenome(funcionarioService.createFuncionario(funcionarioService.findFuncById(v.getFuncionario().getId())).getSobrenome());
+        p.setNome(funcionarioService.build(funcionarioService.finFuncById(v.getFuncionario().getId())).getNome());
+        p.setSobrenome(funcionarioService.build(funcionarioService.finFuncById(v.getFuncionario().getId())).getSobrenome());
         return p;
     }
 
