@@ -34,7 +34,8 @@ public class ItemFornecedorService {
     }
 
     public void delete(Long id){
-        itemFornecedorRepository.deleteById(id);
+        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
+        itemFornecedorRepository.delete(itemFornecedorEntity);
     }
 
     public void update(Long id,Double valor_compra){

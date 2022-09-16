@@ -61,7 +61,8 @@ public class PessoaService {
 
 
     public void delete(Long id) {
-        pessoaRepository.deleteAllById(Collections.singleton(id));
+        PessoaEntity pessoa = getPessoaById(id);
+        pessoaRepository.delete(pessoa);
     }
 
     public PessoaDTO update(Long id, String novoNome) {

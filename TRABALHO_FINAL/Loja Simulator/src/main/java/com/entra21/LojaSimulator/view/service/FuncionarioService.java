@@ -60,8 +60,6 @@ public class FuncionarioService implements UserDetailsService {
         funcionario.getVendas().add(venda);
     }
 
-
-
     //Metodo Save - Criando uma venda em um funcionário
     public void savePedidoCompra(Long id){
         FuncionarioEntity funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
