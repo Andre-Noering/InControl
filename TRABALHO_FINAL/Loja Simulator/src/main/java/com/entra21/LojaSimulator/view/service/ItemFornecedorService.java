@@ -24,13 +24,13 @@ public class ItemFornecedorService {
         return itemFornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item de Fornecedor não encontrada!"));
     }
     public void save(ItemFornecedorDTO itemFornecedorDTO){
-        ItemFornecedorEntity i = new ItemFornecedorEntity();
-        i.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getId_fornecedor()));
-        i.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getId_item())));
-        i.setValorCompra(itemFornecedorDTO.getValor_compra());
-        i.setId(itemFornecedorDTO.getId());
-        i.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getId_fornecedor()));
-        itemFornecedorRepository.save(i);
+        ItemFornecedorEntity itemFornecedorEntity = new ItemFornecedorEntity();
+        itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getId_fornecedor()));
+        itemFornecedorEntity.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getId_item())));
+        itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValor_compra());
+        itemFornecedorEntity.setId(itemFornecedorDTO.getId());
+        itemFornecedorEntity.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getId_fornecedor()));
+        itemFornecedorRepository.save(itemFornecedorEntity);
     }
 
     public void delete(Long id){
@@ -38,9 +38,9 @@ public class ItemFornecedorService {
     }
 
     public void update(Long id,Double valor_compra){
-        ItemFornecedorEntity i = getItemFornecedorById(id);
+        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
         if(valor_compra!=null){
-            i.setValorCompra(valor_compra);
+            itemFornecedorEntity.setValorCompra(valor_compra);
         }
     }
 

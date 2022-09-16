@@ -52,53 +52,53 @@ public class ItemService {
 	}
 
 	public ItemDTO update(Long id, String novoNome, Double novoValor, Integer novaQtde, Integer novaQtdeAlerta) {
-		ItemEntity i = getItemById(id);
+		ItemEntity itemEntity = getItemById(id);
 		if (novoNome != null) {
-			i.setNome(novoNome);
+			itemEntity.setNome(novoNome);
 		}
 		if (novoValor != null) {
-			i.setValor(novoValor);
+			itemEntity.setValor(novoValor);
 		}
 		if (novaQtde != null) {
-			i.setQtde_estoque(novaQtde);
+			itemEntity.setQtde_estoque(novaQtde);
 		}
 		if (novaQtdeAlerta != null) {
-			i.setQtde_alerta_estoque(novaQtdeAlerta);
+			itemEntity.setQtde_alerta_estoque(novaQtdeAlerta);
 		}
-		return new ItemDTO(i.getId(),i.getNome(),i.getValor(),i.getQtde_estoque(),i.getQtde_alerta_estoque());
+		return new ItemDTO(itemEntity.getId(),itemEntity.getNome(),itemEntity.getValor(),itemEntity.getQtde_estoque(),itemEntity.getQtde_alerta_estoque());
 	}
 
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
-		List<ItemEntity> list = itemRepository.findAllByLoja_Id(idLoja);
-		return list.stream().map(i -> {
-			ItemDTO dto = new ItemDTO(i.getId(), i.getNome(), i.getValor(), i.getQtde_estoque(), i.getQtde_alerta_estoque());
-			return dto;
+		List<ItemEntity> listaItens = itemRepository.findAllByLoja_Id(idLoja);
+		return listaItens.stream().map(item -> {
+			ItemDTO itemDTO = new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
+			return itemDTO;
 		}).collect(Collectors.toList());
 	}
 
 	//Retorna item pela id
 	public ItemDTO getDTOById(Long id) {
-		ItemEntity i = getItemById(id);
-		return new ItemDTO(i.getId(), i.getNome(), i.getValor(), i.getQtde_estoque(), i.getQtde_alerta_estoque());
+		ItemEntity itemEntity = getItemById(id);
+		return new ItemDTO(itemEntity.getId(), itemEntity.getNome(), itemEntity.getValor(), itemEntity.getQtde_estoque(), itemEntity.getQtde_alerta_estoque());
 	}
 
 	//Retorna o valor do item pelo id
 	public ItemValorDTO getValorById(Long id) {
-		ItemEntity i = getItemById(id);
-		return new ItemValorDTO(i.getValor());
+		ItemEntity itemEntity = getItemById(id);
+		return new ItemValorDTO(itemEntity.getValor());
 	}
 
 	//Retorna quantidade de estoque pelo id
 	public ItemQtdeEstoqueDTO getQtdeEstoqueById(Long id) {
-		ItemEntity i =  getItemById(id);
-		return new ItemQtdeEstoqueDTO(i.getQtde_estoque());
+		ItemEntity itemEntity =  getItemById(id);
+		return new ItemQtdeEstoqueDTO(itemEntity.getQtde_estoque());
 	}
 
 	//Diz se o estoque está em alerta pelo id do item
 	public boolean alertaById(Long id) {
-		ItemEntity i = getItemById(id);
-		if (i.getQtde_estoque() <= i.getQtde_alerta_estoque()) {
+		ItemEntity itemEntity = getItemById(id);
+		if (itemEntity.getQtde_estoque() <= itemEntity.getQtde_alerta_estoque()) {
 			return true;
 		} else {
 			return false;
@@ -106,9 +106,9 @@ public class ItemService {
 	}
 
 	public List<FornecedorEntity> getFornecedores(Long id) {
-		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
-		return i.getFornecedores().stream().map(f -> {
-			return itemFornecedorService.getFornecedorById(f.getFornecedor().getId());
+		ItemEntity itemEntity = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		return itemEntity.getFornecedores().stream().map(fornecedor -> {
+			return itemFornecedorService.getFornecedorById(fornecedor.getFornecedor().getId());
 		}).collect(Collectors.toList());
 	}
 }

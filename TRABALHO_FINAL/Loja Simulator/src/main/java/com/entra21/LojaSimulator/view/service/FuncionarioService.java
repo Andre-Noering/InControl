@@ -26,24 +26,24 @@ public class FuncionarioService implements UserDetailsService {
     //Método Get - Retornando o funcionário pelo ID
     public FuncionarioDTO findFuncById(Long id){
         FuncionarioEntity funcionario = getFuncionarioById(id);
-        FuncionarioDTO dto = new FuncionarioDTO();
-        dto.setId(funcionario.getId());
-        dto.setNome(funcionario.getNome());
-        dto.setSobrenome(funcionario.getSobrenome());
-        dto.setCpf(funcionario.getCpf());
-        dto.setTelefone(funcionario.getTelefone());
-        return dto;
+        FuncionarioDTO funcionarioDTO = new FuncionarioDTO();
+        funcionarioDTO.setId(funcionario.getId());
+        funcionarioDTO.setNome(funcionario.getNome());
+        funcionarioDTO.setSobrenome(funcionario.getSobrenome());
+        funcionarioDTO.setCpf(funcionario.getCpf());
+        funcionarioDTO.setTelefone(funcionario.getTelefone());
+        return funcionarioDTO;
     }
 
     //Build do funcionário
-    public FuncionarioEntity build(FuncionarioDTO input){
-        FuncionarioEntity newEntity = new FuncionarioEntity();
-        newEntity.setId(input.getId());
-        newEntity.setNome(input.getNome());
-        newEntity.setSobrenome(input.getSobrenome());
-        newEntity.setTelefone(input.getTelefone());
-        newEntity.setCpf(input.getCpf());
-        return newEntity;
+    public FuncionarioEntity build(FuncionarioDTO funcionarioDTO){
+        FuncionarioEntity newFuncionario = new FuncionarioEntity();
+        newFuncionario.setId(funcionarioDTO.getId());
+        newFuncionario.setNome(funcionarioDTO.getNome());
+        newFuncionario.setSobrenome(funcionarioDTO.getSobrenome());
+        newFuncionario.setTelefone(funcionarioDTO.getTelefone());
+        newFuncionario.setCpf(funcionarioDTO.getCpf());
+        return newFuncionario;
     }
 
     //Método Get - Retornando todas as vendas do funcionário filtrando o funcionário pelo iD
