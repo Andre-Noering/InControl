@@ -20,7 +20,7 @@ public class ItemVendaService {
     private VendaService vendaService;
     public void save(ItemVendaDTO itemVendaDTO){
         ItemVendaEntity i = new ItemVendaEntity();
-        i.setItem(itemService.build(itemService.getById(itemVendaDTO.getId_item())));
+        i.setItem(itemService.build(itemService.getDTOById(itemVendaDTO.getId_item())));
         i.setQtde(itemVendaDTO.getQtde());
         i.setValor_unitario(itemVendaDTO.getValor_unitario());
         i.setVenda(vendaService.getVenda(itemVendaDTO.getId_venda()));
@@ -31,7 +31,7 @@ public class ItemVendaService {
         itemVendaRepository.deleteById(id);
     }
     public ItemVendaDTO update(Long id, Integer qtde, Double valor_unitario){
-        ItemVendaEntity i = itemVendaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+        ItemVendaEntity i = getById(id);
         if(qtde!=null){
             i.setQtde(qtde);
         }
@@ -45,7 +45,7 @@ public class ItemVendaService {
     }
 
     public ItemVendaDTO getDTOById(Long id){
-       ItemVendaEntity i =itemVendaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+       ItemVendaEntity i = getById(id);
        return new ItemVendaDTO(i.getId(), i.getQtde(), i.getValor_unitario(), i.getItem().getId(), i.getVenda().getId());
     }
 

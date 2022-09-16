@@ -8,8 +8,10 @@ import com.entra21.LojaSimulator.model.dto.VendaPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
 import com.entra21.LojaSimulator.view.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -31,7 +33,7 @@ public class VendaService {
     private ItemVendaService itemVendaService;
 
     public VendaEntity getVenda(Long id){ //Retorna a loja com aquele ID
-        return vendaRepository.findById(id).orElseThrow();
+        return vendaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Venda não encontrada!"));
     }
 
     public void save(VendaPayloadDTO vendaDTO){
@@ -90,8 +92,8 @@ public class VendaService {
     public void createVenda(VendaPayloadDTO vendaDTO){
         VendaEntity venda = new VendaEntity();
         venda.setData(vendaDTO.getData());
-        venda.setPessoa(pessoaService.createPessoa(pessoaService.getById(vendaDTO.getId_cliente())));
-        venda.setFuncionario(funcionarioService.createFuncionario(findFuncById(vendaDTO.getId_vendedor())));
+        venda.setPessoa(pessoaService.build(pessoaService.getById(vendaDTO.getId_cliente())));
+        venda.setFuncionario(funcionarioService.build(funcionarioService.findFuncById(vendaDTO.getId_vendedor())));
     }
 
     //Adiciona um itemVenda na lista de itens daquela venda

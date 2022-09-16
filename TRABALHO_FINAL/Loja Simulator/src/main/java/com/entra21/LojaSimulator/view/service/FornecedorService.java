@@ -4,10 +4,7 @@ package com.entra21.LojaSimulator.view.service;
 import com.entra21.LojaSimulator.model.dto.FornecedorContatoDTO;
 import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
-import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
-import com.entra21.LojaSimulator.model.entity.ItemEntity;
-import com.entra21.LojaSimulator.model.entity.ItemFornecedorEntity;
-import com.entra21.LojaSimulator.model.entity.LojaEntity;
+import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.FornecedorRepository;
 import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +25,9 @@ public class FornecedorService {
     @Autowired
     private ItemFornecedorService itemFornecedorService;
 
+    public FornecedorEntity getFornecedorById(Long id){
+        return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
+    }
     public void save(FornecedorDTO input) {
         FornecedorEntity newEntity = new FornecedorEntity();
         newEntity.setId(input.getId());
@@ -43,7 +43,7 @@ public class FornecedorService {
     }
 
     public FornecedorDTO update(Long id, String novaRazaoSocial, String novoContato) {
-        FornecedorEntity i = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
+        FornecedorEntity i = getFornecedorById(id);
         if (novaRazaoSocial != null) {
             i.setRazao_social(novaRazaoSocial);
         }
@@ -55,9 +55,9 @@ public class FornecedorService {
     }
 
     public List<ItemFornecedorEntity> getItensById(Long id) {
-        FornecedorEntity fornecedor = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
+        FornecedorEntity fornecedor = getFornecedorById(id);
         return fornecedor.getItens().stream().map(i -> {
-            return itemFornecedorService.getById(i.getItem().getId());
+            return itemFornecedorService.getItemFornecedorById(i.getItem().getId());
         }).collect(Collectors.toList());
     }
 
@@ -71,7 +71,5 @@ public class FornecedorService {
         String contato = fornecedor.getContato();
         return new FornecedorContatoDTO(contato).getContato();
     }
-    public FornecedorEntity getFornecedorById(Long id){
-        return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
-    }
+
 }

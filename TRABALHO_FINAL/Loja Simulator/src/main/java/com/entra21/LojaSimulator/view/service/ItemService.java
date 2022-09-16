@@ -24,6 +24,10 @@ public class ItemService {
 	@Autowired
 	private ItemFornecedorService itemFornecedorService;
 
+	public ItemEntity getItemById(Long id){
+		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrada!"));
+	}
+
 	public void save(ItemDTO input) {
 		ItemEntity newEntity = new ItemEntity();
 		newEntity.setId(input.getId());
@@ -48,7 +52,7 @@ public class ItemService {
 	}
 
 	public ItemDTO update(Long id, String novoNome, Double novoValor, Integer novaQtde, Integer novaQtdeAlerta) {
-		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		ItemEntity i = getItemById(id);
 		if (novoNome != null) {
 			i.setNome(novoNome);
 		}
@@ -74,26 +78,26 @@ public class ItemService {
 	}
 
 	//Retorna item pela id
-	public ItemDTO getById(Long id) {
-		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+	public ItemDTO getDTOById(Long id) {
+		ItemEntity i = getItemById(id);
 		return new ItemDTO(i.getId(), i.getNome(), i.getValor(), i.getQtde_estoque(), i.getQtde_alerta_estoque());
 	}
 
 	//Retorna o valor do item pelo id
 	public ItemValorDTO getValorById(Long id) {
-		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		ItemEntity i = getItemById(id);
 		return new ItemValorDTO(i.getValor());
 	}
 
 	//Retorna quantidade de estoque pelo id
 	public ItemQtdeEstoqueDTO getQtdeEstoqueById(Long id) {
-		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		ItemEntity i =  getItemById(id);
 		return new ItemQtdeEstoqueDTO(i.getQtde_estoque());
 	}
 
 	//Diz se o estoque está em alerta pelo id do item
 	public boolean alertaById(Long id) {
-		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		ItemEntity i = getItemById(id);
 		if (i.getQtde_estoque() <= i.getQtde_alerta_estoque()) {
 			return true;
 		} else {

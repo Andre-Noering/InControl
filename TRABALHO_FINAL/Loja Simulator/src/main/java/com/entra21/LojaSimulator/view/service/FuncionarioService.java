@@ -2,10 +2,7 @@ package com.entra21.LojaSimulator.view.service;
 
 import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioVendaDTO;
-import com.entra21.LojaSimulator.model.entity.FuncionarioEntity;
-import com.entra21.LojaSimulator.model.entity.LojaEntity;
-import com.entra21.LojaSimulator.model.entity.PedidoCompraEntity;
-import com.entra21.LojaSimulator.model.entity.VendaEntity;
+import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +19,13 @@ public class FuncionarioService implements UserDetailsService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
+    public FuncionarioEntity getFuncionarioById(Long id){
+        return funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Funcionario não encontrada!"));
+    }
 
     //Método Get - Retornando o funcionário pelo ID
     public FuncionarioDTO findFuncById(Long id){
-        FuncionarioEntity funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
+        FuncionarioEntity funcionario = getFuncionarioById(id);
         FuncionarioDTO dto = new FuncionarioDTO();
         dto.setId(funcionario.getId());
         dto.setNome(funcionario.getNome());
@@ -54,7 +54,7 @@ public class FuncionarioService implements UserDetailsService {
 
     //Metodo Save - Criando uma venda em um funcionário
     public void saveVenda(Long id){
-        FuncionarioEntity funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
+        FuncionarioEntity funcionario = getFuncionarioById(id);
         VendaEntity venda = new VendaEntity();//chamar metodo
         venda.setFuncionario(funcionario);
         funcionario.getVendas().add(venda);
