@@ -33,16 +33,15 @@ public class PedidoCompraService {
 	public void delete(Long id){
 		pedidoCompraRepository.deleteById(id);
 	}
-	public PedidoCompraDTO update(Long id, LocalDate data){
-		PedidoCompraEntity pedido = getById(id);
+	public void update(Long id, LocalDate data){
+		PedidoCompraEntity pedidoCompraEntity = getById(id);
 		if(data!=null){
-			pedido.setData(data);
+			pedidoCompraEntity.setData(data);
 		}
-		return this.getDTOById(id);
 	}
 
 	public PedidoCompraDTO getDTOById(Long id){
-		PedidoCompraEntity pedido = pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
-		return new PedidoCompraDTO(pedido.getId(), pedido.getData(), pedido.getFuncionario().getId());
+		PedidoCompraEntity pedidoCompraEntity = pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
+		return new PedidoCompraDTO(pedidoCompraEntity.getId(), pedidoCompraEntity.getData(), pedidoCompraEntity.getFuncionario().getId());
 	}
 }

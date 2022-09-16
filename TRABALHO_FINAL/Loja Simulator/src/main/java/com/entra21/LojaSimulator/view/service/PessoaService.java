@@ -26,43 +26,37 @@ public class PessoaService {
 
     public List<PessoaDTO> getAll() {
         return pessoaRepository.findAll().stream().map(fr -> {
-            PessoaDTO dto = new PessoaDTO();
-            dto.setIdPessoa(fr.getId());
-            dto.setNome(fr.getNome());
-            dto.setSobrenome(fr.getSobrenome());
-            dto.setTelefone(fr.getTelefone());
-            dto.setCpf(fr.getCpf());
-            return dto;
+            PessoaDTO pessoaDTO = new PessoaDTO();
+            pessoaDTO.setIdPessoa(fr.getId());
+            pessoaDTO.setNome(fr.getNome());
+            pessoaDTO.setSobrenome(fr.getSobrenome());
+            pessoaDTO.setTelefone(fr.getTelefone());
+            pessoaDTO.setCpf(fr.getCpf());
+            return pessoaDTO;
         }).collect(Collectors.toList());
     }
 
-    public void save(@RequestBody PessoaDTO input) {
-        PessoaEntity newEntity = new PessoaEntity();
-        newEntity.setId(input.getIdPessoa());
-        newEntity.setNome(input.getNome());
-        newEntity.setSobrenome(input.getSobrenome());
-        newEntity.setTelefone(input.getTelefone());
-        newEntity.setCpf(input.getCpf());;
-        pessoaRepository.save(newEntity);
+    public void save(@RequestBody PessoaDTO pessoaDTO) {
+        pessoaRepository.save(build(pessoaDTO));
     }
     public PessoaEntity build(PessoaDTO input){
-        PessoaEntity newEntity = new PessoaEntity();
-        newEntity.setId(input.getIdPessoa());
-        newEntity.setNome(input.getNome());
-        newEntity.setSobrenome(input.getSobrenome());
-        newEntity.setTelefone(input.getTelefone());
-        newEntity.setCpf(input.getCpf());
-        return newEntity;
+        PessoaEntity newPessoa = new PessoaEntity();
+        newPessoa.setId(input.getIdPessoa());
+        newPessoa.setNome(input.getNome());
+        newPessoa.setSobrenome(input.getSobrenome());
+        newPessoa.setTelefone(input.getTelefone());
+        newPessoa.setCpf(input.getCpf());
+        return newPessoa;
     }
 
 
     //Retorna Pessoa pela id
-    public PessoaDTO getById(Long id) {
-        PessoaEntity e = getPessoaById(id);
-        PessoaDTO dto = new PessoaDTO();
-        dto.setIdPessoa(e.getId());
-        dto.setNome(e.getNome());
-        return dto;
+    public PessoaDTO getDTOById(Long id) {
+        PessoaEntity pessoaEntity = getPessoaById(id);
+        PessoaDTO pessoaDTO = new PessoaDTO();
+        pessoaDTO.setIdPessoa(pessoaEntity.getId());
+        pessoaDTO.setNome(pessoaEntity.getNome());
+        return pessoaDTO;
     }
 
 
@@ -71,13 +65,13 @@ public class PessoaService {
     }
 
     public PessoaDTO update(Long id, String novoNome) {
-        PessoaEntity e = getPessoaById(id);
-        e.setNome(novoNome);
-        e = pessoaRepository.save(e);
-        PessoaDTO dto = new PessoaDTO();
-        dto.setNome(e.getNome());
-        dto.setIdPessoa(e.getId());
-        return dto;
+        PessoaEntity pessoaEntity = getPessoaById(id);
+        pessoaEntity.setNome(novoNome);
+        pessoaEntity = pessoaRepository.save(pessoaEntity);
+        PessoaDTO pessoaDTO = new PessoaDTO();
+        pessoaDTO.setNome(pessoaEntity.getNome());
+        pessoaDTO.setIdPessoa(pessoaEntity.getId());
+        return pessoaDTO;
     }
 }
 

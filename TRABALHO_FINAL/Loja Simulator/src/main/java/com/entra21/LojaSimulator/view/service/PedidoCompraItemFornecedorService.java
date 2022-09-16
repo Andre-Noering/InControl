@@ -29,13 +29,13 @@ public class PedidoCompraItemFornecedorService {
 
 
     public void save(PedidoCompraItemFornecedorDTO input) {
-        PedidoCompraItemFornecedorEntity newEntity = new PedidoCompraItemFornecedorEntity();
-        newEntity.setId(input.getId());
-        newEntity.setQuantidade(input.getQtde());
-        newEntity.setValorUnitario(input.getValor_unitario());
-        newEntity.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getId_item_fornecedor()));
-        newEntity.setPedidoCompra(pedidoCompraService.getById(input.getId_pedido_compra()));
-        pedidoCompraItemFornecedorRepository.save(newEntity);
+        PedidoCompraItemFornecedorEntity newPedidoCompraItemFornecedor = new PedidoCompraItemFornecedorEntity();
+        newPedidoCompraItemFornecedor.setId(input.getId());
+        newPedidoCompraItemFornecedor.setQuantidade(input.getQtde());
+        newPedidoCompraItemFornecedor.setValorUnitario(input.getValor_unitario());
+        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getId_item_fornecedor()));
+        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getId_pedido_compra()));
+        pedidoCompraItemFornecedorRepository.save(newPedidoCompraItemFornecedor);
     }
     public void delete(Long id){
         if(pedidoCompraItemFornecedorRepository.existsById(id)){
@@ -45,12 +45,12 @@ public class PedidoCompraItemFornecedorService {
         }
     }
     public void update(Long id,Double valor_unitario, Integer qtde){
-        PedidoCompraItemFornecedorEntity i = getPedidoCompraItemFornecedorById(id);
+        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(id);
         if(valor_unitario!=null){
-            i.setValorUnitario(valor_unitario);
+            pedidoCompraItemFornecedorEntity.setValorUnitario(valor_unitario);
         }
         if(qtde!=null){
-            i.setQuantidade(qtde);
+            pedidoCompraItemFornecedorEntity.setQuantidade(qtde);
         }
     }
 
