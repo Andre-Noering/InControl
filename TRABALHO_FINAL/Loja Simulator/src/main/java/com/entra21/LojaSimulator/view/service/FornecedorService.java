@@ -56,7 +56,7 @@ public class FornecedorService {
     public List<FornecedorEntity> getItensById(Long id) {
         FornecedorEntity fornecedor = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
         return fornecedor.getItens().stream().map(i -> {
-            return itemFornecedorService.getItemById(i.getIdItem());
+            return itemFornecedorService.getById(i.getItem().getId());
         }).collect(Collectors.toList());
     }
 
@@ -69,7 +69,7 @@ public class FornecedorService {
         FornecedorEntity fornecedor = this.getFornecedorById(id);
         String contato = fornecedor.getContato();
         return new FornecedorContatoDTO(contato).getContato();
-
+    }
     public FornecedorEntity getFornecedorById(Long id){
         return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
     }

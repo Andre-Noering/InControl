@@ -1,3 +1,4 @@
+
 package com.entra21.LojaSimulator.view.service;
 
 import com.entra21.LojaSimulator.model.dto.ItemPayloadDTO;
@@ -37,7 +38,7 @@ public class VendaService {
         VendaEntity venda = new VendaEntity();
         venda.setData(vendaDTO.getData());
         venda.setPessoa(pessoaService.createPessoa(pessoaService.findPessoaById(vendaDTO.getId_cliente())));
-        venda.setFuncionario(funcionarioService.createFuncionario(funcionarioService.findFuncById(vendaDTO.getId_vendedor())));
+        venda.setFuncionario(funcionarioService.build(funcionarioService.findFuncById(vendaDTO.getId_vendedor())));
         vendaRepository.save(venda);
     }
 
@@ -62,40 +63,14 @@ public class VendaService {
     public PessoaPayloadDTO getVendedor(Long id){
         VendaEntity v = getVenda(id);
         PessoaPayloadDTO p = new PessoaPayloadDTO();
-        p.setNome(funcionarioService.build(funcionarioService.finFuncById(v.getFuncionario().getId())).getNome());
-        p.setSobrenome(funcionarioService.build(funcionarioService.finFuncById(v.getFuncionario().getId())).getSobrenome());
+        p.setNome(funcionarioService.build(funcionarioService.findFuncById(v.getFuncionario().getId())).getNome());
+        p.setSobrenome(funcionarioService.build(funcionarioService.findFuncById(v.getFuncionario().getId())).getSobrenome());
         return p;
     }
 
     //Retorna o valor total da Venda
     public Double getValorTotal(Long id){
         VendaEntity v = getVenda(id);
-        AtomicReference<Double> valorTotal= new AtomicReference<>(0.0);
-        v.getItens().forEach(i -> valorTotal.updateAndGet(v1 -> v1 + i.getValor_unitario() * i.getQtde()));
-        return valorTotal.get();
-    }
-
-    //Retorna os dados do cliente daquela venda
-    public PessoaPayloadDTO getCliente(Long id){
-        VendaEntity v = getVenda(id);
-        PessoaPayloadDTO pessoa = new PessoaPayloadDTO();
-        pessoa.setNome(v.getPessoa().getNome());
-        pessoa.setSobrenome(v.getPessoa().getSobrenome());
-        pessoa.setCpf(v.getPessoa().getCpf());
-        pessoa.setTelefone(v.getPessoa().getTelefone());
-        return pessoa;
-    }
-
-    //Adiciona um itemVenda na lista de itens daquela venda
-    public void addItemVenda(@RequestBody ItemVendaDTO itemVendaDTO){ //Adiciona um item na lista de itens daquela venda
-
-        VendaEntity v = getVenda(itemVendaDTO.getId_venda());
-        ItemVendaEntity i = new ItemVendaEntity();
-        i.setId(itemVendaDTO.getId());
-        i.setVenda(v);
-        i.setQtde(itemVendaDTO.getQtde());
-//        i.setItem(itemService.getItemById(itemVendaDTO.getId_item())); Método do Item Venda
-        v.getItens().add(i);
         AtomicReference<Double> valorTotal= new AtomicReference<>(0.0);
         v.getItens().forEach(i -> valorTotal.updateAndGet(v1 -> v1 + i.getValor_unitario() * i.getQtde()));
         return valorTotal.get();

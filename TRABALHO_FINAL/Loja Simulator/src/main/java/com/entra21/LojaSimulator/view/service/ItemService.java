@@ -104,7 +104,7 @@ public class ItemService {
 	public List<FornecedorEntity> getFornecedores(Long id) {
 		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
 		return i.getFornecedores().stream().map(f -> {
-			return itemFornecedorService.getFornById(f.getIdFornecedor());
+			return itemFornecedorService.getFornecedorById(f.getFornecedor().getId());
 		}).collect(Collectors.toList());
 	}
 }

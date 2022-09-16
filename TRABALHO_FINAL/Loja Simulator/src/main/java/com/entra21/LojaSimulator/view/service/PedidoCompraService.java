@@ -20,7 +20,7 @@ public class PedidoCompraService {
 	private FuncionarioService funcionarioService;
 	public void save(PedidoCompraDTO pedidoCompraDTO){
 		PedidoCompraEntity pedido = new PedidoCompraEntity();
-		pedido.setFuncionario(funcionarioService.build(funcionarioService.finFuncById(pedidoCompraDTO.getId_funcionario())));
+		pedido.setFuncionario(funcionarioService.build(funcionarioService.findFuncById(pedidoCompraDTO.getId_funcionario())));
 		pedido.setId(pedidoCompraDTO.getId());
 		pedido.setData(pedidoCompraDTO.getData());
 		pedidoCompraRepository.save(pedido);
