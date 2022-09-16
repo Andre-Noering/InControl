@@ -2,6 +2,7 @@ package com.entra21.LojaSimulator.view.service;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemQtdeEstoqueDTO;
 import com.entra21.LojaSimulator.model.dto.ItemValorDTO;
+import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.model.entity.ItemEntity;
 import com.entra21.LojaSimulator.model.entity.LojaEntity;
 import com.entra21.LojaSimulator.view.repository.ItemRepository;
@@ -19,6 +20,9 @@ import java.util.stream.Collectors;
 public class ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
+
+	@Autowired
+	private ItemFornecedorService itemFornecedorService;
 
 	public void save(ItemDTO input) {
 		ItemEntity newEntity = new ItemEntity();
@@ -95,5 +99,12 @@ public class ItemService {
 		} else {
 			return false;
 		}
+	}
+
+	public List<FornecedorEntity> getFornecedores(Long id) {
+		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		return i.getFornecedores().stream().map(f -> {
+			return itemFornecedorService.getFornById(f.getIdFornecedor());
+		}).collect(Collectors.toList());
 	}
 }
