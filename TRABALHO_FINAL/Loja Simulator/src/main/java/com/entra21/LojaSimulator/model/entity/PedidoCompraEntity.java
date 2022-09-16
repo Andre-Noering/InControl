@@ -26,4 +26,8 @@ public class PedidoCompraEntity {
 	@JoinColumn(name = "id" , referencedColumnName = "id_pedido_compra", nullable = false)
 	private List<PedidoCompraItemFornecedorEntity> pedidosCompra;
 
+	@OneToMany
+	@JoinColumn(name = "id" , referencedColumnName = "id_pedido_compra", nullable = false)
+	private List<PedidoCompraItemFornecedorEntity> pedidosCompra;
+
 }
