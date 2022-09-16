@@ -6,6 +6,7 @@ import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.model.entity.ItemEntity;
+import com.entra21.LojaSimulator.model.entity.ItemFornecedorEntity;
 import com.entra21.LojaSimulator.model.entity.LojaEntity;
 import com.entra21.LojaSimulator.view.repository.FornecedorRepository;
 import org.hibernate.annotations.NotFound;
@@ -53,10 +54,10 @@ public class FornecedorService {
         return dto;
     }
 
-    public List<FornecedorEntity> getItensById(Long id) {
+    public List<ItemFornecedorEntity> getItensById(Long id) {
         FornecedorEntity fornecedor = fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
         return fornecedor.getItens().stream().map(i -> {
-            return itemFornecedorService.getItemById(i.getIdItem());
+            return itemFornecedorService.getById(i.getItem().getId());
         }).collect(Collectors.toList());
     }
 
@@ -69,7 +70,7 @@ public class FornecedorService {
         FornecedorEntity fornecedor = this.getFornecedorById(id);
         String contato = fornecedor.getContato();
         return new FornecedorContatoDTO(contato).getContato();
-
+    }
     public FornecedorEntity getFornecedorById(Long id){
         return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Fornecedor não encontrado!"));
     }

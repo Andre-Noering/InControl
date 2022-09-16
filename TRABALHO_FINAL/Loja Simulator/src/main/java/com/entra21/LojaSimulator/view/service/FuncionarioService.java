@@ -24,7 +24,7 @@ public class FuncionarioService implements UserDetailsService {
 
 
     //Método Get - Retornando o funcionário pelo ID
-    public FuncionarioDTO finFuncById(Long id){
+    public FuncionarioDTO findFuncById(Long id){
         FuncionarioEntity funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
         FuncionarioDTO dto = new FuncionarioDTO();
         dto.setId(funcionario.getId());
