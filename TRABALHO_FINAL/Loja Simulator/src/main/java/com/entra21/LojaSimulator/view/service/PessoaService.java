@@ -75,6 +75,9 @@ public class PessoaService {
         dto.setIdPessoa(e.getId());
         return dto;
     }
-
-
+    
+    public PessoaEntity createPessoa(PessoaDTO byId) {
+        return PessoaEntity;
+    }
 }
+

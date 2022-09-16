@@ -87,7 +87,15 @@ public class VendaService {
         return pessoa;
     }
 
+    public void createVenda(VendaPayloadDTO vendaDTO){
+        VendaEntity venda = new VendaEntity();
+        venda.setData(vendaDTO.getData());
+        venda.setPessoa(pessoaService.createPessoa(pessoaService.getById(vendaDTO.getId_cliente())));
+        venda.setFuncionario(funcionarioService.createFuncionario(findFuncById(vendaDTO.getId_vendedor())));
+    }
+
     //Adiciona um itemVenda na lista de itens daquela venda
+
     public void addItemVenda(@RequestBody ItemVendaDTO itemVendaDTO){ //Adiciona um item na lista de itens daquela venda
         itemVendaService.save(itemVendaDTO);
     }
