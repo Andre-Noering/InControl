@@ -24,7 +24,7 @@ public class FuncionarioService implements UserDetailsService {
 
 
     //Método Get - Retornando o funcionário pelo ID
-    public FuncionarioDTO getFuncionarioById(Long id){
+    public FuncionarioDTO findFuncById(Long id){
         FuncionarioEntity funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
         FuncionarioDTO dto = new FuncionarioDTO();
         dto.setId(funcionario.getId());
@@ -33,6 +33,17 @@ public class FuncionarioService implements UserDetailsService {
         dto.setCpf(funcionario.getCpf());
         dto.setTelefone(funcionario.getTelefone());
         return dto;
+    }
+
+    //Build do funcionário
+    public FuncionarioEntity build(FuncionarioDTO input){
+        FuncionarioEntity newEntity = new FuncionarioEntity();
+        newEntity.setId(input.getId());
+        newEntity.setNome(input.getNome());
+        newEntity.setSobrenome(input.getSobrenome());
+        newEntity.setTelefone(input.getTelefone());
+        newEntity.setCpf(input.getCpf());
+        return newEntity;
     }
 
     //Método Get - Retornando todas as vendas do funcionário filtrando o funcionário pelo iD

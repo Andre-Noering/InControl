@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,10 +19,18 @@ public class ItemFornecedorEntity {
 
     @ManyToOne
     @JoinColumn (name = "id_item", referencedColumnName = "id")
-    private ItemEntity idItem;
+    private ItemEntity item;
 
     @ManyToOne
     @JoinColumn(name = "id_fornecedor", referencedColumnName = "id")
-    private FornecedorEntity idFornecedor;
+    private FornecedorEntity fornecedor;
+
+    @OneToMany
+    @JoinColumn(name = "id" , referencedColumnName = "id_item_fornecedor", nullable = false)
+    private List<PedidoCompraItemFornecedorEntity> pedidosCompra;
+
+    @OneToMany
+    @JoinColumn(name = "id" , referencedColumnName = "id_item_fornecedor", nullable = false)
+    private List<PedidoCompraItemFornecedorEntity> itensFornecedor;
 
 }

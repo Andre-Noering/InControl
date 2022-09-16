@@ -34,7 +34,11 @@ public class PessoaService {
 
     public void save(@RequestBody PessoaDTO input) {
         PessoaEntity newEntity = new PessoaEntity();
+        newEntity.setId(input.getIdPessoa());
         newEntity.setNome(input.getNome());
+        newEntity.setSobrenome(input.getSobrenome());
+        newEntity.setTelefone(input.getTelefone());
+        newEntity.setCpf(input.getCpf());;
         pessoaRepository.save(newEntity);
     }
     public PessoaEntity build(PessoaDTO input){
@@ -71,8 +75,9 @@ public class PessoaService {
         dto.setIdPessoa(e.getId());
         return dto;
     }
-
+    
     public PessoaEntity createPessoa(PessoaDTO byId) {
         return PessoaEntity;
     }
 }
+

@@ -2,6 +2,7 @@ package com.entra21.LojaSimulator.view.service;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemQtdeEstoqueDTO;
 import com.entra21.LojaSimulator.model.dto.ItemValorDTO;
+import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.model.entity.ItemEntity;
 import com.entra21.LojaSimulator.model.entity.LojaEntity;
 import com.entra21.LojaSimulator.view.repository.ItemRepository;
@@ -20,6 +21,9 @@ public class ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
 
+	@Autowired
+	private ItemFornecedorService itemFornecedorService;
+
 	public void save(ItemDTO input) {
 		ItemEntity newEntity = new ItemEntity();
 		newEntity.setId(input.getId());
@@ -28,6 +32,15 @@ public class ItemService {
 		newEntity.setQtde_estoque(input.getQtde_estoque());
 		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
 		itemRepository.save(newEntity);
+	}
+	public ItemEntity build(ItemDTO input){
+		ItemEntity newEntity = new ItemEntity();
+		newEntity.setId(input.getId());
+		newEntity.setNome(input.getNome());
+		newEntity.setValor(input.getValor());
+		newEntity.setQtde_estoque(input.getQtde_estoque());
+		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		return newEntity;
 	}
 
 	public void delete(Long id) {
@@ -48,8 +61,7 @@ public class ItemService {
 		if (novaQtdeAlerta != null) {
 			i.setQtde_alerta_estoque(novaQtdeAlerta);
 		}
-		ItemDTO dto = new ItemDTO(i.getId(),i.getNome(),i.getValor(),i.getQtde_estoque(),i.getQtde_alerta_estoque());
-		return dto;
+		return new ItemDTO(i.getId(),i.getNome(),i.getValor(),i.getQtde_estoque(),i.getQtde_alerta_estoque());
 	}
 
 	//Retorna todos os itens de uma loja
@@ -87,5 +99,12 @@ public class ItemService {
 		} else {
 			return false;
 		}
+	}
+
+	public List<FornecedorEntity> getFornecedores(Long id) {
+		ItemEntity i = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		return i.getFornecedores().stream().map(f -> {
+			return itemFornecedorService.getFornecedorById(f.getFornecedor().getId());
+		}).collect(Collectors.toList());
 	}
 }
