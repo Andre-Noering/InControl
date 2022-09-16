@@ -45,7 +45,8 @@ public class VendaService {
     }
 
     public void delete(Long id){
-        vendaRepository.deleteById(id);
+        VendaEntity venda = getVenda(id);
+        vendaRepository.delete(venda);
     }
 
     //Retorna nome, valor e qtde de cada item naquela venda
@@ -108,7 +109,7 @@ public class VendaService {
     }
 
 
-    public void deleteItemVenda(Long id_item){ //Remove o item com o id(id_item) da venda com o id(id_venda)
+    public void deleteItemVenda(Long id_item){
         itemVendaService.delete(id_item);
     }
 }

@@ -28,7 +28,8 @@ public class ItemVendaService {
     }
 
     public void delete(Long id){
-        itemVendaRepository.deleteById(id);
+        ItemVendaEntity itemVendaEntity = getById(id);
+        itemVendaRepository.delete(itemVendaEntity);
     }
     public ItemVendaDTO update(Long id, Integer qtde, Double valor_unitario){
         ItemVendaEntity i = getById(id);

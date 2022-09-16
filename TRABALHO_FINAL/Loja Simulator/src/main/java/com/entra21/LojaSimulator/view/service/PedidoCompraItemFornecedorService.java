@@ -38,11 +38,8 @@ public class PedidoCompraItemFornecedorService {
         pedidoCompraItemFornecedorRepository.save(newEntity);
     }
     public void delete(Long id){
-        if(pedidoCompraItemFornecedorRepository.existsById(id)){
-            pedidoCompraItemFornecedorRepository.deleteById(id);
-        } else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!");
-        }
+        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(id);
+        pedidoCompraItemFornecedorRepository.delete(pedidoCompraItemFornecedorEntity);
     }
     public void update(Long id,Double valor_unitario, Integer qtde){
         PedidoCompraItemFornecedorEntity i = getPedidoCompraItemFornecedorById(id);

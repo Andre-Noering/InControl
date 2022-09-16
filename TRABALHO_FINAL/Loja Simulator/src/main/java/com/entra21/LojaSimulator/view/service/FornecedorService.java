@@ -39,7 +39,8 @@ public class FornecedorService {
     }
 
     public void delete(Long id) {
-        fornecedorRepository.deleteById(id);
+        FornecedorEntity fornecedor = getFornecedorById(id);
+        fornecedorRepository.delete(fornecedor);
     }
 
     public FornecedorDTO update(Long id, String novaRazaoSocial, String novoContato) {

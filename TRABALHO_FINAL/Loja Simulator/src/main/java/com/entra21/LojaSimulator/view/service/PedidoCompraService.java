@@ -31,7 +31,8 @@ public class PedidoCompraService {
 	}
 
 	public void delete(Long id){
-		pedidoCompraRepository.deleteById(id);
+		PedidoCompraEntity pedidoCompraEntity = getById(id);
+		pedidoCompraRepository.delete(pedidoCompraEntity);
 	}
 	public PedidoCompraDTO update(Long id, LocalDate data){
 		PedidoCompraEntity pedido = getById(id);

@@ -48,7 +48,8 @@ public class ItemService {
 	}
 
 	public void delete(Long id) {
-		itemRepository.deleteById(id);
+		ItemEntity itemEntity = getItemById(id);
+		itemRepository.delete(itemEntity);
 	}
 
 	public ItemDTO update(Long id, String novoNome, Double novoValor, Integer novaQtde, Integer novaQtdeAlerta) {
