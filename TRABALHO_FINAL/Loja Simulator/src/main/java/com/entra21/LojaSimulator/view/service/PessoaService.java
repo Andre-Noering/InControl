@@ -19,6 +19,7 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+
     public List<PessoaDTO> getAll() {
         return pessoaRepository.findAll().stream().map(fr -> {
             PessoaDTO dto = new PessoaDTO();
@@ -33,24 +34,40 @@ public class PessoaService {
 
     public void save(@RequestBody PessoaDTO input) {
         PessoaEntity newEntity = new PessoaEntity();
+        newEntity.setId(input.getIdPessoa());
         newEntity.setNome(input.getNome());
+        newEntity.setSobrenome(input.getSobrenome());
+        newEntity.setTelefone(input.getTelefone());
+        newEntity.setCpf(input.getCpf());;
         pessoaRepository.save(newEntity);
     }
+    public PessoaEntity build(PessoaDTO input){
+        PessoaEntity newEntity = new PessoaEntity();
+        newEntity.setId(input.getIdPessoa());
+        newEntity.setNome(input.getNome());
+        newEntity.setSobrenome(input.getSobrenome());
+        newEntity.setTelefone(input.getTelefone());
+        newEntity.setCpf(input.getCpf());
+        return newEntity;
+    }
 
+
+    //Retorna Pessoa pela id
     public PessoaDTO getById(Long id) {
-        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado!"));
+        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada!"));
         PessoaDTO dto = new PessoaDTO();
         dto.setIdPessoa(e.getId());
         dto.setNome(e.getNome());
         return dto;
     }
 
+
     public void delete(Long id) {
         pessoaRepository.deleteAllById(Collections.singleton(id));
     }
 
     public PessoaDTO update(Long id, String novoNome) {
-        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Não encontrado!"));
+        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada!"));
         e.setNome(novoNome);
         e = pessoaRepository.save(e);
         PessoaDTO dto = new PessoaDTO();
@@ -58,4 +75,6 @@ public class PessoaService {
         dto.setIdPessoa(e.getId());
         return dto;
     }
+
+
 }

@@ -37,7 +37,7 @@ public class VendaService {
     public void save(VendaPayloadDTO vendaDTO){
         VendaEntity venda = new VendaEntity();
         venda.setData(vendaDTO.getData());
-        venda.setPessoa(pessoaService.createPessoa(pessoaService.findPessoaById(vendaDTO.getId_cliente())));
+        venda.setPessoa(pessoaService.build(pessoaService.getById(vendaDTO.getId_cliente())));
         venda.setFuncionario(funcionarioService.build(funcionarioService.findFuncById(vendaDTO.getId_vendedor())));
         vendaRepository.save(venda);
     }
