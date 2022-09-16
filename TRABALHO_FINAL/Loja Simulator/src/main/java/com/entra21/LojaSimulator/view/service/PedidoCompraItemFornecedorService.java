@@ -2,10 +2,7 @@ package com.entra21.LojaSimulator.view.service;
 
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.PedidoCompraItemFornecedorDTO;
-import com.entra21.LojaSimulator.model.entity.ItemEntity;
-import com.entra21.LojaSimulator.model.entity.ItemFornecedorEntity;
-import com.entra21.LojaSimulator.model.entity.PedidoCompraEntity;
-import com.entra21.LojaSimulator.model.entity.PedidoCompraItemFornecedorEntity;
+import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.ItemFornecedorRepository;
 import com.entra21.LojaSimulator.view.repository.PedidoCompraItemFornecedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +23,17 @@ public class PedidoCompraItemFornecedorService {
 
     @Autowired PedidoCompraService pedidoCompraService;
 
+    public PedidoCompraItemFornecedorEntity getPedidoCompraItemFornecedorById(Long id){
+        return pedidoCompraItemFornecedorRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra de item não encontrado!"));
+    }
+
 
     public void save(PedidoCompraItemFornecedorDTO input) {
         PedidoCompraItemFornecedorEntity newEntity = new PedidoCompraItemFornecedorEntity();
         newEntity.setId(input.getId());
         newEntity.setQuantidade(input.getQtde());
         newEntity.setValorUnitario(input.getValor_unitario());
-        newEntity.setItemFornecedor(itemFornecedorService.getById(input.getId_item_fornecedor()));
+        newEntity.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getId_item_fornecedor()));
         newEntity.setPedidoCompra(pedidoCompraService.getById(input.getId_pedido_compra()));
         pedidoCompraItemFornecedorRepository.save(newEntity);
     }
@@ -44,7 +45,7 @@ public class PedidoCompraItemFornecedorService {
         }
     }
     public void update(Long id,Double valor_unitario, Integer qtde){
-        PedidoCompraItemFornecedorEntity i = pedidoCompraItemFornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado"));
+        PedidoCompraItemFornecedorEntity i = getPedidoCompraItemFornecedorById(id);
         if(valor_unitario!=null){
             i.setValorUnitario(valor_unitario);
         }
@@ -58,7 +59,7 @@ public class PedidoCompraItemFornecedorService {
     }
 
     public ItemFornecedorEntity getItemFornecedorById(Long id){
-        return itemFornecedorService.getById(id);
+        return itemFornecedorService.getItemFornecedorById(id);
     }
 
     public PedidoCompraEntity getPedidoCompraById(Long id){

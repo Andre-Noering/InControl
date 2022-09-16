@@ -1,6 +1,7 @@
 package com.entra21.LojaSimulator.view.service;
 
 import com.entra21.LojaSimulator.model.dto.PessoaDTO;
+import com.entra21.LojaSimulator.model.entity.PedidoCompraEntity;
 import com.entra21.LojaSimulator.model.entity.PessoaEntity;
 import com.entra21.LojaSimulator.view.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class PessoaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    public PessoaEntity getPessoaById(Long id){
+        return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
+    }
 
     public List<PessoaDTO> getAll() {
         return pessoaRepository.findAll().stream().map(fr -> {
@@ -54,7 +58,7 @@ public class PessoaService {
 
     //Retorna Pessoa pela id
     public PessoaDTO getById(Long id) {
-        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada!"));
+        PessoaEntity e = getPessoaById(id);
         PessoaDTO dto = new PessoaDTO();
         dto.setIdPessoa(e.getId());
         dto.setNome(e.getNome());
@@ -67,17 +71,13 @@ public class PessoaService {
     }
 
     public PessoaDTO update(Long id, String novoNome) {
-        PessoaEntity e = pessoaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrada!"));
+        PessoaEntity e = getPessoaById(id);
         e.setNome(novoNome);
         e = pessoaRepository.save(e);
         PessoaDTO dto = new PessoaDTO();
         dto.setNome(e.getNome());
         dto.setIdPessoa(e.getId());
         return dto;
-    }
-    
-    public PessoaEntity createPessoa(PessoaDTO byId) {
-        return PessoaEntity;
     }
 }
 

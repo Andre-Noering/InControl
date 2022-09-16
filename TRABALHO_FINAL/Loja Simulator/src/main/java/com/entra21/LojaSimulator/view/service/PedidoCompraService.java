@@ -18,6 +18,10 @@ public class PedidoCompraService {
 	private PedidoCompraRepository pedidoCompraRepository;
 	@Autowired
 	private FuncionarioService funcionarioService;
+
+	public PedidoCompraEntity getById(Long id){
+		return pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
+	}
 	public void save(PedidoCompraDTO pedidoCompraDTO){
 		PedidoCompraEntity pedido = new PedidoCompraEntity();
 		pedido.setFuncionario(funcionarioService.build(funcionarioService.findFuncById(pedidoCompraDTO.getId_funcionario())));
@@ -30,14 +34,11 @@ public class PedidoCompraService {
 		pedidoCompraRepository.deleteById(id);
 	}
 	public PedidoCompraDTO update(Long id, LocalDate data){
-		PedidoCompraEntity pedido = pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
+		PedidoCompraEntity pedido = getById(id);
 		if(data!=null){
 			pedido.setData(data);
 		}
 		return this.getDTOById(id);
-	}
-	public PedidoCompraEntity getById(Long id){
-		return pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
 	}
 
 	public PedidoCompraDTO getDTOById(Long id){

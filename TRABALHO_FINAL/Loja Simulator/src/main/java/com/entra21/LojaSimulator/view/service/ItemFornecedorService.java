@@ -19,10 +19,14 @@ public class ItemFornecedorService {
     @Autowired
     private ItemService itemService;
     @Autowired PedidoCompraItemFornecedorService pedidoCompraItemFornecedorService;
+
+    public ItemFornecedorEntity getItemFornecedorById(Long id){
+        return itemFornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item de Fornecedor não encontrada!"));
+    }
     public void save(ItemFornecedorDTO itemFornecedorDTO){
         ItemFornecedorEntity i = new ItemFornecedorEntity();
         i.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getId_fornecedor()));
-        i.setItem(itemService.build(itemService.getById(itemFornecedorDTO.getId_item())));
+        i.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getId_item())));
         i.setValorCompra(itemFornecedorDTO.getValor_compra());
         i.setId(itemFornecedorDTO.getId());
         i.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getId_fornecedor()));
@@ -34,19 +38,16 @@ public class ItemFornecedorService {
     }
 
     public void update(Long id,Double valor_compra){
-        ItemFornecedorEntity i = itemFornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado"));
+        ItemFornecedorEntity i = getItemFornecedorById(id);
         if(valor_compra!=null){
             i.setValorCompra(valor_compra);
         }
     }
 
-    public ItemFornecedorEntity getById(Long id){
-        return itemFornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado"));
-    }
     public FornecedorEntity getFornecedorById(Long id){
         return fornecedorService.getFornecedorById(id);
     }
     public ItemEntity getItem(Long id){
-        return itemService.build(itemService.getById(id));
+        return itemService.getItemById(id);
     }
 }
