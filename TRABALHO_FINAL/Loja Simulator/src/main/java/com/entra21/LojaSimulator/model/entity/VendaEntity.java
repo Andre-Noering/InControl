@@ -17,21 +17,21 @@ public class VendaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="data")
+    @Column(name="data", nullable = false)
     private LocalDate data;
 
     @ManyToOne
-    @JoinColumn(name="id_cliente",referencedColumnName = "id")
+    @JoinColumn(name="id_cliente",referencedColumnName = "id", nullable = false)
     @JsonIgnore
     private PessoaEntity pessoa;
 
     @ManyToOne
-    @JoinColumn(name = "id_venda",referencedColumnName = "id_pessoa")
+    @JoinColumn(name = "id_venda",referencedColumnName = "id_pessoa", nullable = false)
     @JsonIgnore
     private FuncionarioEntity funcionario;
 
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id_venda")
+    @JoinColumn(name = "id", referencedColumnName = "id_venda", nullable = false)
     private List<ItemVendaEntity> itens;
 
 

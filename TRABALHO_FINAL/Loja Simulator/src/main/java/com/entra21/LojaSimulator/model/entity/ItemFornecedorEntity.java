@@ -14,15 +14,15 @@ public class ItemFornecedorEntity {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "valor_compra")
+    @Column(name = "valor_compra", nullable = false)
     private Double valorCompra;
 
     @ManyToOne
-    @JoinColumn (name = "id_item", referencedColumnName = "id")
+    @JoinColumn (name = "id_item", referencedColumnName = "id", nullable = false)
     private ItemEntity item;
 
     @ManyToOne
-    @JoinColumn(name = "id_fornecedor", referencedColumnName = "id")
+    @JoinColumn(name = "id_fornecedor", referencedColumnName = "id", nullable = false)
     private FornecedorEntity fornecedor;
 
     @OneToMany

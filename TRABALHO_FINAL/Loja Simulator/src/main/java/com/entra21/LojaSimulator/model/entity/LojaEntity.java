@@ -29,6 +29,18 @@ public class LojaEntity {
     private Double valor_caixa;
 
     @OneToMany
-    @JoinColumn(name="id_funcionario", referencedColumnName = "id")
+    @JoinColumn(name="id", referencedColumnName = "id_loja", nullable = false)
     private List<FuncionarioEntity> funcionarios;
+
+    @ManyToOne
+    @JoinColumn(name="id_funcionario", referencedColumnName = "id_pessoa", nullable = false)
+    private FuncionarioEntity gerente;
+
+    @OneToMany
+    @JoinColumn(name = "id", referencedColumnName = "id_loja",nullable = false)
+    private List<ItemEntity> itens;
+
+    @OneToMany
+    @JoinColumn(name = "id", referencedColumnName = "id_loja", nullable = false)
+    private List<FornecedorEntity> fornecedores;
 }

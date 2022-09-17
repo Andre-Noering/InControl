@@ -15,19 +15,14 @@ public class PedidoCompraEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="data")
+	@Column(name="data", nullable = false)
 	private LocalDate data;
 
 	@OneToOne
-	@JoinColumn(name = "id_funcionario", referencedColumnName = "id")
-	private FuncionarioEntity funcionario;]
+	@JoinColumn(name = "id_funcionario", referencedColumnName = "id", nullable = false)
+	private FuncionarioEntity funcionario;
 
 	@OneToMany
 	@JoinColumn(name = "id" , referencedColumnName = "id_pedido_compra", nullable = false)
 	private List<PedidoCompraItemFornecedorEntity> pedidosCompra;
-
-	@OneToMany
-	@JoinColumn(name = "id" , referencedColumnName = "id_pedido_compra", nullable = false)
-	private List<PedidoCompraItemFornecedorEntity> pedidosCompra;
-
 }
