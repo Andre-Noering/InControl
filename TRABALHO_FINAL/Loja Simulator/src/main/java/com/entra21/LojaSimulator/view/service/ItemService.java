@@ -24,6 +24,9 @@ public class ItemService {
 	@Autowired
 	private ItemFornecedorService itemFornecedorService;
 
+	@Autowired
+	private LojaService lojaService;
+
 	public ItemEntity getItemById(Long id){
 		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrada!"));
 	}
@@ -70,7 +73,8 @@ public class ItemService {
 
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
-		List<ItemEntity> listaItens = itemRepository.findAllByLoja_Id(idLoja);
+		LojaEntity loja = lojaService.getById(idLoja);
+		List<ItemEntity> listaItens = loja.g;
 		return listaItens.stream().map(item -> {
 			ItemDTO itemDTO = new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
 			return itemDTO;
