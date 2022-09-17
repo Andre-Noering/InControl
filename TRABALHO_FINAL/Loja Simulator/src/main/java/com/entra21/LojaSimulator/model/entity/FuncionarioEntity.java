@@ -31,6 +31,10 @@ public class FuncionarioEntity extends PessoaEntity implements UserDetails {
     @JsonIgnore
     private Set<PedidoCompraEntity> pedidos;
 
+    @OneToMany
+    @JoinColumn(name="id_pessoa", referencedColumnName = "id_funcionario")
+    private List<LojaEntity> lojas;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("USER"));

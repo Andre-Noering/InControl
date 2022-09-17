@@ -15,17 +15,17 @@ public class PedidoCompraItemFornecedorEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "valor_unitario")
+    @Column(name = "valor_unitario", nullable = false)
     private Double valorUnitario;
 
-    @Column(name = "qtde")
+    @Column(name = "qtde", nullable = false)
     private Integer quantidade;
 
     @ManyToOne
-    @JoinColumn (name = "id_item_fornecedor", referencedColumnName = "id")
+    @JoinColumn (name = "id_item_fornecedor", referencedColumnName = "id", nullable = false)
     private ItemFornecedorEntity itemFornecedor;
 
     @ManyToOne
-    @JoinColumn(name = "id_pedido_compra", referencedColumnName = "id")
+    @JoinColumn(name = "id_pedido_compra", referencedColumnName = "id", nullable = false)
     private PedidoCompraEntity pedidoCompra;
 }

@@ -27,14 +27,14 @@ public class ItemEntity {
 	private Integer qtde_alerta_estoque;
 
 	@ManyToOne
-	@JoinColumn(name = "id_loja", referencedColumnName = "id")
+	@JoinColumn(name = "id_loja", referencedColumnName = "id", nullable = false)
 	private LojaEntity loja;
 
 	@ManyToOne
-	@JoinColumn(name = "id", referencedColumnName = "id_item")
+	@JoinColumn(name = "id", referencedColumnName = "id_item", nullable = false)
 	private List<ItemVendaEntity> vendas;
 
 	@ManyToOne
-	@JoinColumn(name = "id", referencedColumnName = "id_item")
+	@JoinColumn(name = "id", referencedColumnName = "id_item", nullable = false)
 	private List<ItemFornecedorEntity> fornecedores;
 }

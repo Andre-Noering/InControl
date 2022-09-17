@@ -14,19 +14,21 @@ public class PessoaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="nome")
+    @Column(name="nome", nullable = false)
     private String nome;
 
-    @Column(name="sobrenome")
+    @Column(name="sobrenome", nullable = false)
     private String sobrenome;
 
-    @Column(name="telefone")
+    @Column(name="telefone", nullable = false)
     private String telefone;
 
-    @Column(name="cpf")
+    @Column(name="cpf", nullable = false)
     private String cpf;
 
     @ManyToOne
-    @JoinColumn(name = "id_loja" , referencedColumnName = "id")
+    @JoinColumn(name = "id_loja" , referencedColumnName = "id", nullable = false)
     private LojaEntity loja;
+
+
 }
