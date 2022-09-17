@@ -10,5 +10,4 @@ import java.util.List;
 
 @Repository
 public interface FornecedorRepository extends JpaRepository<FornecedorEntity,Long> {
-    List<FornecedorEntity> findAllByLoja_Id(Long id);
 }
