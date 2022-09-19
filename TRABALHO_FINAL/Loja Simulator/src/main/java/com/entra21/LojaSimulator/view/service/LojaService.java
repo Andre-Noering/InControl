@@ -30,4 +30,8 @@ public class LojaService {
     public LojaEntity getById(Long id){
         return lojaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
     }
+
+    public LojaEntity getByRazao_Social(String razao_social){
+        return lojaRepository.findByRazao_Social(razao_social);
+    }
 }

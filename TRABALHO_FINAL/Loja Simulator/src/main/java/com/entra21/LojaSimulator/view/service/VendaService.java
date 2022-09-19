@@ -103,10 +103,7 @@ public class VendaService {
         itemVendaService.save(itemVendaDTO);
     }
 
-    //Muda a quantidade do item
-    public void updateQtde(Long id_item, Integer qtde_nova){ //Muda a quantidade do item (id_item) na venda (id_venda) para (qtde_nova)
-        itemVendaService.getById(id_item).setQtde(qtde_nova);
-    }
+
 
 
     public void deleteItemVenda(Long id_item){

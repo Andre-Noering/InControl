@@ -28,11 +28,11 @@ public class ItemVendaService {
     }
 
     public void delete(Long id){
-        ItemVendaEntity itemVendaEntity = getById(id);
+        ItemVendaEntity itemVendaEntity = getItemVenda(id);
         itemVendaRepository.delete(itemVendaEntity);
     }
     public void update(Long id, Integer qtde, Double valor_unitario){
-        ItemVendaEntity itemVendaEntity = getById(id);
+        ItemVendaEntity itemVendaEntity = getItemVenda(id);
         if(qtde!=null){
             itemVendaEntity.setQtde(qtde);
         }
@@ -40,12 +40,15 @@ public class ItemVendaService {
             itemVendaEntity.setValor_unitario(valor_unitario);
         }
     }
-    public ItemVendaEntity getById(Long id){
+    public void updateQtde(Integer qtde_nova, Long id){
+        getItemVenda(id).setQtde(qtde_nova);
+    }
+    public ItemVendaEntity getItemVenda(Long id){
         return itemVendaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
     }
 
     public ItemVendaDTO getDTOById(Long id){
-       ItemVendaEntity itemVendaEntity = getById(id);
+       ItemVendaEntity itemVendaEntity = getItemVenda(id);
        return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValor_unitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
     }
 

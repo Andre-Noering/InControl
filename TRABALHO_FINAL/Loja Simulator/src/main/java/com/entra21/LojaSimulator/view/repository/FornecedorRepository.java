@@ -13,4 +13,7 @@ public interface FornecedorRepository extends JpaRepository<FornecedorEntity,Lon
     List<FornecedorEntity> findAllByLoja_Id(Long id);
 
     FornecedorEntity findByRazao_Social(String razao_social);
+    List<FornecedorEntity> findAllByLoja_Razao_Social(String razao_social);
+
+    void deleteByRazao_Social(String razao_social);
 }
