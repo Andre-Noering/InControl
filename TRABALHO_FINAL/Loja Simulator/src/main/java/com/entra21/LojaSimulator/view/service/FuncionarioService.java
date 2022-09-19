@@ -68,6 +68,23 @@ public class FuncionarioService implements UserDetailsService {
         funcionario.getPedidos().add(venda);
     }
 
+    public void update(FuncionarioDTO funcionarioDTO){
+        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getId());
+            if (funcionarioDTO.getCpf() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getCpf());
+            }
+            if (funcionarioDTO.getNome() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getNome());
+            }
+            if (funcionarioDTO.getSobrenome() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getSobrenome());
+            }
+            if (funcionarioDTO.getTelefone() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getTelefone());
+            }
+
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         FuncionarioEntity en = funcionarioRepository.findByLogin(username);

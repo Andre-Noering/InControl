@@ -48,16 +48,15 @@ public class FornecedorService {
         fornecedorRepository.delete(fornecedor);
     }
 
-    public void update(@RequestBody FornecedorDTO dto) {
-        FornecedorEntity fornecedor = getFornecedorById(dto.getId());
-        if (dto.getRazao_social() != null) {
-            fornecedor.setRazao_social(dto.getRazao_social());
-        }
-        if (dto.getContato() != null) {
-            fornecedor.setContato(dto.getContato());
-        }
-        save(getDtoById(fornecedor.getId()));
 
+    public void update(FornecedorDTO fornecedorDTO) {
+        FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
+        if (fornecedorDTO.getRazao_social() != null) {
+            fornecedor.setRazao_social(fornecedorDTO.getRazao_social());
+        }
+        if (fornecedorDTO.getContato() != null) {
+            fornecedor.setContato(fornecedorDTO.getContato());
+        }
     }
 
     public FornecedorDTO getDtoById(Long id) {
