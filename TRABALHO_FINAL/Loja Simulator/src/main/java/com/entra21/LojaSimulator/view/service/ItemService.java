@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -28,10 +29,10 @@ public class ItemService {
 	private LojaService lojaService;
 
 	public ItemEntity getItemById(Long id){
-		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrada!"));
+		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrado!"));
 	}
 
-	public void save(ItemDTO input) {
+	public void save(@RequestBody ItemDTO input) {
 		ItemEntity newEntity = new ItemEntity();
 		newEntity.setId(input.getId());
 		newEntity.setNome(input.getNome());
@@ -75,7 +76,7 @@ public class ItemService {
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
 		LojaEntity loja = lojaService.getById(idLoja);
-		List<ItemEntity> listaItens = loja.g;
+		List<ItemEntity> listaItens = loja.getItens();
 		return listaItens.stream().map(item -> {
 			ItemDTO itemDTO = new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
 			return itemDTO;
@@ -111,7 +112,7 @@ public class ItemService {
 	}
 
 	public List<FornecedorEntity> getFornecedores(Long id) {
-		ItemEntity itemEntity = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		ItemEntity itemEntity =  getItemById(id);
 		return itemEntity.getFornecedores().stream().map(fornecedor -> {
 			return itemFornecedorService.getFornecedorById(fornecedor.getFornecedor().getId());
 		}).collect(Collectors.toList());
