@@ -45,6 +45,10 @@ public class ItemFornecedorService {
         }
     }
 
+    public ItemFornecedorDTO getDTOById(Long id){
+        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
+        return new ItemFornecedorDTO(itemFornecedorEntity.getId(), itemFornecedorEntity.getValorCompra(), itemFornecedorEntity.getItem().getId(), itemFornecedorEntity.getFornecedor().getId());
+    }
     public FornecedorEntity getFornecedorById(Long id){
         return fornecedorService.getFornecedorById(id);
     }
