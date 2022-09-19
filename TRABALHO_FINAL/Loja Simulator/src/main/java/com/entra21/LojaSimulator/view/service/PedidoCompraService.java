@@ -34,10 +34,10 @@ public class PedidoCompraService {
 		PedidoCompraEntity pedidoCompraEntity = getById(id);
 		pedidoCompraRepository.delete(pedidoCompraEntity);
 	}
-	public void update(Long id, LocalDate data){
-		PedidoCompraEntity pedidoCompraEntity = getById(id);
-		if(data!=null){
-			pedidoCompraEntity.setData(data);
+	public void update(PedidoCompraDTO pedidoCompraDTO){
+		PedidoCompraEntity pedidoCompraEntity = getById(pedidoCompraDTO.getId());
+		if(pedidoCompraDTO.getData()!=null){
+			pedidoCompraEntity.setData(pedidoCompraDTO.getData());
 		}
 	}
 

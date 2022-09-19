@@ -23,7 +23,6 @@ public class FornecedorService {
     @Autowired
     private FornecedorRepository fornecedorRepository;
 
-
     @Autowired
     private ItemFornecedorService itemFornecedorService;
 
@@ -45,13 +44,13 @@ public class FornecedorService {
         fornecedorRepository.delete(fornecedor);
     }
 
-    public void update(Long id, String novaRazaoSocial, String novoContato) {
-        FornecedorEntity fornecedor = getFornecedorById(id);
-        if (novaRazaoSocial != null) {
-            fornecedor.setRazao_social(novaRazaoSocial);
+    public void update(FornecedorDTO fornecedorDTO) {
+        FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
+        if (fornecedorDTO.getRazao_social() != null) {
+            fornecedor.setRazao_social(fornecedorDTO.getRazao_social());
         }
-        if (novoContato != null) {
-            fornecedor.setContato(novoContato);
+        if (fornecedorDTO.getContato() != null) {
+            fornecedor.setContato(fornecedorDTO.getContato());
         }
     }
 

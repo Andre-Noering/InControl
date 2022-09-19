@@ -38,10 +38,10 @@ public class ItemFornecedorService {
         itemFornecedorRepository.delete(itemFornecedorEntity);
     }
 
-    public void update(Long id,Double valor_compra){
-        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
-        if(valor_compra!=null){
-            itemFornecedorEntity.setValorCompra(valor_compra);
+    public void update(ItemFornecedorDTO itemFornecedorDTO){
+        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(itemFornecedorDTO.getId());
+        if(itemFornecedorDTO.getValor_compra() !=null){
+            itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValor_compra());
         }
     }
 

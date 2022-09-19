@@ -65,14 +65,12 @@ public class PessoaService {
         pessoaRepository.delete(pessoa);
     }
 
-    public PessoaDTO update(Long id, String novoNome) {
-        PessoaEntity pessoaEntity = getPessoaById(id);
-        pessoaEntity.setNome(novoNome);
-        pessoaEntity = pessoaRepository.save(pessoaEntity);
-        PessoaDTO pessoaDTO = new PessoaDTO();
-        pessoaDTO.setNome(pessoaEntity.getNome());
-        pessoaDTO.setIdPessoa(pessoaEntity.getId());
-        return pessoaDTO;
+    public void update(PessoaDTO pessoaDTO) {
+        PessoaEntity pessoaEntity = getPessoaById(pessoaDTO.getIdPessoa());
+        pessoaEntity.setNome(pessoaDTO.getNome());
+        pessoaEntity.setCpf(pessoaDTO.getCpf());
+        pessoaEntity.setSobrenome(pessoaDTO.getSobrenome());
+        pessoaEntity.setTelefone(pessoaDTO.getTelefone());
     }
 }
 
