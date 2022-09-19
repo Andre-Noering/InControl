@@ -27,6 +27,7 @@ public class ItemService {
 
 	@Autowired
 	private LojaService lojaService;
+
 	public ItemEntity getItemById(Long id){
 		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrado!"));
 	}

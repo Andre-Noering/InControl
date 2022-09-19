@@ -28,6 +28,6 @@ public class LojaService {
     private LojaRepository lojaRepository;
 
     public LojaEntity getById(Long id){
-        return lojaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Loja não encontrada!"));
+        return lojaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Loja não encontrada!"));      
     }
 }
