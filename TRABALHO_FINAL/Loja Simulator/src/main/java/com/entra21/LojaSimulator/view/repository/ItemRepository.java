@@ -9,5 +9,4 @@ import java.util.function.Supplier;
 
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
-    List<ItemEntity> findAllByLoja_Id(Long id);
 }
