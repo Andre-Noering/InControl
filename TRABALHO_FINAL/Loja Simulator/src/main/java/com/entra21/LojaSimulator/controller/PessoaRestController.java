@@ -35,8 +35,7 @@ public class PessoaRestController {
     }
 
     @PutMapping("/update")
-    public PessoaDTO updatePessoa(@PathVariable(name = "id") Long id,
-                                  @RequestBody String novoNome) {
-        return pessoaService.update(id, novoNome);
+    public PessoaDTO updatePessoa (@RequestBody PessoaDTO pessoaDTO) {
+        return pessoaService.update(PessoaDTO);
     }
 }
