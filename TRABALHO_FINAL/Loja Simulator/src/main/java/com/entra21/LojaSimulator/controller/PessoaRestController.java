@@ -19,22 +19,22 @@ public class PessoaRestController {
         return PessoaService.getAll();
     }
 
-    @PostMapping
+    @PostMapping ("/adicionar")
     public void addPessoa(@RequestBody PessoaPayloadDTO newPessoa) {
         pessoaService.save(new PessoaDTO());
     }
 
     @GetMapping("/")
-    public PessoaDTO getFranquia(@PathVariable(name = "id") Long id) {
+    public PessoaDTO get(@PathVariable(name = "id") Long id) {
         return pessoaService.getDTOById(id);
     }
 
-    @DeleteMapping("/")
+    @DeleteMapping("/delete")
     public void deletePessoa(@PathVariable(name = "id") Long id) {
         PessoaService.delete(id);
     }
 
-    @PutMapping("/")
+    @PutMapping("/update")
     public PessoaDTO updatePessoa(@PathVariable(name = "id") Long id,
                                   @RequestBody String novoNome) {
         return pessoaService.update(id, novoNome);
