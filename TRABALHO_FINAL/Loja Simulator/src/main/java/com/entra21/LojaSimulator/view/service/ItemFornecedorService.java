@@ -1,5 +1,6 @@
 package com.entra21.LojaSimulator.view.service;
 
+import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemFornecedorDTO;
 import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.model.entity.ItemEntity;
@@ -38,10 +39,10 @@ public class ItemFornecedorService {
         itemFornecedorRepository.delete(itemFornecedorEntity);
     }
 
-    public void update(Long id,Double valor_compra){
-        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
-        if(valor_compra!=null){
-            itemFornecedorEntity.setValorCompra(valor_compra);
+    public void update(ItemFornecedorDTO itemFornecedorDTO){
+        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(itemFornecedorDTO.getId());
+        if(itemFornecedorDTO.getValor_compra() !=null){
+            itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValor_compra());
         }
     }
 
@@ -54,5 +55,9 @@ public class ItemFornecedorService {
     }
     public ItemEntity getItem(Long id){
         return itemService.getItemById(id);
+    }
+
+    public ItemDTO getItemDTO(Long id){
+        return itemService.getDTOById(this.getItem(id).getId());
     }
 }

@@ -24,7 +24,7 @@ public class PessoaService {
         return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
     }
 
-    public List<PessoaDTO> getAll() {
+    public static List<PessoaDTO> getAll() {
         return pessoaRepository.findAll().stream().map(fr -> {
             PessoaDTO pessoaDTO = new PessoaDTO();
             pessoaDTO.setIdPessoa(fr.getId());
@@ -60,19 +60,17 @@ public class PessoaService {
     }
 
 
-    public void delete(Long id) {
+    public static void delete(Long id) {
         PessoaEntity pessoa = getPessoaById(id);
         pessoaRepository.delete(pessoa);
     }
 
-    public PessoaDTO update(Long id, String novoNome) {
-        PessoaEntity pessoaEntity = getPessoaById(id);
-        pessoaEntity.setNome(novoNome);
-        pessoaEntity = pessoaRepository.save(pessoaEntity);
-        PessoaDTO pessoaDTO = new PessoaDTO();
-        pessoaDTO.setNome(pessoaEntity.getNome());
-        pessoaDTO.setIdPessoa(pessoaEntity.getId());
-        return pessoaDTO;
+    public void update(PessoaDTO pessoaDTO) {
+        PessoaEntity pessoaEntity = getPessoaById(pessoaDTO.getIdPessoa());
+        pessoaEntity.setNome(pessoaDTO.getNome());
+        pessoaEntity.setCpf(pessoaDTO.getCpf());
+        pessoaEntity.setSobrenome(pessoaDTO.getSobrenome());
+        pessoaEntity.setTelefone(pessoaDTO.getTelefone());
     }
 }
 

@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.view.service;
 import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioVendaDTO;
+import com.entra21.LojaSimulator.model.dto.VendaDTO;
 import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ import java.util.Optional;
 public class FuncionarioService implements UserDetailsService {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
+
+    @Autowired
+    private VendaService vendaService;
 
     public FuncionarioEntity getFuncionarioById(Long id){
         return funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Funcionario não encontrada!"));
@@ -56,7 +60,7 @@ public class FuncionarioService implements UserDetailsService {
     //Metodo Save - Criando uma venda em um funcionário
     public void saveVenda(Long id){
         FuncionarioEntity funcionario = getFuncionarioById(id);
-        VendaEntity venda = new VendaEntity();//chamar metodo
+        VendaEntity venda = new VendaEntity();
         venda.setFuncionario(funcionario);
         funcionario.getVendas().add(venda);
     }
@@ -74,12 +78,29 @@ public class FuncionarioService implements UserDetailsService {
         return dto;
     }
 
-    //Metodo Save - Criando uma venda em um funcionário
+    //Metodo Save - Criando um Pedido de Compra em um funcionário
     public void savePedidoCompra(Long id){
-        FuncionarioEntity funcionario = funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
+        FuncionarioEntity funcionario = getFuncionarioById(id);
         PedidoCompraEntity venda = new PedidoCompraEntity();//chamar metodo
         venda.setFuncionario(funcionario);
         funcionario.getPedidos().add(venda);
+    }
+
+    public void update(FuncionarioDTO funcionarioDTO){
+        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getId());
+            if (funcionarioDTO.getCpf() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getCpf());
+            }
+            if (funcionarioDTO.getNome() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getNome());
+            }
+            if (funcionarioDTO.getSobrenome() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getSobrenome());
+            }
+            if (funcionarioDTO.getTelefone() != null){
+                funcionarioEntity.setCpf(funcionarioDTO.getTelefone());
+            }
+
     }
 
     @Override

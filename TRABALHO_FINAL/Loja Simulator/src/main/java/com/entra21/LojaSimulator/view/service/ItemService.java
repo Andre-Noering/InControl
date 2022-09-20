@@ -56,30 +56,27 @@ public class ItemService {
 		itemRepository.delete(itemEntity);
 	}
 
-	public ItemDTO update(Long id, String novoNome, Double novoValor, Integer novaQtde, Integer novaQtdeAlerta) {
-		ItemEntity itemEntity = getItemById(id);
-		if (novoNome != null) {
-			itemEntity.setNome(novoNome);
+	public void update(ItemDTO itemDTO) {
+		ItemEntity itemEntity = getItemById(itemDTO.getId());
+		if (itemEntity.getNome() != null) {
+			itemEntity.setNome(itemEntity.getNome());
 		}
-		if (novoValor != null) {
-			itemEntity.setValor(novoValor);
+		if (itemEntity.getValor() != null) {
+			itemEntity.setValor(itemEntity.getValor());
 		}
-		if (novaQtde != null) {
-			itemEntity.setQtde_estoque(novaQtde);
+		if (itemDTO.getQtde_estoque() != null) {
+			itemEntity.setQtde_estoque(itemDTO.getQtde_estoque());
 		}
-		if (novaQtdeAlerta != null) {
-			itemEntity.setQtde_alerta_estoque(novaQtdeAlerta);
+		if (itemDTO.getQtde_alerta_estoque() != null) {
+			itemEntity.setQtde_alerta_estoque(itemDTO.getQtde_alerta_estoque());
 		}
-		return new ItemDTO(itemEntity.getId(),itemEntity.getNome(),itemEntity.getValor(),itemEntity.getQtde_estoque(),itemEntity.getQtde_alerta_estoque());
 	}
 
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
-		LojaEntity loja = lojaService.getById(idLoja);
-		List<ItemEntity> listaItens = loja.getItens();
+		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
 		return listaItens.stream().map(item -> {
-			ItemDTO itemDTO = new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
-			return itemDTO;
+			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
 		}).collect(Collectors.toList());
 	}
 

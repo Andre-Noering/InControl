@@ -111,5 +111,7 @@ public class LojaService {
         return new LojaValorCaixaDTO(loja.getValor_caixa());
     }
 
-
+    public LojaEntity getByRazao_Social(String razao_social){
+        return lojaRepository.findByRazao_Social(razao_social);
+    }
 }

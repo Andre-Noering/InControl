@@ -41,13 +41,13 @@ public class PedidoCompraItemFornecedorService {
         PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(id);
         pedidoCompraItemFornecedorRepository.delete(pedidoCompraItemFornecedorEntity);
     }
-    public void update(Long id,Double valor_unitario, Integer qtde){
-        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(id);
-        if(valor_unitario!=null){
-            pedidoCompraItemFornecedorEntity.setValorUnitario(valor_unitario);
+    public void update(PedidoCompraItemFornecedorDTO pedidoCompraItemFornecedorDTO){
+        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(pedidoCompraItemFornecedorDTO.getId());
+        if(pedidoCompraItemFornecedorDTO.getValor_unitario()!=null){
+            pedidoCompraItemFornecedorEntity.setValorUnitario(pedidoCompraItemFornecedorDTO.getValor_unitario());
         }
-        if(qtde!=null){
-            pedidoCompraItemFornecedorEntity.setQuantidade(qtde);
+        if(pedidoCompraItemFornecedorDTO.getQtde()!=null){
+            pedidoCompraItemFornecedorEntity.setQuantidade(pedidoCompraItemFornecedorDTO.getQtde());
         }
     }
 
