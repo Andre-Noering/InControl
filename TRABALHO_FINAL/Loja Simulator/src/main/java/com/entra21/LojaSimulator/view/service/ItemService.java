@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -24,56 +25,21 @@ public class ItemService {
 	@Autowired
 	private ItemFornecedorService itemFornecedorService;
 
+	@Autowired
+	private LojaService lojaService;
+
+
+	//GET
 	public ItemEntity getItemById(Long id){
-		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrada!"));
+		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrado!"));
 	}
 
-	public void save(ItemDTO input) {
-		ItemEntity newEntity = new ItemEntity();
-		newEntity.setId(input.getId());
-		newEntity.setNome(input.getNome());
-		newEntity.setValor(input.getValor());
-		newEntity.setQtde_estoque(input.getQtde_estoque());
-		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
-		itemRepository.save(newEntity);
-	}
-	public ItemEntity build(ItemDTO input){
-		ItemEntity newEntity = new ItemEntity();
-		newEntity.setId(input.getId());
-		newEntity.setNome(input.getNome());
-		newEntity.setValor(input.getValor());
-		newEntity.setQtde_estoque(input.getQtde_estoque());
-		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
-		return newEntity;
-	}
-
-	public void delete(Long id) {
-		itemRepository.deleteById(id);
-	}
-
-	public ItemDTO update(Long id, String novoNome, Double novoValor, Integer novaQtde, Integer novaQtdeAlerta) {
-		ItemEntity itemEntity = getItemById(id);
-		if (novoNome != null) {
-			itemEntity.setNome(novoNome);
-		}
-		if (novoValor != null) {
-			itemEntity.setValor(novoValor);
-		}
-		if (novaQtde != null) {
-			itemEntity.setQtde_estoque(novaQtde);
-		}
-		if (novaQtdeAlerta != null) {
-			itemEntity.setQtde_alerta_estoque(novaQtdeAlerta);
-		}
-		return new ItemDTO(itemEntity.getId(),itemEntity.getNome(),itemEntity.getValor(),itemEntity.getQtde_estoque(),itemEntity.getQtde_alerta_estoque());
-	}
 
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
-		List<ItemEntity> listaItens = itemRepository.findAllByLoja_Id(idLoja);
+		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
 		return listaItens.stream().map(item -> {
-			ItemDTO itemDTO = new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
-			return itemDTO;
+			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
 		}).collect(Collectors.toList());
 	}
 
@@ -88,6 +54,12 @@ public class ItemService {
 		ItemEntity itemEntity = getItemById(id);
 		return new ItemValorDTO(itemEntity.getValor());
 	}
+	public List<ItemDTO> getItensEmAlerta(String razao_social){
+		List<ItemDTO> listaItens = getAllByLoja(lojaService.getByRazao_Social(razao_social).getId());
+		listaItens.removeIf(item -> !this.alertaById(item.getId()));
+		return listaItens;
+	}
+
 
 	//Retorna quantidade de estoque pelo id
 	public ItemQtdeEstoqueDTO getQtdeEstoqueById(Long id) {
@@ -106,9 +78,57 @@ public class ItemService {
 	}
 
 	public List<FornecedorEntity> getFornecedores(Long id) {
-		ItemEntity itemEntity = itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+		ItemEntity itemEntity =  getItemById(id);
 		return itemEntity.getFornecedores().stream().map(fornecedor -> {
 			return itemFornecedorService.getFornecedorById(fornecedor.getFornecedor().getId());
 		}).collect(Collectors.toList());
 	}
+
+	public ItemEntity build(ItemDTO input){
+		ItemEntity newEntity = new ItemEntity();
+		newEntity.setId(input.getId());
+		newEntity.setNome(input.getNome());
+		newEntity.setValor(input.getValor());
+		newEntity.setQtde_estoque(input.getQtde_estoque());
+		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		return newEntity;
+	}
+
+
+
+	//POST
+	public void save(@RequestBody ItemDTO input) {
+		ItemEntity newEntity = new ItemEntity();
+		newEntity.setId(input.getId());
+		newEntity.setNome(input.getNome());
+		newEntity.setValor(input.getValor());
+		newEntity.setQtde_estoque(input.getQtde_estoque());
+		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		itemRepository.save(newEntity);
+	}
+
+	//PUT
+	public void update(ItemDTO itemDTO) {
+		ItemEntity itemEntity = getItemById(itemDTO.getId());
+		if (itemEntity.getNome() != null) {
+			itemEntity.setNome(itemEntity.getNome());
+		}
+		if (itemEntity.getValor() != null) {
+			itemEntity.setValor(itemEntity.getValor());
+		}
+		if (itemDTO.getQtde_estoque() != null) {
+			itemEntity.setQtde_estoque(itemDTO.getQtde_estoque());
+		}
+		if (itemDTO.getQtde_alerta_estoque() != null) {
+			itemEntity.setQtde_alerta_estoque(itemDTO.getQtde_alerta_estoque());
+		}
+	}
+
+
+	public void delete(Long id) {
+		ItemEntity itemEntity = getItemById(id);
+		itemRepository.delete(itemEntity);
+	}
+
+
 }
