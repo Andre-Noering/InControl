@@ -55,8 +55,6 @@ public class PessoaService {
         return pessoaDTO;
     }
 
-
-
     //POST
     public void save(@RequestBody PessoaDTO pessoaDTO) {
         pessoaRepository.save(build(pessoaDTO));
@@ -70,8 +68,8 @@ public class PessoaService {
         pessoaEntity.setSobrenome(pessoaDTO.getSobrenome());
         pessoaEntity.setTelefone(pessoaDTO.getTelefone());
     }
-    
 
+    //DELETE
     public void delete(Long id) {
         PessoaEntity pessoa = getPessoaById(id);
         pessoaRepository.delete(pessoa);

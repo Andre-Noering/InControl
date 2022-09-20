@@ -1,9 +1,6 @@
 package com.entra21.LojaSimulator.view.service;
 
-import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
-import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
-import com.entra21.LojaSimulator.model.dto.FuncionarioVendaDTO;
-import com.entra21.LojaSimulator.model.dto.VendaDTO;
+import com.entra21.LojaSimulator.model.dto.*;
 import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.FuncionarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,25 +56,23 @@ public class FuncionarioService implements UserDetailsService {
         newFuncionario.setSobrenome(funcionarioDTO.getSobrenome());
         newFuncionario.setTelefone(funcionarioDTO.getTelefone());
         newFuncionario.setCpf(funcionarioDTO.getCpf());
+        newFuncionario.setLogin(funcionarioDTO.getLogin());
+        newFuncionario.setSenha(funcionarioDTO.getSenha());
         return newFuncionario;
     }
 
 
-    //POST
-    //Metodo Save - Criando uma venda em um funcionário
-    public void saveVenda(Long id){
-        FuncionarioEntity funcionario = getFuncionarioById(id);
-        VendaEntity venda = new VendaEntity();
-        venda.setFuncionario(funcionario);
-        funcionario.getVendas().add(venda);
-    }
-
-    //Metodo Save - Criando um Pedido de Compra em um funcionário
-    public void savePedidoCompra(Long id){
-        FuncionarioEntity funcionario = getFuncionarioById(id);
-        PedidoCompraEntity venda = new PedidoCompraEntity();//chamar metodo
-        venda.setFuncionario(funcionario);
-        funcionario.getPedidos().add(venda);
+    //Metodo Save - Criando um funcionario
+    public void save(FuncionarioDTO funcionarioDTO){
+        FuncionarioEntity funcionarioEntity = new FuncionarioEntity();
+        funcionarioEntity.setId(funcionarioDTO.getId());
+        funcionarioEntity.setNome(funcionarioDTO.getNome());
+        funcionarioEntity.setSobrenome(funcionarioDTO.getSobrenome());
+        funcionarioEntity.setTelefone(funcionarioDTO.getTelefone());
+        funcionarioEntity.setCpf(funcionarioDTO.getCpf());
+        funcionarioEntity.setLogin(funcionarioDTO.getLogin());
+        funcionarioEntity.setSenha(funcionarioDTO.getSenha());
+        funcionarioRepository.save(funcionarioEntity);
     }
 
 

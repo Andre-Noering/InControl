@@ -7,6 +7,7 @@ import com.entra21.LojaSimulator.view.service.FornecedorService;
 import com.entra21.LojaSimulator.view.service.ItemFornecedorService;
 import com.entra21.LojaSimulator.view.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +28,11 @@ public class FornecedorRestController {
         return fornecedorService.getAllByLoja(razao_social);
     }
     @GetMapping(name="/${razao_social}/itens")
-    public List<ItemDTO> getItens(String razao_social){
+    public List<ItemDTO> getItens(@PathVariable String razao_social){
         return fornecedorService.getItensByRazaoSocial(razao_social);
     }
     @GetMapping(name="/${razao_social}/contato")
-    public String getContato(String razao_social){
+    public String getContato(@PathVariable String razao_social){
         return fornecedorService.getContatoByRazaoSocial(razao_social);
     }
     @DeleteMapping(name="/${razao_social}")
@@ -40,13 +41,15 @@ public class FornecedorRestController {
     }
 
     @PostMapping(name="/adicionar")
-    public void post(FornecedorDTO fornecedorDTO){
+    public void post(@RequestBody FornecedorDTO fornecedorDTO){
         fornecedorService.save(fornecedorDTO);
     }
+
     @PutMapping(name="/${razao_social}")
     public void update(@RequestBody FornecedorDTO fornecedorDTO){
         fornecedorService.update(fornecedorDTO);
     }
+
 
 
 }
