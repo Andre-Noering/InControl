@@ -120,7 +120,9 @@ public class LojaService {
         LojaEntity fornecedor = getById(id);
         lojaRepository.delete(fornecedor);
     }
-
+    public void deleteByRazao_Social(String razao_social){
+        lojaRepository.deleteByRazao_Social(razao_social);
+    }
 
 
 
