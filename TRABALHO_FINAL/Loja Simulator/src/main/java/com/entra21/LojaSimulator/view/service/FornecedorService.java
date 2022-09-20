@@ -59,6 +59,7 @@ public class FornecedorService {
         if (fornecedorDTO.getContato() != null) {
             fornecedor.setContato(fornecedorDTO.getContato());
         }
+        save(getDtoById(fornecedor.getId()));
     }
 
     public FornecedorDTO getDtoById(Long id) {

@@ -1,5 +1,6 @@
 package com.entra21.LojaSimulator.view.service;
 
+import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioVendaDTO;
 import com.entra21.LojaSimulator.model.dto.VendaDTO;
@@ -62,6 +63,19 @@ public class FuncionarioService implements UserDetailsService {
         VendaEntity venda = new VendaEntity();
         venda.setFuncionario(funcionario);
         funcionario.getVendas().add(venda);
+    }
+
+    public FuncionarioDTO getDTOById(Long id) {
+        FuncionarioEntity funcionario = getFuncionarioById(id);
+        FuncionarioDTO dto = new FuncionarioDTO();
+        dto.setId(funcionario.getId());
+        dto.setNome(funcionario.getNome());
+        dto.setLogin(funcionario.getLogin());
+        dto.setSenha(funcionario.getSenha());
+        dto.setCpf(dto.getCpf());
+        dto.setSobrenome(dto.getSobrenome());
+        dto.setTelefone(dto.getTelefone());
+        return dto;
     }
 
     //Metodo Save - Criando um Pedido de Compra em um funcionário

@@ -30,17 +30,17 @@ public class LojaEntity {
 
     @OneToMany
     @JoinColumn(name="id", referencedColumnName = "id_loja", nullable = false)
-    private List<FuncionarioEntity> funcionarios;
+    private List<PessoaEntity> funcionarios;
 
     @ManyToOne
     @JoinColumn(name="id_funcionario", referencedColumnName = "id_pessoa", nullable = false)
     private FuncionarioEntity gerente;
 
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "id_loja",nullable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id_loja")
     private List<ItemEntity> itens;
 
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "id_loja", nullable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id_loja")
     private List<FornecedorEntity> fornecedores;
 }
