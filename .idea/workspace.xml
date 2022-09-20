@@ -6,9 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0d72c8b1-ba1e-4d7a-abf0-c6f77be03b4e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/VendaEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/VendaEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/LojaRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/LojaRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/PessoaRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/PessoaRestController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/VendaRestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/VendaRestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/PessoaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/PessoaService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/VendaService.java" beforeDir="false" afterPath="$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/VendaService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +29,16 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/FuncionarioRestController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/ItemFornecedorRestController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/PessoaRestController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/controller/VendaRestController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/FuncionarioEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/ItemFornecedorEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/ItemVendaEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/LojaEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/PessoaEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/model/entity/VendaEntity.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/ItemService.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/TRABALHO_FINAL/Loja Simulator/src/main/java/com/entra21/LojaSimulator/view/service/PessoaService.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
