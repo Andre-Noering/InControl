@@ -9,34 +9,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(name = "/pessoas")
 public class PessoaRestController {
 
     @Autowired
     private PessoaService pessoaService;
 
-    @GetMapping
-    public List<PessoaDTO> getPessoa() {
-        return PessoaService.getAll();
-    }
-
-    @PostMapping
-    public void addPessoa(@RequestBody PessoaPayloadDTO newPessoa) {
-        pessoaService.save(new PessoaDTO());
-    }
-
-    @GetMapping("/")
-    public PessoaDTO getFranquia(@PathVariable(name = "id") Long id) {
+    @GetMapping(name = "/${id}")
+    public PessoaDTO getPessoa(@PathVariable Long id) {
         return pessoaService.getDTOById(id);
     }
 
-    @DeleteMapping("/")
-    public void deletePessoa(@PathVariable(name = "id") Long id) {
-        PessoaService.delete(id);
+    @PostMapping(name = "/salvar")
+    public void savePessoa(@RequestBody PessoaDTO pessoaDTO) {
+        pessoaService.save(pessoaDTO);
     }
 
-    @PutMapping("/")
-    public PessoaDTO updatePessoa(@PathVariable(name = "id") Long id,
-                                  @RequestBody String novoNome) {
-        return pessoaService.update(id, novoNome);
+    @DeleteMapping(name = "/${id}")
+    public void deletePessoa(@PathVariable Long id) {
+        pessoaService.delete(id);
+    }
+
+    @PutMapping(name = "/uptade")
+    public void updatePessoa(PessoaDTO pessoaDTO){
+        pessoaService.update(pessoaDTO);
     }
 }
