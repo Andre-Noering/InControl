@@ -32,11 +32,11 @@ public class ItemFornecedorService {
     }
 
     public FornecedorEntity getFornecedorById(Long id){
-        return fornecedorService.getFornecedorById(id);
+        return fornecedorService.getFornecedorById(getItemFornecedorById(id).getFornecedor().getId());
     }
 
     public ItemEntity getItem(Long id){
-        return itemService.getItemById(id);
+        return itemService.getItemById(getItemFornecedorById(id).getItem().getId());
     }
 
     public ItemDTO getItemDTO(Long id){
@@ -63,6 +63,7 @@ public class ItemFornecedorService {
         }
     }
 
+    //DELETE
     public void delete(Long id){
         ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
         itemFornecedorRepository.delete(itemFornecedorEntity);

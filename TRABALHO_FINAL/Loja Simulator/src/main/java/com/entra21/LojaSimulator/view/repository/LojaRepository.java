@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LojaRepository extends JpaRepository<LojaEntity, Long> {
     LojaEntity findByRazao_Social(String razao_social);
+
+    void deleteByRazao_Social(String razao_social);
 }

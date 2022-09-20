@@ -74,6 +74,11 @@ public class VendaService {
         return pessoa;
     }
 
+    public VendaDTO getDTOById(Long id){
+        VendaEntity vendaEntity=getVenda(id);
+        return new VendaDTO(vendaEntity.getId(), vendaEntity.getData(), vendaEntity.getPessoa().getId(), vendaEntity.getFuncionario().getId());
+    }
+
     //POST
     public void save(VendaPayloadDTO vendaDTO){
         VendaEntity newVenda = new VendaEntity();
