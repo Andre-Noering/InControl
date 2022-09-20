@@ -32,36 +32,8 @@ public class FornecedorService {
     @Autowired
     private LojaService lojaService;
 
-    public FornecedorEntity getFornecedorById(Long id){
-        return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
-    }
-    public void save(@RequestBody FornecedorDTO input) {
-        FornecedorEntity newFornecedor = new FornecedorEntity();
-        newFornecedor.setId(input.getId());
-        newFornecedor.setRazao_social(input.getRazao_social());
-        newFornecedor.setCnpj(input.getCnpj());
-        newFornecedor.setContato(input.getContato());
-        newFornecedor.setLoja(input.getLoja());
-        fornecedorRepository.save(newFornecedor);
-    }
 
-    public void delete(Long id) {
-        FornecedorEntity fornecedor = getFornecedorById(id);
-        fornecedorRepository.delete(fornecedor);
-    }
-
-
-    public void update(FornecedorDTO fornecedorDTO) {
-        FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
-        if (fornecedorDTO.getRazao_social() != null) {
-            fornecedor.setRazao_social(fornecedorDTO.getRazao_social());
-        }
-        if (fornecedorDTO.getContato() != null) {
-            fornecedor.setContato(fornecedorDTO.getContato());
-        }
-        save(getDtoById(fornecedor.getId()));
-    }
-
+    //GET
     public FornecedorDTO getDtoById(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
         return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazao_social(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
@@ -94,8 +66,42 @@ public class FornecedorService {
         FornecedorEntity fornecedor = getFornecedorById(id);
         return new FornecedorDTO(fornecedor.getId(), fornecedor.getRazao_social(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
     }
+    public FornecedorEntity getFornecedorById(Long id){
+        return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
+    }
 
+
+    //POST
+    public void save(@RequestBody FornecedorDTO input) {
+        FornecedorEntity newFornecedor = new FornecedorEntity();
+        newFornecedor.setId(input.getId());
+        newFornecedor.setRazao_social(input.getRazao_social());
+        newFornecedor.setCnpj(input.getCnpj());
+        newFornecedor.setContato(input.getContato());
+        newFornecedor.setLoja(input.getLoja());
+        fornecedorRepository.save(newFornecedor);
+    }
+
+
+    //PUT
+    public void update(FornecedorDTO fornecedorDTO) {
+        FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
+        if (fornecedorDTO.getRazao_social() != null) {
+            fornecedor.setRazao_social(fornecedorDTO.getRazao_social());
+        }
+        if (fornecedorDTO.getContato() != null) {
+            fornecedor.setContato(fornecedorDTO.getContato());
+        }
+        save(getDtoById(fornecedor.getId()));
+    }
+
+
+    //DELETE
     public void deleteByRazaoSocial(String razao_social){
         fornecedorRepository.deleteByRazao_Social(razao_social);
+    }
+    public void delete(Long id) {
+        FornecedorEntity fornecedor = getFornecedorById(id);
+        fornecedorRepository.delete(fornecedor);
     }
 }

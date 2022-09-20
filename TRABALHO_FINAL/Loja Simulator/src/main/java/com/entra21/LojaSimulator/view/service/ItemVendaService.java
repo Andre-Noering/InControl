@@ -18,6 +18,19 @@ public class ItemVendaService {
     private ItemService itemService;
     @Autowired
     private VendaService vendaService;
+
+    //GET
+    public ItemVendaEntity getItemVendaById(Long id){
+        return itemVendaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+    }
+
+    public ItemVendaDTO getDTOById(Long id){
+        ItemVendaEntity itemVendaEntity = getItemVendaById(id);
+        return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValor_unitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
+    }
+
+
+    //POST
     public void save(ItemVendaDTO itemVendaDTO){
         ItemVendaEntity itemVendaEntity = new ItemVendaEntity();
         itemVendaEntity.setItem(itemService.build(itemService.getDTOById(itemVendaDTO.getId_item())));
@@ -27,12 +40,9 @@ public class ItemVendaService {
         itemVendaRepository.save(itemVendaEntity);
     }
 
-    public void delete(Long id){
-        ItemVendaEntity itemVendaEntity = getItemVenda(id);
-        itemVendaRepository.delete(itemVendaEntity);
-    }
+    //PUT
     public void update(ItemVendaDTO itemVendaDTO){
-        ItemVendaEntity itemVendaEntity = getById(itemVendaDTO.getId());
+        ItemVendaEntity itemVendaEntity = getItemVendaById(itemVendaDTO.getId());
         if(itemVendaDTO.getQtde()!=null){
             itemVendaEntity.setQtde(itemVendaDTO.getQtde());
         }
@@ -41,15 +51,15 @@ public class ItemVendaService {
         }
     }
     public void updateQtde(Integer qtde_nova, Long id){
-        getItemVenda(id).setQtde(qtde_nova);
-    }
-    public ItemVendaEntity getItemVenda(Long id){
-        return itemVendaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+        getItemVendaById(id).setQtde(qtde_nova);
     }
 
-    public ItemVendaDTO getDTOById(Long id){
-       ItemVendaEntity itemVendaEntity = getItemVenda(id);
-       return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValor_unitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
+
+    public void delete(Long id){
+        ItemVendaEntity itemVendaEntity = getItemVendaById(id);
+        itemVendaRepository.delete(itemVendaEntity);
     }
+
+
 
 }

@@ -27,30 +27,6 @@ public class PedidoCompraItemFornecedorService {
         return pedidoCompraItemFornecedorRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra de item não encontrado!"));
     }
 
-
-    public void save(PedidoCompraItemFornecedorDTO input) {
-        PedidoCompraItemFornecedorEntity newPedidoCompraItemFornecedor = new PedidoCompraItemFornecedorEntity();
-        newPedidoCompraItemFornecedor.setId(input.getId());
-        newPedidoCompraItemFornecedor.setQuantidade(input.getQtde());
-        newPedidoCompraItemFornecedor.setValorUnitario(input.getValor_unitario());
-        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getId_item_fornecedor()));
-        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getId_pedido_compra()));
-        pedidoCompraItemFornecedorRepository.save(newPedidoCompraItemFornecedor);
-    }
-    public void delete(Long id){
-        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(id);
-        pedidoCompraItemFornecedorRepository.delete(pedidoCompraItemFornecedorEntity);
-    }
-    public void update(PedidoCompraItemFornecedorDTO pedidoCompraItemFornecedorDTO){
-        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(pedidoCompraItemFornecedorDTO.getId());
-        if(pedidoCompraItemFornecedorDTO.getValor_unitario()!=null){
-            pedidoCompraItemFornecedorEntity.setValorUnitario(pedidoCompraItemFornecedorDTO.getValor_unitario());
-        }
-        if(pedidoCompraItemFornecedorDTO.getQtde()!=null){
-            pedidoCompraItemFornecedorEntity.setQuantidade(pedidoCompraItemFornecedorDTO.getQtde());
-        }
-    }
-
     public List<PedidoCompraItemFornecedorEntity> getAllByIdItemFornecedor(Long id){
         return pedidoCompraItemFornecedorRepository.findAllById(Collections.singleton(id));
     }
@@ -62,4 +38,37 @@ public class PedidoCompraItemFornecedorService {
     public PedidoCompraEntity getPedidoCompraById(Long id){
         return pedidoCompraService.getById(id);
     }
+
+
+    //POST
+    public void save(PedidoCompraItemFornecedorDTO input) {
+        PedidoCompraItemFornecedorEntity newPedidoCompraItemFornecedor = new PedidoCompraItemFornecedorEntity();
+        newPedidoCompraItemFornecedor.setId(input.getId());
+        newPedidoCompraItemFornecedor.setQuantidade(input.getQtde());
+        newPedidoCompraItemFornecedor.setValorUnitario(input.getValor_unitario());
+        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getId_item_fornecedor()));
+        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getId_pedido_compra()));
+        pedidoCompraItemFornecedorRepository.save(newPedidoCompraItemFornecedor);
+    }
+
+    //PUT
+    public void update(PedidoCompraItemFornecedorDTO pedidoCompraItemFornecedorDTO){
+        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(pedidoCompraItemFornecedorDTO.getId());
+        if(pedidoCompraItemFornecedorDTO.getValor_unitario()!=null){
+            pedidoCompraItemFornecedorEntity.setValorUnitario(pedidoCompraItemFornecedorDTO.getValor_unitario());
+        }
+        if(pedidoCompraItemFornecedorDTO.getQtde()!=null){
+            pedidoCompraItemFornecedorEntity.setQuantidade(pedidoCompraItemFornecedorDTO.getQtde());
+        }
+    }
+
+
+    public void delete(Long id){
+        PedidoCompraItemFornecedorEntity pedidoCompraItemFornecedorEntity = getPedidoCompraItemFornecedorById(id);
+        pedidoCompraItemFornecedorRepository.delete(pedidoCompraItemFornecedorEntity);
+    }
+
+
+
+
 }

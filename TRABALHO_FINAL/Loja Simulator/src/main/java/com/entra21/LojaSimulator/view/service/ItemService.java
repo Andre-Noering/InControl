@@ -28,49 +28,12 @@ public class ItemService {
 	@Autowired
 	private LojaService lojaService;
 
+
+	//GET
 	public ItemEntity getItemById(Long id){
 		return itemRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item não encontrado!"));
 	}
 
-	public void save(@RequestBody ItemDTO input) {
-		ItemEntity newEntity = new ItemEntity();
-		newEntity.setId(input.getId());
-		newEntity.setNome(input.getNome());
-		newEntity.setValor(input.getValor());
-		newEntity.setQtde_estoque(input.getQtde_estoque());
-		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
-		itemRepository.save(newEntity);
-	}
-	public ItemEntity build(ItemDTO input){
-		ItemEntity newEntity = new ItemEntity();
-		newEntity.setId(input.getId());
-		newEntity.setNome(input.getNome());
-		newEntity.setValor(input.getValor());
-		newEntity.setQtde_estoque(input.getQtde_estoque());
-		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
-		return newEntity;
-	}
-
-	public void delete(Long id) {
-		ItemEntity itemEntity = getItemById(id);
-		itemRepository.delete(itemEntity);
-	}
-
-	public void update(ItemDTO itemDTO) {
-		ItemEntity itemEntity = getItemById(itemDTO.getId());
-		if (itemEntity.getNome() != null) {
-			itemEntity.setNome(itemEntity.getNome());
-		}
-		if (itemEntity.getValor() != null) {
-			itemEntity.setValor(itemEntity.getValor());
-		}
-		if (itemDTO.getQtde_estoque() != null) {
-			itemEntity.setQtde_estoque(itemDTO.getQtde_estoque());
-		}
-		if (itemDTO.getQtde_alerta_estoque() != null) {
-			itemEntity.setQtde_alerta_estoque(itemDTO.getQtde_alerta_estoque());
-		}
-	}
 
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
@@ -114,4 +77,52 @@ public class ItemService {
 			return itemFornecedorService.getFornecedorById(fornecedor.getFornecedor().getId());
 		}).collect(Collectors.toList());
 	}
+
+	public ItemEntity build(ItemDTO input){
+		ItemEntity newEntity = new ItemEntity();
+		newEntity.setId(input.getId());
+		newEntity.setNome(input.getNome());
+		newEntity.setValor(input.getValor());
+		newEntity.setQtde_estoque(input.getQtde_estoque());
+		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		return newEntity;
+	}
+
+
+
+	//POST
+	public void save(@RequestBody ItemDTO input) {
+		ItemEntity newEntity = new ItemEntity();
+		newEntity.setId(input.getId());
+		newEntity.setNome(input.getNome());
+		newEntity.setValor(input.getValor());
+		newEntity.setQtde_estoque(input.getQtde_estoque());
+		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		itemRepository.save(newEntity);
+	}
+
+	//PUT
+	public void update(ItemDTO itemDTO) {
+		ItemEntity itemEntity = getItemById(itemDTO.getId());
+		if (itemEntity.getNome() != null) {
+			itemEntity.setNome(itemEntity.getNome());
+		}
+		if (itemEntity.getValor() != null) {
+			itemEntity.setValor(itemEntity.getValor());
+		}
+		if (itemDTO.getQtde_estoque() != null) {
+			itemEntity.setQtde_estoque(itemDTO.getQtde_estoque());
+		}
+		if (itemDTO.getQtde_alerta_estoque() != null) {
+			itemEntity.setQtde_alerta_estoque(itemDTO.getQtde_alerta_estoque());
+		}
+	}
+
+
+	public void delete(Long id) {
+		ItemEntity itemEntity = getItemById(id);
+		itemRepository.delete(itemEntity);
+	}
+
+
 }

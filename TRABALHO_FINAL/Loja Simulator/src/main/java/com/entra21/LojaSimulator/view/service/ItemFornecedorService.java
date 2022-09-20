@@ -21,9 +21,30 @@ public class ItemFornecedorService {
     private ItemService itemService;
     @Autowired PedidoCompraItemFornecedorService pedidoCompraItemFornecedorService;
 
+    //GET
     public ItemFornecedorEntity getItemFornecedorById(Long id){
         return itemFornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Item de Fornecedor não encontrada!"));
     }
+
+    public ItemFornecedorDTO getDTOById(Long id){
+        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
+        return new ItemFornecedorDTO(itemFornecedorEntity.getId(), itemFornecedorEntity.getValorCompra(), itemFornecedorEntity.getItem().getId(), itemFornecedorEntity.getFornecedor().getId());
+    }
+
+    public FornecedorEntity getFornecedorById(Long id){
+        return fornecedorService.getFornecedorById(id);
+    }
+
+    public ItemEntity getItem(Long id){
+        return itemService.getItemById(id);
+    }
+
+    public ItemDTO getItemDTO(Long id){
+        return itemService.getDTOById(this.getItem(id).getId());
+    }
+
+
+    //POST
     public void save(ItemFornecedorDTO itemFornecedorDTO){
         ItemFornecedorEntity itemFornecedorEntity = new ItemFornecedorEntity();
         itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getId_fornecedor()));
@@ -34,11 +55,7 @@ public class ItemFornecedorService {
         itemFornecedorRepository.save(itemFornecedorEntity);
     }
 
-    public void delete(Long id){
-        ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
-        itemFornecedorRepository.delete(itemFornecedorEntity);
-    }
-
+    //PUT
     public void update(ItemFornecedorDTO itemFornecedorDTO){
         ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(itemFornecedorDTO.getId());
         if(itemFornecedorDTO.getValor_compra() !=null){
@@ -46,18 +63,12 @@ public class ItemFornecedorService {
         }
     }
 
-    public ItemFornecedorDTO getDTOById(Long id){
+    public void delete(Long id){
         ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
-        return new ItemFornecedorDTO(itemFornecedorEntity.getId(), itemFornecedorEntity.getValorCompra(), itemFornecedorEntity.getItem().getId(), itemFornecedorEntity.getFornecedor().getId());
-    }
-    public FornecedorEntity getFornecedorById(Long id){
-        return fornecedorService.getFornecedorById(id);
-    }
-    public ItemEntity getItem(Long id){
-        return itemService.getItemById(id);
+        itemFornecedorRepository.delete(itemFornecedorEntity);
     }
 
-    public ItemDTO getItemDTO(Long id){
-        return itemService.getDTOById(this.getItem(id).getId());
-    }
+
+
+
 }

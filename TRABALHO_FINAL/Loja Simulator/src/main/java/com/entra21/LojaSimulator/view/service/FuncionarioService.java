@@ -24,47 +24,13 @@ public class FuncionarioService implements UserDetailsService {
     @Autowired
     private VendaService vendaService;
 
+
+    //GET
     public FuncionarioEntity getFuncionarioById(Long id){
         return funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Funcionario não encontrada!"));
     }
 
     //Método Get - Retornando o funcionário pelo ID
-    public FuncionarioDTO findFuncById(Long id){
-        FuncionarioEntity funcionario = getFuncionarioById(id);
-        FuncionarioDTO funcionarioDTO = new FuncionarioDTO();
-        funcionarioDTO.setId(funcionario.getId());
-        funcionarioDTO.setNome(funcionario.getNome());
-        funcionarioDTO.setSobrenome(funcionario.getSobrenome());
-        funcionarioDTO.setCpf(funcionario.getCpf());
-        funcionarioDTO.setTelefone(funcionario.getTelefone());
-        return funcionarioDTO;
-    }
-
-    //Build do funcionário
-    public FuncionarioEntity build(FuncionarioDTO funcionarioDTO){
-        FuncionarioEntity newFuncionario = new FuncionarioEntity();
-        newFuncionario.setId(funcionarioDTO.getId());
-        newFuncionario.setNome(funcionarioDTO.getNome());
-        newFuncionario.setSobrenome(funcionarioDTO.getSobrenome());
-        newFuncionario.setTelefone(funcionarioDTO.getTelefone());
-        newFuncionario.setCpf(funcionarioDTO.getCpf());
-        return newFuncionario;
-    }
-
-    //Método Get - Retornando todas as vendas do funcionário filtrando o funcionário pelo iD
-    public FuncionarioVendaDTO getVendasFuncionario(Long id) {
-        Optional<FuncionarioEntity> funcionario = funcionarioRepository.findById(id);
-        return funcionario.map(funcionarioEntity -> new FuncionarioVendaDTO(funcionarioEntity.getVendas())).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
-    }
-
-    //Metodo Save - Criando uma venda em um funcionário
-    public void saveVenda(Long id){
-        FuncionarioEntity funcionario = getFuncionarioById(id);
-        VendaEntity venda = new VendaEntity();
-        venda.setFuncionario(funcionario);
-        funcionario.getVendas().add(venda);
-    }
-
     public FuncionarioDTO getDTOById(Long id) {
         FuncionarioEntity funcionario = getFuncionarioById(id);
         FuncionarioDTO dto = new FuncionarioDTO();
@@ -78,6 +44,34 @@ public class FuncionarioService implements UserDetailsService {
         return dto;
     }
 
+    //Método Get - Retornando todas as vendas do funcionário filtrando o funcionário pelo iD
+    public FuncionarioVendaDTO getVendasFuncionario(Long id) {
+        Optional<FuncionarioEntity> funcionario = funcionarioRepository.findById(id);
+        return funcionario.map(funcionarioEntity -> new FuncionarioVendaDTO(funcionarioEntity.getVendas())).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
+    }
+
+
+    //Build do funcionário
+    public FuncionarioEntity build(FuncionarioDTO funcionarioDTO){
+        FuncionarioEntity newFuncionario = new FuncionarioEntity();
+        newFuncionario.setId(funcionarioDTO.getId());
+        newFuncionario.setNome(funcionarioDTO.getNome());
+        newFuncionario.setSobrenome(funcionarioDTO.getSobrenome());
+        newFuncionario.setTelefone(funcionarioDTO.getTelefone());
+        newFuncionario.setCpf(funcionarioDTO.getCpf());
+        return newFuncionario;
+    }
+
+
+    //POST
+    //Metodo Save - Criando uma venda em um funcionário
+    public void saveVenda(Long id){
+        FuncionarioEntity funcionario = getFuncionarioById(id);
+        VendaEntity venda = new VendaEntity();
+        venda.setFuncionario(funcionario);
+        funcionario.getVendas().add(venda);
+    }
+
     //Metodo Save - Criando um Pedido de Compra em um funcionário
     public void savePedidoCompra(Long id){
         FuncionarioEntity funcionario = getFuncionarioById(id);
@@ -86,6 +80,8 @@ public class FuncionarioService implements UserDetailsService {
         funcionario.getPedidos().add(venda);
     }
 
+
+    //PUT
     public void update(FuncionarioDTO funcionarioDTO){
         FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getId());
             if (funcionarioDTO.getCpf() != null){

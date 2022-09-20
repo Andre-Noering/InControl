@@ -22,18 +22,21 @@ public class PedidoCompraService {
 	public PedidoCompraEntity getById(Long id){
 		return pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
 	}
+	public PedidoCompraDTO getDTOById(Long id){
+		PedidoCompraEntity pedidoCompraEntity = pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
+		return new PedidoCompraDTO(pedidoCompraEntity.getId(), pedidoCompraEntity.getData(), pedidoCompraEntity.getFuncionario().getId());
+	}
+
+	//POST
 	public void save(PedidoCompraDTO pedidoCompraDTO){
 		PedidoCompraEntity pedido = new PedidoCompraEntity();
-		pedido.setFuncionario(funcionarioService.build(funcionarioService.findFuncById(pedidoCompraDTO.getId_funcionario())));
+		pedido.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(pedidoCompraDTO.getId_funcionario())));
 		pedido.setId(pedidoCompraDTO.getId());
 		pedido.setData(pedidoCompraDTO.getData());
 		pedidoCompraRepository.save(pedido);
 	}
 
-	public void delete(Long id){
-		PedidoCompraEntity pedidoCompraEntity = getById(id);
-		pedidoCompraRepository.delete(pedidoCompraEntity);
-	}
+	//PUT
 	public void update(PedidoCompraDTO pedidoCompraDTO){
 		PedidoCompraEntity pedidoCompraEntity = getById(pedidoCompraDTO.getId());
 		if(pedidoCompraDTO.getData()!=null){
@@ -41,8 +44,12 @@ public class PedidoCompraService {
 		}
 	}
 
-	public PedidoCompraDTO getDTOById(Long id){
-		PedidoCompraEntity pedidoCompraEntity = pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
-		return new PedidoCompraDTO(pedidoCompraEntity.getId(), pedidoCompraEntity.getData(), pedidoCompraEntity.getFuncionario().getId());
+
+	public void delete(Long id){
+		PedidoCompraEntity pedidoCompraEntity = getById(id);
+		pedidoCompraRepository.delete(pedidoCompraEntity);
 	}
+
+
+
 }

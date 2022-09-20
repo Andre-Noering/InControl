@@ -37,50 +37,8 @@ public class LojaService {
         return lojaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Loja não encontrada!"));
     }
 
-    public void save(@RequestBody LojaDTO input) {
-        LojaEntity newLoja = new LojaEntity();
-        newLoja.setId(input.getId());
-        newLoja.setRazao_social(input.getRazao_social());
-        newLoja.setCnpj(input.getCnpj());
-        newLoja.setContato(input.getContato());
-        newLoja.setValor_caixa(input.getValor_caixa());
-        newLoja.setGerente(input.getGerente());
-        lojaRepository.save(newLoja);
-    }
 
-    public void delete(Long id) {
-        LojaEntity fornecedor = getById(id);
-        lojaRepository.delete(fornecedor);
-    }
-
-    public LojaDTO getDtoById(Long id) {
-        LojaEntity loja = getById(id);
-        return new LojaDTO(loja.getId(), loja.getRazao_social(), loja.getCnpj(), loja.getContato(), loja.getValor_caixa(), loja.getGerente(), loja.getItens(), loja.getFornecedores(), loja.getFuncionarios());
-    }
-
-    public void update(@RequestBody LojaUpdateDTO dto) {
-        LojaEntity loja = getById(dto.getId());
-        if (dto.getGerente() != null) {
-            loja.setGerente(dto.getGerente());
-        }
-        if (dto.getContato() != null) {
-            loja.setContato(dto.getContato());
-        }
-        if (dto.getFuncionarios() != null) {
-            loja.setFuncionarios(dto.getFuncionarios());
-        }
-        if (dto.getValor_caixa() != null) {
-            loja.setValor_caixa(dto.getValor_caixa());
-        }
-        if (dto.getItens() != null) {
-            loja.setItens(dto.getItens());
-        }
-        if (dto.getFornecedores() != null) {
-            loja.setFornecedores(dto.getFornecedores());
-        }
-        save(getDtoById(loja.getId()));
-    }
-
+    //GET
     public List<ItemDTO> getItensById(Long id) {
         LojaEntity loja = getById(id);
         return loja.getItens().stream().map(item -> itemService.getDTOById(item.getId())).collect(Collectors.toList());
@@ -114,4 +72,56 @@ public class LojaService {
     public LojaEntity getByRazao_Social(String razao_social){
         return lojaRepository.findByRazao_Social(razao_social);
     }
+
+    public LojaDTO getDTOById(Long id) {
+        LojaEntity loja = getById(id);
+        return new LojaDTO(loja.getId(), loja.getRazao_social(), loja.getCnpj(), loja.getContato(), loja.getValor_caixa(), loja.getGerente(), loja.getItens(), loja.getFornecedores(), loja.getFuncionarios());
+    }
+
+
+    //POST
+    public void save(@RequestBody LojaDTO input) {
+        LojaEntity newLoja = new LojaEntity();
+        newLoja.setId(input.getId());
+        newLoja.setRazao_social(input.getRazao_social());
+        newLoja.setCnpj(input.getCnpj());
+        newLoja.setContato(input.getContato());
+        newLoja.setValor_caixa(input.getValor_caixa());
+        newLoja.setGerente(input.getGerente());
+        lojaRepository.save(newLoja);
+    }
+
+    //PUT
+    public void update(@RequestBody LojaUpdateDTO dto) {
+        LojaEntity loja = getById(dto.getId());
+        if (dto.getGerente() != null) {
+            loja.setGerente(dto.getGerente());
+        }
+        if (dto.getContato() != null) {
+            loja.setContato(dto.getContato());
+        }
+        if (dto.getFuncionarios() != null) {
+            loja.setFuncionarios(dto.getFuncionarios());
+        }
+        if (dto.getValor_caixa() != null) {
+            loja.setValor_caixa(dto.getValor_caixa());
+        }
+        if (dto.getItens() != null) {
+            loja.setItens(dto.getItens());
+        }
+        if (dto.getFornecedores() != null) {
+            loja.setFornecedores(dto.getFornecedores());
+        }
+        save(getDTOById(loja.getId()));
+    }
+
+
+    public void delete(Long id) {
+        LojaEntity fornecedor = getById(id);
+        lojaRepository.delete(fornecedor);
+    }
+
+
+
+
 }
