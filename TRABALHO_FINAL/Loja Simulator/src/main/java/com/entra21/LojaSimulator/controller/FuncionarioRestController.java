@@ -20,22 +20,17 @@ public class FuncionarioRestController {
 
     @GetMapping(name = "/${id_funcionario}")
     public FuncionarioDTO getFuncionarioDTO(@PathVariable(name = "id")Long id){
-        return funcionarioService.findFuncById(id);
-    }
-
-    @PostMapping(name = "/save-venda")
-    public void saveVenda(@RequestBody Long id){
-         funcionarioService.saveVenda(id);
-    }
-
-    @PostMapping(name = "/save-pedido-compra")
-    public void savePedidoCompra(@RequestBody Long id){
-        funcionarioService.savePedidoCompra(id);
+        return funcionarioService.getDTOById(id);
     }
 
     @PutMapping(name = "/alteracao-funcionario/${id}")
-    public void uptadeFuncionarioDTO(@RequestBody FuncionarioDTO funcionarioDTO){
+    public void updateFuncionarioDTO(@RequestBody FuncionarioDTO funcionarioDTO){
         funcionarioService.update(funcionarioDTO);
+    }
+
+    @PostMapping(name = "/adicionar")
+    public void saveFuncionarioDTO(@RequestBody FuncionarioDTO funcionarioDTO){
+        funcionarioService.save(funcionarioDTO);
     }
 
 }

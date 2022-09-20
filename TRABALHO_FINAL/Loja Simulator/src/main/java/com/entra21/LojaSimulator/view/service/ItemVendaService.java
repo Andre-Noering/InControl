@@ -1,6 +1,8 @@
 package com.entra21.LojaSimulator.view.service;
 
+import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemVendaDTO;
+import com.entra21.LojaSimulator.model.dto.VendaDTO;
 import com.entra21.LojaSimulator.model.entity.ItemVendaEntity;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
 import com.entra21.LojaSimulator.view.repository.ItemVendaRepository;
@@ -8,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemVendaService {
@@ -24,9 +29,23 @@ public class ItemVendaService {
         return itemVendaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
     }
 
+    public List<ItemVendaDTO> getAllByVenda(Long id){
+        return itemVendaRepository.findAllByLoja_Id(id).stream().map(item-> {return getDTOById(item.getId());}).collect(Collectors.toList());
+    }
     public ItemVendaDTO getDTOById(Long id){
         ItemVendaEntity itemVendaEntity = getItemVendaById(id);
         return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValor_unitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
+    }
+
+    public ItemDTO getItemDTO(Long id){
+        return itemService.getDTOById(getItemVendaById(id).getItem().getId());
+    }
+    public VendaDTO getVendaDTO(Long id){
+        return vendaService.getDTOById(getItemVendaById(id).getVenda().getId());
+    }
+
+    public Double getValor(ItemVendaDTO itemVendaDTO){
+        return itemVendaDTO.getValor_unitario()*itemVendaDTO.getQtde();
     }
 
 

@@ -74,6 +74,11 @@ public class VendaService {
         return pessoa;
     }
 
+    public VendaDTO getDTOById(Long id){
+        VendaEntity vendaEntity=getVenda(id);
+        return new VendaDTO(vendaEntity.getId(), vendaEntity.getData(), vendaEntity.getPessoa().getId(), vendaEntity.getFuncionario().getId());
+    }
+
     //POST
     public void save(VendaPayloadDTO vendaDTO){
         VendaEntity newVenda = new VendaEntity();
@@ -81,13 +86,6 @@ public class VendaService {
         newVenda.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getId_cliente())));
         newVenda.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getId_vendedor())));
         vendaRepository.save(newVenda);
-    }
-
-    public void createVenda(VendaPayloadDTO vendaDTO){
-        VendaEntity vendaEntity = new VendaEntity();
-        vendaEntity.setData(vendaDTO.getData());
-        vendaEntity.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getId_cliente())));
-        vendaEntity.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getId_vendedor())));
     }
 
     //Adiciona um itemVenda na lista de itens daquela venda
