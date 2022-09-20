@@ -76,8 +76,7 @@ public class ItemService {
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
 		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
 		return listaItens.stream().map(item -> {
-			ItemDTO itemDTO = new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
-			return itemDTO;
+			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
 		}).collect(Collectors.toList());
 	}
 
