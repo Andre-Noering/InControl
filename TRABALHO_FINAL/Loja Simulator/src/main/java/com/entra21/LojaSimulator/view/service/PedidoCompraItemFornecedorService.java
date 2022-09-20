@@ -1,6 +1,7 @@
 package com.entra21.LojaSimulator.view.service;
 
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
+import com.entra21.LojaSimulator.model.dto.PedidoCompraDTO;
 import com.entra21.LojaSimulator.model.dto.PedidoCompraItemFornecedorDTO;
 import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.ItemFornecedorRepository;
@@ -31,6 +32,11 @@ public class PedidoCompraItemFornecedorService {
         return pedidoCompraItemFornecedorRepository.findAllById(Collections.singleton(id));
     }
 
+    public PedidoCompraItemFornecedorDTO getDTOById(Long id) {
+        PedidoCompraItemFornecedorEntity entity = getPedidoCompraItemFornecedorById(id);
+        return new PedidoCompraItemFornecedorDTO(entity.getId(), entity.getValorUnitario(), entity.getQuantidade(), entity.getItemFornecedor(), entity.getPedidoCompra());
+    }
+
     public ItemFornecedorEntity getItemFornecedorById(Long id){
         return itemFornecedorService.getItemFornecedorById(id);
     }
@@ -46,8 +52,8 @@ public class PedidoCompraItemFornecedorService {
         newPedidoCompraItemFornecedor.setId(input.getId());
         newPedidoCompraItemFornecedor.setQuantidade(input.getQtde());
         newPedidoCompraItemFornecedor.setValorUnitario(input.getValor_unitario());
-        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getId_item_fornecedor()));
-        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getId_pedido_compra()));
+        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getItemFornecedor().getId()));
+        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getPedidoCompra().getId()));
         pedidoCompraItemFornecedorRepository.save(newPedidoCompraItemFornecedor);
     }
 

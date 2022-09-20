@@ -88,11 +88,6 @@ public class VendaService {
         vendaRepository.save(newVenda);
     }
 
-    //Adiciona um itemVenda na lista de itens daquela venda
-    public void addItemVenda(ItemVendaDTO itemVendaDTO){ //Adiciona um item na lista de itens daquela venda
-        itemVendaService.save(itemVendaDTO);
-    }
-
     //PUT
     public void update(VendaDTO vendaDTO){
         VendaEntity vendaEntity = getVenda(vendaDTO.getId());
