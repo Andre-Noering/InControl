@@ -24,7 +24,7 @@ public class PessoaService {
         return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
     }
 
-    public List<PessoaDTO> getAll() {
+    public static List<PessoaDTO> getAll() {
         return pessoaRepository.findAll().stream().map(fr -> {
             PessoaDTO pessoaDTO = new PessoaDTO();
             pessoaDTO.setIdPessoa(fr.getId());
@@ -60,7 +60,7 @@ public class PessoaService {
     }
 
 
-    public void delete(Long id) {
+    public static void delete(Long id) {
         PessoaEntity pessoa = getPessoaById(id);
         pessoaRepository.delete(pessoa);
     }
