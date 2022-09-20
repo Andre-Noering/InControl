@@ -83,18 +83,6 @@ public class VendaService {
         vendaRepository.save(newVenda);
     }
 
-    public void createVenda(VendaPayloadDTO vendaDTO){
-        VendaEntity vendaEntity = new VendaEntity();
-        vendaEntity.setData(vendaDTO.getData());
-        vendaEntity.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getId_cliente())));
-        vendaEntity.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getId_vendedor())));
-    }
-
-    //Adiciona um itemVenda na lista de itens daquela venda
-    public void addItemVenda(ItemVendaDTO itemVendaDTO){ //Adiciona um item na lista de itens daquela venda
-        itemVendaService.save(itemVendaDTO);
-    }
-
     //PUT
     public void update(VendaDTO vendaDTO){
         VendaEntity vendaEntity = getVenda(vendaDTO.getId());
