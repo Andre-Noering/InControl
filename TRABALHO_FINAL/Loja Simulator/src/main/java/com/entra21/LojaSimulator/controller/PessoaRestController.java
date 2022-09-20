@@ -25,7 +25,7 @@ public class PessoaRestController {
     }
 
     @GetMapping("/")
-    public PessoaDTO get(@PathVariable(name = "id") Long id) {
+    public PessoaDTO get(@PathVariable ){
         return pessoaService.getDTOById(id);
     }
 
