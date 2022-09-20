@@ -74,8 +74,7 @@ public class ItemService {
 
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
-		LojaEntity loja = lojaService.getById(idLoja);
-		List<ItemEntity> listaItens = loja.getItens();
+		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
 		return listaItens.stream().map(item -> {
 			ItemDTO itemDTO = new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
 			return itemDTO;

@@ -1,5 +1,6 @@
 package com.entra21.LojaSimulator.view.service;
 
+import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemFornecedorDTO;
 import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.model.entity.ItemEntity;
@@ -54,5 +55,9 @@ public class ItemFornecedorService {
     }
     public ItemEntity getItem(Long id){
         return itemService.getItemById(id);
+    }
+
+    public ItemDTO getItemDTO(Long id){
+        return itemService.getDTOById(this.getItem(id).getId());
     }
 }

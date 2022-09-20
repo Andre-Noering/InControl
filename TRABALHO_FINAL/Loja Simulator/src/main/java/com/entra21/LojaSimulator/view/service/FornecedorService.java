@@ -26,6 +26,8 @@ public class FornecedorService {
 
     @Autowired
     private ItemFornecedorService itemFornecedorService;
+    @Autowired
+    private ItemService itemService;
 
     @Autowired
     private LojaService lojaService;
@@ -68,26 +70,31 @@ public class FornecedorService {
         FornecedorEntity fornecedor = getFornecedorById(id);
         return fornecedor.getItens().stream().map(item -> itemFornecedorService.getItemFornecedorById(item.getItem().getId())).collect(Collectors.toList());
     }
-    public List<ItemFornecedorDTO> getItensByRazaoSocial(@PathVariable String razao_social){
+    public List<ItemDTO> getItensByRazaoSocial(String razao_social){
         return getFornecedorByRazaoSocial(razao_social).getItens().stream().map(item -> {
-            return itemFornecedorService.getDTOById(item.getId());
+            return itemFornecedorService.getItemDTO(item.getItem().getId());
         }).collect(Collectors.toList());
     }
 
-    public List<FornecedorDTO> getAllByLoja(Long idLoja) {
-        LojaEntity loja = lojaService.getById(idLoja);
-        List<FornecedorEntity> listaFornecedores = loja.getFornecedores();
+    public List<FornecedorDTO> getAllByLoja(String razao_social) {
+        List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_Razao_Social(razao_social);
         return listaFornecedores.stream().map(fornecedor -> new FornecedorDTO(fornecedor.getId(),fornecedor.getRazao_social(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja())).collect(Collectors.toList());
     }
 
-    public String getContatoById(Long id) {
-        FornecedorEntity fornecedor = this.getFornecedorById(id);
-        String contato = fornecedor.getContato();
-        return new FornecedorContatoDTO(contato).getContato();
+    public String getContatoByRazaoSocial(String razao_social) {
+        return this.getFornecedorByRazaoSocial(razao_social).getContato();
     }
 
     public FornecedorEntity getFornecedorByRazaoSocial(String razao_social){
         return fornecedorRepository.findByRazao_Social(razao_social);
     }
 
+    public FornecedorDTO getDTOById(Long id){
+        FornecedorEntity fornecedor = getFornecedorById(id);
+        return new FornecedorDTO(fornecedor.getId(), fornecedor.getRazao_social(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
+    }
+
+    public void deleteByRazaoSocial(String razao_social){
+        fornecedorRepository.deleteByRazao_Social(razao_social);
+    }
 }
