@@ -54,6 +54,12 @@ public class ItemService {
 		ItemEntity itemEntity = getItemById(id);
 		return new ItemValorDTO(itemEntity.getValor());
 	}
+	public List<ItemDTO> getItensEmAlerta(String razao_social){
+		List<ItemDTO> listaItens = getAllByLoja(lojaService.getByRazao_Social(razao_social).getId());
+		listaItens.removeIf(item -> !this.alertaById(item.getId()));
+		return listaItens;
+	}
+
 
 	//Retorna quantidade de estoque pelo id
 	public ItemQtdeEstoqueDTO getQtdeEstoqueById(Long id) {
