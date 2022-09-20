@@ -1,10 +1,7 @@
 
 package com.entra21.LojaSimulator.view.service;
 
-import com.entra21.LojaSimulator.model.dto.ItemPayloadDTO;
-import com.entra21.LojaSimulator.model.dto.ItemVendaDTO;
-import com.entra21.LojaSimulator.model.dto.PessoaPayloadDTO;
-import com.entra21.LojaSimulator.model.dto.VendaPayloadDTO;
+import com.entra21.LojaSimulator.model.dto.*;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
 import com.entra21.LojaSimulator.view.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,9 +99,6 @@ public class VendaService {
     public void addItemVenda(@RequestBody ItemVendaDTO itemVendaDTO){ //Adiciona um item na lista de itens daquela venda
         itemVendaService.save(itemVendaDTO);
     }
-
-
-
 
     public void deleteItemVenda(Long id_item){
         itemVendaService.delete(id_item);

@@ -31,13 +31,13 @@ public class ItemVendaService {
         ItemVendaEntity itemVendaEntity = getItemVenda(id);
         itemVendaRepository.delete(itemVendaEntity);
     }
-    public void update(Long id, Integer qtde, Double valor_unitario){
-        ItemVendaEntity itemVendaEntity = getItemVenda(id);
-        if(qtde!=null){
-            itemVendaEntity.setQtde(qtde);
+    public void update(ItemVendaDTO itemVendaDTO){
+        ItemVendaEntity itemVendaEntity = getById(itemVendaDTO.getId());
+        if(itemVendaDTO.getQtde()!=null){
+            itemVendaEntity.setQtde(itemVendaDTO.getQtde());
         }
-        if(valor_unitario!=null){
-            itemVendaEntity.setValor_unitario(valor_unitario);
+        if(itemVendaDTO.getValor_unitario()!=null){
+            itemVendaEntity.setValor_unitario(itemVendaDTO.getValor_unitario());
         }
     }
     public void updateQtde(Integer qtde_nova, Long id){

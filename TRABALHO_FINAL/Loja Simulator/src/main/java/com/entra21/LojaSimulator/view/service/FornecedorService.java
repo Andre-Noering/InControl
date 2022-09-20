@@ -11,6 +11,7 @@ import org.hibernate.annotations.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
@@ -23,16 +24,18 @@ public class FornecedorService {
     @Autowired
     private FornecedorRepository fornecedorRepository;
 
-
     @Autowired
     private ItemFornecedorService itemFornecedorService;
     @Autowired
     private ItemService itemService;
 
+    @Autowired
+    private LojaService lojaService;
+
     public FornecedorEntity getFornecedorById(Long id){
         return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
     }
-    public void save(FornecedorDTO input) {
+    public void save(@RequestBody FornecedorDTO input) {
         FornecedorEntity newFornecedor = new FornecedorEntity();
         newFornecedor.setId(input.getId());
         newFornecedor.setRazao_social(input.getRazao_social());
@@ -47,14 +50,20 @@ public class FornecedorService {
         fornecedorRepository.delete(fornecedor);
     }
 
-    public void update(Long id, String novaRazaoSocial, String novoContato) {
+
+    public void update(FornecedorDTO fornecedorDTO) {
+        FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
+        if (fornecedorDTO.getRazao_social() != null) {
+            fornecedor.setRazao_social(fornecedorDTO.getRazao_social());
+        }
+        if (fornecedorDTO.getContato() != null) {
+            fornecedor.setContato(fornecedorDTO.getContato());
+        }
+    }
+
+    public FornecedorDTO getDtoById(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
-        if (novaRazaoSocial != null) {
-            fornecedor.setRazao_social(novaRazaoSocial);
-        }
-        if (novoContato != null) {
-            fornecedor.setContato(novoContato);
-        }
+        return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazao_social(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
     }
 
     public List<ItemFornecedorEntity> getItensById(Long id) {
