@@ -25,5 +25,4 @@ public class LojaRestController {
     public void delete(@PathVariable String razao_social){
         lojaService.deleteByRazao_Social(razao_social);
     }
-
 }
