@@ -11,16 +11,16 @@ import java.util.List;
 public class LojaUpdateDTO {
     private Long id;
     private String contato;
-    private Double valor_caixa;
+    private Double valorCaixa;
     private FuncionarioEntity gerente;
     private List<ItemEntity> itens;
     private List<FornecedorEntity> fornecedores;
     private List<PessoaEntity> funcionarios;
 
-    public LojaUpdateDTO(Long id, String contato, Double valor_caixa, FuncionarioEntity gerente, List<ItemEntity> itens, List<FornecedorEntity> fornecedores, List<PessoaEntity> funcionarios) {
+    public LojaUpdateDTO(Long id, String contato, Double valorCaixa, FuncionarioEntity gerente, List<ItemEntity> itens, List<FornecedorEntity> fornecedores, List<PessoaEntity> funcionarios) {
         this.id = id;
         this.contato = contato;
-        this.valor_caixa = valor_caixa;
+        this.valorCaixa = valorCaixa;
         this.gerente = gerente;
         this.itens = itens;
         this.fornecedores = fornecedores;

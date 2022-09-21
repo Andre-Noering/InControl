@@ -17,7 +17,7 @@ public class ItemRestController {
 	private LojaService lojaService;
 	@GetMapping
 	public List<ItemDTO> getAll(@PathVariable String razao_social){
-		return itemService.getAllByLoja(lojaService.getByRazao_Social(razao_social).getId());
+		return itemService.getAllByLoja(lojaService.getByRazaoSocial(razao_social).getId());
 	}
 
 	@GetMapping(name = "/{id}")

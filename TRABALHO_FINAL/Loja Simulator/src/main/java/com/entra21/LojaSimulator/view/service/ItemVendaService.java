@@ -34,7 +34,7 @@ public class ItemVendaService {
     }
     public ItemVendaDTO getDTOById(Long id){
         ItemVendaEntity itemVendaEntity = getItemVendaById(id);
-        return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValor_unitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
+        return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValorUnitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
     }
 
     public ItemDTO getItemDTO(Long id){
@@ -45,17 +45,17 @@ public class ItemVendaService {
     }
 
     public Double getValor(ItemVendaDTO itemVendaDTO){
-        return itemVendaDTO.getValor_unitario()*itemVendaDTO.getQtde();
+        return itemVendaDTO.getValorUnitario()*itemVendaDTO.getQtde();
     }
 
 
     //POST
     public void save(ItemVendaDTO itemVendaDTO){
         ItemVendaEntity itemVendaEntity = new ItemVendaEntity();
-        itemVendaEntity.setItem(itemService.build(itemService.getDTOById(itemVendaDTO.getId_item())));
+        itemVendaEntity.setItem(itemService.build(itemService.getDTOById(itemVendaDTO.getIdItem())));
         itemVendaEntity.setQtde(itemVendaDTO.getQtde());
-        itemVendaEntity.setValor_unitario(itemVendaDTO.getValor_unitario());
-        itemVendaEntity.setVenda(vendaService.getVenda(itemVendaDTO.getId_venda()));
+        itemVendaEntity.setValorUnitario(itemVendaDTO.getValorUnitario());
+        itemVendaEntity.setVenda(vendaService.getVenda(itemVendaDTO.getIdVenda()));
         itemVendaRepository.save(itemVendaEntity);
     }
 
@@ -65,8 +65,8 @@ public class ItemVendaService {
         if(itemVendaDTO.getQtde()!=null){
             itemVendaEntity.setQtde(itemVendaDTO.getQtde());
         }
-        if(itemVendaDTO.getValor_unitario()!=null){
-            itemVendaEntity.setValor_unitario(itemVendaDTO.getValor_unitario());
+        if(itemVendaDTO.getValorUnitario()!=null){
+            itemVendaEntity.setValorUnitario(itemVendaDTO.getValorUnitario());
         }
     }
     public void updateQtde(Integer qtde_nova, Long id){

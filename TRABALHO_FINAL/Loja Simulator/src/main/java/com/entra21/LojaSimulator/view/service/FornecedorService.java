@@ -36,7 +36,7 @@ public class FornecedorService {
     //GET
     public FornecedorDTO getDtoById(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
-        return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazao_social(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
+        return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
     }
 
     public List<ItemFornecedorEntity> getItensById(Long id) {
@@ -51,7 +51,7 @@ public class FornecedorService {
 
     public List<FornecedorDTO> getAllByLoja(String razao_social) {
         List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_Razao_Social(razao_social);
-        return listaFornecedores.stream().map(fornecedor -> new FornecedorDTO(fornecedor.getId(),fornecedor.getRazao_social(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja())).collect(Collectors.toList());
+        return listaFornecedores.stream().map(fornecedor -> new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja())).collect(Collectors.toList());
     }
 
     public String getContatoByRazaoSocial(String razao_social) {
@@ -64,7 +64,7 @@ public class FornecedorService {
 
     public FornecedorDTO getDTOById(Long id){
         FornecedorEntity fornecedor = getFornecedorById(id);
-        return new FornecedorDTO(fornecedor.getId(), fornecedor.getRazao_social(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
+        return new FornecedorDTO(fornecedor.getId(), fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
     }
     public FornecedorEntity getFornecedorById(Long id){
         return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
@@ -75,7 +75,7 @@ public class FornecedorService {
     public void save(@RequestBody FornecedorDTO input) {
         FornecedorEntity newFornecedor = new FornecedorEntity();
         newFornecedor.setId(input.getId());
-        newFornecedor.setRazao_social(input.getRazao_social());
+        newFornecedor.setRazaoSocial(input.getRazao_social());
         newFornecedor.setCnpj(input.getCnpj());
         newFornecedor.setContato(input.getContato());
         newFornecedor.setLoja(input.getLoja());
@@ -87,7 +87,7 @@ public class FornecedorService {
     public void update(FornecedorDTO fornecedorDTO) {
         FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
         if (fornecedorDTO.getRazao_social() != null) {
-            fornecedor.setRazao_social(fornecedorDTO.getRazao_social());
+            fornecedor.setRazaoSocial(fornecedorDTO.getRazao_social());
         }
         if (fornecedorDTO.getContato() != null) {
             fornecedor.setContato(fornecedorDTO.getContato());
@@ -97,8 +97,8 @@ public class FornecedorService {
 
 
     //DELETE
-    public void deleteByRazaoSocial(String razao_social){
-        fornecedorRepository.deleteByRazao_Social(razao_social);
+    public void deleteByRazaoSocial(String razaoSocial){
+        fornecedorRepository.deleteByRazao_Social(razaoSocial);
     }
     public void delete(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
