@@ -39,14 +39,14 @@ public class ItemService {
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
 		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
 		return listaItens.stream().map(item -> {
-			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtde_estoque(), item.getQtde_alerta_estoque());
+			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtdeEstoque(), item.getQtdeAlertaEstoque());
 		}).collect(Collectors.toList());
 	}
 
 	//Retorna item pela id
 	public ItemDTO getDTOById(Long id) {
 		ItemEntity itemEntity = getItemById(id);
-		return new ItemDTO(itemEntity.getId(), itemEntity.getNome(), itemEntity.getValor(), itemEntity.getQtde_estoque(), itemEntity.getQtde_alerta_estoque());
+		return new ItemDTO(itemEntity.getId(), itemEntity.getNome(), itemEntity.getValor(), itemEntity.getQtdeEstoque(), itemEntity.getQtdeAlertaEstoque());
 	}
 
 	//Retorna o valor do item pelo id
@@ -54,8 +54,8 @@ public class ItemService {
 		ItemEntity itemEntity = getItemById(id);
 		return new ItemValorDTO(itemEntity.getValor());
 	}
-	public List<ItemDTO> getItensEmAlerta(String razao_social){
-		List<ItemDTO> listaItens = getAllByLoja(lojaService.getByRazao_Social(razao_social).getId());
+	public List<ItemDTO> getItensEmAlerta(String razaoSocial){
+		List<ItemDTO> listaItens = getAllByLoja(lojaService.getByRazaoSocial(razaoSocial).getId());
 		listaItens.removeIf(item -> !this.alertaById(item.getId()));
 		return listaItens;
 	}
@@ -64,13 +64,13 @@ public class ItemService {
 	//Retorna quantidade de estoque pelo id
 	public ItemQtdeEstoqueDTO getQtdeEstoqueById(Long id) {
 		ItemEntity itemEntity =  getItemById(id);
-		return new ItemQtdeEstoqueDTO(itemEntity.getQtde_estoque());
+		return new ItemQtdeEstoqueDTO(itemEntity.getQtdeEstoque());
 	}
 
 	//Diz se o estoque está em alerta pelo id do item
 	public boolean alertaById(Long id) {
 		ItemEntity itemEntity = getItemById(id);
-		if (itemEntity.getQtde_estoque() <= itemEntity.getQtde_alerta_estoque()) {
+		if (itemEntity.getQtdeEstoque() <= itemEntity.getQtdeAlertaEstoque()) {
 			return true;
 		} else {
 			return false;
@@ -89,8 +89,8 @@ public class ItemService {
 		newEntity.setId(input.getId());
 		newEntity.setNome(input.getNome());
 		newEntity.setValor(input.getValor());
-		newEntity.setQtde_estoque(input.getQtde_estoque());
-		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		newEntity.setQtdeEstoque(input.getQtdeEstoque());
+		newEntity.setQtdeAlertaEstoque(input.getQtdeAlertaEstoque());
 		return newEntity;
 	}
 
@@ -102,8 +102,8 @@ public class ItemService {
 		newEntity.setId(input.getId());
 		newEntity.setNome(input.getNome());
 		newEntity.setValor(input.getValor());
-		newEntity.setQtde_estoque(input.getQtde_estoque());
-		newEntity.setQtde_alerta_estoque(input.getQtde_alerta_estoque());
+		newEntity.setQtdeEstoque(input.getQtdeEstoque());
+		newEntity.setQtdeAlertaEstoque(input.getQtdeAlertaEstoque());
 		itemRepository.save(newEntity);
 	}
 
@@ -116,11 +116,11 @@ public class ItemService {
 		if (itemEntity.getValor() != null) {
 			itemEntity.setValor(itemEntity.getValor());
 		}
-		if (itemDTO.getQtde_estoque() != null) {
-			itemEntity.setQtde_estoque(itemDTO.getQtde_estoque());
+		if (itemDTO.getQtdeEstoque() != null) {
+			itemEntity.setQtdeEstoque(itemDTO.getQtdeEstoque());
 		}
-		if (itemDTO.getQtde_alerta_estoque() != null) {
-			itemEntity.setQtde_alerta_estoque(itemDTO.getQtde_alerta_estoque());
+		if (itemDTO.getQtdeAlertaEstoque() != null) {
+			itemEntity.setQtdeAlertaEstoque(itemDTO.getQtdeAlertaEstoque());
 		}
 	}
 

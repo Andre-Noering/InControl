@@ -39,7 +39,7 @@ public class VendaService {
         getVenda(id).getItens().forEach( itemVenda -> {
             ItemPayloadDTO itemPayloadDTO = new ItemPayloadDTO();
             itemPayloadDTO.setNome(itemVenda.getItem().getNome());
-            itemPayloadDTO.setValor(itemVenda.getValor_unitario());
+            itemPayloadDTO.setValor(itemVenda.getValorUnitario());
             itemPayloadDTO.setQtde(itemVenda.getQtde());
             listaItens.add(itemPayloadDTO);
         });
@@ -59,7 +59,7 @@ public class VendaService {
     public Double getValorTotal(Long id){
         VendaEntity vendaEntity = getVenda(id);
         AtomicReference<Double> valorTotal= new AtomicReference<>(0.0);
-        vendaEntity.getItens().forEach(itemVenda -> valorTotal.updateAndGet(v1 -> v1 + itemVenda.getValor_unitario() * itemVenda.getQtde()));
+        vendaEntity.getItens().forEach(itemVenda -> valorTotal.updateAndGet(v1 -> v1 + itemVenda.getValorUnitario() * itemVenda.getQtde()));
         return valorTotal.get();
     }
 
@@ -109,7 +109,7 @@ public class VendaService {
         VendaEntity venda = getVenda(id);
         vendaRepository.delete(venda);
     }
-    public void deleteItemVenda(Long id_item){
-        itemVendaService.delete(id_item);
+    public void deleteItemVenda(Long idItem){
+        itemVendaService.delete(idItem);
     }
 }

@@ -18,7 +18,7 @@ public class ItemVendaEntity {
     private int qtde;
 
     @Column(name = "valor_unitario", nullable = false)
-    private Double valor_unitario;
+    private Double valorUnitario;
 
     @ManyToOne
     @JoinColumn(name="id_item",referencedColumnName = "id", nullable = false)

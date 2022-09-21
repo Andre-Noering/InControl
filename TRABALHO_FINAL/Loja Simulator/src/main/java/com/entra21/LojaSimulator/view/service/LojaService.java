@@ -66,16 +66,16 @@ public class LojaService {
 
     public LojaValorCaixaDTO getValorCaixaById(Long id) {
         LojaEntity loja = getById(id);
-        return new LojaValorCaixaDTO(loja.getValor_caixa());
+        return new LojaValorCaixaDTO(loja.getValorCaixa());
     }
 
-    public LojaEntity getByRazao_Social(String razao_social){
-        return lojaRepository.findByRazao_Social(razao_social);
+    public LojaEntity getByRazaoSocial(String razaoSocial){
+        return lojaRepository.findByRazaoSocial(razaoSocial);
     }
 
     public LojaDTO getDTOById(Long id) {
         LojaEntity loja = getById(id);
-        return new LojaDTO(loja.getId(), loja.getRazao_social(), loja.getCnpj(), loja.getContato(), loja.getValor_caixa(), loja.getGerente(), loja.getItens(), loja.getFornecedores(), loja.getFuncionarios());
+        return new LojaDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente(), loja.getItens(), loja.getFornecedores(), loja.getFuncionarios());
     }
 
 
@@ -83,10 +83,10 @@ public class LojaService {
     public void save(@RequestBody LojaDTO input) {
         LojaEntity newLoja = new LojaEntity();
         newLoja.setId(input.getId());
-        newLoja.setRazao_social(input.getRazao_social());
+        newLoja.setRazaoSocial(input.getRazao_social());
         newLoja.setCnpj(input.getCnpj());
         newLoja.setContato(input.getContato());
-        newLoja.setValor_caixa(input.getValor_caixa());
+        newLoja.setValorCaixa(input.getValor_caixa());
         newLoja.setGerente(input.getGerente());
         lojaRepository.save(newLoja);
     }
@@ -103,8 +103,8 @@ public class LojaService {
         if (dto.getFuncionarios() != null) {
             loja.setFuncionarios(dto.getFuncionarios());
         }
-        if (dto.getValor_caixa() != null) {
-            loja.setValor_caixa(dto.getValor_caixa());
+        if (dto.getValorCaixa() != null) {
+            loja.setValorCaixa(dto.getValorCaixa());
         }
         if (dto.getItens() != null) {
             loja.setItens(dto.getItens());
@@ -120,8 +120,8 @@ public class LojaService {
         LojaEntity fornecedor = getById(id);
         lojaRepository.delete(fornecedor);
     }
-    public void deleteByRazao_Social(String razao_social){
-        lojaRepository.deleteByRazao_Social(razao_social);
+    public void deleteByRazaoSocial(String razaoSocial){
+        lojaRepository.deleteByRazaoSocial(razaoSocial);
     }
 
 

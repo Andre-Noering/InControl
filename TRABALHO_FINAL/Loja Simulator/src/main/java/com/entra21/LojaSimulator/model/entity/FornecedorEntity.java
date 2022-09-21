@@ -16,7 +16,7 @@ public class FornecedorEntity {
     private Long id;
 
     @Column(name="razao_social", nullable = false)
-    private String razao_social;
+    private String razaoSocial;
 
     @Column(name="cnpj", nullable = false)
     private String cnpj;

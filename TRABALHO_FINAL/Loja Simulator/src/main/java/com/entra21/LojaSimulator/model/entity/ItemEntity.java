@@ -21,10 +21,10 @@ public class ItemEntity {
 	private Double valor;
 	
 	@Column(name="qtde_estoque", nullable = false)
-	private Integer qtde_estoque;
+	private Integer qtdeEstoque;
 
 	@Column(name="qtde_alerta_estoque", nullable = false)
-	private Integer qtde_alerta_estoque;
+	private Integer qtdeAlertaEstoque;
 
 	@ManyToOne
 	@JoinColumn(name = "id_loja", referencedColumnName = "id", nullable = false)
