@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class GerenteRestController {
     @Autowired
     private LojaService lojaService;
-    @PostMapping
+    @PostMapping(name = "/adicionar")
     public void save(LojaDTO lojaDTO){
         lojaService.save(lojaDTO);
     }

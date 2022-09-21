@@ -30,8 +30,8 @@ public class PessoaRestController {
         pessoaService.delete(id);
     }
 
-    @PutMapping(name = "/uptade")
-    public void updatePessoa(PessoaDTO pessoaDTO){
+    @PutMapping(name = "/update")
+    public void updatePessoa(@RequestBody PessoaDTO pessoaDTO){
         pessoaService.update(pessoaDTO);
     }
 }

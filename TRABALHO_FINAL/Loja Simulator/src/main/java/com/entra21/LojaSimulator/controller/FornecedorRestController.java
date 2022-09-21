@@ -49,7 +49,4 @@ public class FornecedorRestController {
     public void update(@RequestBody FornecedorDTO fornecedorDTO){
         fornecedorService.update(fornecedorDTO);
     }
-
-
-
 }
