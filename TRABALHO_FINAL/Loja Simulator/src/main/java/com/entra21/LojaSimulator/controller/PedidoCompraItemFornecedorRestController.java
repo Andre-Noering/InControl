@@ -7,23 +7,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/pcif")
 public class PedidoCompraItemFornecedorRestController {
     @Autowired
     private PedidoCompraItemFornecedorService pedidoCompraItemFornecedorService;
 
-    @GetMapping(name = "/pedido-compra-item-fornecedor/${id}")
+    @GetMapping
+    @RequestMapping("/pedido-compra-item-fornecedor/id")
     public PedidoCompraItemFornecedorDTO getDTO(@PathVariable(name = "id")Long id){
         return pedidoCompraItemFornecedorService.getDTOById(id);
     }
-    @PostMapping(name = "/save-pedido-compra-item-fornecedor")
+    @PostMapping
+    @RequestMapping("/save-pedido-compra-item-fornecedor")
     public void saveVenda(@RequestBody PedidoCompraItemFornecedorDTO dto){
         pedidoCompraItemFornecedorService.save(dto);
     }
-    @PutMapping(name = "/alteracao-pedido-compra-item-fornecedor")
+    @PutMapping
+    @RequestMapping("/alteracao-pedido-compra-item-fornecedor")
     public void uptadeVenda(@RequestBody PedidoCompraItemFornecedorDTO dto){
         pedidoCompraItemFornecedorService.update(dto);
     }
-    @DeleteMapping(name = "delete-pedido-compra-item-fornecedor/${id}")
+    @DeleteMapping
+    @RequestMapping("/delete-pedido-compra-item-fornecedor/id")
     public void delete(@PathVariable Long id) {
         pedidoCompraItemFornecedorService.delete(id);
     }

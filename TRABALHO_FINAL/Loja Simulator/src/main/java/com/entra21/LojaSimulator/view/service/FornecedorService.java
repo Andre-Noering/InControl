@@ -36,7 +36,7 @@ public class FornecedorService {
     //GET
     public FornecedorDTO getDtoById(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
-        return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
+        return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja().getId());
     }
 
     public List<ItemFornecedorEntity> getItensById(Long id) {
@@ -50,8 +50,8 @@ public class FornecedorService {
     }
 
     public List<FornecedorDTO> getAllByLoja(String razao_social) {
-        List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_Razao_Social(razao_social);
-        return listaFornecedores.stream().map(fornecedor -> new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja())).collect(Collectors.toList());
+        List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_RazaoSocial(razao_social);
+        return listaFornecedores.stream().map(fornecedor -> new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja().getId())).collect(Collectors.toList());
     }
 
     public String getContatoByRazaoSocial(String razao_social) {
@@ -59,12 +59,12 @@ public class FornecedorService {
     }
 
     public FornecedorEntity getFornecedorByRazaoSocial(String razao_social){
-        return fornecedorRepository.findByRazao_Social(razao_social);
+        return fornecedorRepository.findByRazaoSocial(razao_social);
     }
 
     public FornecedorDTO getDTOById(Long id){
         FornecedorEntity fornecedor = getFornecedorById(id);
-        return new FornecedorDTO(fornecedor.getId(), fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
+        return new FornecedorDTO(fornecedor.getId(), fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja().getId());
     }
     public FornecedorEntity getFornecedorById(Long id){
         return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
@@ -78,7 +78,7 @@ public class FornecedorService {
         newFornecedor.setRazaoSocial(input.getRazao_social());
         newFornecedor.setCnpj(input.getCnpj());
         newFornecedor.setContato(input.getContato());
-        newFornecedor.setLoja(input.getLoja());
+        newFornecedor.setLoja(lojaService.getById(input.getId_loja()));
         fornecedorRepository.save(newFornecedor);
     }
 
@@ -98,7 +98,7 @@ public class FornecedorService {
 
     //DELETE
     public void deleteByRazaoSocial(String razaoSocial){
-        fornecedorRepository.deleteByRazao_Social(razaoSocial);
+        fornecedorRepository.deleteByRazaoSocial(razaoSocial);
     }
     public void delete(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);

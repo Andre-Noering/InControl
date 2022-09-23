@@ -9,6 +9,7 @@ import com.entra21.LojaSimulator.view.repository.LojaRepository;
 import com.entra21.LojaSimulator.view.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
@@ -82,12 +83,11 @@ public class LojaService {
     //POST
     public void save(@RequestBody LojaDTO input) {
         LojaEntity newLoja = new LojaEntity();
-        newLoja.setId(input.getId());
         newLoja.setRazaoSocial(input.getRazao_social());
         newLoja.setCnpj(input.getCnpj());
         newLoja.setContato(input.getContato());
         newLoja.setValorCaixa(input.getValor_caixa());
-        newLoja.setGerente(input.getGerente());
+        newLoja.setGerente(((FuncionarioEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
         lojaRepository.save(newLoja);
     }
 

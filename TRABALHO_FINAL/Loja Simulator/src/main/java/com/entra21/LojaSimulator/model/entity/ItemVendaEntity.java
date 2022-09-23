@@ -3,7 +3,6 @@ package com.entra21.LojaSimulator.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
@@ -21,10 +20,10 @@ public class ItemVendaEntity {
     private Double valorUnitario;
 
     @ManyToOne
-    @JoinColumn(name="id_item",referencedColumnName = "id", nullable = false)
+    @JoinColumn(name="id_item",referencedColumnName = "id")
     private ItemEntity item;
 
     @ManyToOne
-    @JoinColumn(name="id_venda",referencedColumnName = "id", nullable = false)
+    @JoinColumn(name="id_venda",referencedColumnName = "id")
     private VendaEntity venda;
 }

@@ -9,38 +9,44 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/{razao_social}/itens")
+@RequestMapping("/itens")
 public class ItemRestController {
 	@Autowired
 	private ItemService itemService;
 	@Autowired
 	private LojaService lojaService;
 	@GetMapping
+	@RequestMapping("/itens")
 	public List<ItemDTO> getAll(@PathVariable String razao_social){
 		return itemService.getAllByLoja(lojaService.getByRazaoSocial(razao_social).getId());
 	}
 
-	@GetMapping(name = "/{id}")
-	public ItemDTO getItemById(@PathVariable Long id){
-		return itemService.getDTOById(id);
+	@GetMapping
+	@RequestMapping("/idItem")
+	public ItemDTO getItemById(@PathVariable Long idItem){
+		return itemService.getDTOById(idItem);
 	}
 
-	@GetMapping(name="/alerta")
+	@GetMapping
+	@RequestMapping("/alerta")
 	public List<ItemDTO> getAllEmAlerta(@PathVariable String razao_social){
 		return itemService.getItensEmAlerta(razao_social);
 	}
 
-	@PostMapping(name="/adicionar")
+	@PostMapping
+	@RequestMapping("/adicionarItem")
 	public void save(@RequestBody ItemDTO itemDTO){
 		itemService.save(itemDTO);
 	}
 
-	@PutMapping(name="/atualizar")
+	@PutMapping
+	@RequestMapping("/atualizarItem")
 	public void update(@RequestBody ItemDTO itemDTO){
 		itemService.update(itemDTO);
 	}
 
-	@DeleteMapping(name="/deletar")
+	@DeleteMapping
+	@RequestMapping("/deletarItem")
 	public void delete(@RequestBody Long id){
 		itemService.delete(id);
 	}
