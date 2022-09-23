@@ -25,10 +25,9 @@ public class FornecedorEntity {
     private String contato;
 
     @ManyToOne
-    @JoinColumn(name="id_loja", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name="id_loja", referencedColumnName = "id", nullable = false,insertable = false,updatable = false)
     private LojaEntity loja;
 
-    @OneToMany
-    @JoinColumn(name = "id" , referencedColumnName = "id_fornecedor", nullable = false)
+    @OneToMany(mappedBy = "fornecedor")
     private List<ItemFornecedorEntity> itens;
 }

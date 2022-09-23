@@ -30,8 +30,7 @@ public class VendaEntity {
     @JsonIgnore
     private FuncionarioEntity funcionario;
 
-    @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "id_venda", nullable = false)
+    @OneToMany(mappedBy = "venda")
     private List<ItemVendaEntity> itens;
 
 

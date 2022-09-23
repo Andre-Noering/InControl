@@ -11,39 +11,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(name = "/ItemFornecedor")
+@RequestMapping("/ItemFornecedor")
 public class ItemFornecedorRestController {
     @Autowired
     private ItemFornecedorService itemFornecedorService;
     @Autowired
     private FornecedorService fornecedorService;
 
-    @GetMapping(name = "/${id}")
-    public ItemFornecedorDTO itemFornecedorDTO(@RequestBody Long id){
-        return itemFornecedorService.getDTOById(id);
+    @GetMapping
+    @RequestMapping("/idItemFornecedor")
+    public ItemFornecedorDTO itemFornecedorDTO(@PathVariable Long idItemFornecedor){
+        return itemFornecedorService.getDTOById(idItemFornecedor);
     }
 
-    @GetMapping(name = "/${id}/fornecedor-item")
+    @GetMapping
+    @RequestMapping("/id/fornecedor-item")
     public FornecedorDTO fornecedorDTO(@RequestBody Long id){
         return fornecedorService.getDTOById(itemFornecedorService.getFornecedorById(id).getId());
     }
 
-    @GetMapping(name = "/${id}/item-fornecedor")
+    @GetMapping
+    @RequestMapping("/id/item-fornecedor")
     public ItemDTO itemDTO(@RequestBody Long id){
         return itemFornecedorService.getItemDTO(id);
     }
 
-    @PostMapping(name = "/save")
-    public void saveItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
+    @PostMapping
+    @RequestMapping("/adicionarItemFornecedor")
+    public void save(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
         itemFornecedorService.save(itemFornecedorDTO);
     }
 
-    @PutMapping(name = "/put")
+    @PutMapping
+    @RequestMapping("/put")
     public void putItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
         itemFornecedorService.update(itemFornecedorDTO);
     }
 
-    @DeleteMapping(name = "/delete")
+    @DeleteMapping
+    @RequestMapping("/delete")
     public void deleteItemFornecedor(@RequestBody Long id){
         itemFornecedorService.delete(id);
     }

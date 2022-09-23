@@ -9,13 +9,13 @@ public class FornecedorDTO {
     private String razao_social;
     private String cnpj;
     private String contato;
-    private LojaEntity loja;
+    private Long id_loja;
 
-    public FornecedorDTO(Long id, String razao_social, String cnpj, String contato, LojaEntity loja) {
+    public FornecedorDTO(Long id, String razao_social, String cnpj, String contato, Long id_loja) {
         this.id = id;
         this.razao_social = razao_social;
         this.cnpj = cnpj;
         this.contato = contato;
-        this.loja = loja;
+        this.id_loja = id_loja;
     }
 }

@@ -9,28 +9,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/pessoas")
+@RequestMapping("/pessoas")
 public class PessoaRestController {
 
     @Autowired
     private PessoaService pessoaService;
 
-    @GetMapping(name = "/${id}")
+    @GetMapping
+    @RequestMapping("/idPessoa")
     public PessoaDTO getPessoa(@PathVariable Long id) {
         return pessoaService.getDTOById(id);
     }
 
-    @PostMapping(name = "/salvar")
+    @PostMapping
+    @RequestMapping("/salvar")
     public void savePessoa(@RequestBody PessoaDTO pessoaDTO) {
         pessoaService.save(pessoaDTO);
     }
 
-    @DeleteMapping(name = "/${id}")
+    @DeleteMapping
+    @RequestMapping("/id")
     public void deletePessoa(@PathVariable Long id) {
         pessoaService.delete(id);
     }
 
-    @PutMapping(name = "/update")
+    @PutMapping
+    @RequestMapping("/update")
     public void updatePessoa(@RequestBody PessoaDTO pessoaDTO){
         pessoaService.update(pessoaDTO);
     }
