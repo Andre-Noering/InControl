@@ -17,49 +17,54 @@ public class VendaRestController {
     private VendaService vendaService;
 
     @GetMapping
-    @RequestMapping("/venda-itens")
-    public List<ItemPayloadDTO> getItens(Long id){
+    @RequestMapping("/{id}/venda-itens")
+    public List<ItemPayloadDTO> getItens(@PathVariable Long id){
         return vendaService.getItens(id);
     }
 
     @GetMapping
-    @RequestMapping("/id")
-    public VendaDTO getDTO(@PathVariable(name = "id")Long id){
+    @RequestMapping("/{id}")
+    public VendaDTO getDTO(@PathVariable Long id){
         return vendaService.getDTOById(id);
     }
 
     @GetMapping
-    @RequestMapping("/venda-vendedor/id")
+    @RequestMapping("/{id}/venda-vendedor")
     public PessoaPayloadDTO getVendedor(@PathVariable Long id){
         return vendaService.getVendedor(id);
     }
 
     @GetMapping
-    @RequestMapping("/venda-valor-total/id")
+    @RequestMapping("/{id}/venda-valor-total")
     public Double getValorTotal(@PathVariable Long id){
         return vendaService.getValorTotal(id);
     }
 
     @GetMapping
-    @RequestMapping("/venda-cliente/id")
+    @RequestMapping("/{id}/venda-cliente")
     public PessoaPayloadDTO getCliente(@PathVariable Long id){
         return vendaService.getCliente(id);
     }
 
     @PostMapping
     @RequestMapping("/adicionar")
-    public void saveVenda(@RequestBody VendaPayloadDTO vendaDTO){
+    public void save(@RequestBody VendaPayloadDTO vendaDTO){
         vendaService.save(vendaDTO);
+    }
+    @PostMapping
+    @RequestMapping("/finalizar")
+    public void finalizar(@RequestBody Long id){
+        vendaService.finalizar(id);
     }
 
     @PutMapping
     @RequestMapping("/atualizar")
-    public void uptadeVenda(@RequestBody VendaDTO vendaDTO){
+    public void update(@RequestBody VendaDTO vendaDTO){
         vendaService.update(vendaDTO);
     }
 
     @DeleteMapping
-    @RequestMapping("/id/deletar")
+    @RequestMapping("/{id}/deletar")
     public void delete(@PathVariable Long id) {
         vendaService.delete(id);
     }

@@ -21,31 +21,31 @@ public class ItemVendaRestController {
     }
 
     @GetMapping
-    @RequestMapping("/idItemVenda")
+    @RequestMapping("/{idItemVenda}")
     public ItemVendaDTO getItem(@PathVariable Long idItemVenda){
         return itemVendaService.getDTOById(idItemVenda);
     }
 
     @GetMapping
-    @RequestMapping("/id/valor")
+    @RequestMapping("/{id}/valor")
     public Double getValor(@PathVariable Long id){
         return itemVendaService.getValor(itemVendaService.getDTOById(id));
     }
 
     @PostMapping
-    @RequestMapping("/adicionarItemVenda")
+    @RequestMapping("/adicionar")
     public void save(@RequestBody ItemVendaPayloadDTO itemVendaDTO){
         itemVendaService.save(itemVendaDTO);
     }
 
     @PutMapping
-    @RequestMapping("/id/atualizar")
-    public void update(@PathVariable Long id){
-        itemVendaService.update(itemVendaService.getDTOById(id));
+    @RequestMapping("/atualizar")
+    public void update(@RequestBody ItemVendaDTO itemVendaDTO){
+        itemVendaService.update(itemVendaDTO);
     }
 
     @DeleteMapping
-    @RequestMapping("/id/deletar")
+    @RequestMapping("/{id}/deletar")
     public void delete(@PathVariable Long id){
         itemVendaService.delete(id);
     }

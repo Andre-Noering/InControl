@@ -21,9 +21,9 @@ public class FuncionarioRestController {
     }
 
     @GetMapping
-    @RequestMapping("/id_funcionario")
-    public FuncionarioDTO get(@PathVariable(name = "id_funcionario")Long id){
-        return funcionarioService.getDTOById(id);
+    @RequestMapping("/{id_funcionario}")
+    public FuncionarioDTO get(@PathVariable Long id_funcionario){
+        return funcionarioService.getDTOById(id_funcionario);
     }
 
     @PutMapping

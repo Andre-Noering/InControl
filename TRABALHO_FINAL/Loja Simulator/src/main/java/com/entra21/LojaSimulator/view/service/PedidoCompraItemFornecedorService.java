@@ -35,7 +35,7 @@ public class PedidoCompraItemFornecedorService {
 
     public PedidoCompraItemFornecedorDTO getDTOById(Long id) {
         PedidoCompraItemFornecedorEntity entity = getById(id);
-        return new PedidoCompraItemFornecedorDTO(entity.getId(), entity.getValorUnitario(), entity.getQuantidade(), entity.getItemFornecedor(), entity.getPedidoCompra());
+        return new PedidoCompraItemFornecedorDTO(entity.getId(), entity.getValorUnitario(), entity.getQuantidade(), entity.getItemFornecedor().getId(), entity.getPedidoCompra().getId());
     }
 
     public ItemFornecedorEntity getItemFornecedorById(Long id){
