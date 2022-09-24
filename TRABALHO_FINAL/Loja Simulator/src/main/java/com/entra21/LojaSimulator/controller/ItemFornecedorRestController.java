@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.controller;
 import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemFornecedorDTO;
+import com.entra21.LojaSimulator.model.dto.ItemFornecedorPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.view.service.FornecedorService;
 import com.entra21.LojaSimulator.view.service.ItemFornecedorService;
@@ -11,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/ItemFornecedor")
+@RequestMapping("/itemFornecedor")
 public class ItemFornecedorRestController {
     @Autowired
     private ItemFornecedorService itemFornecedorService;
@@ -38,7 +39,7 @@ public class ItemFornecedorRestController {
 
     @PostMapping
     @RequestMapping("/adicionarItemFornecedor")
-    public void save(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
+    public void save(@RequestBody ItemFornecedorPayloadDTO itemFornecedorDTO){
         itemFornecedorService.save(itemFornecedorDTO);
     }
 

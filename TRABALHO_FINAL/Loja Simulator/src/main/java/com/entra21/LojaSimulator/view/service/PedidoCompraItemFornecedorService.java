@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.view.service;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.PedidoCompraDTO;
 import com.entra21.LojaSimulator.model.dto.PedidoCompraItemFornecedorDTO;
+import com.entra21.LojaSimulator.model.dto.PedidoCompraItemFornecedorPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.ItemFornecedorRepository;
 import com.entra21.LojaSimulator.view.repository.PedidoCompraItemFornecedorRepository;
@@ -47,13 +48,12 @@ public class PedidoCompraItemFornecedorService {
 
 
     //POST
-    public void save(PedidoCompraItemFornecedorDTO input) {
+    public void save(PedidoCompraItemFornecedorPayloadDTO input) {
         PedidoCompraItemFornecedorEntity newPedidoCompraItemFornecedor = new PedidoCompraItemFornecedorEntity();
-        newPedidoCompraItemFornecedor.setId(input.getId());
         newPedidoCompraItemFornecedor.setQuantidade(input.getQtde());
         newPedidoCompraItemFornecedor.setValorUnitario(input.getValor_unitario());
-        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getItemFornecedor().getId()));
-        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getPedidoCompra().getId()));
+        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getId_item_fornecedor()));
+        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getId_pedido_compra()));
         pedidoCompraItemFornecedorRepository.save(newPedidoCompraItemFornecedor);
     }
 

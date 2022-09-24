@@ -74,7 +74,6 @@ public class FornecedorService {
     //POST
     public void save(@RequestBody FornecedorDTO input) {
         FornecedorEntity newFornecedor = new FornecedorEntity();
-        newFornecedor.setId(input.getId());
         newFornecedor.setRazaoSocial(input.getRazao_social());
         newFornecedor.setCnpj(input.getCnpj());
         newFornecedor.setContato(input.getContato());

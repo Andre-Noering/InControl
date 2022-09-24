@@ -20,7 +20,7 @@ public class PedidoCompraRestController {
 	}
 	@PostMapping
 	@RequestMapping("/save-pedido-compra")
-	public void saveVenda(@RequestBody PedidoCompraDTO dto){
+	public void saveVenda(@RequestBody PedidoCompraPayloadDTO dto){
 		pedidoCompraService.save(dto);
 	}
 	@PutMapping

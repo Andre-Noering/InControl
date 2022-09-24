@@ -8,4 +8,5 @@ public class PessoaPayloadDTO {
     private String sobrenome;
     private String cpf;
     private String telefone;
+    private Long idLoja;
 }

@@ -18,8 +18,8 @@ public class PedidoCompraEntity {
 	@Column(name="data", nullable = false)
 	private LocalDate data;
 
-	@OneToOne
-	@JoinColumn(name = "id_funcionario", referencedColumnName = "id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "id_funcionario", referencedColumnName = "id_pessoa", nullable = false)
 	private FuncionarioEntity funcionario;
 
 	@OneToMany(mappedBy = "pedidoCompra")
