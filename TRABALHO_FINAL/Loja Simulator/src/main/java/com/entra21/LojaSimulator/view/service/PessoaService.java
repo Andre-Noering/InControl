@@ -22,7 +22,7 @@ public class PessoaService {
     @Autowired
     private LojaService lojaService;
 
-    public PessoaEntity getPessoaById(Long id){
+    public PessoaEntity getById(Long id){
         return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
     }
 
@@ -51,7 +51,7 @@ public class PessoaService {
 
     //Retorna Pessoa pela id
     public PessoaDTO getDTOById(Long id) {
-        PessoaEntity pessoaEntity = getPessoaById(id);
+        PessoaEntity pessoaEntity = getById(id);
         PessoaDTO pessoaDTO = new PessoaDTO();
         pessoaDTO.setIdPessoa(pessoaEntity.getId());
         pessoaDTO.setNome(pessoaEntity.getNome());
@@ -75,16 +75,17 @@ public class PessoaService {
 
     //PUT
     public void update(PessoaDTO pessoaDTO) {
-        PessoaEntity pessoaEntity = getPessoaById(pessoaDTO.getIdPessoa());
+        PessoaEntity pessoaEntity = getById(pessoaDTO.getIdPessoa());
         pessoaEntity.setNome(pessoaDTO.getNome());
         pessoaEntity.setCpf(pessoaDTO.getCpf());
         pessoaEntity.setSobrenome(pessoaDTO.getSobrenome());
         pessoaEntity.setTelefone(pessoaDTO.getTelefone());
+        pessoaRepository.save(pessoaEntity);
     }
 
     //DELETE
     public void delete(Long id) {
-        PessoaEntity pessoa = getPessoaById(id);
+        PessoaEntity pessoa = getById(id);
         pessoaRepository.delete(pessoa);
     }
 

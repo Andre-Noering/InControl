@@ -13,10 +13,10 @@ import java.util.List;
 @Data
 public class LojaDTO {
     private Long id;
-    private String razao_social;
+    private String razaoSocial;
     private String cnpj;
     private String contato;
-    private Double valor_caixa;
+    private Double valorCaixa;
     private FuncionarioEntity gerente;
     private List<ItemEntity> itens;
     private List<FornecedorEntity> fornecedores;
@@ -24,10 +24,10 @@ public class LojaDTO {
 
     public LojaDTO(Long id, String razao_social, String cnpj, String contato, Double valor_caixa, FuncionarioEntity gerente, List<ItemEntity> itens, List<FornecedorEntity> fornecedores, List<PessoaEntity> funcionarios) {
         this.id = id;
-        this.razao_social = razao_social;
+        this.razaoSocial = razao_social;
         this.cnpj = cnpj;
         this.contato = contato;
-        this.valor_caixa = valor_caixa;
+        this.valorCaixa = valor_caixa;
         this.gerente = gerente;
         this.itens = itens;
         this.fornecedores = fornecedores;

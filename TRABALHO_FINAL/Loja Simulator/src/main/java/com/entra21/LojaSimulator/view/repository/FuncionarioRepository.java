@@ -13,4 +13,5 @@ public interface FuncionarioRepository extends JpaRepository<FuncionarioEntity, 
 
     public List<FuncionarioEntity> findAllById(Long id);
 
+    boolean existsByLogin(String login);
 }

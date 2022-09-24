@@ -52,7 +52,7 @@ public class LojaService {
 
     public List<FornecedorDTO> getFornecedoresById(Long id) {
         LojaEntity loja = getById(id);
-        return loja.getFornecedores().stream().map(fornecedor -> fornecedorService.getDtoById(fornecedor.getId())).collect(Collectors.toList());
+        return loja.getFornecedores().stream().map(fornecedor -> fornecedorService.getDTOById(fornecedor.getId())).collect(Collectors.toList());
     }
 
     public LojaGerenteDTO getGerenteById(Long id) {
@@ -83,10 +83,10 @@ public class LojaService {
     //POST
     public void save(@RequestBody LojaDTO input) {
         LojaEntity newLoja = new LojaEntity();
-        newLoja.setRazaoSocial(input.getRazao_social());
+        newLoja.setRazaoSocial(input.getRazaoSocial());
         newLoja.setCnpj(input.getCnpj());
         newLoja.setContato(input.getContato());
-        newLoja.setValorCaixa(input.getValor_caixa());
+        newLoja.setValorCaixa(input.getValorCaixa());
         newLoja.setGerente(((FuncionarioEntity) SecurityContextHolder.getContext().getAuthentication().getPrincipal()));
         lojaRepository.save(newLoja);
     }
@@ -112,7 +112,7 @@ public class LojaService {
         if (dto.getFornecedores() != null) {
             loja.setFornecedores(dto.getFornecedores());
         }
-        save(getDTOById(loja.getId()));
+        lojaRepository.save(loja);
     }
 
 

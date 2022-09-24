@@ -38,7 +38,7 @@ public class PedidoCompraService {
 	//POST
 	public void save(PedidoCompraPayloadDTO pedidoCompraDTO){
 		PedidoCompraEntity pedido = new PedidoCompraEntity();
-		pedido.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(pedidoCompraDTO.getId_funcionario())));
+		pedido.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(pedidoCompraDTO.getIdFuncionario())));
 		pedido.setData(pedidoCompraDTO.getData());
 		pedido = pedidoCompraRepository.save(pedido);
 		pedido.getFuncionario().getLoja().setValorCaixa(pedido.getFuncionario().getLoja().getValorCaixa()-getValorTotal(pedido.getId()));
@@ -51,6 +51,7 @@ public class PedidoCompraService {
 		if(pedidoCompraDTO.getData()!=null){
 			pedidoCompraEntity.setData(pedidoCompraDTO.getData());
 		}
+		pedidoCompraRepository.save(pedidoCompraEntity);
 	}
 
 

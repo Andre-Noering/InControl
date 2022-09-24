@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/pcif")
+@RequestMapping("/PCIF")
 public class PedidoCompraItemFornecedorRestController {
     @Autowired
     private PedidoCompraItemFornecedorService pedidoCompraItemFornecedorService;
@@ -19,17 +19,17 @@ public class PedidoCompraItemFornecedorRestController {
         return pedidoCompraItemFornecedorService.getDTOById(id);
     }
     @PostMapping
-    @RequestMapping("/save-pedido-compra-item-fornecedor")
+    @RequestMapping("/adicionar")
     public void saveVenda(@RequestBody PedidoCompraItemFornecedorPayloadDTO dto){
         pedidoCompraItemFornecedorService.save(dto);
     }
     @PutMapping
-    @RequestMapping("/alteracao-pedido-compra-item-fornecedor")
+    @RequestMapping("/atualizar")
     public void uptadeVenda(@RequestBody PedidoCompraItemFornecedorDTO dto){
         pedidoCompraItemFornecedorService.update(dto);
     }
     @DeleteMapping
-    @RequestMapping("/delete-pedido-compra-item-fornecedor/id")
+    @RequestMapping("/id/deletar")
     public void delete(@PathVariable Long id) {
         pedidoCompraItemFornecedorService.delete(id);
     }

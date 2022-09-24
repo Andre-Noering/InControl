@@ -9,20 +9,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/itens")
+@RequestMapping("/{razao_social}/itens")
 public class ItemRestController {
 	@Autowired
 	private ItemService itemService;
 	@Autowired
 	private LojaService lojaService;
 	@GetMapping
-	@RequestMapping("/itens")
+	@RequestMapping("")
 	public List<ItemDTO> getAll(@PathVariable String razao_social){
 		return itemService.getAllByLoja(lojaService.getByRazaoSocial(razao_social).getId());
 	}
 
 	@GetMapping
-	@RequestMapping("/idItem")
+	@RequestMapping("/{idItem}")
 	public ItemDTO getItemById(@PathVariable Long idItem){
 		return itemService.getDTOById(idItem);
 	}
@@ -34,21 +34,21 @@ public class ItemRestController {
 	}
 
 	@PostMapping
-	@RequestMapping("/adicionarItem")
+	@RequestMapping("/adicionar")
 	public void save(@RequestBody ItemDTO itemDTO){
 		itemService.save(itemDTO);
 	}
 
 	@PutMapping
-	@RequestMapping("/atualizarItem")
+	@RequestMapping("/atualizar")
 	public void update(@RequestBody ItemDTO itemDTO){
 		itemService.update(itemDTO);
 	}
 
 	@DeleteMapping
-	@RequestMapping("/deletarItem")
-	public void delete(@RequestBody Long id){
-		itemService.delete(id);
+	@RequestMapping("/{idItem}/deletar")
+	public void delete(@PathVariable Long idItem){
+		itemService.delete(idItem);
 	}
 
 }

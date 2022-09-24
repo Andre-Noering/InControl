@@ -53,13 +53,13 @@ public class VendaRestController {
     }
 
     @PutMapping
-    @RequestMapping("/alteracao-venda")
+    @RequestMapping("/atualizar")
     public void uptadeVenda(@RequestBody VendaDTO vendaDTO){
         vendaService.update(vendaDTO);
     }
 
     @DeleteMapping
-    @RequestMapping("/delete-venda/id")
+    @RequestMapping("/id/deletar")
     public void delete(@PathVariable Long id) {
         vendaService.delete(id);
     }
