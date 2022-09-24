@@ -6,6 +6,8 @@ import com.entra21.LojaSimulator.model.dto.PedidoCompraPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.ItemVendaEntity;
 import com.entra21.LojaSimulator.model.entity.PedidoCompraEntity;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
+import com.entra21.LojaSimulator.view.repository.ItemRepository;
+import com.entra21.LojaSimulator.view.repository.LojaRepository;
 import com.entra21.LojaSimulator.view.repository.PedidoCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,10 @@ public class PedidoCompraService {
 	private PedidoCompraRepository pedidoCompraRepository;
 	@Autowired
 	private FuncionarioService funcionarioService;
+	@Autowired
+	private LojaRepository lojaRepository;
+	@Autowired
+	private ItemRepository itemRepository;
 
 	public PedidoCompraEntity getById(Long id){
 		return pedidoCompraRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido de compra não encontrado!"));
@@ -41,8 +47,13 @@ public class PedidoCompraService {
 		pedido.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(pedidoCompraDTO.getIdFuncionario())));
 		pedido.setData(pedidoCompraDTO.getData());
 		pedido = pedidoCompraRepository.save(pedido);
+	}
+	public void finish(Long id){
+		PedidoCompraEntity pedido = getById(id);
 		pedido.getFuncionario().getLoja().setValorCaixa(pedido.getFuncionario().getLoja().getValorCaixa()-getValorTotal(pedido.getId()));
-		pedido.getPedidosCompra().forEach(item->item.getItemFornecedor().getItem().setQtdeEstoque(item.getItemFornecedor().getItem().getQtdeEstoque()+item.getQuantidade()));
+		lojaRepository.save(pedido.getFuncionario().getLoja());
+		pedido.getPedidosCompra().forEach(item->{item.getItemFornecedor().getItem().setQtdeEstoque(item.getItemFornecedor().getItem().getQtdeEstoque()+item.getQuantidade());
+		itemRepository.save(item.getItemFornecedor().getItem());});
 	}
 
 	//PUT

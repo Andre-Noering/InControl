@@ -12,7 +12,7 @@ public class LojaRestController {
     @Autowired
     LojaService lojaService;
     @GetMapping
-    @RequestMapping("/razaoSocial")
+    @RequestMapping("/{razaoSocial}")
     public LojaDTO getLoja(@PathVariable String razaoSocial){
         return lojaService.getDTOById(lojaService.getByRazaoSocial(razaoSocial).getId());
     }
@@ -24,7 +24,7 @@ public class LojaRestController {
     }
 
     @DeleteMapping
-    @RequestMapping("/razaoSocial/deletar")
+    @RequestMapping("/{razaoSocial}/deletar")
     public void delete(@PathVariable String razaoSocial){
         lojaService.deleteByRazaoSocial(razaoSocial);
     }

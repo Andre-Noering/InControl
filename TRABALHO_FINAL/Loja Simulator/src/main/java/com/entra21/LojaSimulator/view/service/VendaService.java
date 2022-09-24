@@ -6,6 +6,8 @@ import com.entra21.LojaSimulator.model.dto.PessoaPayloadDTO;
 import com.entra21.LojaSimulator.model.dto.VendaDTO;
 import com.entra21.LojaSimulator.model.dto.VendaPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
+import com.entra21.LojaSimulator.view.repository.ItemRepository;
+import com.entra21.LojaSimulator.view.repository.LojaRepository;
 import com.entra21.LojaSimulator.view.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
 
 @Service
 public class VendaService {
@@ -30,6 +33,10 @@ public class VendaService {
 
     @Autowired
     private ItemVendaService itemVendaService;
+    @Autowired
+    private LojaRepository lojaRepository;
+    @Autowired
+    private ItemRepository itemRepository;
 
     public VendaEntity getById(Long id){
         return vendaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Venda não encontrada!"));
@@ -37,24 +44,20 @@ public class VendaService {
 
     //Retorna nome, valor e qtde de cada item naquela venda
     public List<ItemPayloadDTO> getItens(Long id){
-        List<ItemPayloadDTO> listaItens = null;
-        getById(id).getItens().forEach( itemVenda -> {
+        List<ItemPayloadDTO> listaItens=getById(id).getItens().stream().map(itemVenda -> {
             ItemPayloadDTO itemPayloadDTO = new ItemPayloadDTO();
             itemPayloadDTO.setNome(itemVenda.getItem().getNome());
             itemPayloadDTO.setValor(itemVenda.getValorUnitario());
             itemPayloadDTO.setQtde(itemVenda.getQtde());
-            listaItens.add(itemPayloadDTO);
-        });
+            return itemPayloadDTO;
+        }).collect(Collectors.toList());;
         return listaItens;
     }
 
     //Retorna o vendedor que efetuou a venda
     public PessoaPayloadDTO getVendedor(Long id){
         VendaEntity vendaEntity = getById(id);
-        PessoaPayloadDTO pessoaPayloadDTO = new PessoaPayloadDTO();
-        pessoaPayloadDTO.setNome(funcionarioService.build(funcionarioService.getDTOById(vendaEntity.getFuncionario().getId())).getNome());
-        pessoaPayloadDTO.setSobrenome(funcionarioService.build(funcionarioService.getDTOById(vendaEntity.getFuncionario().getId())).getSobrenome());
-        return pessoaPayloadDTO;
+        return new PessoaPayloadDTO(vendaEntity.getFuncionario().getNome(), vendaEntity.getFuncionario().getSobrenome(), vendaEntity.getFuncionario().getCpf(), vendaEntity.getFuncionario().getTelefone(), vendaEntity.getFuncionario().getLoja().getId());
     }
 
     //Retorna o valor total da Venda
@@ -68,12 +71,7 @@ public class VendaService {
     //Retorna os dados do cliente daquela venda
     public PessoaPayloadDTO getCliente(Long id){
         VendaEntity vendaEntity = getById(id);
-        PessoaPayloadDTO pessoa = new PessoaPayloadDTO();
-        pessoa.setNome(vendaEntity.getPessoa().getNome());
-        pessoa.setSobrenome(vendaEntity.getPessoa().getSobrenome());
-        pessoa.setCpf(vendaEntity.getPessoa().getCpf());
-        pessoa.setTelefone(vendaEntity.getPessoa().getTelefone());
-        return pessoa;
+        return new PessoaPayloadDTO(vendaEntity.getPessoa().getNome(), vendaEntity.getPessoa().getSobrenome(), vendaEntity.getPessoa().getCpf(), vendaEntity.getPessoa().getTelefone(), vendaEntity.getPessoa().getLoja().getId());
     }
 
     public VendaDTO getDTOById(Long id){
@@ -88,8 +86,13 @@ public class VendaService {
         newVenda.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getIdCliente())));
         newVenda.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getIdVendedor())));
         newVenda=vendaRepository.save(newVenda);
-        newVenda.getFuncionario().getLoja().setValorCaixa(newVenda.getFuncionario().getLoja().getValorCaixa()+getValorTotal(newVenda.getId()));
-        newVenda.getItens().forEach(item-> item.getItem().setQtdeEstoque(item.getItem().getQtdeEstoque()-item.getQtde()));
+
+    }
+    public void finalizar(Long id){
+        VendaEntity venda = getById(id);
+        venda.getFuncionario().getLoja().setValorCaixa(venda.getFuncionario().getLoja().getValorCaixa()+getValorTotal(venda.getId()));
+        lojaRepository.save(venda.getFuncionario().getLoja());
+        venda.getItens().forEach(item-> {item.getItem().setQtdeEstoque(item.getItem().getQtdeEstoque()-item.getQtde());itemRepository.save(item.getItem());});
     }
 
     //PUT

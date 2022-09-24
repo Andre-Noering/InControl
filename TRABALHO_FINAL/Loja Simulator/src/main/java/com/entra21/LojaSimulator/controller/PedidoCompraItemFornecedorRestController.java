@@ -14,22 +14,22 @@ public class PedidoCompraItemFornecedorRestController {
     private PedidoCompraItemFornecedorService pedidoCompraItemFornecedorService;
 
     @GetMapping
-    @RequestMapping("/pedido-compra-item-fornecedor/id")
-    public PedidoCompraItemFornecedorDTO getDTO(@PathVariable(name = "id")Long id){
+    @RequestMapping("/pedido-compra-item-fornecedor/{id}")
+    public PedidoCompraItemFornecedorDTO getDTO(@PathVariable Long id){
         return pedidoCompraItemFornecedorService.getDTOById(id);
     }
     @PostMapping
     @RequestMapping("/adicionar")
-    public void saveVenda(@RequestBody PedidoCompraItemFornecedorPayloadDTO dto){
+    public void save(@RequestBody PedidoCompraItemFornecedorPayloadDTO dto){
         pedidoCompraItemFornecedorService.save(dto);
     }
     @PutMapping
     @RequestMapping("/atualizar")
-    public void uptadeVenda(@RequestBody PedidoCompraItemFornecedorDTO dto){
+    public void uptade(@RequestBody PedidoCompraItemFornecedorDTO dto){
         pedidoCompraItemFornecedorService.update(dto);
     }
     @DeleteMapping
-    @RequestMapping("/id/deletar")
+    @RequestMapping("/{id}/deletar")
     public void delete(@PathVariable Long id) {
         pedidoCompraItemFornecedorService.delete(id);
     }
