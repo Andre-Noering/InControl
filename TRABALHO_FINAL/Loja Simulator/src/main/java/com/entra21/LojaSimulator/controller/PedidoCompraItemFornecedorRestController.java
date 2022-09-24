@@ -2,6 +2,7 @@ package com.entra21.LojaSimulator.controller;
 
 import com.entra21.LojaSimulator.model.dto.PedidoCompraDTO;
 import com.entra21.LojaSimulator.model.dto.PedidoCompraItemFornecedorDTO;
+import com.entra21.LojaSimulator.model.dto.PedidoCompraItemFornecedorPayloadDTO;
 import com.entra21.LojaSimulator.view.service.PedidoCompraItemFornecedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class PedidoCompraItemFornecedorRestController {
     }
     @PostMapping
     @RequestMapping("/save-pedido-compra-item-fornecedor")
-    public void saveVenda(@RequestBody PedidoCompraItemFornecedorDTO dto){
+    public void saveVenda(@RequestBody PedidoCompraItemFornecedorPayloadDTO dto){
         pedidoCompraItemFornecedorService.save(dto);
     }
     @PutMapping

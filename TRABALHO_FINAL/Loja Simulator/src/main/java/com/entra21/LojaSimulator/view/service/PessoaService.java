@@ -19,6 +19,8 @@ public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
+    private LojaService lojaService;
 
     public PessoaEntity getPessoaById(Long id){
         return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
@@ -43,6 +45,7 @@ public class PessoaService {
         newPessoa.setSobrenome(input.getSobrenome());
         newPessoa.setTelefone(input.getTelefone());
         newPessoa.setCpf(input.getCpf());
+        newPessoa.setLoja(lojaService.getById(input.getIdLoja()));
         return newPessoa;
     }
 
@@ -52,12 +55,22 @@ public class PessoaService {
         PessoaDTO pessoaDTO = new PessoaDTO();
         pessoaDTO.setIdPessoa(pessoaEntity.getId());
         pessoaDTO.setNome(pessoaEntity.getNome());
+        pessoaDTO.setCpf(pessoaEntity.getCpf());
+        pessoaDTO.setSobrenome(pessoaEntity.getSobrenome());
+        pessoaDTO.setIdLoja(pessoaEntity.getLoja().getId());
+        pessoaDTO.setTelefone(pessoaEntity.getTelefone());
         return pessoaDTO;
     }
 
     //POST
-    public void save(@RequestBody PessoaDTO pessoaDTO) {
-        pessoaRepository.save(build(pessoaDTO));
+    public void save(PessoaDTO input) {
+        PessoaEntity newPessoa = new PessoaEntity();
+        newPessoa.setNome(input.getNome());
+        newPessoa.setSobrenome(input.getSobrenome());
+        newPessoa.setTelefone(input.getTelefone());
+        newPessoa.setCpf(input.getCpf());
+        newPessoa.setLoja(lojaService.getById(input.getIdLoja()));
+        pessoaRepository.save(newPessoa);
     }
 
     //PUT

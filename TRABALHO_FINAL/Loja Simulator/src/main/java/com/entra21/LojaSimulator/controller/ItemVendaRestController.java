@@ -1,6 +1,7 @@
 package com.entra21.LojaSimulator.controller;
 
 import com.entra21.LojaSimulator.model.dto.ItemVendaDTO;
+import com.entra21.LojaSimulator.model.dto.ItemVendaPayloadDTO;
 import com.entra21.LojaSimulator.view.service.ItemVendaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/razao_social/vendas/id")
+@RequestMapping("/itensVenda")
 public class ItemVendaRestController {
     @Autowired
     private ItemVendaService itemVendaService;
@@ -33,7 +34,7 @@ public class ItemVendaRestController {
 
     @PostMapping
     @RequestMapping("/adicionarItemVenda")
-    public void save(@PathVariable ItemVendaDTO itemVendaDTO){
+    public void save(@RequestBody ItemVendaPayloadDTO itemVendaDTO){
         itemVendaService.save(itemVendaDTO);
     }
 

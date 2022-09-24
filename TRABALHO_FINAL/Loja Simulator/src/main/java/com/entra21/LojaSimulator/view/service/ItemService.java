@@ -39,14 +39,14 @@ public class ItemService {
 	public List<ItemDTO> getAllByLoja(Long idLoja) {
 		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
 		return listaItens.stream().map(item -> {
-			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtdeEstoque(), item.getQtdeAlertaEstoque());
+			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtdeEstoque(), item.getQtdeAlertaEstoque(), item.getLoja().getId());
 		}).collect(Collectors.toList());
 	}
 
 	//Retorna item pela id
 	public ItemDTO getDTOById(Long id) {
 		ItemEntity itemEntity = getItemById(id);
-		return new ItemDTO(itemEntity.getId(), itemEntity.getNome(), itemEntity.getValor(), itemEntity.getQtdeEstoque(), itemEntity.getQtdeAlertaEstoque());
+		return new ItemDTO(itemEntity.getId(), itemEntity.getNome(), itemEntity.getValor(), itemEntity.getQtdeEstoque(), itemEntity.getQtdeAlertaEstoque(), itemEntity.getLoja().getId());
 	}
 
 	//Retorna o valor do item pelo id
@@ -86,11 +86,22 @@ public class ItemService {
 
 	public ItemEntity build(ItemDTO input){
 		ItemEntity newEntity = new ItemEntity();
+		newEntity.setNome(input.getNome());
+		newEntity.setValor(input.getValor());
+		newEntity.setQtdeEstoque(input.getQtdeEstoque());
+		newEntity.setQtdeAlertaEstoque(input.getQtdeAlertaEstoque());
+		newEntity.setLoja(lojaService.getById(input.getIdLoja()));
+		return newEntity;
+	}
+
+	public ItemEntity buildWithId(ItemDTO input){
+		ItemEntity newEntity = new ItemEntity();
 		newEntity.setId(input.getId());
 		newEntity.setNome(input.getNome());
 		newEntity.setValor(input.getValor());
 		newEntity.setQtdeEstoque(input.getQtdeEstoque());
 		newEntity.setQtdeAlertaEstoque(input.getQtdeAlertaEstoque());
+		newEntity.setLoja(lojaService.getById(input.getIdLoja()));
 		return newEntity;
 	}
 
@@ -98,13 +109,7 @@ public class ItemService {
 
 	//POST
 	public void save(@RequestBody ItemDTO input) {
-		ItemEntity newEntity = new ItemEntity();
-		newEntity.setId(input.getId());
-		newEntity.setNome(input.getNome());
-		newEntity.setValor(input.getValor());
-		newEntity.setQtdeEstoque(input.getQtdeEstoque());
-		newEntity.setQtdeAlertaEstoque(input.getQtdeAlertaEstoque());
-		itemRepository.save(newEntity);
+		itemRepository.save(build(input));
 	}
 
 	//PUT

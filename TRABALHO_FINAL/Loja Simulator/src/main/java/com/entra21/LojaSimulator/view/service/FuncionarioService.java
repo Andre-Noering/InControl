@@ -21,6 +21,8 @@ public class FuncionarioService implements UserDetailsService {
     @Autowired
     private VendaService vendaService;
 
+    @Autowired
+    private LojaService lojaService;
 
     //GET
     public FuncionarioEntity getFuncionarioById(Long id){
@@ -63,15 +65,15 @@ public class FuncionarioService implements UserDetailsService {
 
 
     //Metodo Save - Criando um funcionario
-    public void save(FuncionarioDTO funcionarioDTO){
+    public void save(FuncionarioPayloadDTO funcionarioDTO){
         FuncionarioEntity funcionarioEntity = new FuncionarioEntity();
-        funcionarioEntity.setId(funcionarioDTO.getId());
         funcionarioEntity.setNome(funcionarioDTO.getNome());
         funcionarioEntity.setSobrenome(funcionarioDTO.getSobrenome());
         funcionarioEntity.setTelefone(funcionarioDTO.getTelefone());
         funcionarioEntity.setCpf(funcionarioDTO.getCpf());
         funcionarioEntity.setLogin(funcionarioDTO.getLogin());
         funcionarioEntity.setSenha(funcionarioDTO.getSenha());
+        funcionarioEntity.setLoja(lojaService.getById(funcionarioDTO.getIdLoja()));
         funcionarioRepository.save(funcionarioEntity);
     }
 

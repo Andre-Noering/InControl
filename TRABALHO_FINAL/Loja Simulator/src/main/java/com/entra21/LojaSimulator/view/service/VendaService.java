@@ -29,7 +29,7 @@ public class VendaService {
     @Autowired
     private ItemVendaService itemVendaService;
 
-    public VendaEntity getVenda(Long id){ //Retorna a loja com aquele ID
+    public VendaEntity getVenda(Long id){
         return vendaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Venda não encontrada!"));
     }
 
@@ -85,7 +85,9 @@ public class VendaService {
         newVenda.setData(vendaDTO.getData());
         newVenda.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getId_cliente())));
         newVenda.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getId_vendedor())));
-        vendaRepository.save(newVenda);
+        newVenda=vendaRepository.save(newVenda);
+        newVenda.getFuncionario().getLoja().setValorCaixa(newVenda.getFuncionario().getLoja().getValorCaixa()+getValorTotal(newVenda.getId()));
+        newVenda.getItens().forEach(item-> item.getItem().setQtdeEstoque(item.getItem().getQtdeEstoque()-item.getQtde()));
     }
 
     //PUT

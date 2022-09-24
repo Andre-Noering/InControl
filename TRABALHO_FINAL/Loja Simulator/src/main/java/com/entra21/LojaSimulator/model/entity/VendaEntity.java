@@ -22,12 +22,10 @@ public class VendaEntity {
 
     @ManyToOne
     @JoinColumn(name="id_cliente",referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private PessoaEntity pessoa;
 
     @ManyToOne
-    @JoinColumn(name = "id_venda",referencedColumnName = "id_pessoa", nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "id_vendedor",referencedColumnName = "id_pessoa", nullable = false)
     private FuncionarioEntity funcionario;
 
     @OneToMany(mappedBy = "venda")
