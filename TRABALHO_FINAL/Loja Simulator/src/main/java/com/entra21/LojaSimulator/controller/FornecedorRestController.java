@@ -24,34 +24,34 @@ public class FornecedorRestController {
     @Autowired
     private LojaService lojaService;
     @GetMapping
-    @RequestMapping("")
-    public List<FornecedorDTO> getFornecedores(){
-        return fornecedorService.getAllByLoja("");
+    @RequestMapping("/{razao_social}")
+    public List<FornecedorDTO> getFornecedores(@PathVariable(name = "razao_social") String razao_social){
+        return fornecedorService.getAllByLoja(razao_social);
     }
     @GetMapping
-    @RequestMapping("/razao_social/itens")
+    @RequestMapping("/{razao_social}/itens")
     public List<ItemDTO> getItens(@PathVariable String razao_social){
         return fornecedorService.getItensByRazaoSocial(razao_social);
     }
     @GetMapping
-    @RequestMapping("/razao_social/contato")
+    @RequestMapping("/{razao_social}/contato")
     public String getContato(@PathVariable String razao_social){
         return fornecedorService.getContatoByRazaoSocial(razao_social);
     }
     @DeleteMapping
-    @RequestMapping("/razao_social")
-    public void delete(@PathVariable String razao_social){
-        fornecedorService.deleteByRazaoSocial(razao_social);
+    @RequestMapping("/{id}/deletar")
+    public void delete(@PathVariable Long id){
+        fornecedorService.delete(id);
     }
 
     @PostMapping
-    @RequestMapping("/adicionarFornecedor")
+    @RequestMapping("/adicionar")
     public void post(@RequestBody FornecedorDTO fornecedorDTO){
         fornecedorService.save(fornecedorDTO);
     }
 
     @PutMapping
-    @RequestMapping("/atualizarFornecedor")
+    @RequestMapping("/atualizar")
     public void update(@RequestBody FornecedorDTO fornecedorDTO){
         fornecedorService.update(fornecedorDTO);
     }

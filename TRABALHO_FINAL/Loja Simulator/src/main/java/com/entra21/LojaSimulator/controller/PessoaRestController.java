@@ -22,19 +22,19 @@ public class PessoaRestController {
     }
 
     @PostMapping
-    @RequestMapping("/salvar")
+    @RequestMapping("/adicionar")
     public void savePessoa(@RequestBody PessoaDTO pessoaDTO) {
         pessoaService.save(pessoaDTO);
     }
 
     @DeleteMapping
-    @RequestMapping("/id")
+    @RequestMapping("/id/deletar")
     public void deletePessoa(@PathVariable Long id) {
         pessoaService.delete(id);
     }
 
     @PutMapping
-    @RequestMapping("/update")
+    @RequestMapping("/atualizar")
     public void updatePessoa(@RequestBody PessoaDTO pessoaDTO){
         pessoaService.update(pessoaDTO);
     }

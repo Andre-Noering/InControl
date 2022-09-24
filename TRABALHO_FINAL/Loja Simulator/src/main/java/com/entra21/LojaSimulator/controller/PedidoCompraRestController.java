@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/pedidoCompra")
+@RequestMapping("/pedidosCompra")
 public class PedidoCompraRestController {
 	@Autowired
 	private PedidoCompraService pedidoCompraService;
@@ -19,17 +19,17 @@ public class PedidoCompraRestController {
 		return pedidoCompraService.getDTOById(id);
 	}
 	@PostMapping
-	@RequestMapping("/save-pedido-compra")
+	@RequestMapping("/adicionar")
 	public void saveVenda(@RequestBody PedidoCompraPayloadDTO dto){
 		pedidoCompraService.save(dto);
 	}
 	@PutMapping
-	@RequestMapping("/alteracao-pedido-compra")
+	@RequestMapping("/atualizar")
 	public void uptadeVenda(@RequestBody PedidoCompraDTO dto){
 		pedidoCompraService.update(dto);
 	}
 	@DeleteMapping
-	@RequestMapping("/delete-pedido-compra/id")
+	@RequestMapping("/id/deletar")
 	public void delete(@PathVariable Long id) {
 		pedidoCompraService.delete(id);
 	}

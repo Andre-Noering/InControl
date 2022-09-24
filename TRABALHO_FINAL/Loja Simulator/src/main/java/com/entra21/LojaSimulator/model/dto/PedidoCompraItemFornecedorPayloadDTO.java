@@ -6,15 +6,15 @@ import lombok.Data;
 
 @Data
 public class PedidoCompraItemFornecedorPayloadDTO {
-    private Double valor_unitario;
+    private Double valorUnitario;
     private Integer qtde;
-    private Long id_item_fornecedor;
-    private Long id_pedido_compra;
+    private Long idItemFornecedor;
+    private Long idPedidoCompra;
 
     public PedidoCompraItemFornecedorPayloadDTO(Double valor_unitario, Integer qtde, Long id_item_fornecedor, Long id_pedido_compra) {
-        this.valor_unitario = valor_unitario;
+        this.valorUnitario = valor_unitario;
         this.qtde = qtde;
-        this.id_item_fornecedor = id_item_fornecedor;
-        this.id_pedido_compra = id_pedido_compra;
+        this.idItemFornecedor = id_item_fornecedor;
+        this.idPedidoCompra = id_pedido_compra;
     }
 }

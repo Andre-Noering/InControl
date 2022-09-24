@@ -8,11 +8,11 @@ import java.time.LocalDate;
 public class PedidoCompraDTO {
     private Long id;
     private LocalDate data;
-    private Long id_funcionario;
+    private Long idFuncionario;
 
     public PedidoCompraDTO(Long id, LocalDate data, Long id_funcionario) {
         this.id = id;
         this.data = data;
-        this.id_funcionario = id_funcionario;
+        this.idFuncionario = id_funcionario;
     }
 }

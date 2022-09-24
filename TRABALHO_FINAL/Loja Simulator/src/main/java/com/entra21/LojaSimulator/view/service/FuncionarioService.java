@@ -25,13 +25,13 @@ public class FuncionarioService implements UserDetailsService {
     private LojaService lojaService;
 
     //GET
-    public FuncionarioEntity getFuncionarioById(Long id){
+    public FuncionarioEntity getById(Long id){
         return funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Funcionario não encontrada!"));
     }
 
     //Método Get - Retornando o funcionário pelo ID
     public FuncionarioDTO getDTOById(Long id) {
-        FuncionarioEntity funcionario = getFuncionarioById(id);
+        FuncionarioEntity funcionario = getById(id);
         FuncionarioDTO dto = new FuncionarioDTO();
         dto.setId(funcionario.getId());
         dto.setNome(funcionario.getNome());
@@ -80,20 +80,26 @@ public class FuncionarioService implements UserDetailsService {
 
     //PUT
     public void update(FuncionarioDTO funcionarioDTO){
-        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getId());
+        FuncionarioEntity funcionarioEntity = getById(funcionarioDTO.getId());
             if (funcionarioDTO.getCpf() != null){
                 funcionarioEntity.setCpf(funcionarioDTO.getCpf());
             }
             if (funcionarioDTO.getNome() != null){
-                funcionarioEntity.setCpf(funcionarioDTO.getNome());
+                funcionarioEntity.setNome(funcionarioDTO.getNome());
             }
             if (funcionarioDTO.getSobrenome() != null){
-                funcionarioEntity.setCpf(funcionarioDTO.getSobrenome());
+                funcionarioEntity.setSobrenome(funcionarioDTO.getSobrenome());
             }
             if (funcionarioDTO.getTelefone() != null){
-                funcionarioEntity.setCpf(funcionarioDTO.getTelefone());
+                funcionarioEntity.setTelefone(funcionarioDTO.getTelefone());
             }
-
+            if(funcionarioDTO.getSenha()!=null){
+                funcionarioEntity.setSenha(funcionarioDTO.getSenha());
+            }
+            if(funcionarioDTO.getLogin()!=null&&!funcionarioRepository.existsByLogin(funcionarioDTO.getLogin())){
+                funcionarioEntity.setLogin(funcionarioDTO.getLogin());
+            }
+            funcionarioRepository.save(funcionarioEntity);
     }
 
     @Override

@@ -10,14 +10,14 @@ import javax.persistence.ManyToOne;
 @Data
 public class PedidoCompraItemFornecedorDTO {
     private Long id;
-    private Double valor_unitario;
+    private Double valorUnitario;
     private Integer qtde;
     private ItemFornecedorEntity itemFornecedor;
     private PedidoCompraEntity pedidoCompra;
 
     public PedidoCompraItemFornecedorDTO(Long id, Double valor_unitario, Integer qtde, ItemFornecedorEntity itemFornecedor, PedidoCompraEntity pedidoCompra) {
         this.id = id;
-        this.valor_unitario = valor_unitario;
+        this.valorUnitario = valor_unitario;
         this.qtde = qtde;
         this.itemFornecedor = itemFornecedor;
         this.pedidoCompra = pedidoCompra;

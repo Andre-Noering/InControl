@@ -22,20 +22,21 @@ public class FuncionarioRestController {
 
     @GetMapping
     @RequestMapping("/id_funcionario")
-    public FuncionarioDTO get(@PathVariable(name = "id")Long id){
+    public FuncionarioDTO get(@PathVariable(name = "id_funcionario")Long id){
         return funcionarioService.getDTOById(id);
     }
 
     @PutMapping
-    @RequestMapping("/alteracao-funcionario/id")
+    @RequestMapping("/atualizar")
     public void update(@RequestBody FuncionarioDTO funcionarioDTO){
         funcionarioService.update(funcionarioDTO);
     }
 
     @PostMapping
-    @RequestMapping("/adicionarFunc")
+    @RequestMapping("/adicionar")
     public void save(@RequestBody FuncionarioPayloadDTO funcionarioDTO){
         funcionarioService.save(funcionarioDTO);
     }
+
 
 }

@@ -34,17 +34,13 @@ public class FornecedorService {
 
 
     //GET
-    public FornecedorDTO getDtoById(Long id) {
-        FornecedorEntity fornecedor = getFornecedorById(id);
-        return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja().getId());
-    }
 
     public List<ItemFornecedorEntity> getItensById(Long id) {
-        FornecedorEntity fornecedor = getFornecedorById(id);
-        return fornecedor.getItens().stream().map(item -> itemFornecedorService.getItemFornecedorById(item.getItem().getId())).collect(Collectors.toList());
+        FornecedorEntity fornecedor = getById(id);
+        return fornecedor.getItens().stream().map(item -> itemFornecedorService.getById(item.getItem().getId())).collect(Collectors.toList());
     }
     public List<ItemDTO> getItensByRazaoSocial(String razao_social){
-        return getFornecedorByRazaoSocial(razao_social).getItens().stream().map(item -> {
+        return getByRazaoSocial(razao_social).getItens().stream().map(item -> {
             return itemFornecedorService.getItemDTO(item.getItem().getId());
         }).collect(Collectors.toList());
     }
@@ -55,18 +51,18 @@ public class FornecedorService {
     }
 
     public String getContatoByRazaoSocial(String razao_social) {
-        return this.getFornecedorByRazaoSocial(razao_social).getContato();
+        return this.getByRazaoSocial(razao_social).getContato();
     }
 
-    public FornecedorEntity getFornecedorByRazaoSocial(String razao_social){
+    public FornecedorEntity getByRazaoSocial(String razao_social){
         return fornecedorRepository.findByRazaoSocial(razao_social);
     }
 
     public FornecedorDTO getDTOById(Long id){
-        FornecedorEntity fornecedor = getFornecedorById(id);
+        FornecedorEntity fornecedor = getById(id);
         return new FornecedorDTO(fornecedor.getId(), fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja().getId());
     }
-    public FornecedorEntity getFornecedorById(Long id){
+    public FornecedorEntity getById(Long id){
         return fornecedorRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Fornecedor não encontrada!"));
     }
 
@@ -74,24 +70,27 @@ public class FornecedorService {
     //POST
     public void save(@RequestBody FornecedorDTO input) {
         FornecedorEntity newFornecedor = new FornecedorEntity();
-        newFornecedor.setRazaoSocial(input.getRazao_social());
+        newFornecedor.setRazaoSocial(input.getRazaoSocial());
         newFornecedor.setCnpj(input.getCnpj());
         newFornecedor.setContato(input.getContato());
-        newFornecedor.setLoja(lojaService.getById(input.getId_loja()));
+        newFornecedor.setLoja(lojaService.getById(input.getIdLoja()));
         fornecedorRepository.save(newFornecedor);
     }
 
 
     //PUT
     public void update(FornecedorDTO fornecedorDTO) {
-        FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
-        if (fornecedorDTO.getRazao_social() != null) {
-            fornecedor.setRazaoSocial(fornecedorDTO.getRazao_social());
+        FornecedorEntity fornecedor = getById(fornecedorDTO.getId());
+        if (fornecedorDTO.getRazaoSocial() != null) {
+            fornecedor.setRazaoSocial(fornecedorDTO.getRazaoSocial());
+        }
+        if(fornecedorDTO.getCnpj()!=null){
+            fornecedor.setCnpj(fornecedorDTO.getCnpj());
         }
         if (fornecedorDTO.getContato() != null) {
             fornecedor.setContato(fornecedorDTO.getContato());
         }
-        save(getDtoById(fornecedor.getId()));
+        fornecedorRepository.save(fornecedor);
     }
 
 
@@ -100,7 +99,7 @@ public class FornecedorService {
         fornecedorRepository.deleteByRazaoSocial(razaoSocial);
     }
     public void delete(Long id) {
-        FornecedorEntity fornecedor = getFornecedorById(id);
+        FornecedorEntity fornecedor = getById(id);
         fornecedorRepository.delete(fornecedor);
     }
 }
