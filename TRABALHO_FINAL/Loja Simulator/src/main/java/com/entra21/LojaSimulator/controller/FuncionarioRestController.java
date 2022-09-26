@@ -14,14 +14,24 @@ import java.util.List;
 public class FuncionarioRestController {
     @Autowired
     private FuncionarioService funcionarioService;
-    @GetMapping("/vendas")
-    public FuncionarioVendaDTO getFuncionarioVendaDTO(Long id){
+    @GetMapping("/{id}/vendas")
+    public FuncionarioVendaDTO getFuncionarioVendaDTO(@PathVariable Long id){
         return funcionarioService.getVendasFuncionario(id);
     }
 
     @GetMapping("/{id_funcionario}")
     public FuncionarioDTO get(@PathVariable Long id_funcionario){
         return funcionarioService.getDTOById(id_funcionario);
+    }
+
+    @PutMapping("/{id}/desativar")
+    public void delete(@PathVariable Long id) {
+        funcionarioService.delete(id);
+    }
+
+    @PutMapping("/{id}/ativar")
+    public void ativar(@PathVariable Long id) {
+        funcionarioService.ativar(id);
     }
 
     @PutMapping("/atualizar")
