@@ -32,6 +32,9 @@ public class FuncionarioEntity extends PessoaEntity implements UserDetails {
     @OneToMany(mappedBy = "gerente", fetch = FetchType.LAZY)
     private List<LojaEntity> lojas;
 
+    @Column(name = "ativo", nullable = false)
+    private Boolean ativo = true;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("USER"));
