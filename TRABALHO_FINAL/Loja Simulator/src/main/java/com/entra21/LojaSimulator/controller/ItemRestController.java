@@ -16,37 +16,31 @@ public class ItemRestController {
 	@Autowired
 	private LojaService lojaService;
 	@GetMapping
-	@RequestMapping("")
 	public List<ItemDTO> getAll(@PathVariable String razao_social){
 		return itemService.getAllByLoja(lojaService.getByRazaoSocial(razao_social).getId());
 	}
 
-	@GetMapping
-	@RequestMapping("/{idItem}")
+	@GetMapping("/{idItem}")
 	public ItemDTO getItemById(@PathVariable Long idItem){
 		return itemService.getDTOById(idItem);
 	}
 
-	@GetMapping
-	@RequestMapping("/alerta")
+	@GetMapping("/alerta")
 	public List<ItemDTO> getAllEmAlerta(@PathVariable String razao_social){
 		return itemService.getItensEmAlerta(razao_social);
 	}
 
-	@PostMapping
-	@RequestMapping("/adicionar")
+	@PostMapping("/adicionar")
 	public void save(@RequestBody ItemDTO itemDTO){
 		itemService.save(itemDTO);
 	}
 
-	@PutMapping
-	@RequestMapping("/atualizar")
+	@PutMapping("/atualizar")
 	public void update(@RequestBody ItemDTO itemDTO){
 		itemService.update(itemDTO);
 	}
 
-	@DeleteMapping
-	@RequestMapping("/{idItem}/deletar")
+	@DeleteMapping("/{idItem}")
 	public void delete(@PathVariable Long idItem){
 		itemService.delete(idItem);
 	}

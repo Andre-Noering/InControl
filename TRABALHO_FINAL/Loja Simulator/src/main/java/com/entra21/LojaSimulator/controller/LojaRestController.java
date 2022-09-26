@@ -7,24 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/loja")
+@RequestMapping("/{razaoSocial}")
 public class LojaRestController {
     @Autowired
     LojaService lojaService;
     @GetMapping
-    @RequestMapping("/{razaoSocial}")
     public LojaDTO getLoja(@PathVariable String razaoSocial){
         return lojaService.getDTOById(lojaService.getByRazaoSocial(razaoSocial).getId());
     }
 
     @PutMapping
-    @RequestMapping("")
     public void update(@RequestBody LojaUpdateDTO lojaDTO){
         lojaService.update(lojaDTO);
     }
 
     @DeleteMapping
-    @RequestMapping("/{razaoSocial}/deletar")
     public void delete(@PathVariable String razaoSocial){
         lojaService.deleteByRazaoSocial(razaoSocial);
     }

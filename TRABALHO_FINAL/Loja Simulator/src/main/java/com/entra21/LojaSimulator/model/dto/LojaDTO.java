@@ -17,18 +17,18 @@ public class LojaDTO {
     private String cnpj;
     private String contato;
     private Double valorCaixa;
-    private FuncionarioEntity gerente;
+    private Long idGerente;
     private List<ItemEntity> itens;
     private List<FornecedorEntity> fornecedores;
     private List<PessoaEntity> funcionarios;
 
-    public LojaDTO(Long id, String razao_social, String cnpj, String contato, Double valor_caixa, FuncionarioEntity gerente, List<ItemEntity> itens, List<FornecedorEntity> fornecedores, List<PessoaEntity> funcionarios) {
+    public LojaDTO(Long id, String razaoSocial, String cnpj, String contato, Double valorCaixa, Long idGerente, List<ItemEntity> itens, List<FornecedorEntity> fornecedores, List<PessoaEntity> funcionarios) {
         this.id = id;
-        this.razaoSocial = razao_social;
+        this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
         this.contato = contato;
-        this.valorCaixa = valor_caixa;
-        this.gerente = gerente;
+        this.valorCaixa = valorCaixa;
+        this.idGerente = idGerente;
         this.itens = itens;
         this.fornecedores = fornecedores;
         this.funcionarios = funcionarios;

@@ -10,30 +10,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/funcionario")
+@RequestMapping("/{razaoSocial}/funcionario")
 public class FuncionarioRestController {
     @Autowired
     private FuncionarioService funcionarioService;
-    @GetMapping
-    @RequestMapping("/vendas")
+    @GetMapping("/vendas")
     public FuncionarioVendaDTO getFuncionarioVendaDTO(Long id){
         return funcionarioService.getVendasFuncionario(id);
     }
 
-    @GetMapping
-    @RequestMapping("/{id_funcionario}")
+    @GetMapping("/{id_funcionario}")
     public FuncionarioDTO get(@PathVariable Long id_funcionario){
         return funcionarioService.getDTOById(id_funcionario);
     }
 
-    @PutMapping
-    @RequestMapping("/atualizar")
+    @PutMapping("/atualizar")
     public void update(@RequestBody FuncionarioDTO funcionarioDTO){
         funcionarioService.update(funcionarioDTO);
     }
 
-    @PostMapping
-    @RequestMapping("/adicionar")
+    @PostMapping("/adicionar")
     public void save(@RequestBody FuncionarioPayloadDTO funcionarioDTO){
         funcionarioService.save(funcionarioDTO);
     }

@@ -76,7 +76,7 @@ public class LojaService {
 
     public LojaDTO getDTOById(Long id) {
         LojaEntity loja = getById(id);
-        return new LojaDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente(), loja.getItens(), loja.getFornecedores(), loja.getFuncionarios());
+        return new LojaDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente().getId(), loja.getItens(), loja.getFornecedores(), loja.getFuncionarios());
     }
 
 
@@ -121,7 +121,7 @@ public class LojaService {
         lojaRepository.delete(fornecedor);
     }
     public void deleteByRazaoSocial(String razaoSocial){
-        lojaRepository.deleteByRazaoSocial(razaoSocial);
+        lojaRepository.deleteById(getByRazaoSocial(razaoSocial).getId());
     }
 
 
