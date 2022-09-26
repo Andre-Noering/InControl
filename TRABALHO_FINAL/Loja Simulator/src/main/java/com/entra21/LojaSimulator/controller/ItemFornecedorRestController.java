@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/itensFornecedor")
+@RequestMapping("/{razaoSocial}/itensFornecedor")
 public class ItemFornecedorRestController {
     @Autowired
     private ItemFornecedorService itemFornecedorService;
@@ -21,38 +21,32 @@ public class ItemFornecedorRestController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping
-    @RequestMapping("/{idItemFornecedor}")
+    @GetMapping("/{idItemFornecedor}")
     public ItemFornecedorDTO itemFornecedorDTO(@PathVariable Long idItemFornecedor){
         return itemFornecedorService.getDTOById(idItemFornecedor);
     }
 
-    @GetMapping
-    @RequestMapping("/{id}/fornecedor-item")
+    @GetMapping("/{id}/fornecedor-item")
     public FornecedorDTO fornecedorDTO(@PathVariable Long id){
         return fornecedorService.getDTOById(itemFornecedorService.getFornecedorById(id).getId());
     }
 
-    @GetMapping
-    @RequestMapping("/{id}/item-fornecedor")
+    @GetMapping("/{id}/item-fornecedor")
     public ItemDTO itemDTO(@PathVariable Long id){
         return itemService.getDTOById(itemFornecedorService.getItem(id).getId());
     }
 
-    @PostMapping
-    @RequestMapping("/adicionar")
+    @PostMapping("/adicionar")
     public void save(@RequestBody ItemFornecedorPayloadDTO itemFornecedorDTO){
         itemFornecedorService.save(itemFornecedorDTO);
     }
 
-    @PutMapping
-    @RequestMapping("/atualizar")
+    @PutMapping("/atualizar")
     public void putItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
         itemFornecedorService.update(itemFornecedorDTO);
     }
 
-    @DeleteMapping
-    @RequestMapping("/{id}/deletar")
+    @DeleteMapping("/{id}/deletar")
     public void deleteItemFornecedor(@PathVariable Long id){
         itemFornecedorService.delete(id);
     }

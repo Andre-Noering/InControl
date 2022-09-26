@@ -9,43 +9,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/itensVenda")
+@RequestMapping("/{razaoSocial}/itensVenda")
 public class ItemVendaRestController {
     @Autowired
     private ItemVendaService itemVendaService;
 
-    @GetMapping
-    @RequestMapping("/itens")
+    @GetMapping("/itens")
     public List<ItemVendaDTO> getItens(@PathVariable Long id){
         return itemVendaService.getAllByVenda(id);
     }
 
-    @GetMapping
-    @RequestMapping("/{idItemVenda}")
+    @GetMapping("/{idItemVenda}")
     public ItemVendaDTO getItem(@PathVariable Long idItemVenda){
         return itemVendaService.getDTOById(idItemVenda);
     }
 
-    @GetMapping
-    @RequestMapping("/{id}/valor")
+    @GetMapping("/{id}/valor")
     public Double getValor(@PathVariable Long id){
         return itemVendaService.getValor(itemVendaService.getDTOById(id));
     }
 
-    @PostMapping
-    @RequestMapping("/adicionar")
+    @PostMapping("/adicionar")
     public void save(@RequestBody ItemVendaPayloadDTO itemVendaDTO){
         itemVendaService.save(itemVendaDTO);
     }
 
-    @PutMapping
-    @RequestMapping("/atualizar")
+    @PutMapping("/atualizar")
     public void update(@RequestBody ItemVendaDTO itemVendaDTO){
         itemVendaService.update(itemVendaDTO);
     }
 
-    @DeleteMapping
-    @RequestMapping("/{id}/deletar")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
         itemVendaService.delete(id);
     }

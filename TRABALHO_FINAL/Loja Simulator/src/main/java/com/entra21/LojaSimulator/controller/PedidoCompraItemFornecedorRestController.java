@@ -8,28 +8,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/PCIF")
+@RequestMapping("/{razaoSocial}/PCIF")
 public class PedidoCompraItemFornecedorRestController {
     @Autowired
     private PedidoCompraItemFornecedorService pedidoCompraItemFornecedorService;
 
-    @GetMapping
-    @RequestMapping("/pedido-compra-item-fornecedor/{id}")
+    @GetMapping("/pedido-compra-item-fornecedor/{id}")
     public PedidoCompraItemFornecedorDTO getDTO(@PathVariable Long id){
         return pedidoCompraItemFornecedorService.getDTOById(id);
     }
-    @PostMapping
-    @RequestMapping("/adicionar")
+    @PostMapping("/adicionar")
     public void save(@RequestBody PedidoCompraItemFornecedorPayloadDTO dto){
         pedidoCompraItemFornecedorService.save(dto);
     }
-    @PutMapping
-    @RequestMapping("/atualizar")
+    @PutMapping("/atualizar")
     public void uptade(@RequestBody PedidoCompraItemFornecedorDTO dto){
         pedidoCompraItemFornecedorService.update(dto);
     }
-    @DeleteMapping
-    @RequestMapping("/{id}/deletar")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         pedidoCompraItemFornecedorService.delete(id);
     }
