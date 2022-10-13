@@ -2,6 +2,7 @@ package com.entra21.LojaSimulator.view.service;
 
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemVendaDTO;
+import com.entra21.LojaSimulator.model.dto.ItemVendaPayloadDTO;
 import com.entra21.LojaSimulator.model.dto.VendaDTO;
 import com.entra21.LojaSimulator.model.entity.ItemVendaEntity;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
@@ -25,60 +26,69 @@ public class ItemVendaService {
     private VendaService vendaService;
 
     //GET
-    public ItemVendaEntity getItemVendaById(Long id){
-        return itemVendaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
+    public ItemVendaEntity getById(Long id) {
+        return itemVendaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Item não encontrado!"));
     }
 
-    public List<ItemVendaDTO> getAllByVenda(Long id){
-        return itemVendaRepository.findAllByLoja_Id(id).stream().map(item-> {return getDTOById(item.getId());}).collect(Collectors.toList());
+    public List<ItemVendaDTO> getAllByVenda(Long id) {
+        return itemVendaRepository.findAllByVenda_Id(id).stream().map(item -> {
+            return getDTOById(item.getId());
+        }).collect(Collectors.toList());
     }
-    public ItemVendaDTO getDTOById(Long id){
-        ItemVendaEntity itemVendaEntity = getItemVendaById(id);
+
+    public ItemVendaDTO getDTOById(Long id) {
+        ItemVendaEntity itemVendaEntity = getById(id);
         return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValorUnitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
     }
 
-    public ItemDTO getItemDTO(Long id){
-        return itemService.getDTOById(getItemVendaById(id).getItem().getId());
-    }
-    public VendaDTO getVendaDTO(Long id){
-        return vendaService.getDTOById(getItemVendaById(id).getVenda().getId());
+    public ItemDTO getItemDTO(Long id) {
+        return itemService.getDTOById(getById(id).getItem().getId());
     }
 
-    public Double getValor(ItemVendaDTO itemVendaDTO){
-        return itemVendaDTO.getValorUnitario()*itemVendaDTO.getQtde();
+    public VendaDTO getVendaDTO(Long id) {
+        return vendaService.getDTOById(getById(id).getVenda().getId());
+    }
+
+    public Double getValor(ItemVendaDTO itemVendaDTO) {
+        return itemVendaDTO.getValorUnitario() * itemVendaDTO.getQtde();
     }
 
 
     //POST
-    public void save(ItemVendaDTO itemVendaDTO){
-        ItemVendaEntity itemVendaEntity = new ItemVendaEntity();
-        itemVendaEntity.setItem(itemService.build(itemService.getDTOById(itemVendaDTO.getIdItem())));
-        itemVendaEntity.setQtde(itemVendaDTO.getQtde());
-        itemVendaEntity.setValorUnitario(itemVendaDTO.getValorUnitario());
-        itemVendaEntity.setVenda(vendaService.getVenda(itemVendaDTO.getIdVenda()));
-        itemVendaRepository.save(itemVendaEntity);
+    public void save(ItemVendaPayloadDTO itemVendaDTO) {
+        if (itemService.getById(itemVendaDTO.getIdItem()).getQtdeEstoque() >= itemVendaDTO.getQtde()) {
+            ItemVendaEntity itemVendaEntity = new ItemVendaEntity();
+            itemVendaEntity.setItem(itemService.buildWithId(itemService.getDTOById(itemVendaDTO.getIdItem())));
+            itemVendaEntity.setQtde(itemVendaDTO.getQtde());
+            itemVendaEntity.setValorUnitario(itemVendaDTO.getValorUnitario());
+            itemVendaEntity.setVenda(vendaService.getById(itemVendaDTO.getIdVenda()));
+            itemVendaRepository.save(itemVendaEntity);
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Itens insuficientes");
+        }
     }
 
     //PUT
-    public void update(ItemVendaDTO itemVendaDTO){
-        ItemVendaEntity itemVendaEntity = getItemVendaById(itemVendaDTO.getId());
-        if(itemVendaDTO.getQtde()!=null){
+    public void update(ItemVendaDTO itemVendaDTO) {
+        ItemVendaEntity itemVendaEntity = getById(itemVendaDTO.getId());
+        if (itemVendaDTO.getQtde() != null) {
             itemVendaEntity.setQtde(itemVendaDTO.getQtde());
         }
-        if(itemVendaDTO.getValorUnitario()!=null){
+        if (itemVendaDTO.getValorUnitario() != null) {
             itemVendaEntity.setValorUnitario(itemVendaDTO.getValorUnitario());
         }
+        itemVendaRepository.save(itemVendaEntity);
     }
-    public void updateQtde(Integer qtde_nova, Long id){
-        getItemVendaById(id).setQtde(qtde_nova);
+
+    public void updateQtde(Integer qtde_nova, Long id) {
+        getById(id).setQtde(qtde_nova);
     }
 
 
-    public void delete(Long id){
-        ItemVendaEntity itemVendaEntity = getItemVendaById(id);
+    public void delete(Long id) {
+        ItemVendaEntity itemVendaEntity = getById(id);
         itemVendaRepository.delete(itemVendaEntity);
     }
-
 
 
 }

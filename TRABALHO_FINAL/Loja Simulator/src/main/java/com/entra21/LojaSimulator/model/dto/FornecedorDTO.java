@@ -6,16 +6,16 @@ import lombok.Data;
 @Data
 public class FornecedorDTO {
     private Long id;
-    private String razao_social;
+    private String razaoSocial;
     private String cnpj;
     private String contato;
-    private LojaEntity loja;
+    private Long idLoja;
 
-    public FornecedorDTO(Long id, String razao_social, String cnpj, String contato, LojaEntity loja) {
+    public FornecedorDTO(Long id, String razaoSocial, String cnpj, String contato, Long idLoja) {
         this.id = id;
-        this.razao_social = razao_social;
+        this.razaoSocial = razaoSocial;
         this.cnpj = cnpj;
         this.contato = contato;
-        this.loja = loja;
+        this.idLoja = idLoja;
     }
 }

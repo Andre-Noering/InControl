@@ -26,7 +26,7 @@ public class PessoaEntity {
     @Column(name="cpf", nullable = false)
     private String cpf;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_loja" , referencedColumnName = "id", nullable = false)
     private LojaEntity loja;
 

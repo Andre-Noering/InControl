@@ -1,6 +1,7 @@
 package com.entra21.LojaSimulator.controller;
 
 import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
+import com.entra21.LojaSimulator.model.dto.FuncionarioPayloadDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioVendaDTO;
 import com.entra21.LojaSimulator.view.service.FuncionarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,28 +10,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/funcionario")
+@RequestMapping("/{razaoSocial}/funcionario")
 public class FuncionarioRestController {
     @Autowired
     private FuncionarioService funcionarioService;
-    @GetMapping(name = "/vendas")
-    public FuncionarioVendaDTO getFuncionarioVendaDTO(Long id){
+    @GetMapping("/{id}/vendas")
+    public FuncionarioVendaDTO getFuncionarioVendaDTO(@PathVariable Long id){
         return funcionarioService.getVendasFuncionario(id);
     }
 
-    @GetMapping(name = "/${id_funcionario}")
-    public FuncionarioDTO getFuncionarioDTO(@PathVariable(name = "id")Long id){
-        return funcionarioService.getDTOById(id);
+    @GetMapping("/{id_funcionario}")
+    public FuncionarioDTO get(@PathVariable Long id_funcionario){
+        return funcionarioService.getDTOById(id_funcionario);
     }
 
-    @PutMapping(name = "/alteracao-funcionario/${id}")
-    public void updateFuncionarioDTO(@RequestBody FuncionarioDTO funcionarioDTO){
+    @PutMapping("/{id}/desativar")
+    public void delete(@PathVariable Long id) {
+        funcionarioService.delete(id);
+    }
+
+    @PutMapping("/{id}/ativar")
+    public void ativar(@PathVariable Long id) {
+        funcionarioService.ativar(id);
+    }
+
+    @PutMapping("/atualizar")
+    public void update(@RequestBody FuncionarioDTO funcionarioDTO){
         funcionarioService.update(funcionarioDTO);
     }
 
-    @PostMapping(name = "/adicionar")
-    public void saveFuncionarioDTO(@RequestBody FuncionarioDTO funcionarioDTO){
+    @PostMapping("/adicionar")
+    public void save(@RequestBody FuncionarioPayloadDTO funcionarioDTO){
         funcionarioService.save(funcionarioDTO);
     }
+
 
 }

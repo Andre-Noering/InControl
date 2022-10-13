@@ -8,5 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface LojaRepository extends JpaRepository<LojaEntity, Long> {
     LojaEntity findByRazaoSocial(String razaoSocial);
 
-    void deleteByRazaoSocial(String razaoSocial);
 }

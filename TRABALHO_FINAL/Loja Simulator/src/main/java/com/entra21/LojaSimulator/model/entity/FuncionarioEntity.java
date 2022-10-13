@@ -23,17 +23,17 @@ public class FuncionarioEntity extends PessoaEntity implements UserDetails {
     @Column(name = "senha", nullable = false)
     private String senha;
 
-    @OneToMany(mappedBy = "funcionario")
+    @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY)
     private List<VendaEntity> vendas;
 
-    @OneToMany
-    @JoinColumn(name="id",referencedColumnName = "id_funcionario")
-    @JsonIgnore
+    @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY)
     private Set<PedidoCompraEntity> pedidos;
 
-    @OneToMany
-    @JoinColumn(name="id_pessoa", referencedColumnName = "id_funcionario")
+    @OneToMany(mappedBy = "gerente", fetch = FetchType.LAZY)
     private List<LojaEntity> lojas;
+
+    @Column(name = "ativo", nullable = false)
+    private Boolean ativo = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

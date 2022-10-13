@@ -6,14 +6,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-public class PedidoCompraDTO {
-    private Long id;
+public class PedidoCompraPayloadDTO {
     private LocalDateTime data;
     private Long idFuncionario;
 
-    public PedidoCompraDTO(Long id, LocalDateTime data, Long id_funcionario) {
-        this.id = id;
+    public PedidoCompraPayloadDTO( LocalDateTime data, Long id_funcionario) {
         this.data = data;
         this.idFuncionario = id_funcionario;
     }
 }
+

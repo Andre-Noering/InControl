@@ -9,4 +9,5 @@ public class PessoaDTO {
     private String sobrenome;
     private String telefone;
     private String cpf;
+    private Long idLoja;
 }

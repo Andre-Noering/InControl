@@ -3,18 +3,19 @@ package com.entra21.LojaSimulator.model.dto;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class VendaDTO {
     private Long id;
-    private LocalDate data;
-    private Long id_cliente;
-    private Long id_vendedor;
+    private LocalDateTime data;
+    private Long idCliente;
+    private Long idVendedor;
 
-    public VendaDTO(Long id, LocalDate data, Long id_cliente, Long id_vendedor) {
+    public VendaDTO(Long id, LocalDateTime data, Long id_cliente, Long id_vendedor) {
         this.id = id;
         this.data = data;
-        this.id_cliente = id_cliente;
-        this.id_vendedor = id_vendedor;
+        this.idCliente = id_cliente;
+        this.idVendedor = id_vendedor;
     }
 }

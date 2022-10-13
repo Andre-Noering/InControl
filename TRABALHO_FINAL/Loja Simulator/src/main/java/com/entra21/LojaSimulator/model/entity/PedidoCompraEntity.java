@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -16,13 +17,12 @@ public class PedidoCompraEntity {
 	private Long id;
 	
 	@Column(name="data", nullable = false)
-	private LocalDate data;
+	private LocalDateTime data;
 
-	@OneToOne
-	@JoinColumn(name = "id_funcionario", referencedColumnName = "id", nullable = false)
+	@ManyToOne
+	@JoinColumn(name = "id_funcionario", referencedColumnName = "id_pessoa", nullable = false)
 	private FuncionarioEntity funcionario;
 
-	@OneToMany
-	@JoinColumn(name = "id" , referencedColumnName = "id_pedido_compra", nullable = false)
+	@OneToMany(mappedBy = "pedidoCompra")
 	private List<PedidoCompraItemFornecedorEntity> pedidosCompra;
 }

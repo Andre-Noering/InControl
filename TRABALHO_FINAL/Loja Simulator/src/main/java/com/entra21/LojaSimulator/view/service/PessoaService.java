@@ -19,8 +19,10 @@ public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
+    private LojaService lojaService;
 
-    public PessoaEntity getPessoaById(Long id){
+    public PessoaEntity getById(Long id){
         return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
     }
 
@@ -43,35 +45,47 @@ public class PessoaService {
         newPessoa.setSobrenome(input.getSobrenome());
         newPessoa.setTelefone(input.getTelefone());
         newPessoa.setCpf(input.getCpf());
+        newPessoa.setLoja(lojaService.getById(input.getIdLoja()));
         return newPessoa;
     }
 
     //Retorna Pessoa pela id
     public PessoaDTO getDTOById(Long id) {
-        PessoaEntity pessoaEntity = getPessoaById(id);
+        PessoaEntity pessoaEntity = getById(id);
         PessoaDTO pessoaDTO = new PessoaDTO();
         pessoaDTO.setIdPessoa(pessoaEntity.getId());
         pessoaDTO.setNome(pessoaEntity.getNome());
+        pessoaDTO.setCpf(pessoaEntity.getCpf());
+        pessoaDTO.setSobrenome(pessoaEntity.getSobrenome());
+        pessoaDTO.setIdLoja(pessoaEntity.getLoja().getId());
+        pessoaDTO.setTelefone(pessoaEntity.getTelefone());
         return pessoaDTO;
     }
 
     //POST
-    public void save(@RequestBody PessoaDTO pessoaDTO) {
-        pessoaRepository.save(build(pessoaDTO));
+    public void save(PessoaDTO input) {
+        PessoaEntity newPessoa = new PessoaEntity();
+        newPessoa.setNome(input.getNome());
+        newPessoa.setSobrenome(input.getSobrenome());
+        newPessoa.setTelefone(input.getTelefone());
+        newPessoa.setCpf(input.getCpf());
+        newPessoa.setLoja(lojaService.getById(input.getIdLoja()));
+        pessoaRepository.save(newPessoa);
     }
 
     //PUT
     public void update(PessoaDTO pessoaDTO) {
-        PessoaEntity pessoaEntity = getPessoaById(pessoaDTO.getIdPessoa());
+        PessoaEntity pessoaEntity = getById(pessoaDTO.getIdPessoa());
         pessoaEntity.setNome(pessoaDTO.getNome());
         pessoaEntity.setCpf(pessoaDTO.getCpf());
         pessoaEntity.setSobrenome(pessoaDTO.getSobrenome());
         pessoaEntity.setTelefone(pessoaDTO.getTelefone());
+        pessoaRepository.save(pessoaEntity);
     }
 
     //DELETE
     public void delete(Long id) {
-        PessoaEntity pessoa = getPessoaById(id);
+        PessoaEntity pessoa = getById(id);
         pessoaRepository.delete(pessoa);
     }
 

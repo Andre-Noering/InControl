@@ -28,19 +28,16 @@ public class LojaEntity {
     @Column(name="valor_caixa", nullable = false)
     private Double valorCaixa;
 
-    @OneToMany
-    @JoinColumn(name="id", referencedColumnName = "id_loja", nullable = false)
+    @OneToMany(mappedBy = "loja")
     private List<PessoaEntity> funcionarios;
 
     @ManyToOne
     @JoinColumn(name="id_funcionario", referencedColumnName = "id_pessoa", nullable = false)
     private FuncionarioEntity gerente;
 
-    @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "id_loja")
+    @OneToMany(mappedBy = "loja")
     private List<ItemEntity> itens;
 
-    @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "id_loja")
+    @OneToMany(mappedBy = "loja")
     private List<FornecedorEntity> fornecedores;
 }

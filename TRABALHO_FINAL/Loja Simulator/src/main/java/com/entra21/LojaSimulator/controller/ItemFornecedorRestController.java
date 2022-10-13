@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.controller;
 import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemFornecedorDTO;
+import com.entra21.LojaSimulator.model.dto.ItemFornecedorPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.view.service.FornecedorService;
 import com.entra21.LojaSimulator.view.service.ItemFornecedorService;
@@ -11,40 +12,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(name = "/ItemFornecedor")
+@RequestMapping("/{razaoSocial}/itensFornecedor")
 public class ItemFornecedorRestController {
     @Autowired
     private ItemFornecedorService itemFornecedorService;
     @Autowired
     private FornecedorService fornecedorService;
+    @Autowired
+    private ItemService itemService;
 
-    @GetMapping(name = "/${id}")
-    public ItemFornecedorDTO itemFornecedorDTO(@RequestBody Long id){
-        return itemFornecedorService.getDTOById(id);
+    @GetMapping("/{idItemFornecedor}")
+    public ItemFornecedorDTO itemFornecedorDTO(@PathVariable Long idItemFornecedor){
+        return itemFornecedorService.getDTOById(idItemFornecedor);
     }
 
-    @GetMapping(name = "/${id}/fornecedor-item")
-    public FornecedorDTO fornecedorDTO(@RequestBody Long id){
+    @GetMapping("/{id}/fornecedor-item")
+    public FornecedorDTO fornecedorDTO(@PathVariable Long id){
         return fornecedorService.getDTOById(itemFornecedorService.getFornecedorById(id).getId());
     }
 
-    @GetMapping(name = "/${id}/item-fornecedor")
-    public ItemDTO itemDTO(@RequestBody Long id){
-        return itemFornecedorService.getItemDTO(id);
+    @GetMapping("/{id}/item-fornecedor")
+    public ItemDTO itemDTO(@PathVariable Long id){
+        return itemService.getDTOById(itemFornecedorService.getItem(id).getId());
     }
 
-    @PostMapping(name = "/save")
-    public void saveItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
+    @PostMapping("/adicionar")
+    public void save(@RequestBody ItemFornecedorPayloadDTO itemFornecedorDTO){
         itemFornecedorService.save(itemFornecedorDTO);
     }
 
-    @PutMapping(name = "/put")
+    @PutMapping("/atualizar")
     public void putItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
         itemFornecedorService.update(itemFornecedorDTO);
     }
 
-    @DeleteMapping(name = "/delete")
-    public void deleteItemFornecedor(@RequestBody Long id){
+    @DeleteMapping("/{id}/deletar")
+    public void deleteItemFornecedor(@PathVariable Long id){
         itemFornecedorService.delete(id);
     }
 }
