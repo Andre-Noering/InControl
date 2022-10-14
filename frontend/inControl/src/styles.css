@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+#home {
+	background: #1323b3;
+	color: white;
+    padding-bottom: 20px;
+}
+
+header{
+    background: #1323b3;
+	color: white;
+}
+
+#link{
+    color:white;
+}
+
+#link:hover {
+    color: #7b87f1;   
+}
+
+#btn-entrar{
+    color: white;
+    background-color: #7b87f1;
+    margin-left: 20px;
+}
+
+#btn-comece-agora{
+    background-color: #7b87f1; color: white; font-size: 1.3em;
+}
+
+#btn-comece-agora:hover {
+    color: darkblue;
+}
+
+.caixa {
+	padding: 60px 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+footer p a {
+	margin:  5px 15px;
+}
