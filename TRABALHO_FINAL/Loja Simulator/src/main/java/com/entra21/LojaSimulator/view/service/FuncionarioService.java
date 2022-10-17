@@ -142,4 +142,6 @@ public class FuncionarioService implements UserDetailsService {
         }
     }
 
+
+
 }
