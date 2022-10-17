@@ -1,14 +1,37 @@
-<main class="form-signin m-auto" style="padding-top:9%;">
-  <form style="padding: 50px; padding-top: 10px;">
-    <h1 class="h3 mb-3 fw-normal">Login</h1>
-    <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-      <label for="floatingInput">Nome de usuário</label>
+<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
+          class="img-fluid" alt="Sample image">
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 d-flex align-items-center ">
+        <form>
+
+          <div class="my-4">
+            <h2 class="text-center fw-bold mx-3 mb-0">Faça o seu Login</h2>
+          </div>
+
+          <!-- Usuário input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Usuário" />
+          </div>
+
+          <!-- Senha input -->
+          <div class="form-outline mb-3">
+            <input type="password" id="form3Example4" class="form-control form-control-lg"
+              placeholder="Senha" />
+          </div>
+
+          <div class="text-center text-lg-center mt-4 pt-2">
+            <button type="button" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+            <p class="small fw-bold mt-2 pt-1 mb-0">Ainda não tem uma conta? <a href="#" style="text-decoration: none; color: black;">Registre-se!</a> 
+          </div>
+
+        </form>
+      </div>
     </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Senha</label>
-    </div>
-    <button class="w-100 btn btn-lg" id="enviar" type="submit">Entrar</button>
-  </form>
-</main>
+  </div>
+</section>
