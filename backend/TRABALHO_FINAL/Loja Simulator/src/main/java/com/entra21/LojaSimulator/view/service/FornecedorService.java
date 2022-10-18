@@ -50,7 +50,7 @@ public class FornecedorService {
     }
 
     public List<FornecedorDTO> getAllByLoja(String razao_social) {
-        List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_Razao_Social(razao_social);
+        List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_RazaoSocial(razao_social);
         return listaFornecedores.stream().map(fornecedor -> new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja())).collect(Collectors.toList());
     }
 
@@ -59,7 +59,7 @@ public class FornecedorService {
     }
 
     public FornecedorEntity getFornecedorByRazaoSocial(String razao_social){
-        return fornecedorRepository.findByRazao_Social(razao_social);
+        return fornecedorRepository.findByRazaoSocial(razao_social);
     }
 
     public FornecedorDTO getDTOById(Long id){
@@ -98,7 +98,7 @@ public class FornecedorService {
 
     //DELETE
     public void deleteByRazaoSocial(String razaoSocial){
-        fornecedorRepository.deleteByRazao_Social(razaoSocial);
+        fornecedorRepository.deleteByRazaoSocial(razaoSocial);
     }
     public void delete(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);

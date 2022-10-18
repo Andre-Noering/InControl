@@ -5,6 +5,7 @@ import com.entra21.LojaSimulator.model.dto.ItemFornecedorDTO;
 import com.entra21.LojaSimulator.model.entity.FornecedorEntity;
 import com.entra21.LojaSimulator.model.entity.ItemEntity;
 import com.entra21.LojaSimulator.model.entity.ItemFornecedorEntity;
+import com.entra21.LojaSimulator.view.repository.FornecedorRepository;
 import com.entra21.LojaSimulator.view.repository.ItemFornecedorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 public class ItemFornecedorService {
     @Autowired
     private ItemFornecedorRepository itemFornecedorRepository;
+
     @Autowired
     private FornecedorService fornecedorService;
     @Autowired

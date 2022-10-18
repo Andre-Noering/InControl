@@ -30,7 +30,7 @@ public class ItemVendaService {
     }
 
     public List<ItemVendaDTO> getAllByVenda(Long id){
-        return itemVendaRepository.findAllByLoja_Id(id).stream().map(item-> {return getDTOById(item.getId());}).collect(Collectors.toList());
+        return itemVendaRepository.findAllByVenda_Id(id).stream().map(item-> {return getDTOById(item.getId());}).collect(Collectors.toList());
     }
     public ItemVendaDTO getDTOById(Long id){
         ItemVendaEntity itemVendaEntity = getItemVendaById(id);

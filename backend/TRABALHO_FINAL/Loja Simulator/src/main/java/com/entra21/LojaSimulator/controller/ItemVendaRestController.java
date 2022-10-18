@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "/${razao_social}/vendas/${id}/itens")
+@RequestMapping("/{razao_social}/vendas/{id}/itens")
 public class ItemVendaRestController {
     @Autowired
     private ItemVendaService itemVendaService;
@@ -18,29 +18,29 @@ public class ItemVendaRestController {
         return itemVendaService.getAllByVenda(id);
     }
 
-    @GetMapping(name="/${id}")
-    public ItemVendaDTO getItem(@PathVariable Long id){
-        return itemVendaService.getDTOById(id);
+    @GetMapping("/{id_item}")
+    public ItemVendaDTO getItem(@PathVariable Long id_item){
+        return itemVendaService.getDTOById(id_item);
     }
 
-    @GetMapping(name = "/${id}/valor")
-    public Double getValor(@PathVariable Long id){
-        return itemVendaService.getValor(itemVendaService.getDTOById(id));
+    @GetMapping("/{id_item}/valor")
+    public Double getValor(@PathVariable Long id_item){
+        return itemVendaService.getValor(itemVendaService.getDTOById(id_item));
     }
 
-    @PostMapping(name = "/adicionar")
+    @PostMapping("/adicionar")
     public void save(@PathVariable ItemVendaDTO itemVendaDTO){
         itemVendaService.save(itemVendaDTO);
     }
 
-    @PutMapping(name="/${id}")
-    public void update(@PathVariable Long id){
-        itemVendaService.update(itemVendaService.getDTOById(id));
+    @PutMapping("/{id_item}")
+    public void update(@RequestBody ItemVendaDTO itemVendaDTO){
+        itemVendaService.update(itemVendaDTO);
     }
 
-    @DeleteMapping(name="/${id}")
-    public void delete(@PathVariable Long id){
-        itemVendaService.delete(id);
+    @DeleteMapping("/{id_item}")
+    public void delete(@PathVariable Long id_item){
+        itemVendaService.delete(id_item);
     }
 
 }
