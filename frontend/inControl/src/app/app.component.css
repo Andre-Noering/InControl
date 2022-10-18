@@ -1,0 +1,17 @@
+.icon{
+    margin: 10px;
+}
+
+.nav-link {
+    color: white;
+}
+
+footer {
+    background-color: white;
+    padding: 10px;
+    margin: 0;
+}
+
+html, body, main{
+    width: 100%;
+}

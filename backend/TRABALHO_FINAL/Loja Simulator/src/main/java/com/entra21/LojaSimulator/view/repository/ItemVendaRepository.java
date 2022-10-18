@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ItemVendaRepository extends JpaRepository<ItemVendaEntity, Long> {
 
-    List<ItemVendaEntity> findAllByLoja_Id(Long id);
+    List<ItemVendaEntity> findAllByVenda_Id(Long id);
 }

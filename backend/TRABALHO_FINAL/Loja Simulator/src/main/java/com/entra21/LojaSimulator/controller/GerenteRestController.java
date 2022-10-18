@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(name = "/criarLoja")
+@RequestMapping("")
 public class GerenteRestController {
     @Autowired
     private LojaService lojaService;
-    @PostMapping(name = "/adicionar")
+    @PostMapping("/adicionar")
     public void save(LojaDTO lojaDTO){
         lojaService.save(lojaDTO);
     }
