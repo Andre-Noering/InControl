@@ -20,3 +20,9 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export type User = {
+  id: number;
+  login: string;
+  password: string;
+  authdata?: string;
+}

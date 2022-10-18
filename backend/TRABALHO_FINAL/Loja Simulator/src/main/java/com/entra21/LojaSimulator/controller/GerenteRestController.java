@@ -1,6 +1,8 @@
 package com.entra21.LojaSimulator.controller;
 
+import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
 import com.entra21.LojaSimulator.model.dto.LojaDTO;
+import com.entra21.LojaSimulator.view.service.FuncionarioService;
 import com.entra21.LojaSimulator.view.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,5 +17,10 @@ public class GerenteRestController {
     @PostMapping("/adicionar")
     public void save(LojaDTO lojaDTO){
         lojaService.save(lojaDTO);
+    }
+
+    @PostMapping(name="/login")
+    public FuncionarioDTO login(String username, String password){
+        return funcionarioService.login(username,password);
     }
 }
