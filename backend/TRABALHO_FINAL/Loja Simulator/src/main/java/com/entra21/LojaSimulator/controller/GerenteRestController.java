@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
+@RequestMapping("")
 public class GerenteRestController {
     @Autowired
     private LojaService lojaService;
-    @Autowired
-    private FuncionarioService funcionarioService;
-    @PostMapping(name = "/adicionar")
+    @PostMapping("/adicionar")
     public void save(LojaDTO lojaDTO){
         lojaService.save(lojaDTO);
     }

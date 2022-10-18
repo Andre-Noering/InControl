@@ -8,23 +8,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping( "pedidosCompra")
 public class PedidoCompraRestController {
 	@Autowired
 	private PedidoCompraService pedidoCompraService;
 
-	@GetMapping(name = "/pedido-compra/${id}")
-	public PedidoCompraDTO getDTO(@PathVariable(name = "id")Long id){
+	@GetMapping( "/pedido-compra/{id}")
+	public PedidoCompraDTO getDTO(@PathVariable( "id")Long id){
 		return pedidoCompraService.getDTOById(id);
 	}
-	@PostMapping(name = "/save-pedido-compra")
+	@PostMapping( "/save-pedido-compra")
 	public void saveVenda(@RequestBody PedidoCompraDTO dto){
 		pedidoCompraService.save(dto);
 	}
-	@PutMapping(name = "/alteracao-pedido-compra")
+	@PutMapping( "/alteracao-pedido-compra")
 	public void uptadeVenda(@RequestBody PedidoCompraDTO dto){
 		pedidoCompraService.update(dto);
 	}
-	@DeleteMapping(name = "delete-pedido-compra/${id}")
+	@DeleteMapping( "delete-pedido-compra/{id}")
 	public void delete(@PathVariable Long id) {
 		pedidoCompraService.delete(id);
 	}
