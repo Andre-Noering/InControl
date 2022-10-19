@@ -19,7 +19,7 @@ public class FuncionarioRestController {
     }
 
     @GetMapping("/{id_funcionario}")
-    public FuncionarioDTO getFuncionarioDTO(@PathVariable("id")Long id){
+    public FuncionarioDTO getFuncionarioDTO(@PathVariable("id_funcionario")Long id){
         return funcionarioService.getDTOById(id);
     }
 

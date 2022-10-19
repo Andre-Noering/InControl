@@ -1,0 +1,12 @@
+.loja-item{
+    display: flex;
+    flex-direction: column;
+    margin: 10px 5px;
+}
+#adicionarLoja{
+    border: 1px solid blue;
+    border-radius: 6px;
+    background-color: #ffffff;
+    padding: 0;
+    height: 170px;
+}

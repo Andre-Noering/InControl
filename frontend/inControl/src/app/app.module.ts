@@ -8,13 +8,17 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CadastroScreenComponent } from './cadastro-screen/cadastro-screen.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { LojasScreenComponent } from './lojas/lojas-screen/lojas-screen.component';
+import { LojasListItemComponent } from './lojas/lojas-list-item/lojas-list-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginScreenComponent,
     LandingPageComponent,
-    CadastroScreenComponent
+    CadastroScreenComponent,
+    LojasScreenComponent,
+    LojasListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -31,4 +35,21 @@ export type User = {
   login: string;
   password: string;
   authdata?: string;
+}
+export type Funcionario = {
+  idPessoa: number;
+  nome: string;
+  sobrenome: string;
+  cpf: string;
+  telefone:string;
+  login: string;
+  senha:string;
+}
+
+export type Loja = {
+  razao_social: string;
+  cnpj:string;
+  contato:string;
+  valor_caixa:number;
+  id_funcionario:number;
 }
