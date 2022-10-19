@@ -31,10 +31,10 @@ export class LoginScreenComponent implements OnInit {
     .subscribe(
         data => {
           console.log("caiu")
-            this.router.navigate(['']);
+          this.router.navigate(['']);
         },
         error => {
-            console.log(error)
+            alert("Usuário ou senha incorreto!")
         });
   }
   ngOnInit(): void {

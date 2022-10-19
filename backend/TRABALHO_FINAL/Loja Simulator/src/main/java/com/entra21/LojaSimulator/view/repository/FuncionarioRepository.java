@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<FuncionarioEntity, Long> {
-    public FuncionarioEntity findByLogin(String login);
+    FuncionarioEntity findByLogin(String login);
 
     public List<FuncionarioEntity> findAllById(Long id);
 

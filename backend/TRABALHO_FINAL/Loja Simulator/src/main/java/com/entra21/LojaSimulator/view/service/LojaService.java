@@ -37,7 +37,7 @@ public class LojaService {
     FuncionarioService funcionarioService;
 
     public List<LojaPayloadDTO> getLojasByLogin(String login){
-        return lojaRepository.findAllByGerente(funcionarioService.getIdByLogin(login)).stream().map((loja)-> {
+        return lojaRepository.findAllByGerente(funcionarioService.getFuncionarioById(funcionarioService.getIdByLogin(login))).stream().map((loja)-> {
             return new LojaPayloadDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa());
         }).collect(Collectors.toList());
     }

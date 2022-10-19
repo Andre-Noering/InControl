@@ -1,0 +1,19 @@
+#lojaComp{
+    border: 1px solid blue;
+    border-radius: 6px;
+    background-color: #ffffff;
+    width: 100%;
+    padding: 10px 5px 10px 5px;
+    height: 170px;
+}
+#lojaComp h2{
+    margin-bottom: 20px;
+}
+#lojaComp p{
+    margin: 0;
+}
+#desc{
+    border-top: 1px solid blue;
+    padding-left: 10px;
+    margin:0;
+}

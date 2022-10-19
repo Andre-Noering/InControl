@@ -23,6 +23,7 @@ export class LojasScreenComponent implements OnInit {
   ngOnInit(): void {
     this.lojaService.getAll(this.user!.login).pipe(first()).subscribe(lojas => {
       this.lojas = lojas;
+      console.log(lojas);
   });
   }
 
