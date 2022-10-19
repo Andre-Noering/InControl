@@ -33,6 +33,15 @@ public class LojaService {
     @Autowired
     FornecedorService fornecedorService;
 
+    @Autowired
+    FuncionarioService funcionarioService;
+
+    public List<LojaPayloadDTO> getLojasByLogin(String login){
+        return lojaRepository.findAllByGerente(funcionarioService.getIdByLogin(login)).stream().map((loja)-> {
+            return new LojaPayloadDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa());
+        }).collect(Collectors.toList());
+    }
+
     public LojaEntity getById(Long id) {
         return lojaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Loja não encontrada!"));
     }

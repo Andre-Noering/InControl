@@ -4,6 +4,8 @@ import com.entra21.LojaSimulator.model.entity.LojaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface LojaRepository extends JpaRepository<LojaEntity, Long> {
     LojaEntity findByRazaoSocial(String razaoSocial);
@@ -11,4 +13,6 @@ public interface LojaRepository extends JpaRepository<LojaEntity, Long> {
     void deleteByRazaoSocial(String razaoSocial);
 
     boolean existsByRazaoSocial(String razaoSocial);
+
+    List<LojaEntity> findAllByGerente(Long id);
 }

@@ -27,17 +27,21 @@ public class FuncionarioService implements UserDetailsService {
         return funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Funcionario não encontrada!"));
     }
 
+    public Long getIdByLogin(String login){
+        return funcionarioRepository.findByLogin(login).getId();
+    }
+
     //Método Get - Retornando o funcionário pelo ID
     public FuncionarioDTO getDTOById(Long id) {
         FuncionarioEntity funcionario = getFuncionarioById(id);
         FuncionarioDTO dto = new FuncionarioDTO();
-        dto.setId(funcionario.getId());
+        dto.setIdPessoa(funcionario.getId());
         dto.setNome(funcionario.getNome());
         dto.setLogin(funcionario.getLogin());
         dto.setSenha(funcionario.getSenha());
-        dto.setCpf(dto.getCpf());
-        dto.setSobrenome(dto.getSobrenome());
-        dto.setTelefone(dto.getTelefone());
+        dto.setCpf(funcionario.getCpf());
+        dto.setSobrenome(funcionario.getSobrenome());
+        dto.setTelefone(funcionario.getTelefone());
         return dto;
     }
 
@@ -51,7 +55,7 @@ public class FuncionarioService implements UserDetailsService {
     //Build do funcionário
     public FuncionarioEntity build(FuncionarioDTO funcionarioDTO){
         FuncionarioEntity newFuncionario = new FuncionarioEntity();
-        newFuncionario.setId(funcionarioDTO.getId());
+        newFuncionario.setId(funcionarioDTO.getIdPessoa());
         newFuncionario.setNome(funcionarioDTO.getNome());
         newFuncionario.setSobrenome(funcionarioDTO.getSobrenome());
         newFuncionario.setTelefone(funcionarioDTO.getTelefone());
@@ -65,7 +69,7 @@ public class FuncionarioService implements UserDetailsService {
     //Metodo Save - Criando um funcionario
     public void save(FuncionarioDTO funcionarioDTO){
         FuncionarioEntity funcionarioEntity = new FuncionarioEntity();
-        funcionarioEntity.setId(funcionarioDTO.getId());
+        funcionarioEntity.setId(funcionarioDTO.getIdPessoa());
         funcionarioEntity.setNome(funcionarioDTO.getNome());
         funcionarioEntity.setSobrenome(funcionarioDTO.getSobrenome());
         funcionarioEntity.setTelefone(funcionarioDTO.getTelefone());
@@ -78,7 +82,7 @@ public class FuncionarioService implements UserDetailsService {
 
     //PUT
     public void update(FuncionarioDTO funcionarioDTO){
-        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getId());
+        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getIdPessoa());
             if (funcionarioDTO.getCpf() != null){
                 funcionarioEntity.setCpf(funcionarioDTO.getCpf());
             }
@@ -106,7 +110,7 @@ public class FuncionarioService implements UserDetailsService {
     public FuncionarioDTO login(String login, String password){
         FuncionarioEntity en = funcionarioRepository.findByLogin(login);
         if(en != null && en.getSenha().equals(password)){
-            return new FuncionarioDTO(en.getId(), login, password);
+            return new FuncionarioDTO(login, password);
         }
         return null;
     }
