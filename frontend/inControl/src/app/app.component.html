@@ -1,4 +1,5 @@
-<nav style="height: 10%;" class="navbar navbar-expand-sm">
+
+<nav style="height: 11%;margin: 0;" class="navbar navbar-expand-sm fixed-top">
   <div class="container"> 
    <a class="navbar-brand">
      </a>
@@ -27,13 +28,19 @@
          <a id="btn-entrar" class="btn ml-4" routerLink="/login">Entrar</a>
        </li>
        <li class="nav-item" *ngIf="user != null">
+        <span class="nav-link">|</span>
+      </li>
+       <li class="nav-item" *ngIf="user != null">
         <a href="#" class="nav-link">Minhas lojas</a>
        </li>
+       <li class="nav-item" *ngIf="user != null">
+        <button type="button" id="btn-entrar" class="btn ml-4" (click)="logout()">Sair</button>
+      </li>
      </ul>
    </div>
   </div>
  </nav> <!-- Fim header -->
- <router-outlet></router-outlet>
+ <router-outlet style="margin: 0;"></router-outlet>
 
  <!-- Inicio footer -->
  <div class="">

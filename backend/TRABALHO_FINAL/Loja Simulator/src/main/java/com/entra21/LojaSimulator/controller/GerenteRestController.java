@@ -1,6 +1,7 @@
 package com.entra21.LojaSimulator.controller;
 
 import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
+import com.entra21.LojaSimulator.model.dto.LoginDTO;
 import com.entra21.LojaSimulator.model.dto.LojaDTO;
 import com.entra21.LojaSimulator.view.service.FuncionarioService;
 import com.entra21.LojaSimulator.view.service.LojaService;
@@ -24,7 +25,7 @@ public class GerenteRestController {
     }
 
     @PostMapping("/login")
-    public FuncionarioDTO login(@RequestBody String username, @RequestBody String password){
-        return funcionarioService.login(username,password);
+    public FuncionarioDTO login(@RequestBody LoginDTO loginDTO){
+        return funcionarioService.login(loginDTO.getUsername(), loginDTO.getPassword());
     }
 }
