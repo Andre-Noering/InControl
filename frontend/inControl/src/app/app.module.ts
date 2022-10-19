@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CadastroScreenComponent } from './cadastro-screen/cadastro-screen.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,9 +18,17 @@ import { CadastroScreenComponent } from './cadastro-screen/cadastro-screen.compo
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+export type User = {
+  id: number;
+  login: string;
+  password: string;
+  authdata?: string;
+}

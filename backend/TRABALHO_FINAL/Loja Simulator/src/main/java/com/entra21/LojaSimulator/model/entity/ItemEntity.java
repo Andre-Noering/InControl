@@ -13,13 +13,13 @@ public class ItemEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name="nome", nullable = false)
 	private String nome;
-	
+
 	@Column(name="valor", nullable = false)
 	private Double valor;
-	
+
 	@Column(name="qtde_estoque", nullable = false)
 	private Integer qtdeEstoque;
 
@@ -30,11 +30,9 @@ public class ItemEntity {
 	@JoinColumn(name = "id_loja", referencedColumnName = "id", nullable = false)
 	private LojaEntity loja;
 
-	@ManyToOne
-	@JoinColumn(name = "id", referencedColumnName = "id_item", nullable = false)
+	@OneToMany(mappedBy = "item")
 	private List<ItemVendaEntity> vendas;
 
-	@ManyToOne
-	@JoinColumn(name = "id", referencedColumnName = "id_item", nullable = false)
+	@OneToMany(mappedBy = "fornecedor")
 	private List<ItemFornecedorEntity> fornecedores;
 }
