@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthenticationService } from '../helpers/auth.service';
+import { first } from 'rxjs';
+
 
 @Component({
   selector: 'app-login-screen',
@@ -21,16 +26,18 @@ export class LoginScreenComponent implements OnInit {
             this.router.navigate(['']);
         }
   }
-
+  login(){
+    this.authenticationService.login(this.formLogin.get('username')?.value, this.formLogin.get('password')?.value).pipe(first())
+    .subscribe(
+        data => {
+          console.log("caiu")
+            this.router.navigate(['']);
+        },
+        error => {
+            console.log(error)
+        });
+  }
   ngOnInit(): void {
   }
 
 }
-import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { User } from '../app.module';import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../helpers/auth.service';
-

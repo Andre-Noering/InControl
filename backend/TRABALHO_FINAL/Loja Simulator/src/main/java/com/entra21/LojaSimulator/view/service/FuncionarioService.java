@@ -104,10 +104,9 @@ public class FuncionarioService implements UserDetailsService {
     }
 
     public FuncionarioDTO login(String login, String password){
-        if(funcionarioRepository.existsByLogin(login)){
-            if(funcionarioRepository.findByLogin(login).getSenha().equals(password)){
-                return new FuncionarioDTO(funcionarioRepository.findByLogin(login).getId(), login, password);
-            }
+        FuncionarioEntity en = funcionarioRepository.findByLogin(login);
+        if(en != null && en.getSenha().equals(password)){
+            return new FuncionarioDTO(en.getId(), login, password);
         }
         return null;
     }
