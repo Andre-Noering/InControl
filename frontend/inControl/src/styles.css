@@ -35,12 +35,22 @@ body, #tela-login {
     margin-left: 20px;
 }
 
+#btn-entrar:hover {
+    background-color:#6270ec ;
+    transition-duration: 500ms;
+}
+
 #btn-comece-agora{
-    background-color: #7b87f1; color: white; font-size: 1.3em;
+    padding: 10px;
+    background-color: #7b87f1; 
+    color: white; 
+    font-size: 1.1em;
+    border: 0;
 }
 
 #btn-comece-agora:hover {
-    color: darkblue;
+    background-color:#6270ec ;
+    transition-duration: 500ms;
 }
 
 .caixa {
