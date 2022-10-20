@@ -20,10 +20,10 @@
     <app-item-loja (funcionarios)="setFuncionarios($event)" (itens)="setItens($event)" (lojaNull)="setLoja($event)" [loja]="loja"></app-item-loja>
 </div>
 <div [ngStyle]="{'display': loja!=null && itens==true && addItem==false ? 'block' : 'none'}" >
-    <app-item-screen (voltarItem)="setItens($event)" (adicionandoItem)="adicionando($event)" [loja]="loja" ></app-item-screen>
+    <app-item-screen (voltarItem)="setItens($event)" (adicionandoItem)="adicionando($event)" [loja]="loja" [adic]="addItem"></app-item-screen>
 </div>
 <div [ngStyle]="{'display': loja!=null && itens==true && addItem==true ? 'block' : 'none'}">
-    <app-add-item [loja]="loja"></app-add-item>
+    <app-add-item (adicionandoItem)="adicionando($event)" [loja]="loja"></app-add-item>
 </div>
 
 <!--ÁREA DOS FUNCIONÁRIOS-->

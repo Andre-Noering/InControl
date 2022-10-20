@@ -10,6 +10,8 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class AddItemComponent implements OnInit, OnChanges {
   @Input() loja:Loja | null = null;
+  @Output() adicionandoItem = new EventEmitter<boolean>();
+  @Output() lojaChange = new EventEmitter<Loja>();
 
   formItem = this.formBuilder.group({
     nome:['', Validators.required],
@@ -39,5 +41,7 @@ export class AddItemComponent implements OnInit, OnChanges {
   }
   addItem(){
     this.itemService.add(this.formItem.value as Item);
+    this.lojaChange.emit(this.loja!)
+    this.adicionandoItem.emit(false);
   }
 }

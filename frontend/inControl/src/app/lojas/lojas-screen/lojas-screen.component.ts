@@ -41,9 +41,7 @@ export class LojasScreenComponent implements OnInit {
     this.funcionarios=valor;
   }
   adicionando(valor:any){
-    console.log(this.addItem)
     this.addItem=valor;
-    console.log(this.addItem)
   }
 
 }
