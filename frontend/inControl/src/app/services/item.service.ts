@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Loja, User, Item } from '../app.module';
+import {  User, Item } from '../app.module';
 import { AuthenticationService } from '../helpers/auth.service';
 import { Router } from '@angular/router';
 
@@ -16,13 +16,13 @@ export class ItemService {
     this.authenticationService.user.subscribe(x => this.user = x);
     }
 
-    getAll(razao_social:string) {
-        return this.http.get<Item[]>(`/${razao_social}/itens`);
+    getAll(id:number) {
+        return this.http.get<Item[]>(`/itens/${id}`);
     }
-    add(razao_social:string, item:Item){
-        this.http.post(`/${razao_social}/itens/adicionar`, item).subscribe(
+    add(item:Item){
+        this.http.post(`/itens/adicionar`, item).subscribe(
             resultado => {
-              this.router.navigate([`/estoque`])
+              console.log(resultado);
             },
             erro => {
               if(erro.status == 400) {

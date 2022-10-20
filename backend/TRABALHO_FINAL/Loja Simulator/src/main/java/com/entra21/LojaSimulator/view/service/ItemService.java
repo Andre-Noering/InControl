@@ -1,4 +1,5 @@
 package com.entra21.LojaSimulator.view.service;
+import com.entra21.LojaSimulator.model.dto.ItemAddDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemQtdeEstoqueDTO;
 import com.entra21.LojaSimulator.model.dto.ItemValorDTO;
@@ -97,9 +98,8 @@ public class ItemService {
 
 
 	//POST
-	public void save(@RequestBody ItemDTO input) {
+	public void save(@RequestBody ItemAddDTO input) {
 		ItemEntity newEntity = new ItemEntity();
-		newEntity.setId(input.getId());
 		newEntity.setNome(input.getNome());
 		newEntity.setValor(input.getValor());
 		newEntity.setQtdeEstoque(input.getQtdeEstoque());

@@ -7,7 +7,7 @@ import { Loja } from 'src/app/app.module';
   styleUrls: ['./item-loja.component.css']
 })
 export class ItemLojaComponent implements OnInit {
-  @Input() loja!:Loja;
+  @Input() loja: Loja |null=null;
   @Output() lojaNull = new EventEmitter<null>();
   @Output() itens = new EventEmitter<boolean>();
   @Output() funcionarios = new EventEmitter<boolean>();

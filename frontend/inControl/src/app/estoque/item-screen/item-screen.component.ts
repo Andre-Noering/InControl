@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Loja, User, Item } from '../../app.module';
 import { AuthenticationService } from '../../helpers/auth.service';
@@ -9,8 +9,8 @@ import { ItemService } from 'src/app/services/item.service';
   templateUrl: './item-screen.component.html',
   styleUrls: ['./item-screen.component.css']
 })
-export class ItemScreenComponent implements OnInit {
-  @Input() loja!: Loja;
+export class ItemScreenComponent implements OnInit, OnChanges {
+  @Input() loja: Loja |null=null;
   @Output() adicionandoItem = new EventEmitter<boolean>();
   @Output() voltarItem = new EventEmitter<boolean>();
 
@@ -21,19 +21,28 @@ export class ItemScreenComponent implements OnInit {
     private itemService:ItemService) {
     this.authenticationService.user.subscribe(x => this.user = x);
    }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loja = changes['loja'].currentValue;
+    this.loadEstoque();
+  }
 
   ngOnInit(): void {
-    this.itemService.getAll(this.loja.razao_social).pipe().subscribe(itens => {
-      console.log(this.loja);
-      this.itens = itens;
-      
-  });
+    this.loadEstoque();
   }
+
+  loadEstoque = () => {
+    if (this.loja != null) {
+      console.log("loja");
+      this.itemService.getAll(this.loja.id).pipe().subscribe(itens => {
+        this.itens = itens;
+      });
+    }
+  }
+
   addItem(){
     this.adicionandoItem.emit(true);
   }
   voltarTela(){
-    console.log(this.loja);
     this.voltarItem.emit(false);
   }
 }

@@ -7,12 +7,11 @@ import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class LojaService {
-
     user: User | null = null;
     constructor(
     private http: HttpClient,
     private router:Router,
-    private authenticationService: AuthenticationService) { 
+    private authenticationService: AuthenticationService) {
     this.authenticationService.user.subscribe(x => this.user = x);
     }
 

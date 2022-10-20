@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Item, Loja } from 'src/app/app.module';
 import { ItemService } from 'src/app/services/item.service';
@@ -8,9 +8,8 @@ import { ItemService } from 'src/app/services/item.service';
   templateUrl: './add-item.component.html',
   styleUrls: ['./add-item.component.css']
 })
-export class AddItemComponent implements OnInit {
-  @Input() loja!:Loja;
-  @Output() adicionandoItem = new EventEmitter<boolean>();
+export class AddItemComponent implements OnInit, OnChanges {
+  @Input() loja:Loja | null = null;
 
   formItem = this.formBuilder.group({
     nome:['', Validators.required],
@@ -26,12 +25,19 @@ export class AddItemComponent implements OnInit {
   ) { 
     
   }
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loja = changes['loja'].currentValue;
+    if(this.loja!=null){
+      this.formItem.get('idLoja')?.patchValue(this.loja!.id);
+    }
+  }
 
   ngOnInit(): void {
-    this.formItem.get('idLoja')?.patchValue(this.loja.id);
+    if(this.loja!=null){
+      this.formItem.get('idLoja')?.patchValue(this.loja!.id);
+    }
   }
   addItem(){
-    this.itemService.add(this.loja.razao_social,this.formItem.value as Item);
-    this.adicionandoItem.emit(false);
+    this.itemService.add(this.formItem.value as Item);
   }
 }
