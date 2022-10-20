@@ -7,6 +7,9 @@
 body, #tela-login {
     height: 100%;
     background-color: #f5f5f5;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.1em;
+    color: black;
   }
 
 .navbar{
@@ -41,7 +44,7 @@ body, #tela-login {
 }
 
 .caixa {
-	padding: 60px 0;
+	padding: 40px 0;
 	border-bottom: 1px solid #e5e5e5;
 }
 
