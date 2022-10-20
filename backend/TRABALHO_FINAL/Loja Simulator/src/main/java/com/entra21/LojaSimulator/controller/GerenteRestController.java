@@ -25,7 +25,7 @@ public class GerenteRestController {
     }
 
     @PostMapping("/adicionar")
-    public void save(LojaDTO lojaDTO){
+    public void save(@RequestBody LojaPayloadDTO lojaDTO){
         lojaService.save(lojaDTO);
     }
 
