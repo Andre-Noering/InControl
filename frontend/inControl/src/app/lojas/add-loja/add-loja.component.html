@@ -1,0 +1,25 @@
+<form [formGroup]="formLoja" (ngSubmit)="addLoja()">
+    <div id="formulario-cadastro" class="container">
+        <h2>Cadastre sua loja!</h2>
+        
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="razao_social">Razão social</label>
+        <input formControlName="razao_social" type="text" class="form-control" id="razao_social"  placeholder="Informe a razão social." required>
+        </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="cnpj">CNPJ</label>
+        <input formControlName="cnpj" type="text" class="form-control" id="cnpj" placeholder="Informe o cnpj." required >
+        </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            <label for="contato">Contato</label>
+            <input formControlName="contato" type="text" class="form-control" id="contato" placeholder="Informe as informações de contato" required>
+        </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            <label for="valor_caixa">Valor de Caixa</label>
+            <input formControlName="valor_caixa" type="text" class="form-control" id="valor_caixa" placeholder="Informe valor de caixa da loja." required>
+        </div>
+
+        
+        <button  type="submit" class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;">Enviar</button>
+    </div>
+</form>

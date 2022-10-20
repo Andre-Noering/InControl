@@ -10,6 +10,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LojasScreenComponent } from './lojas/lojas-screen/lojas-screen.component';
 import { LojasListItemComponent } from './lojas/lojas-list-item/lojas-list-item.component';
+import { AddLojaComponent } from './lojas/add-loja/add-loja.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { BasicAuthInterceptor } from './helpers/basic-auth.interceptor';
+import { LojaItemComponent } from './lojas/loja-item/loja-item.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BasicAuthInterceptor } from './helpers/basic-auth.interceptor';
 import { ItemListItemComponent } from './estoque/item-list-item/item-list-item.component';
@@ -23,6 +27,8 @@ import { ItemScreenComponent } from './estoque/item-screen/item-screen.component
     CadastroScreenComponent,
     LojasScreenComponent,
     LojasListItemComponent,
+    AddLojaComponent,
+    LojaItemComponent
     ItemListItemComponent,
     ItemScreenComponent
   ],
@@ -34,7 +40,7 @@ import { ItemScreenComponent } from './estoque/item-screen/item-screen.component
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }
+    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
