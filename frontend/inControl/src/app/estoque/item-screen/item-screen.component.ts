@@ -11,6 +11,7 @@ import { ItemService } from 'src/app/services/item.service';
 })
 export class ItemScreenComponent implements OnInit, OnChanges {
   @Input() loja: Loja |null=null;
+  @Input() adic: boolean = false;
   @Output() adicionandoItem = new EventEmitter<boolean>();
   @Output() voltarItem = new EventEmitter<boolean>();
 
@@ -22,8 +23,17 @@ export class ItemScreenComponent implements OnInit, OnChanges {
     this.authenticationService.user.subscribe(x => this.user = x);
    }
   ngOnChanges(changes: SimpleChanges): void {
-    this.loja = changes['loja'].currentValue;
-    this.loadEstoque();
+    if(changes['loja'] != null) {
+      this.loja = changes['loja'].currentValue;
+      this.loadEstoque();
+    }
+    if(changes['adic'] != null && this.adic) {
+      console.log(changes);
+      this.adic = changes['adic'].currentValue;
+      if(!this.adic) {
+        this.loadEstoque();
+      }
+    }
   }
 
   ngOnInit(): void {
@@ -41,6 +51,7 @@ export class ItemScreenComponent implements OnInit, OnChanges {
 
   addItem(){
     this.adicionandoItem.emit(true);
+    this.adic = true;
   }
   voltarTela(){
     this.voltarItem.emit(false);
