@@ -1,6 +1,7 @@
 package com.entra21.LojaSimulator.controller;
 
 import com.entra21.LojaSimulator.model.dto.LojaDTO;
+import com.entra21.LojaSimulator.model.dto.LojaPayloadDTO;
 import com.entra21.LojaSimulator.model.dto.LojaUpdateDTO;
 import com.entra21.LojaSimulator.view.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ public class LojaRestController {
     @Autowired
     LojaService lojaService;
     @GetMapping
-    public LojaDTO getLoja(@PathVariable String razaoSocial){
+    public LojaPayloadDTO getLoja(@PathVariable String razaoSocial){
         return lojaService.getDTOById(lojaService.getByRazaoSocial(razaoSocial).getId());
     }
 

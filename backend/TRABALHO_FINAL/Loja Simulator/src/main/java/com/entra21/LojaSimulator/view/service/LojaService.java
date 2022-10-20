@@ -38,7 +38,7 @@ public class LojaService {
 
     public List<LojaPayloadDTO> getLojasByLogin(String login){
         return lojaRepository.findAllByGerente(funcionarioService.getFuncionarioById(funcionarioService.getIdByLogin(login))).stream().map((loja)-> {
-            return new LojaPayloadDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa());
+            return new LojaPayloadDTO( loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente().getId());
         }).collect(Collectors.toList());
     }
 
@@ -82,28 +82,27 @@ public class LojaService {
         return lojaRepository.findByRazaoSocial(razaoSocial);
     }
 
-    public LojaDTO getDTOById(Long id) {
+    public LojaPayloadDTO getDTOById(Long id) {
         LojaEntity loja = getById(id);
-        return new LojaDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente(), loja.getItens(), loja.getFornecedores(), loja.getFuncionarios());
+        return new LojaPayloadDTO( loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente().getId());
     }
 
 
     //POST
-    public void save(@RequestBody LojaDTO input) {
+    public void save(LojaPayloadDTO input) {
         LojaEntity newLoja = new LojaEntity();
         if (!lojaRepository.existsByRazaoSocial(input.getRazao_social())) {
-            newLoja.setId(input.getId());
             newLoja.setRazaoSocial(input.getRazao_social());
             newLoja.setCnpj(input.getCnpj());
             newLoja.setContato(input.getContato());
             newLoja.setValorCaixa(input.getValor_caixa());
-            newLoja.setGerente(input.getGerente());
+            newLoja.setGerente(funcionarioService.getFuncionarioById(input.getId_funcionario()));
             lojaRepository.save(newLoja);
         }
     }
 
     //PUT
-    public void update(@RequestBody LojaUpdateDTO dto) {
+    public void update(LojaUpdateDTO dto) {
         LojaEntity loja = getById(dto.getId());
         if (dto.getGerente() != null) {
             loja.setGerente(dto.getGerente());

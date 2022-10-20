@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
-public class LojaSimulatorApplication {
+public class  LojaSimulatorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LojaSimulatorApplication.class, args);
