@@ -11,6 +11,7 @@ public class ItemDTO {
     private Integer qtdeEstoque;
     private Integer qtdeAlertaEstoque;
 
+    private Long idLoja;
     public ItemDTO(Long id, String nome, Double valor, int qtde_estoque, int qtde_alerta_estoque) {
         this.id = id;
         this.nome = nome;

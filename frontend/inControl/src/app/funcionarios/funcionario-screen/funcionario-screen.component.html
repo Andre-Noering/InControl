@@ -1,0 +1,12 @@
+<div class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Equipe</h2>
+    <div class="titulo1" style="height: 20%;">Nome</div><div class="titulo borda">Ativo</div><div class="titulo">Contato</div>
+
+    <div *ngFor="let funcionario of funcionarios">
+        <app-funcionario-list-item [funcionario]="funcionario" ></app-funcionario-list-item>
+    </div>
+    <button  class="add">+</button>
+</div>
+<button  class="btn btn-primary">Voltar</button>
+
+

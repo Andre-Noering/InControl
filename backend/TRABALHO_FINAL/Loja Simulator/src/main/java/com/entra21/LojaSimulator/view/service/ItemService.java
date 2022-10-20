@@ -104,6 +104,7 @@ public class ItemService {
 		newEntity.setValor(input.getValor());
 		newEntity.setQtdeEstoque(input.getQtdeEstoque());
 		newEntity.setQtdeAlertaEstoque(input.getQtdeAlertaEstoque());
+		newEntity.setLoja(lojaService.getById(input.getIdLoja()));
 		itemRepository.save(newEntity);
 	}
 

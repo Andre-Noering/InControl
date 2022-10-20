@@ -38,7 +38,7 @@ public class LojaService {
 
     public List<LojaPayloadDTO> getLojasByLogin(String login){
         return lojaRepository.findAllByGerente(funcionarioService.getFuncionarioById(funcionarioService.getIdByLogin(login))).stream().map((loja)-> {
-            return new LojaPayloadDTO( loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente().getId());
+            return new LojaPayloadDTO(loja.getId() ,loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente().getId());
         }).collect(Collectors.toList());
     }
 
@@ -53,9 +53,9 @@ public class LojaService {
         return loja.getItens().stream().map(item -> itemService.getDTOById(item.getId())).collect(Collectors.toList());
     }
 
-    public List<PessoaDTO> getFuncionariosById(Long id) {
-        LojaEntity loja = getById(id);
-        return loja.getFuncionarios().stream().map(func -> pessoaService.getDTOById(func.getId())).collect(Collectors.toList());
+    public List<FuncionarioPayloadDTO> getFuncionariosByRazaoSocial(String razao_social) {
+        LojaEntity loja = getByRazaoSocial(razao_social);
+        return loja.getFuncionarios().stream().map(func -> funcionarioService.getDTOwithAtivoById(func.getId())).collect(Collectors.toList());
     }
 
     public List<FornecedorDTO> getFornecedoresById(Long id) {
@@ -84,7 +84,7 @@ public class LojaService {
 
     public LojaPayloadDTO getDTOById(Long id) {
         LojaEntity loja = getById(id);
-        return new LojaPayloadDTO( loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente().getId());
+        return new LojaPayloadDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa(), loja.getGerente().getId());
     }
 
 
