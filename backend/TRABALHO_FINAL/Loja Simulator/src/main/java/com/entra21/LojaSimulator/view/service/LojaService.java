@@ -36,6 +36,9 @@ public class LojaService {
     @Autowired
     FuncionarioService funcionarioService;
 
+    @Autowired
+    VendaService vendaService;
+
     public List<LojaPayloadDTO> getLojasByLogin(String login){
         return lojaRepository.findAllByGerente(funcionarioService.getFuncionarioById(funcionarioService.getIdByLogin(login))).stream().map((loja)-> {
             return new LojaPayloadDTO(loja.getId(), loja.getRazaoSocial(), loja.getCnpj(), loja.getContato(), loja.getValorCaixa());
@@ -45,7 +48,6 @@ public class LojaService {
     public LojaEntity getById(Long id) {
         return lojaRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Loja não encontrada!"));
     }
-
 
     //GET
     public List<ItemDTO> getItensById(Long id) {
@@ -58,6 +60,11 @@ public class LojaService {
         return loja.getFuncionarios().stream().map(func -> pessoaService.getDTOById(func.getId())).collect(Collectors.toList());
     }
 
+    public List<VendaDTO> getVendasById(Long id) {
+        List<VendaDTO> vendasFim = null;
+        this.getFuncionariosById(id).stream().map(func -> funcionarioService.getVendasFuncionario(func.getIdPessoa())).map(vendas -> vendas.stream().map(venda -> vendasFim.add(venda))).collect(Collectors.toList());
+        return vendasFim;
+    }
     public List<FornecedorDTO> getFornecedoresById(Long id) {
         LojaEntity loja = getById(id);
         return loja.getFornecedores().stream().map(fornecedor -> fornecedorService.getDtoById(fornecedor.getId())).collect(Collectors.toList());
