@@ -9,12 +9,15 @@ import { LojasScreenComponent } from './lojas/lojas-screen/lojas-screen.componen
 import { AddLojaComponent } from './lojas/add-loja/add-loja.component';
 import { ItemListItemComponent } from './estoque/item-list-item/item-list-item.component';
 import { ItemScreenComponent } from './estoque/item-screen/item-screen.component';
+import { AddItemComponent } from './estoque/add-item/add-item.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
   {path: 'login', component: LoginScreenComponent},
   {path: 'cadastro', component: CadastroScreenComponent},
   {path: 'lojas', component: LojasScreenComponent},
+  {path: 'estoque', component: ItemScreenComponent},
+  {path: `estoque/adicionar`, component: AddItemComponent}
   {path: 'adicionarLoja', component: AddLojaComponent}
   {path: 'estoque', component: ItemScreenComponent}
 ];

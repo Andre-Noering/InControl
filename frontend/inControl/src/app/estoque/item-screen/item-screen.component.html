@@ -1,12 +1,13 @@
 
 <div class="cont" style="margin-top:30px; height: 50%;">
     <h2 style="margin: 30px;">Estoque</h2>
-    <div class="titulo1" style="height: 20%;">Nome</div><div class="titulo borda">valor</div><div class="titulo">Quantidade em estoque</div>
+    <div class="titulo1" style="height: 20%;">Nome</div><div class="titulo borda">Valor</div><div class="titulo">Quantidade em estoque</div>
 
     <div *ngFor="let item of itens">
         <app-item-list-item  [item]="item"></app-item-list-item>
     </div>
-    <button class="add">+</button>
+    <button (click)="addItem()" class="add">+</button>
 </div>
+<button (click)="voltarTela()" class="btn btn-primary">Voltar</button>
 
 

@@ -18,6 +18,11 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BasicAuthInterceptor } from './helpers/basic-auth.interceptor';
 import { ItemListItemComponent } from './estoque/item-list-item/item-list-item.component';
 import { ItemScreenComponent } from './estoque/item-screen/item-screen.component';
+import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
+import { AddItemComponent } from './estoque/add-item/add-item.component';
+import { FuncionarioScreenComponent } from './funcionarios/funcionario-screen/funcionario-screen.component';
+import { FuncionarioListItemComponent } from './funcionarios/funcionario-list-item/funcionario-list-item.component';
+import { AddFuncionarioComponent } from './funcionarios/add-funcionario/add-funcionario.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,12 @@ import { ItemScreenComponent } from './estoque/item-screen/item-screen.component
     AddLojaComponent,
     LojaItemComponent
     ItemListItemComponent,
-    ItemScreenComponent
+    ItemScreenComponent,
+    ItemLojaComponent,
+    AddItemComponent,
+    FuncionarioScreenComponent,
+    FuncionarioListItemComponent,
+    AddFuncionarioComponent
   ],
   imports: [
     BrowserModule,
@@ -56,12 +66,14 @@ export type Funcionario = {
   nome: string;
   sobrenome: string;
   cpf: string;
+  ativo:boolean;
   telefone:string;
   login: string;
   senha:string;
 }
 
 export type Loja = {
+  id:number,
   razao_social: string;
   cnpj:string;
   contato:string;
@@ -73,5 +85,6 @@ export type Item = {
   nome: string;
   valor: number,
   qtdeEstoque: number,
-  qtdeAlertaEstoque: number
+  qtdeAlertaEstoque: number,
+  idLoja:number
 }

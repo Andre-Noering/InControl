@@ -1,16 +1,36 @@
-<div class="row row-cols-6" *ngIf="loja == null">
+
+<div class="row row-cols-6" *ngIf="loja==null">
     <div class="d-flex flex-direction-column col-2 col-sm-2 loja-item" *ngFor="let loja of lojas">
-        <button style="border:none;" (click)="setLoja(loja)">
+        <button (click)="setLoja(loja)" style="border: none; margin:0;">
             <app-lojas-list-item  [loja]="loja" style="display:block; margin-top: 10px;"></app-lojas-list-item>
-        </button>    
+        </button>
     </div>
+    <div style="display:block; margin-top: 20px;" id="adicionarLoja" class="d-flex flex-direction-column col-2 col-sm-2 loja-item">
+        <p style="font-size: 200px; margin:0; margin-top: 20px;">+</p>
+    </div>
+    
     <a routerLink="/adicionarLoja" style="text-decoration:none;" class="d-flex flex-direction-column col-2 col-sm-2 loja-item">
         <h1>
             <i class="bi bi-plus-square-fill" style="color: #7b87f1;"></i>
         </h1>
     </a>
     
-    
 </div>
 <app-loja-item (lojaNull)="setLoja($event)" [loja]="loja" *ngIf="loja != null"></app-loja-item>
+
+<!--ÁREA DO ESTOQUE-->
+<div *ngIf="loja!=null && itens==false && funcionarios==false">
+    <app-item-loja (funcionarios)="setFuncionarios($event)" (itens)="setItens($event)" (lojaNull)="setLoja($event)" [loja]="loja"></app-item-loja>
+</div>
+<div *ngIf="loja!=null && itens==true && addItem==false">
+    <app-item-screen (voltarItem)="setItens($event)" (adicionandoItem)="adicionando($event)" [loja]="loja" ></app-item-screen>
+</div>
+<div *ngIf="loja!=null && itens==true && addItem==true">
+    <app-add-item [loja]="loja"></app-add-item>
+</div>
+
+<!--ÁREA DOS FUNCIONÁRIOS-->
+<div *ngIf="loja!=null && itens==false && funcionarios==true">
+    <app-funcionario-screen [loja]="loja"></app-funcionario-screen>
+</div>
 

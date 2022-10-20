@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Loja, User, Item } from '../../app.module';
 import { AuthenticationService } from '../../helpers/auth.service';
@@ -10,6 +10,9 @@ import { ItemService } from 'src/app/services/item.service';
   styleUrls: ['./item-screen.component.css']
 })
 export class ItemScreenComponent implements OnInit {
+  @Input() loja!: Loja;
+  @Output() adicionandoItem = new EventEmitter<boolean>();
+  @Output() voltarItem = new EventEmitter<boolean>();
 
   user: User | null = null;
   itens: Item[] = [];
@@ -20,10 +23,17 @@ export class ItemScreenComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.itemService.getAll().pipe().subscribe(itens => {
+    this.itemService.getAll(this.loja.razao_social).pipe().subscribe(itens => {
+      console.log(this.loja);
       this.itens = itens;
-      console.log(itens);
+      
   });
   }
-
+  addItem(){
+    this.adicionandoItem.emit(true);
+  }
+  voltarTela(){
+    console.log(this.loja);
+    this.voltarItem.emit(false);
+  }
 }

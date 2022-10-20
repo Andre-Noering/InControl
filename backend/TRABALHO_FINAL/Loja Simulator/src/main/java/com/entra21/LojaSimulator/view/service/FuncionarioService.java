@@ -44,6 +44,19 @@ public class FuncionarioService implements UserDetailsService {
         dto.setTelefone(funcionario.getTelefone());
         return dto;
     }
+    public FuncionarioPayloadDTO getDTOwithAtivoById(Long id) {
+        FuncionarioEntity funcionario = getFuncionarioById(id);
+        FuncionarioPayloadDTO dto = new FuncionarioPayloadDTO();
+        dto.setIdPessoa(funcionario.getId());
+        dto.setNome(funcionario.getNome());
+        dto.setAtivo(funcionario.getAtivo());
+        dto.setLogin(funcionario.getLogin());
+        dto.setSenha(funcionario.getSenha());
+        dto.setCpf(funcionario.getCpf());
+        dto.setSobrenome(funcionario.getSobrenome());
+        dto.setTelefone(funcionario.getTelefone());
+        return dto;
+    }
 
     //Método Get - Retornando todas as vendas do funcionário filtrando o funcionário pelo iD
     public FuncionarioVendaDTO getVendasFuncionario(Long id) {

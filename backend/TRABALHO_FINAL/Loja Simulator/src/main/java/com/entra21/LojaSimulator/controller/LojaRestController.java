@@ -1,11 +1,11 @@
 package com.entra21.LojaSimulator.controller;
 
-import com.entra21.LojaSimulator.model.dto.LojaDTO;
-import com.entra21.LojaSimulator.model.dto.LojaPayloadDTO;
-import com.entra21.LojaSimulator.model.dto.LojaUpdateDTO;
+import com.entra21.LojaSimulator.model.dto.*;
 import com.entra21.LojaSimulator.view.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/{razao_social}")
@@ -13,9 +13,10 @@ public class LojaRestController {
     @Autowired
     LojaService lojaService;
     @GetMapping
-    public LojaPayloadDTO getLoja(@PathVariable String razaoSocial){
-        return lojaService.getDTOById(lojaService.getByRazaoSocial(razaoSocial).getId());
+    public LojaPayloadDTO getLoja(@PathVariable String razao_social){
+        return lojaService.getDTOById(lojaService.getByRazaoSocial(razao_social).getId());
     }
+
 
     @PutMapping
     public void update(@RequestBody LojaUpdateDTO lojaDTO){

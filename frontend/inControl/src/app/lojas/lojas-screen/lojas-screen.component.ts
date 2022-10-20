@@ -11,10 +11,12 @@ import { LojaService } from 'src/app/services/loja.service';
   styleUrls: ['./lojas-screen.component.css']
 })
 export class LojasScreenComponent implements OnInit {
-  @Input() loja!:Loja | null;
+  @Input() loja!: Loja|null;
 
   user: User | null = null;
-
+  itens: boolean = false;
+  funcionarios:boolean = false;
+  addItem:boolean = false;
   lojas: Loja[] = [];
   constructor(private http: HttpClient,
     private authenticationService: AuthenticationService,
@@ -29,7 +31,19 @@ export class LojasScreenComponent implements OnInit {
   });
   }
 
-  setLoja(loja: Loja|null){
-    this.loja=loja;
+  setLoja(loja:Loja|null){
+    this.loja=loja
   }
+  setItens(valor:any){
+    this.itens=valor;
+  }
+  setFuncionarios(valor:any){
+    this.funcionarios=valor;
+  }
+  adicionando(valor:any){
+    console.log(this.addItem)
+    this.addItem=valor;
+    console.log(this.addItem)
+  }
+
 }
