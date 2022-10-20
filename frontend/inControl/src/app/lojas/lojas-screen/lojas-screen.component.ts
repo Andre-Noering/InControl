@@ -45,5 +45,5 @@ export class LojasScreenComponent implements OnInit {
     this.addItem=valor;
     console.log(this.addItem)
   }
-  
+
 }
