@@ -8,7 +8,7 @@ import { FuncionarioService } from 'src/app/services/funcionario.service';
   styleUrls: ['./funcionario-screen.component.css']
 })
 export class FuncionarioScreenComponent implements OnInit {
-  @Input() loja!:Loja;
+  @Input() loja:Loja | null = null;
   @Output() adicionandoFuncionario = new EventEmitter<boolean>();
   
   funcionarios:Funcionario[] = [];
@@ -17,9 +17,11 @@ export class FuncionarioScreenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.funcionarioService.getAll(this.loja.razao_social).pipe().subscribe(funcionarios => {
+    if(this.loja!=null){
+    this.funcionarioService.getAll(this.loja!.razao_social).pipe().subscribe(funcionarios => {
       this.funcionarios = this.funcionarios;
     })
     console.log(this.funcionarios);
   };
+}
 }

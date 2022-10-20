@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
@@ -13,16 +12,13 @@ import { LojasListItemComponent } from './lojas/lojas-list-item/lojas-list-item.
 import { AddLojaComponent } from './lojas/add-loja/add-loja.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BasicAuthInterceptor } from './helpers/basic-auth.interceptor';
-import { LojaItemComponent } from './lojas/loja-item/loja-item.component';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { BasicAuthInterceptor } from './helpers/basic-auth.interceptor';
 import { ItemListItemComponent } from './estoque/item-list-item/item-list-item.component';
 import { ItemScreenComponent } from './estoque/item-screen/item-screen.component';
-import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
 import { AddItemComponent } from './estoque/add-item/add-item.component';
 import { FuncionarioScreenComponent } from './funcionarios/funcionario-screen/funcionario-screen.component';
 import { FuncionarioListItemComponent } from './funcionarios/funcionario-list-item/funcionario-list-item.component';
 import { AddFuncionarioComponent } from './funcionarios/add-funcionario/add-funcionario.component';
+import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +29,14 @@ import { AddFuncionarioComponent } from './funcionarios/add-funcionario/add-func
     LojasScreenComponent,
     LojasListItemComponent,
     AddLojaComponent,
-    LojaItemComponent
     ItemListItemComponent,
     ItemScreenComponent,
-    ItemLojaComponent,
     AddItemComponent,
     FuncionarioScreenComponent,
     FuncionarioListItemComponent,
-    AddFuncionarioComponent
+    AddFuncionarioComponent,
+    ItemLojaComponent,
+    FuncionarioScreenComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,7 @@ import { LojaService } from 'src/app/services/loja.service';
   styleUrls: ['./lojas-screen.component.css']
 })
 export class LojasScreenComponent implements OnInit {
-  @Input() loja!: Loja|null;
+  @Input() loja: Loja|null=null;
 
   user: User | null = null;
   itens: boolean = false;

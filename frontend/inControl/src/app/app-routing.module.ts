@@ -17,8 +17,8 @@ const routes: Routes = [
   {path: 'cadastro', component: CadastroScreenComponent},
   {path: 'lojas', component: LojasScreenComponent},
   {path: 'estoque', component: ItemScreenComponent},
-  {path: `estoque/adicionar`, component: AddItemComponent}
-  {path: 'adicionarLoja', component: AddLojaComponent}
+  {path: `estoque/adicionar`, component: AddItemComponent},
+  {path: 'adicionarLoja', component: AddLojaComponent},
   {path: 'estoque', component: ItemScreenComponent}
 ];
 

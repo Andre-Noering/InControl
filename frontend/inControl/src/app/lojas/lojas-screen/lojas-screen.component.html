@@ -1,13 +1,11 @@
 
-<div class="row row-cols-6" *ngIf="loja==null">
+<div class="row row-cols-6" [ngStyle]="{'display': loja==null ? 'flex' : 'none'}">
     <div class="d-flex flex-direction-column col-2 col-sm-2 loja-item" *ngFor="let loja of lojas">
         <button (click)="setLoja(loja)" style="border: none; margin:0;">
             <app-lojas-list-item  [loja]="loja" style="display:block; margin-top: 10px;"></app-lojas-list-item>
         </button>
     </div>
-    <div style="display:block; margin-top: 20px;" id="adicionarLoja" class="d-flex flex-direction-column col-2 col-sm-2 loja-item">
-        <p style="font-size: 200px; margin:0; margin-top: 20px;">+</p>
-    </div>
+   
     
     <a routerLink="/adicionarLoja" style="text-decoration:none;" class="d-flex flex-direction-column col-2 col-sm-2 loja-item">
         <h1>
@@ -16,21 +14,20 @@
     </a>
     
 </div>
-<app-loja-item (lojaNull)="setLoja($event)" [loja]="loja" *ngIf="loja != null"></app-loja-item>
 
 <!--ÁREA DO ESTOQUE-->
-<div *ngIf="loja!=null && itens==false && funcionarios==false">
+<div [ngStyle]="{'display': loja!=null && itens==false && funcionarios==false ? 'block' : 'none'}">
     <app-item-loja (funcionarios)="setFuncionarios($event)" (itens)="setItens($event)" (lojaNull)="setLoja($event)" [loja]="loja"></app-item-loja>
 </div>
-<div *ngIf="loja!=null && itens==true && addItem==false">
+<div [ngStyle]="{'display': loja!=null && itens==true && addItem==false ? 'block' : 'none'}" >
     <app-item-screen (voltarItem)="setItens($event)" (adicionandoItem)="adicionando($event)" [loja]="loja" ></app-item-screen>
 </div>
-<div *ngIf="loja!=null && itens==true && addItem==true">
+<div [ngStyle]="{'display': loja!=null && itens==true && addItem==true ? 'block' : 'none'}">
     <app-add-item [loja]="loja"></app-add-item>
 </div>
 
 <!--ÁREA DOS FUNCIONÁRIOS-->
-<div *ngIf="loja!=null && itens==false && funcionarios==true">
+<div [ngStyle]="{'display':loja!=null && itens==false && funcionarios==true ? 'block' : 'none'}">
     <app-funcionario-screen [loja]="loja"></app-funcionario-screen>
 </div>
 
