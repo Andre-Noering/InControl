@@ -34,7 +34,7 @@ body, #tela-login {
 
 #btn-entrar:hover {
     background-color:#6270ec ;
-    transition-duration: 1;
+    transition-duration: 500ms;
 }
 
 #btn-comece-agora{
@@ -47,7 +47,7 @@ body, #tela-login {
 
 #btn-comece-agora:hover {
     background-color:#6270ec ;
-    transition-duration: 1;
+    transition-duration: 500ms;
 }
 
 .caixa {

@@ -6,12 +6,15 @@ import { AuthenticationService } from './helpers/auth.service';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { LojasScreenComponent } from './lojas/lojas-screen/lojas-screen.component';
+import { ItemListItemComponent } from './estoque/item-list-item/item-list-item.component';
+import { ItemScreenComponent } from './estoque/item-screen/item-screen.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
   {path: 'login', component: LoginScreenComponent},
   {path: 'cadastro', component: CadastroScreenComponent},
-  {path: 'lojas', component: LojasScreenComponent}
+  {path: 'lojas', component: LojasScreenComponent},
+  {path: 'estoque', component: ItemScreenComponent}
 ];
 
 @NgModule({
