@@ -7,9 +7,13 @@ import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { CadastroScreenComponent } from './cadastro-screen/cadastro-screen.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LojasScreenComponent } from './lojas/lojas-screen/lojas-screen.component';
 import { LojasListItemComponent } from './lojas/lojas-list-item/lojas-list-item.component';
+import { AddLojaComponent } from './lojas/add-loja/add-loja.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { BasicAuthInterceptor } from './helpers/basic-auth.interceptor';
+import { LojaItemComponent } from './lojas/loja-item/loja-item.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,9 @@ import { LojasListItemComponent } from './lojas/lojas-list-item/lojas-list-item.
     LandingPageComponent,
     CadastroScreenComponent,
     LojasScreenComponent,
-    LojasListItemComponent
+    LojasListItemComponent,
+    AddLojaComponent,
+    LojaItemComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,10 @@ import { LojasListItemComponent } from './lojas/lojas-list-item/lojas-list-item.
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: LocationStrategy, useClass: HashLocationStrategy},
+    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
