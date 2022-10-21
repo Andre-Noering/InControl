@@ -1,10 +1,7 @@
 package com.entra21.LojaSimulator.view.service;
 
 
-import com.entra21.LojaSimulator.model.dto.FornecedorContatoDTO;
-import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
-import com.entra21.LojaSimulator.model.dto.ItemDTO;
-import com.entra21.LojaSimulator.model.dto.ItemFornecedorDTO;
+import com.entra21.LojaSimulator.model.dto.*;
 import com.entra21.LojaSimulator.model.entity.*;
 import com.entra21.LojaSimulator.view.repository.FornecedorRepository;
 import org.hibernate.annotations.NotFound;
@@ -34,9 +31,9 @@ public class FornecedorService {
 
 
     //GET
-    public FornecedorDTO getDtoById(Long id) {
+    public FornecedorPayloadDTO getDtoById(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
-        return new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja());
+        return new FornecedorPayloadDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja().getId());
     }
 
     public List<ItemFornecedorEntity> getItensById(Long id) {
@@ -49,9 +46,9 @@ public class FornecedorService {
         }).collect(Collectors.toList());
     }
 
-    public List<FornecedorDTO> getAllByLoja(String razao_social) {
+    public List<FornecedorPayloadDTO> getAllByLoja(String razao_social) {
         List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_RazaoSocial(razao_social);
-        return listaFornecedores.stream().map(fornecedor -> new FornecedorDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja())).collect(Collectors.toList());
+        return listaFornecedores.stream().map(fornecedor -> new FornecedorPayloadDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja().getId())).collect(Collectors.toList());
     }
 
     public String getContatoByRazaoSocial(String razao_social) {
@@ -72,13 +69,13 @@ public class FornecedorService {
 
 
     //POST
-    public void save(@RequestBody FornecedorDTO input) {
+    public void save(FornecedorPayloadDTO input) {
         FornecedorEntity newFornecedor = new FornecedorEntity();
         newFornecedor.setId(input.getId());
         newFornecedor.setRazaoSocial(input.getRazao_social());
         newFornecedor.setCnpj(input.getCnpj());
         newFornecedor.setContato(input.getContato());
-        newFornecedor.setLoja(input.getLoja());
+        newFornecedor.setLoja(lojaService.getById(input.getIdLoja()));
         fornecedorRepository.save(newFornecedor);
     }
 

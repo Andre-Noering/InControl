@@ -1,4 +1,5 @@
 package com.entra21.LojaSimulator.view.service;
+import com.entra21.LojaSimulator.model.dto.ItemAddDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemQtdeEstoqueDTO;
 import com.entra21.LojaSimulator.model.dto.ItemValorDTO;
@@ -36,8 +37,8 @@ public class ItemService {
 
 
 	//Retorna todos os itens de uma loja
-	public List<ItemDTO> getAllByLoja(Long idLoja) {
-		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
+	public List<ItemDTO> getAllByLoja(String razao_social) {
+		List<ItemEntity> listaItens = lojaService.getByRazaoSocial(razao_social).getItens();
 		return listaItens.stream().map(item -> {
 			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtdeEstoque(), item.getQtdeAlertaEstoque());
 		}).collect(Collectors.toList());
@@ -55,7 +56,7 @@ public class ItemService {
 		return new ItemValorDTO(itemEntity.getValor());
 	}
 	public List<ItemDTO> getItensEmAlerta(String razaoSocial){
-		List<ItemDTO> listaItens = getAllByLoja(lojaService.getByRazaoSocial(razaoSocial).getId());
+		List<ItemDTO> listaItens = getAllByLoja(razaoSocial);
 		listaItens.removeIf(item -> !this.alertaById(item.getId()));
 		return listaItens;
 	}
@@ -97,13 +98,13 @@ public class ItemService {
 
 
 	//POST
-	public void save(@RequestBody ItemDTO input) {
+	public void save(@RequestBody ItemAddDTO input) {
 		ItemEntity newEntity = new ItemEntity();
-		newEntity.setId(input.getId());
 		newEntity.setNome(input.getNome());
 		newEntity.setValor(input.getValor());
 		newEntity.setQtdeEstoque(input.getQtdeEstoque());
 		newEntity.setQtdeAlertaEstoque(input.getQtdeAlertaEstoque());
+		newEntity.setLoja(lojaService.getById(input.getIdLoja()));
 		itemRepository.save(newEntity);
 	}
 

@@ -1,0 +1,23 @@
+.divider:after,
+.divider:before {
+content: "";
+flex: 1;
+height: 1px;
+background: #eee;
+}
+
+#formulario-cadastro{
+   
+    -webkit-box-shadow: 8px 8px 3px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 8px 8px 3px 0px rgba(0,0,0,0.75);
+    box-shadow: 8px 8px 3px 0px rgba(0,0,0,0.75);
+    font-style: oblique;
+
+
+    border-radius: 20px;
+    background-color: lightgray; width: 40%; height: 40%; margin-top: 2%; text-align: center; 
+}
+
+.form-group {
+    margin-top: 1%;
+}

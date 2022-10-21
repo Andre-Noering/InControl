@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { first } from "rxjs";
-import { Funcionario } from "../app.module";
+import { Funcionario, Gerente } from "../app.module";
 import { AuthenticationService } from "../helpers/auth.service";
 
 
@@ -12,7 +12,7 @@ export class CadastroService {
         private authenticationService: AuthenticationService,
         private router: Router) {}
 
-    cadastro(funcionario: Funcionario){
+    cadastro(funcionario: Gerente){
         console.log(funcionario);
         this.http.post(`/funcionario/adicionar`,funcionario).subscribe(
             resultado => {

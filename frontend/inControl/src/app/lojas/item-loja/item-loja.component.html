@@ -1,0 +1,8 @@
+
+<h2>{{loja?.razao_social ?? ''}}</h2>
+<button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas">Sair</button>
+<button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas/{{loja?.razao_social ?? ''}}/estoque">Estoque</button>
+<button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas/{{loja?.razao_social ?? ''}}/funcionarios">Funcionários</button>
+<button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas">Vendas</button>
+<button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas/{{loja?.razao_social ?? ''}}/fornecedores">Fornecedores</button>
+<button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas/{{loja?.razao_social ?? ''}}/pedidosCompra">Pedidos de Compra</button>

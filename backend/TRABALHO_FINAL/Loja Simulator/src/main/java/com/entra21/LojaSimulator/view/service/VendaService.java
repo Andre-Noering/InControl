@@ -3,6 +3,8 @@ package com.entra21.LojaSimulator.view.service;
 
 import com.entra21.LojaSimulator.model.dto.*;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
+import com.entra21.LojaSimulator.view.repository.ItemRepository;
+import com.entra21.LojaSimulator.view.repository.LojaRepository;
 import com.entra21.LojaSimulator.view.repository.VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +27,10 @@ public class VendaService {
     private ItemService itemService;
     @Autowired
     private PessoaService pessoaService;
-
+    @Autowired
+    private LojaRepository lojaRepository;
+    @Autowired
+    private ItemRepository itemRepository;
     @Autowired
     private ItemVendaService itemVendaService;
 
@@ -74,18 +79,25 @@ public class VendaService {
         return pessoa;
     }
 
-    public VendaDTO getDTOById(Long id){
+    public VendaPayloadDTO getDTOById(Long id){
         VendaEntity vendaEntity=getVenda(id);
-        return new VendaDTO(vendaEntity.getId(), vendaEntity.getData(), vendaEntity.getPessoa().getId(), vendaEntity.getFuncionario().getId());
+        return new VendaPayloadDTO(vendaEntity.getId(), vendaEntity.getData(), vendaEntity.getPessoa().getId(), vendaEntity.getFuncionario().getId());
     }
 
     //POST
-    public void save(VendaPayloadDTO vendaDTO){
+    public VendaPayloadDTO save(VendaPayloadDTO vendaDTO){
         VendaEntity newVenda = new VendaEntity();
         newVenda.setData(vendaDTO.getData());
         newVenda.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getId_cliente())));
         newVenda.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getId_vendedor())));
-        vendaRepository.save(newVenda);
+        return getDTOById(vendaRepository.save(newVenda).getId());
+    }
+
+    public void finalizar(Long id){
+        VendaEntity venda = getVenda(id);
+        venda.getFuncionario().getLoja().setValorCaixa(venda.getFuncionario().getLoja().getValorCaixa()+getValorTotal(venda.getId()));
+        lojaRepository.save(venda.getFuncionario().getLoja());
+        venda.getItens().forEach(item-> {item.getItem().setQtdeEstoque(item.getItem().getQtdeEstoque()-item.getQtde());itemRepository.save(item.getItem());});
     }
 
     //PUT

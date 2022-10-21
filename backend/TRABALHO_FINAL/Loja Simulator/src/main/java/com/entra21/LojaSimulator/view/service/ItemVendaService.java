@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.view.service;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemVendaDTO;
 import com.entra21.LojaSimulator.model.dto.VendaDTO;
+import com.entra21.LojaSimulator.model.dto.VendaPayloadDTO;
 import com.entra21.LojaSimulator.model.entity.ItemVendaEntity;
 import com.entra21.LojaSimulator.model.entity.VendaEntity;
 import com.entra21.LojaSimulator.view.repository.ItemVendaRepository;
@@ -34,13 +35,13 @@ public class ItemVendaService {
     }
     public ItemVendaDTO getDTOById(Long id){
         ItemVendaEntity itemVendaEntity = getItemVendaById(id);
-        return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValorUnitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId());
+        return new ItemVendaDTO(itemVendaEntity.getId(), itemVendaEntity.getQtde(), itemVendaEntity.getValorUnitario(), itemVendaEntity.getItem().getId(), itemVendaEntity.getVenda().getId(), itemVendaEntity.getItem().getNome(), itemVendaEntity.getItem().getQtdeEstoque());
     }
 
     public ItemDTO getItemDTO(Long id){
         return itemService.getDTOById(getItemVendaById(id).getItem().getId());
     }
-    public VendaDTO getVendaDTO(Long id){
+    public VendaPayloadDTO getVendaDTO(Long id){
         return vendaService.getDTOById(getItemVendaById(id).getVenda().getId());
     }
 

@@ -1,0 +1,44 @@
+.add{
+    background-color: #7b87f1;
+    width: 100%;
+    color: white;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border: 0;
+}
+
+.add:hover {
+    background-color:#6270ec ;
+    transition-duration: 500ms;
+}
+
+
+.cont{
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.titulo1 {
+    border-top-left-radius: 8px;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    background-color: #7b87f1;
+    text-align: center;
+    color: white;
+}
+.titulo {
+    display: inline-block;
+    width: 25%;
+    text-align: center;
+    height: 100%;
+    color: white;
+    background-color: #7b87f1;
+    border-top-right-radius: 8px;
+}
+.borda {
+    border-left: 1px solid #6270ec;
+    border-right: 1px solid #6270ec;
+    border-top-right-radius:0;
+}

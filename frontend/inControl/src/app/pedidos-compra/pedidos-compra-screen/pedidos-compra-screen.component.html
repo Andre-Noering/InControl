@@ -1,0 +1,10 @@
+<div class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Pedidos de Compra</h2>
+    <div class="titulo1" style="height: 20%;">Data</div><div class="titulo borda">Valor</div><div class="titulo borda">Funcionario</div>
+
+    <div *ngFor="let pedido of pedidos">
+        <app-pedido-compra-list-item [pedido]="pedido" ></app-pedido-compra-list-item>
+    </div>
+    <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas/adicionar">+</button>
+</div>
+

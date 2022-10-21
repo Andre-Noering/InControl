@@ -1,0 +1,29 @@
+<form [formGroup]="formVenda" (ngSubmit)="addVenda()">
+    <div id="formulario-cadastro" class="container">
+        <h2>Cadastrar venda</h2>
+        
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="data">Data</label>
+        <input formControlName="data" type="datetime-local" class="form-control" id="data"  placeholder="Informe a data da venda." required>
+        </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="selectFunc">Selecione o funcionário</label>
+        <select name="selectFunc" formControlName="id_vendedor" id="selectFunc" style="width: 50%;">
+            <option></option>
+            <option *ngFor="let funcionario of funcionarios" value="{{funcionario.idPessoa}}">
+                {{funcionario.nome}} {{funcionario.sobrenome}}
+            </option>
+        </select>
+        </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            <label for="selectPessoa">Selecione o cliente</label>
+            <select formControlName="id_cliente" name="selectPessoa" id="selectPessoa" style="width: 50%;">
+                <option></option>
+                <option *ngFor="let cliente of clientes" value="{{cliente.idPessoa}}">
+                    {{cliente.nome}} {{cliente.sobrenome}}
+                </option>
+            </select>
+            </div>
+        <button class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;">Enviar</button>
+    </div>
+</form>

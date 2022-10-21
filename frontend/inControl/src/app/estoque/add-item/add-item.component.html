@@ -1,0 +1,30 @@
+<form [formGroup]="formItem" (ngSubmit)="addItem()">
+    <div id="formulario-cadastro" class="container">
+        <h2>Cadastre-se</h2>
+        
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="Nome">Nome</label>
+        <input formControlName="nome" type="text" class="form-control" id="Nome"  placeholder="Informe o nome do item" required>
+        </div>
+
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="valor">Valor</label>
+        <input formControlName="valor" type="number" class="form-control" id="valor" placeholder="Informe o valor do item" required >
+        </div>
+
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            <label for="qtdeEstoque">Quantidade em Estoque</label>
+            <input formControlName="qtdeEstoque" type="number" class="form-control" id="qtdeEstoque" placeholder="Informe a quantidade em estoque do item" required>
+        </div>
+        
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            <label for="qtdeAlertaEstoque">Quantidade de Alerta</label>
+            <input formControlName="qtdeAlertaEstoque" type="number" class="form-control" id="qtdeAlertaEstoque" placeholder="Informe a quantidade de alerta do item" required>
+        </div>
+
+        <div class="divider d-flex align-items-center my-4"></div>
+
+        
+        <button type="submit" class="btn btn-primary" style="margin-top: 3%; margin-bottom: 2%; ">Enviar</button>
+    </div>
+</form>

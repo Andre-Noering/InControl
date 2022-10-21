@@ -27,7 +27,7 @@ public class FuncionarioEntity extends PessoaEntity implements UserDetails {
     private List<VendaEntity> vendas;
 
     @OneToMany(mappedBy = "funcionario", fetch = FetchType.LAZY)
-    private Set<PedidoCompraEntity> pedidos;
+    private List<PedidoCompraEntity> pedidos;
 
     @OneToMany(mappedBy = "gerente", fetch = FetchType.LAZY)
     private List<LojaEntity> lojas;

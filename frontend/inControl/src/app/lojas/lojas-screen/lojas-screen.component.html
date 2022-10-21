@@ -1,9 +1,10 @@
 <div class="row row-cols-6">
     <div class="d-flex flex-direction-column col-2 col-sm-2 loja-item" *ngFor="let loja of lojas">
-        <app-lojas-list-item  [loja]="loja" style="display:block; margin-top: 10px;"></app-lojas-list-item>
+        <button routerLink="/lojas/{{loja.razao_social}}" style="border: none; margin:0;">
+            <app-lojas-list-item  [loja]="loja"></app-lojas-list-item>
+        </button>
     </div>
-    <div style="display:block; margin-top: 20px;" id="adicionarLoja" class="d-flex flex-direction-column col-2 col-sm-2 loja-item">
-        <p style="font-size: 200px; margin:0; margin-top: 20px;">+</p>
-    </div>
+
+    <i routerLink="/adicionarLoja" class="bi bi-plus-square-fill"></i>   
 </div>
 

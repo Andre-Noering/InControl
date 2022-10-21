@@ -11,40 +11,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(  "/venda")
+@RequestMapping("/venda")
 public class VendaRestController {
     @Autowired
     private VendaService vendaService;
 
-    @GetMapping( "/venda-itens")
+    @GetMapping("/itens")
     public List<ItemPayloadDTO> getItens(Long id){
         return vendaService.getItens(id);
     }
-    @GetMapping( "/venda/{id}")
-    public VendaDTO getDTO(@PathVariable( "id")Long id){
+    @GetMapping("/{id}")
+    public VendaPayloadDTO getDTO(@PathVariable Long id){
         return vendaService.getDTOById(id);
     }
-    @GetMapping( "/venda-vendedor/{id}")
+    @PostMapping("/finalizar")
+    public void finalizar(@RequestBody Long id){
+        vendaService.finalizar(id);
+    }
+    @GetMapping("/vendedor/{id}")
     public PessoaPayloadDTO getVendedor(@PathVariable Long id){
         return vendaService.getVendedor(id);
     }
-    @GetMapping( "/venda-valor-total/{id}")
+    @GetMapping("/valor-total/{id}")
     public Double getValorTotal(@PathVariable Long id){
         return vendaService.getValorTotal(id);
     }
-    @GetMapping( "/venda-cliente/{id}")
+    @GetMapping("/cliente/{id}")
     public PessoaPayloadDTO getCliente(@PathVariable Long id){
         return vendaService.getCliente(id);
     }
-    @PostMapping( "/save-venda")
-    public void saveVenda(@RequestBody VendaPayloadDTO vendaDTO){
-        vendaService.save(vendaDTO);
+
+    @PostMapping("/adicionar")
+    public VendaPayloadDTO saveVenda(@RequestBody VendaPayloadDTO vendaDTO){
+        return vendaService.save(vendaDTO);
     }
-    @PutMapping( "/alteracao-venda")
+    @PutMapping("/alteracao")
     public void uptadeVenda(@RequestBody VendaDTO vendaDTO){
         vendaService.update(vendaDTO);
     }
-    @DeleteMapping( "delete-venda/{id}")
+    @DeleteMapping("/delete/{id}")
     public void delete(@PathVariable Long id) {
         vendaService.delete(id);
     }
