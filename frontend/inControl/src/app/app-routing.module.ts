@@ -11,6 +11,8 @@ import { ItemScreenComponent } from './estoque/item-screen/item-screen.component
 import { AddItemComponent } from './estoque/add-item/add-item.component';
 import { VendaListItemComponent } from './vendas/venda-list-item/venda-list-item.component';
 import { VendaScreenComponent } from './vendas/venda-screen/venda-screen.component';
+import { SobreNosScreenComponent } from './sobre-nos-screen/sobre-nos-screen.component';
+import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
 
 const routes: Routes = [
   {path: 'venda', component: ItemScreenComponent},
@@ -18,9 +20,12 @@ const routes: Routes = [
   {path: 'login', component: LoginScreenComponent},
   {path: 'cadastro', component: CadastroScreenComponent},
   {path: 'lojas', component: LojasScreenComponent},
-  {path: 'estoque', component: ItemScreenComponent},
+  {path: 'lojas/:razao_social', component: ItemLojaComponent},
+  {path: 'lojas/:razao_social/estoque', component: ItemScreenComponent},
+  {path: 'lojas/:razao_social/estoque/adicionar', component: AddItemComponent},
   {path: `estoque/adicionar`, component: AddItemComponent},
   {path: 'adicionarLoja', component: AddLojaComponent},
+  {path: 'SobreNos', component: SobreNosScreenComponent}
 ];
 
 @NgModule({
