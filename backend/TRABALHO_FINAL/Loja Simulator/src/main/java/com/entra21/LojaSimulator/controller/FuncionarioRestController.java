@@ -3,6 +3,7 @@ package com.entra21.LojaSimulator.controller;
 import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioPayloadDTO;
 import com.entra21.LojaSimulator.model.dto.FuncionarioVendaDTO;
+import com.entra21.LojaSimulator.model.dto.VendaDTO;
 import com.entra21.LojaSimulator.view.service.FuncionarioService;
 import com.entra21.LojaSimulator.view.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class FuncionarioRestController {
         return lojaService.getFuncionariosByRazaoSocial(razao_social);
     }
     @GetMapping("/vendas")
-    public FuncionarioVendaDTO getFuncionarioVendaDTO(Long id){
+    public List<VendaDTO> getFuncionarioVendaDTO(Long id){
         return funcionarioService.getVendasFuncionario(id);
     }
 
