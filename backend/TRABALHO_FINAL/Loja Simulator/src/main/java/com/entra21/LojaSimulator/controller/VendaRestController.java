@@ -24,6 +24,10 @@ public class VendaRestController {
     public VendaPayloadDTO getDTO(@PathVariable Long id){
         return vendaService.getDTOById(id);
     }
+    @PostMapping("/finalizar")
+    public void finalizar(@RequestBody Long id){
+        vendaService.finalizar(id);
+    }
     @GetMapping("/vendedor/{id}")
     public PessoaPayloadDTO getVendedor(@PathVariable Long id){
         return vendaService.getVendedor(id);
@@ -36,6 +40,7 @@ public class VendaRestController {
     public PessoaPayloadDTO getCliente(@PathVariable Long id){
         return vendaService.getCliente(id);
     }
+
     @PostMapping("/adicionar")
     public VendaPayloadDTO saveVenda(@RequestBody VendaPayloadDTO vendaDTO){
         return vendaService.save(vendaDTO);

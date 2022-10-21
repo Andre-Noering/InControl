@@ -4,21 +4,21 @@
         
         
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
-        <label for="selectItem">Selecione o item</label>
-        <select name="selectItem" id="selectItem" style="width: 50%;">
+        <label for="idItem">Selecione o item</label>
+        <select name="idItem"  formControlName="idItem" id="idItem" style="width: 50%;">
             <option></option>
-            <option *ngFor="let item of itens" value="{{item}}">
-                {{item.nome}} | R${{item.valor}}
+            <option *ngFor="let item of itens" value='{{item.id}}'>
+                {{item.nome}}
             </option>
         </select>
         </div>
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
             <label for="qtde">Quantidade vendida:</label>
-            <input id="qtde" formControlName="qtde" name="qtde">
+            <input type="number" id="qtde" formControlName="qtde" name="qtde">
         </div>
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
-            <label for="qtde">Valor unitario:</label>
-            <input id="valorUnitario" formControlName="qtde" name="qtde">
+            <label for="valorUnitario">Valor unitario:</label>
+            <input type="number" id="valorUnitario" formControlName="valorUnitario" name="valorUnitario">
         </div>
         <button class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;">Enviar</button>
     </div>

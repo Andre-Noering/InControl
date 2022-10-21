@@ -70,6 +70,16 @@ public class LojaService {
         vendasMeio.forEach(vendas -> vendas.forEach(venda -> vendasFim.add(venda)));
         return vendasFim;
     }
+    public List<PedidoCompraDTO> getAllPedidos(String razao_social){
+        List<PedidoCompraDTO> pedidosFim=new ArrayList<>();
+        List<PessoaEntity> pessoas = this.getByRazaoSocial(razao_social).getFuncionarios();
+        pessoas.removeIf(pessoa-> !funcionarioService.isFuncionario(pessoa.getId()));
+        List<List<PedidoCompraDTO>> pedidosMeio = pessoas.stream().map(func -> funcionarioService.getPedidosFuncionario(func.getId())
+        ).collect(Collectors.toList());
+        pedidosMeio.forEach(pedidos -> pedidos.forEach(pedido -> pedidosFim.add(pedido)));
+        return pedidosFim;
+    }
+
 
     public List<FornecedorPayloadDTO> getFornecedoresById(Long id) {
         LojaEntity loja = getById(id);

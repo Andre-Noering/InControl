@@ -49,6 +49,7 @@ export class AddVendaComponent implements OnInit {
       this.venda = venda;
     }
     addVenda(){
+      console.log(this.formVenda.value);
       this.vendaService.add(this.formVenda.value as Venda).subscribe(resultado=>{this.setVenda(resultado)
         ;
         this.router.navigate([`/lojas/${this.loja!.razao_social}/vendas/${this.venda!.id}/itensVenda`]);

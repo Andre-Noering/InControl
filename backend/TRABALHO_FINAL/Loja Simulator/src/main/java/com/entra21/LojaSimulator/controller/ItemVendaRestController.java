@@ -29,7 +29,7 @@ public class ItemVendaRestController {
     }
 
     @PostMapping("/adicionar")
-    public void save(@PathVariable ItemVendaDTO itemVendaDTO){
+    public void save(@RequestBody ItemVendaDTO itemVendaDTO){
         itemVendaService.save(itemVendaDTO);
     }
 

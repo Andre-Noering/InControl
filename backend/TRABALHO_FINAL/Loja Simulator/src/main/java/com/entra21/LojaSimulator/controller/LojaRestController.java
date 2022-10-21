@@ -21,6 +21,10 @@ public class LojaRestController {
     public List<VendaDTO> getVendas(@PathVariable String razao_social) {
         return lojaService.getAllVendas(razao_social);
     }
+    @GetMapping("/pedidos")
+    public List<PedidoCompraDTO> getPedidos(@PathVariable String razao_social){
+        return lojaService.getAllPedidos(razao_social);
+    }
 
     @PutMapping
     public void update(@RequestBody LojaUpdateDTO lojaDTO){

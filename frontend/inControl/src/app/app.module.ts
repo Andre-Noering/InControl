@@ -29,6 +29,8 @@ import { AddFornecedorComponent } from './fornecedores/add-fornecedor/add-fornec
 import { ItemVendaScreenComponent } from './venda/itensvenda/item-venda-screen/item-venda-screen.component';
 import { ItemVendaListItemComponent } from './venda/itensvenda/item-venda-list-item/item-venda-list-item.component';
 import { AddItemVendaComponent } from './venda/itensvenda/add-item-venda/add-item-venda.component';
+import { PedidoCompraListItemComponent } from './pedido-compra-list-item/pedido-compra-list-item.component';
+import { PedidosCompraScreenComponent } from './pedidos-compra/pedidos-compra-screen/pedidos-compra-screen.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { AddItemVendaComponent } from './venda/itensvenda/add-item-venda/add-ite
     ItemVendaScreenComponent,
     ItemVendaListItemComponent,
     AddItemVendaComponent,
+    PedidosCompraScreenComponent,
+    PedidoCompraListItemComponent,
   
   ],
   imports: [
@@ -133,6 +137,13 @@ export type Venda = {
   id_cliente: number;
   nome_cliente: string;
   nome_vendedor: string;
+  valor : number;
+}
+export type PedidoCompra = {
+  id: number | null;
+  data: Date | null;
+  id_funcionario: number;
+  nome_funcionario: string;
   valor : number;
 }
 
