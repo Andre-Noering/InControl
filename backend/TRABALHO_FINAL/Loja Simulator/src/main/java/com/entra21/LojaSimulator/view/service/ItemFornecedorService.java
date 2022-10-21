@@ -47,15 +47,15 @@ public class ItemFornecedorService {
 
 
     //POST
-    public void save(ItemFornecedorDTO itemFornecedorDTO){
-        ItemFornecedorEntity itemFornecedorEntity = new ItemFornecedorEntity();
-        itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getId_fornecedor()));
-        itemFornecedorEntity.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getId_item())));
-        itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValor_compra());
-        itemFornecedorEntity.setId(itemFornecedorDTO.getId());
-        itemFornecedorEntity.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getId_fornecedor()));
-        itemFornecedorRepository.save(itemFornecedorEntity);
-    }
+//    public void save(ItemFornecedorDTO itemFornecedorDTO){
+//        ItemFornecedorEntity itemFornecedorEntity = new ItemFornecedorEntity();
+//        itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getId_fornecedor()));
+//        itemFornecedorEntity.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getId_item())));
+//        itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValor_compra());
+//        itemFornecedorEntity.setId(itemFornecedorDTO.getId());
+//        itemFornecedorEntity.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getId_fornecedor()));
+//        itemFornecedorRepository.save(itemFornecedorEntity);
+//    }
 
     //PUT
     public void update(ItemFornecedorDTO itemFornecedorDTO){

@@ -34,7 +34,7 @@ import { PessoasScreenComponent } from './pessoas/pessoas-screen/pessoas-screen.
 import { PessoasListItemComponent } from './pessoas/pessoas-list-item/pessoas-list-item.component';
 import { PedidoCompraListItemComponent } from './pedidos-compra/pedido-compra-list-item/pedido-compra-list-item.component';
 import { AddPessoaComponent } from './pessoas/add-pessoa/add-pessoa.component';
-import { ItemFornecedorScreenComponent } from './item-fornecedor-screen/item-fornecedor-screen.component';
+import { ItemFornecedorScreenComponent } from './item-fornecedor/item-fornecedor-screen/item-fornecedor-screen.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +137,16 @@ export type Item = {
   qtdeAlertaEstoque: number,
   idLoja:number
 }
+
+export type ItemFornecedor = {
+  id:number;
+  idFornecedor:number;
+  idItem:number;
+  valorCompra:number;
+  nome_item:string;
+  nome_fornecedor:string;
+}
+
 
 export type Venda = {
   id: number | null;

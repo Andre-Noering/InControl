@@ -49,6 +49,11 @@ public class LojaService {
 
 
     //GET
+
+//    public List<ItemFornecedorDTO> getAllItensFornecedores(String razao_social){
+//
+//    }
+
     public List<ItemDTO> getItensById(Long id) {
         LojaEntity loja = getById(id);
         return loja.getItens().stream().map(item -> itemService.getDTOById(item.getId())).collect(Collectors.toList());

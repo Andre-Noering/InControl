@@ -16,15 +16,7 @@ export class CadastroService {
         console.log(funcionario);
         this.http.post(`/funcionario/adicionar`,funcionario).subscribe(
             resultado => {
-              console.log(resultado)
-            },
-            erro => {
-              if(erro.status == 400) {
-                console.log(erro);
-              }
-            }
-          );
-        this.authenticationService.login(funcionario.login, funcionario.senha).pipe(first())
+              this.authenticationService.login(funcionario.login, funcionario.senha).pipe(first())
         .subscribe(
             data => {
               console.log("caiu")
@@ -34,5 +26,13 @@ export class CadastroService {
                 console.log(error)
             });;
         this.router.navigate(['']);
+            },
+            erro => {
+              if(erro.status == 400) {
+                console.log(erro);
+              }
+            }
+          );
+        
     }
 }
