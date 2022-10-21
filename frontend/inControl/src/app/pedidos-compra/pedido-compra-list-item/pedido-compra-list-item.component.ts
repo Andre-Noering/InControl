@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { PedidoCompra } from '../app.module';
+import { PedidoCompra } from 'src/app/app.module';
 
 @Component({
   selector: 'app-pedido-compra-list-item',

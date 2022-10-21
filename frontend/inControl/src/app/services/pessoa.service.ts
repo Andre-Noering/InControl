@@ -19,4 +19,16 @@ export class PessoaService {
     getClientes(razao_social:string){
         return this.http.get<Pessoa[]>(`/${razao_social}/pessoas/clientes`)
     }
+    add(razao_social:string, pessoa:Pessoa){
+        this.http.post(`${razao_social}/pessoas/salvar`, pessoa).subscribe(
+            resultado => {
+              
+            },
+            erro => {
+              if(erro.status == 400) {
+                console.log(erro);
+              }
+            }
+          );
+    }
 }
