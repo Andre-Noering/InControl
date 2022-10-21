@@ -1,7 +1,7 @@
 
-<div class="row row-cols-6" [ngStyle]="{'display': loja==null ? 'flex' : 'none'}">
+<div class="row row-cols-6">
     <div class="d-flex flex-direction-column col-2 col-sm-2 loja-item" *ngFor="let loja of lojas">
-        <button (click)="setLoja(loja)" style="border: none; margin:0;">
+        <button routerLink="/lojas/{{loja.razao_social}}" style="border: none; margin:0;">
             <app-lojas-list-item  [loja]="loja" style="display:block; margin-top: 10px;"></app-lojas-list-item>
         </button>
     </div>
@@ -13,21 +13,5 @@
         </h1>
     </a>
     
-</div>
-
-<!--ÁREA DO ESTOQUE-->
-<div [ngStyle]="{'display': loja!=null && itens==false && funcionarios==false ? 'block' : 'none'}">
-    <app-item-loja (funcionarios)="setFuncionarios($event)" (itens)="setItens($event)" (lojaNull)="setLoja($event)" [loja]="loja"></app-item-loja>
-</div>
-<div [ngStyle]="{'display': loja!=null && itens==true && addItem==false ? 'block' : 'none'}" >
-    <app-item-screen (voltarItem)="setItens($event)" (adicionandoItem)="adicionando($event)" [loja]="loja" ></app-item-screen>
-</div>
-<div [ngStyle]="{'display': loja!=null && itens==true && addItem==true ? 'block' : 'none'}">
-    <app-add-item [loja]="loja"></app-add-item>
-</div>
-
-<!--ÁREA DOS FUNCIONÁRIOS-->
-<div [ngStyle]="{'display':loja!=null && itens==false && funcionarios==true ? 'block' : 'none'}">
-    <app-funcionario-screen [loja]="loja"></app-funcionario-screen>
 </div>
 

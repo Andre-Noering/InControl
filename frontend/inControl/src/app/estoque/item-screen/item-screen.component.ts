@@ -3,46 +3,33 @@ import { HttpClient } from '@angular/common/http';
 import { Loja, User, Item } from '../../app.module';
 import { AuthenticationService } from '../../helpers/auth.service';
 import { ItemService } from 'src/app/services/item.service';
+import { LojaService } from 'src/app/services/loja.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item-screen',
   templateUrl: './item-screen.component.html',
   styleUrls: ['./item-screen.component.css']
 })
-export class ItemScreenComponent implements OnInit, OnChanges {
-  @Input() loja: Loja |null=null;
-  @Output() adicionandoItem = new EventEmitter<boolean>();
-  @Output() voltarItem = new EventEmitter<boolean>();
-
+export class ItemScreenComponent {
+  loja: Loja | null = null;
   user: User | null = null;
   itens: Item[] = [];
   constructor(private http: HttpClient,
     private authenticationService: AuthenticationService,
-    private itemService:ItemService) {
-    this.authenticationService.user.subscribe(x => this.user = x);
+    private itemService:ItemService,
+    private lojaService: LojaService, private route: ActivatedRoute) {
+      this.authenticationService.user.subscribe(x => this.user = x);
+      this.route.params.subscribe(params => this.lojaService.getByRazaoSocial(params['razao_social']).subscribe(resultado => {
+        this.loja = resultado;
+        this.itemService.getAll(this.loja!.id).pipe().subscribe(itens => {
+          this.itens = itens;
+        });
+      },
+      erro => {
+        if(erro.status == 400) {
+          console.log(erro);
+        }
+      }));
    }
-  ngOnChanges(changes: SimpleChanges): void {
-    this.loja = changes['loja'].currentValue;
-    this.loadEstoque();
-  }
-
-  ngOnInit(): void {
-    this.loadEstoque();
-  }
-
-  loadEstoque = () => {
-    if (this.loja != null) {
-      console.log("loja");
-      this.itemService.getAll(this.loja.id).pipe().subscribe(itens => {
-        this.itens = itens;
-      });
-    }
-  }
-
-  addItem(){
-    this.adicionandoItem.emit(true);
-  }
-  voltarTela(){
-    this.voltarItem.emit(false);
-  }
 }
