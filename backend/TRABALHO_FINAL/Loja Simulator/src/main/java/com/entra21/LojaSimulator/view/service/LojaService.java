@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -56,6 +57,13 @@ public class LojaService {
     public List<FuncionarioPayloadDTO> getFuncionariosByRazaoSocial(String razao_social) {
         LojaEntity loja = getByRazaoSocial(razao_social);
         return loja.getFuncionarios().stream().map(func -> funcionarioService.getDTOwithAtivoById(func.getId())).collect(Collectors.toList());
+    }
+
+    public List<VendaDTO> getAllVendas(String razaoSocial){
+        List<VendaDTO> vendasFim = new ArrayList<>();
+        this.getByRazaoSocial(razaoSocial).getFuncionarios().stream().map(func -> funcionarioService.getVendasFuncionario(func.getId()).stream().map(venda -> vendasFim.add(venda)));
+        return vendasFim;
+
     }
 
     public List<FornecedorDTO> getFornecedoresById(Long id) {

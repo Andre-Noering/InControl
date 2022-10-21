@@ -68,6 +68,14 @@ export type Funcionario = {
   senha:string;
 }
 
+export type Pessoa = {
+  id: number;
+  nome: string;
+  sobrenome: string;
+  telefone: string;
+  cpf: string;
+}
+
 export type Loja = {
   id:number,
   razao_social: string;
@@ -83,4 +91,11 @@ export type Item = {
   qtdeEstoque: number,
   qtdeAlertaEstoque: number,
   idLoja:number
+}
+
+export type Venda = {
+  id: number,
+  data: Date,
+  id_vendedor: number,
+  id_cliente: number
 }

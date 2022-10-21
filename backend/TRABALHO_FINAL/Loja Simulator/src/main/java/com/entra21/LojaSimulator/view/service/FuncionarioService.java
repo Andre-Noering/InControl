@@ -11,7 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FuncionarioService implements UserDetailsService {
@@ -59,9 +61,9 @@ public class FuncionarioService implements UserDetailsService {
     }
 
     //Método Get - Retornando todas as vendas do funcionário filtrando o funcionário pelo iD
-    public FuncionarioVendaDTO getVendasFuncionario(Long id) {
-        Optional<FuncionarioEntity> funcionario = funcionarioRepository.findById(id);
-        return funcionario.map(funcionarioEntity -> new FuncionarioVendaDTO(funcionarioEntity.getVendas())).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Funcionário não encontrado!"));
+    public List<VendaDTO> getVendasFuncionario(Long id) {
+        FuncionarioEntity funcionario = getFuncionarioById(id);
+        return funcionario.getVendas().stream().map(venda -> new VendaDTO(venda.getId(), venda.getData(), venda.getPessoa().getId(), venda.getFuncionario().getId())).collect(Collectors.toList());
     }
 
 
