@@ -23,7 +23,7 @@ export class LojaService {
     }
 
     addLoja(loja:Loja){
-        return this.http.post(`/adicionar`, loja).subscribe(
+        return this.http.post(`/adicionarLoja`, loja).subscribe(
             resultado => {
               this.router.navigate([`/lojas`])
             },
