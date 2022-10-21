@@ -19,6 +19,7 @@ import { FuncionarioScreenComponent } from './funcionarios/funcionario-screen/fu
 import { FuncionarioListItemComponent } from './funcionarios/funcionario-list-item/funcionario-list-item.component';
 import { AddFuncionarioComponent } from './funcionarios/add-funcionario/add-funcionario.component';
 import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
+import { SobreNosScreenComponent } from './sobre-nos-screen/sobre-nos-screen.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
     AddFuncionarioComponent,
     ItemLojaComponent,
     FuncionarioScreenComponent,
+    SobreNosScreenComponent
   ],
   imports: [
     BrowserModule,
