@@ -25,24 +25,22 @@ export class VendaService {
     }
 
     getVendedor(id:number) {
-        return this.http.get<Pessoa>(`/venda/vendedor/${id}`)
+        return this.http.get<Pessoa>(`/venda/vendedor/${id}`);
     }
 
     getCliente(id:number) {
-        return this.http.get<Pessoa>(`/venda/cliente/${id}`)
+        return this.http.get<Pessoa>(`/venda/cliente/${id}`);
     }
 
+    getVenda(id:number) {
+      return this.http.get<Venda>(`venda/${id}`);
+    }
+    setVenda(venda: Venda){
+      console.log(venda);
+      return venda;
+    }
     add(venda:Venda){
-        this.http.post(`/venda/adicionar`, venda).subscribe(
-            resultado => {
-              console.log(resultado);
-            },
-            erro => {
-              if(erro.status == 400) {
-                console.log(erro);
-              }
-            }
-          );
+      return this.http.post<Venda>(`/venda/adicionar`, venda);
     }
     
 }

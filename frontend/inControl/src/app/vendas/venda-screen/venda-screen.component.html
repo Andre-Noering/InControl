@@ -1,8 +1,10 @@
 <div class="cont" style="margin-top:30px; height: 50%;">
-    <h2 style="margin: 30px;">Estoque</h2>
-    <div class="titulo1" style="height: 20%;">Nome</div><div class="titulo borda">Valor</div><div class="titulo">Quantidade em estoque</div>
+    <h2 style="margin: 30px;">Vendas</h2>
+    <div class="titulo1" style="height: 20%;">Data</div><div class="titulo borda">Valor</div><div class="titulo borda">Vendedor</div><div class="titulo">Cliente</div>
 
     <div *ngFor="let venda of vendas">
-        <app-venda-list-item  [venda]="venda"></app-venda-list-item>
+        <app-venda-list-item [venda]="venda" ></app-venda-list-item>
     </div>
+    <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas/adicionar">+</button>
+</div>
 

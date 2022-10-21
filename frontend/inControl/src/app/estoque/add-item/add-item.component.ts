@@ -45,7 +45,7 @@ export class AddItemComponent {
     })
   }
   addItem(){
-    this.itemService.add(this.formItem.value as Item);
+    this.itemService.add(this.loja!.razao_social,this.formItem.value as Item);
     this.router.navigate([`/lojas/${this.loja?.razao_social ?? ''}/estoque`])
   }
 }

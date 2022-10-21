@@ -1,6 +1,7 @@
 package com.entra21.LojaSimulator.controller;
 
 import com.entra21.LojaSimulator.model.dto.FornecedorDTO;
+import com.entra21.LojaSimulator.model.dto.FornecedorPayloadDTO;
 import com.entra21.LojaSimulator.model.dto.ItemDTO;
 import com.entra21.LojaSimulator.model.dto.ItemFornecedorDTO;
 import com.entra21.LojaSimulator.view.service.FornecedorService;
@@ -25,7 +26,7 @@ public class FornecedorRestController {
     private LojaService lojaService;
 
     @GetMapping
-    public List<FornecedorDTO> getFornecedores(@PathVariable String razao_social){
+    public List<FornecedorPayloadDTO> getFornecedores(@PathVariable String razao_social){
         return fornecedorService.getAllByLoja(razao_social);
     }
 
@@ -41,7 +42,7 @@ public class FornecedorRestController {
     }
 
     @PostMapping("/adicionar")
-    public void post(@RequestBody FornecedorDTO fornecedorDTO){
+    public void post(@RequestBody FornecedorPayloadDTO fornecedorDTO){
         fornecedorService.save(fornecedorDTO);
     }
 

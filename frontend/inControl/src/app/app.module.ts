@@ -20,6 +20,15 @@ import { FuncionarioListItemComponent } from './funcionarios/funcionario-list-it
 import { AddFuncionarioComponent } from './funcionarios/add-funcionario/add-funcionario.component';
 import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
 import { SobreNosScreenComponent } from './sobre-nos-screen/sobre-nos-screen.component';
+import { VendaListItemComponent } from './vendas/venda-list-item/venda-list-item.component';
+import { VendaScreenComponent } from './vendas/venda-screen/venda-screen.component';
+import { AddVendaComponent } from './vendas/add-venda/add-venda.component';
+import { FornecedorScreenComponent } from './fornecedores/fornecedor-screen/fornecedor-screen.component';
+import { FornecedorListItemComponent } from './fornecedores/fornecedor-list-item/fornecedor-list-item.component';
+import { AddFornecedorComponent } from './fornecedores/add-fornecedor/add-fornecedor.component';
+import { ItemVendaScreenComponent } from './venda/itensvenda/item-venda-screen/item-venda-screen.component';
+import { ItemVendaListItemComponent } from './venda/itensvenda/item-venda-list-item/item-venda-list-item.component';
+import { AddItemVendaComponent } from './venda/itensvenda/add-item-venda/add-item-venda.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +47,17 @@ import { SobreNosScreenComponent } from './sobre-nos-screen/sobre-nos-screen.com
     AddFuncionarioComponent,
     ItemLojaComponent,
     FuncionarioScreenComponent,
-    SobreNosScreenComponent
+    SobreNosScreenComponent,
+    VendaListItemComponent,
+    VendaScreenComponent,
+    AddVendaComponent,
+    FornecedorScreenComponent,
+    FornecedorListItemComponent,
+    AddFornecedorComponent,
+    ItemVendaScreenComponent,
+    ItemVendaListItemComponent,
+    AddItemVendaComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -59,7 +78,7 @@ export type User = {
   password: string;
   authdata?: string;
 }
-export type Funcionario = {
+export type Gerente = {
   idPessoa: number;
   nome: string;
   sobrenome: string;
@@ -69,9 +88,20 @@ export type Funcionario = {
   login: string;
   senha:string;
 }
+export type Funcionario = {
+  idPessoa: number;
+  nome: string;
+  sobrenome: string;
+  cpf: string;
+  ativo:boolean;
+  telefone:string;
+  login: string;
+  senha:string;
+  idLoja:number;
+}
 
 export type Pessoa = {
-  id: number;
+  idPessoa: number;
   nome: string;
   sobrenome: string;
   telefone: string;
@@ -88,6 +118,7 @@ export type Loja = {
 }
 
 export type Item = {
+  id:number;
   nome: string;
   valor: number,
   qtdeEstoque: number,
@@ -96,8 +127,29 @@ export type Item = {
 }
 
 export type Venda = {
-  id: number,
-  data: Date,
-  id_vendedor: number,
-  id_cliente: number
+  id: number | null;
+  data: Date | null;
+  id_vendedor: number;
+  id_cliente: number;
+  nome_cliente: string;
+  nome_vendedor: string;
+  valor : number;
+}
+
+export type Fornecedor = {
+  id:number,
+  razao_social: string;
+  cnpj:string;
+  contato:string;
+  idLoja:number;
+}
+
+export type ItemVenda = {
+  id:number;
+  idVenda:number;
+  idItem:number;
+  qtde:number;
+  valorUnitario:number;
+  nome:string;
+  qtdeEstoque:number;
 }

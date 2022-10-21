@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Loja, User, Venda } from 'src/app/app.module';
 import { AuthenticationService } from 'src/app/helpers/auth.service';
+import { LojaService } from 'src/app/services/loja.service';
 import { VendaService } from 'src/app/services/venda.service';
 
 @Component({
@@ -9,24 +11,30 @@ import { VendaService } from 'src/app/services/venda.service';
   templateUrl: './venda-screen.component.html',
   styleUrls: ['./venda-screen.component.css']
 })
-export class VendaScreenComponent implements OnInit {
+export class VendaScreenComponent{
 
-  @Input() loja: Loja |null=null;
-  @Input() adic: boolean = false;
-  @Output() adicionandoVenda = new EventEmitter<boolean>();
-  @Output() voltarVenda= new EventEmitter<boolean>();
+  loja: Loja |null=null;
 
   user: User | null = null;
+  
   vendas: Venda[] = [];
   constructor(private http: HttpClient,
     private authenticationService: AuthenticationService,
-    private vendaService:VendaService) {
-    this.authenticationService.user.subscribe(x => this.user = x);
+    private vendaService:VendaService,
+    private lojaService: LojaService,
+    private route: ActivatedRoute) {
+      this.route.params.subscribe(params => this.lojaService.getByRazaoSocial(params['razao_social']).subscribe(resultado => {
+        this.loja = resultado;
+        this.vendaService.getAll(resultado.razao_social).pipe().subscribe(vendas => {
+          this.vendas = vendas;
+          console.log(this.vendas);
+        });
+      },
+      erro => {
+        if(erro.status == 400) {
+          console.log(erro);
+        }
+      }));
    }
-  ngOnInit(): void {
-    this.vendaService.getAll("teste").pipe().subscribe(vendas => {
-      this.vendas = vendas;
-      console.log(vendas);
-    });}
 }
 

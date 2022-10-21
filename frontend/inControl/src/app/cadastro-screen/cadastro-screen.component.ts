@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Funcionario } from '../app.module';
+import { Funcionario, Gerente } from '../app.module';
 import { AuthenticationService } from '../helpers/auth.service';
 import { CadastroService } from '../services/cadastro.service';
 
@@ -32,6 +32,6 @@ export class CadastroScreenComponent implements OnInit {
   }
 
   cadastro(){
-    this.cadastroService.cadastro(this.formCadastro.value as Funcionario);
+    this.cadastroService.cadastro(this.formCadastro.value as Gerente);
   }
 }

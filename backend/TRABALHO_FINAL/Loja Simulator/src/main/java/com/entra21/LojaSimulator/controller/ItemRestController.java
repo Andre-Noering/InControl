@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/itens")
+@RequestMapping("/{razao_social}/itens")
 public class ItemRestController {
 	@Autowired
 	private ItemService itemService;
 	@Autowired
 	private LojaService lojaService;
-	@GetMapping("/{id_loja}")
-	public List<ItemDTO> getAll(@PathVariable Long id_loja){
-		return itemService.getAllByLoja(id_loja);
+	@GetMapping("")
+	public List<ItemDTO> getAll(@PathVariable String razao_social){
+		return itemService.getAllByLoja(razao_social);
 	}
 
 	@GetMapping("/item/{id}")

@@ -9,11 +9,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(  "/pessoas")
+@RequestMapping("/{razao_social}/pessoas")
 public class PessoaRestController {
 
     @Autowired
     private PessoaService pessoaService;
+
+    @GetMapping("/clientes")
+    public List<PessoaDTO> getClientes(@PathVariable String razao_social){
+        return pessoaService.getClientes(razao_social);
+    }
 
     @GetMapping( "/{id}")
     public PessoaDTO getPessoa(@PathVariable Long id) {

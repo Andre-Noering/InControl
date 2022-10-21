@@ -23,12 +23,18 @@ public class FuncionarioService implements UserDetailsService {
     @Autowired
     private VendaService vendaService;
 
+    @Autowired
+    private LojaService lojaService;
+
 
     //GET
     public FuncionarioEntity getFuncionarioById(Long id){
         return funcionarioRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Funcionario não encontrada!"));
     }
 
+    public boolean isFuncionario(Long id){
+        return funcionarioRepository.existsById(id);
+    }
     public Long getIdByLogin(String login){
         return funcionarioRepository.findByLogin(login).getId();
     }
@@ -37,7 +43,7 @@ public class FuncionarioService implements UserDetailsService {
     public FuncionarioDTO getDTOById(Long id) {
         FuncionarioEntity funcionario = getFuncionarioById(id);
         FuncionarioDTO dto = new FuncionarioDTO();
-        dto.setIdPessoa(funcionario.getId());
+        dto.setId(funcionario.getId());
         dto.setNome(funcionario.getNome());
         dto.setLogin(funcionario.getLogin());
         dto.setSenha(funcionario.getSenha());
@@ -47,6 +53,7 @@ public class FuncionarioService implements UserDetailsService {
         return dto;
     }
     public FuncionarioPayloadDTO getDTOwithAtivoById(Long id) {
+
         FuncionarioEntity funcionario = getFuncionarioById(id);
         FuncionarioPayloadDTO dto = new FuncionarioPayloadDTO();
         dto.setIdPessoa(funcionario.getId());
@@ -63,14 +70,14 @@ public class FuncionarioService implements UserDetailsService {
     //Método Get - Retornando todas as vendas do funcionário filtrando o funcionário pelo iD
     public List<VendaDTO> getVendasFuncionario(Long id) {
         FuncionarioEntity funcionario = getFuncionarioById(id);
-        return funcionario.getVendas().stream().map(venda -> new VendaDTO(venda.getId(), venda.getData(), venda.getPessoa().getId(), venda.getFuncionario().getId())).collect(Collectors.toList());
+        return funcionario.getVendas().stream().map(venda -> new VendaDTO(venda.getId(), venda.getData(), venda.getPessoa().getId(), venda.getFuncionario().getId(), venda.getPessoa().getNome(), venda.getFuncionario().getNome(), vendaService.getValorTotal(venda.getId()))).collect(Collectors.toList());
     }
 
 
     //Build do funcionário
     public FuncionarioEntity build(FuncionarioDTO funcionarioDTO){
         FuncionarioEntity newFuncionario = new FuncionarioEntity();
-        newFuncionario.setId(funcionarioDTO.getIdPessoa());
+        newFuncionario.setId(funcionarioDTO.getId());
         newFuncionario.setNome(funcionarioDTO.getNome());
         newFuncionario.setSobrenome(funcionarioDTO.getSobrenome());
         newFuncionario.setTelefone(funcionarioDTO.getTelefone());
@@ -84,20 +91,23 @@ public class FuncionarioService implements UserDetailsService {
     //Metodo Save - Criando um funcionario
     public void save(FuncionarioDTO funcionarioDTO){
         FuncionarioEntity funcionarioEntity = new FuncionarioEntity();
-        funcionarioEntity.setId(funcionarioDTO.getIdPessoa());
+        funcionarioEntity.setId(funcionarioDTO.getId());
         funcionarioEntity.setNome(funcionarioDTO.getNome());
         funcionarioEntity.setSobrenome(funcionarioDTO.getSobrenome());
         funcionarioEntity.setTelefone(funcionarioDTO.getTelefone());
         funcionarioEntity.setCpf(funcionarioDTO.getCpf());
         funcionarioEntity.setLogin(funcionarioDTO.getLogin());
         funcionarioEntity.setSenha(funcionarioDTO.getSenha());
+        if(funcionarioDTO.getIdLoja()!=null) {
+            funcionarioEntity.setLoja(lojaService.getById(funcionarioDTO.getIdLoja()));
+        }
         funcionarioRepository.save(funcionarioEntity);
     }
 
 
     //PUT
     public void update(FuncionarioDTO funcionarioDTO){
-        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getIdPessoa());
+        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getId());
             if (funcionarioDTO.getCpf() != null){
                 funcionarioEntity.setCpf(funcionarioDTO.getCpf());
             }

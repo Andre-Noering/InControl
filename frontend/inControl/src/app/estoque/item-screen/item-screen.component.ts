@@ -22,7 +22,7 @@ export class ItemScreenComponent {
       this.authenticationService.user.subscribe(x => this.user = x);
       this.route.params.subscribe(params => this.lojaService.getByRazaoSocial(params['razao_social']).subscribe(resultado => {
         this.loja = resultado;
-        this.itemService.getAll(this.loja!.id).pipe().subscribe(itens => {
+        this.itemService.getAll(this.loja!.razao_social).pipe().subscribe(itens => {
           this.itens = itens;
         });
       },

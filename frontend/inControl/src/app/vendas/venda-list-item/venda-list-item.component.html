@@ -1,6 +1,6 @@
 <ul style="width:100%" class="list-group list-group-horizontal">
-    <li style="width: 50%; border-radius: 0;"class="list-group-item">{{venda.id}}</li>
-    <li style="width: 25%; border-radius: 0;" class="list-group-item">R${{vendaService.getValor(venda.id)}}</li>
-    <li style="width: 25%; border-radius: 0;" class="list-group-item">{{vendaService.getCliente(venda.id)}}</li>
-    <li style="width: 25%; border-radius: 0;" class="list-group-item">{{vendaService.getVendedor(venda.id)}}</li>
+    <li style="width: 50%; border-radius: 0;"class="list-group-item">{{venda?.data! ?? ''}}</li>
+    <li style="width: 25%; border-radius: 0;" class="list-group-item">R${{venda?.valor ?? 0}}</li>
+    <li style="width: 25%; border-radius: 0;" class="list-group-item">{{venda?.nome_vendedor ?? ''}}</li>
+    <li style="width: 25%; border-radius: 0;" class="list-group-item">{{venda?.nome_cliente ?? ''}}</li>
 </ul>

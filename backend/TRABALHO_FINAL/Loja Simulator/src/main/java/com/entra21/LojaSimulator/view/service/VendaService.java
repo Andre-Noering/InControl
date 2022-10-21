@@ -74,18 +74,18 @@ public class VendaService {
         return pessoa;
     }
 
-    public VendaDTO getDTOById(Long id){
+    public VendaPayloadDTO getDTOById(Long id){
         VendaEntity vendaEntity=getVenda(id);
-        return new VendaDTO(vendaEntity.getId(), vendaEntity.getData(), vendaEntity.getPessoa().getId(), vendaEntity.getFuncionario().getId());
+        return new VendaPayloadDTO(vendaEntity.getId(), vendaEntity.getData(), vendaEntity.getPessoa().getId(), vendaEntity.getFuncionario().getId());
     }
 
     //POST
-    public void save(VendaPayloadDTO vendaDTO){
+    public VendaPayloadDTO save(VendaPayloadDTO vendaDTO){
         VendaEntity newVenda = new VendaEntity();
         newVenda.setData(vendaDTO.getData());
         newVenda.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getId_cliente())));
         newVenda.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getId_vendedor())));
-        vendaRepository.save(newVenda);
+        return getDTOById(vendaRepository.save(newVenda).getId());
     }
 
     //PUT

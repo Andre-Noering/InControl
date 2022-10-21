@@ -17,7 +17,7 @@ public class LojaRestController {
         return lojaService.getDTOById(lojaService.getByRazaoSocial(razao_social).getId());
     }
 
-    @GetMapping ("/vendas")
+    @GetMapping("/vendas")
     public List<VendaDTO> getVendas(@PathVariable String razao_social) {
         return lojaService.getAllVendas(razao_social);
     }

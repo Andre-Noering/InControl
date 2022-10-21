@@ -4,13 +4,11 @@ import lombok.Data;
 
 @Data
 public class FuncionarioPayloadDTO extends PessoaDTO{
-    private Long id;
     private String login;
     private String senha;
     private boolean ativo;
 
-    public FuncionarioPayloadDTO(Long id, String login, String senha, boolean ativo) {
-        this.id=id;
+    public FuncionarioPayloadDTO(String login, String senha, boolean ativo) {
         this.login = login;
         this.senha = senha;
         this.ativo=ativo;
