@@ -16,11 +16,14 @@ export class ItemService {
     this.authenticationService.user.subscribe(x => this.user = x);
     }
 
-    getAll(id:number) {
-        return this.http.get<Item[]>(`/itens/${id}`);
+    getAll(razao_social:string) {
+        return this.http.get<Item[]>(`/${razao_social}/itens`);
     }
-    add(item:Item){
-        this.http.post(`/itens/adicionar`, item).subscribe(
+    get(razao_social:string,id:number){
+      return this.http.get<Item>(`/${razao_social}/itens/item/${id}`)
+    }
+    add(razao_social:string,item:Item){
+        this.http.post(`/${razao_social}/itens/adicionar`, item).subscribe(
             resultado => {
               console.log(resultado);
             },

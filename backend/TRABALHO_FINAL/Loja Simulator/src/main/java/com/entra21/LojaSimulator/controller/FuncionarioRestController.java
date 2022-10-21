@@ -20,7 +20,7 @@ public class FuncionarioRestController {
     private LojaService lojaService;
 
 
-    @GetMapping()
+    @GetMapping("/")
     public List<FuncionarioPayloadDTO> getFuncionarios(@PathVariable String razao_social){
         return lojaService.getFuncionariosByRazaoSocial(razao_social);
     }

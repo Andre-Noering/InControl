@@ -37,8 +37,8 @@ public class ItemService {
 
 
 	//Retorna todos os itens de uma loja
-	public List<ItemDTO> getAllByLoja(Long idLoja) {
-		List<ItemEntity> listaItens = lojaService.getById(idLoja).getItens();
+	public List<ItemDTO> getAllByLoja(String razao_social) {
+		List<ItemEntity> listaItens = lojaService.getByRazaoSocial(razao_social).getItens();
 		return listaItens.stream().map(item -> {
 			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtdeEstoque(), item.getQtdeAlertaEstoque());
 		}).collect(Collectors.toList());
@@ -56,7 +56,7 @@ public class ItemService {
 		return new ItemValorDTO(itemEntity.getValor());
 	}
 	public List<ItemDTO> getItensEmAlerta(String razaoSocial){
-		List<ItemDTO> listaItens = getAllByLoja(lojaService.getByRazaoSocial(razaoSocial).getId());
+		List<ItemDTO> listaItens = getAllByLoja(razaoSocial);
 		listaItens.removeIf(item -> !this.alertaById(item.getId()));
 		return listaItens;
 	}

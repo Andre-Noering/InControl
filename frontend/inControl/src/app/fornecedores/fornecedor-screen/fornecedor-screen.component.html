@@ -1,0 +1,10 @@
+<div class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Fornecedores</h2>
+    <div class="titulo1" style="height: 20%;">Razão Social</div><div class="titulo borda">Cnpj</div><div class="titulo">Contato</div>
+    <div *ngFor="let fornecedor of fornecedores">
+        <app-fornecedor-list-item [fornecedor]="fornecedor" ></app-fornecedor-list-item>
+    </div>
+    <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/fornecedores/adicionar" class="add">+</button>
+</div>
+<button routerLink="/lojas/{{loja?.razao_social ?? ''}}" class="btn btn-primary">Voltar</button>
+

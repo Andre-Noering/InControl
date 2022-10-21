@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Funcionario, Pessoa, Venda } from 'src/app/app.module';
 import { VendaService } from 'src/app/services/venda.service';
 
 @Component({
@@ -8,11 +9,16 @@ import { VendaService } from 'src/app/services/venda.service';
 })
 export class VendaListItemComponent implements OnInit {
 
+  @Input() venda: Venda | null = null;
+  
   constructor(
-    private vendaService:VendaService
-  ) { }
-
-  ngOnInit(): void {
+    public vendaService:VendaService
+  ) {
+    
   }
 
+  ngOnInit(): void {
+    
+      }
 }
+

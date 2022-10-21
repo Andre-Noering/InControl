@@ -5,8 +5,8 @@
     <div *ngFor="let funcionario of funcionarios">
         <app-funcionario-list-item [funcionario]="funcionario" ></app-funcionario-list-item>
     </div>
-    <button  class="add">+</button>
+    <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/funcionarios/adicionar" class="add">+</button>
 </div>
-<button  class="btn btn-primary">Voltar</button>
+<button routerLink="/lojas/{{loja?.razao_social ?? ''}}" class="btn btn-primary">Voltar</button>
 
 

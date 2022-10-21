@@ -1,0 +1,10 @@
+<div class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Itens da Venda</h2>
+    <div class="titulo1" style="height: 20%;">Nome</div><div class="titulo borda">Valor</div><div class="titulo borda">Quantidade</div><div class="titulo4">Quantidade em estoque</div>
+
+    <div *ngFor="let itemVenda of itensVenda">
+        <app-item-venda-list-item [itemVenda]="itemVenda" ></app-item-venda-list-item>
+    </div>
+    <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas/${{venda?.id ?? 0}/itensVenda/adicionar">+</button>
+</div>
+

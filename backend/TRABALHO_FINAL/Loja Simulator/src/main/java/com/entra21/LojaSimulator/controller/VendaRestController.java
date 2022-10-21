@@ -16,31 +16,31 @@ public class VendaRestController {
     @Autowired
     private VendaService vendaService;
 
-    @GetMapping( "/itens")
+    @GetMapping("/itens")
     public List<ItemPayloadDTO> getItens(Long id){
         return vendaService.getItens(id);
     }
-    @GetMapping( "/{id}")
-    public VendaDTO getDTO(@PathVariable( "id")Long id){
+    @GetMapping("/{id}")
+    public VendaPayloadDTO getDTO(@PathVariable Long id){
         return vendaService.getDTOById(id);
     }
     @GetMapping("/vendedor/{id}")
     public PessoaPayloadDTO getVendedor(@PathVariable Long id){
         return vendaService.getVendedor(id);
     }
-    @GetMapping( "/valor-total/{id}")
+    @GetMapping("/valor-total/{id}")
     public Double getValorTotal(@PathVariable Long id){
         return vendaService.getValorTotal(id);
     }
-    @GetMapping( "/cliente/{id}")
+    @GetMapping("/cliente/{id}")
     public PessoaPayloadDTO getCliente(@PathVariable Long id){
         return vendaService.getCliente(id);
     }
-    @PostMapping( "/adicionar")
-    public void saveVenda(@RequestBody VendaPayloadDTO vendaDTO){
-        vendaService.save(vendaDTO);
+    @PostMapping("/adicionar")
+    public VendaPayloadDTO saveVenda(@RequestBody VendaPayloadDTO vendaDTO){
+        return vendaService.save(vendaDTO);
     }
-    @PutMapping( "/alteracao")
+    @PutMapping("/alteracao")
     public void uptadeVenda(@RequestBody VendaDTO vendaDTO){
         vendaService.update(vendaDTO);
     }

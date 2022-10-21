@@ -19,7 +19,17 @@ public class PessoaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
+    private FuncionarioService funcionarioService;
 
+
+    public List<PessoaDTO> getClientes(String razao_social){
+        List<PessoaEntity> pessoas= pessoaRepository.findAll();
+        pessoas.removeIf(pessoa -> funcionarioService.isFuncionario(pessoa.getId()));
+        return pessoas.stream().map(pessoa-> {
+            return new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSobrenome(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getLoja().getId());
+        }).collect(Collectors.toList());
+    }
     public PessoaEntity getPessoaById(Long id){
         return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
     }

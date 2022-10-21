@@ -56,17 +56,22 @@ public class LojaService {
 
     public List<FuncionarioPayloadDTO> getFuncionariosByRazaoSocial(String razao_social) {
         LojaEntity loja = getByRazaoSocial(razao_social);
-        return loja.getFuncionarios().stream().map(func -> funcionarioService.getDTOwithAtivoById(func.getId())).collect(Collectors.toList());
+        List<PessoaEntity> listaGeral = loja.getFuncionarios();
+        listaGeral.removeIf(pessoa -> !funcionarioService.isFuncionario(pessoa.getId()));
+        return listaGeral.stream().map(func -> funcionarioService.getDTOwithAtivoById(func.getId())).collect(Collectors.toList());
     }
 
     public List<VendaDTO> getAllVendas(String razaoSocial){
         List<VendaDTO> vendasFim = new ArrayList<>();
-        this.getByRazaoSocial(razaoSocial).getFuncionarios().stream().map(func -> funcionarioService.getVendasFuncionario(func.getId()).stream().map(venda -> vendasFim.add(venda)));
+        List<PessoaEntity> pessoas = this.getByRazaoSocial(razaoSocial).getFuncionarios();
+        pessoas.removeIf(pessoa-> !funcionarioService.isFuncionario(pessoa.getId()));
+        List<List<VendaDTO>> vendasMeio = pessoas.stream().map(func -> funcionarioService.getVendasFuncionario(func.getId())
+        ).collect(Collectors.toList());
+        vendasMeio.forEach(vendas -> vendas.forEach(venda -> vendasFim.add(venda)));
         return vendasFim;
-
     }
 
-    public List<FornecedorDTO> getFornecedoresById(Long id) {
+    public List<FornecedorPayloadDTO> getFornecedoresById(Long id) {
         LojaEntity loja = getById(id);
         return loja.getFornecedores().stream().map(fornecedor -> fornecedorService.getDtoById(fornecedor.getId())).collect(Collectors.toList());
     }
