@@ -6,7 +6,6 @@
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
         <label for="idItem">Selecione o item</label>
         <select name="idItem"  formControlName="idItem" id="idItem" style="width: 50%;">
-            <option></option>
             <option *ngFor="let item of itens" value='{{item.id}}'>
                 {{item.nome}}
             </option>

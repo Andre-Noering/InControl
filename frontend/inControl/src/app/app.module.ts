@@ -29,8 +29,12 @@ import { AddFornecedorComponent } from './fornecedores/add-fornecedor/add-fornec
 import { ItemVendaScreenComponent } from './venda/itensvenda/item-venda-screen/item-venda-screen.component';
 import { ItemVendaListItemComponent } from './venda/itensvenda/item-venda-list-item/item-venda-list-item.component';
 import { AddItemVendaComponent } from './venda/itensvenda/add-item-venda/add-item-venda.component';
-import { PedidoCompraListItemComponent } from './pedido-compra-list-item/pedido-compra-list-item.component';
 import { PedidosCompraScreenComponent } from './pedidos-compra/pedidos-compra-screen/pedidos-compra-screen.component';
+import { PessoasScreenComponent } from './pessoas/pessoas-screen/pessoas-screen.component';
+import { PessoasListItemComponent } from './pessoas/pessoas-list-item/pessoas-list-item.component';
+import { PedidoCompraListItemComponent } from './pedidos-compra/pedido-compra-list-item/pedido-compra-list-item.component';
+import { AddPessoaComponent } from './pessoas/add-pessoa/add-pessoa.component';
+import { ItemFornecedorScreenComponent } from './item-fornecedor-screen/item-fornecedor-screen.component';
 
 @NgModule({
   declarations: [
@@ -60,8 +64,11 @@ import { PedidosCompraScreenComponent } from './pedidos-compra/pedidos-compra-sc
     ItemVendaListItemComponent,
     AddItemVendaComponent,
     PedidosCompraScreenComponent,
+    PessoasScreenComponent,
+    PessoasListItemComponent,
     PedidoCompraListItemComponent,
-  
+    AddPessoaComponent,
+    ItemFornecedorScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -110,6 +117,7 @@ export type Pessoa = {
   sobrenome: string;
   telefone: string;
   cpf: string;
+  idLoja: number;
 }
 
 export type Loja = {
