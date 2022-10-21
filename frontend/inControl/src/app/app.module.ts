@@ -36,7 +36,7 @@ import { ItemLojaComponent } from './lojas/item-loja/item-loja.component';
     FuncionarioListItemComponent,
     AddFuncionarioComponent,
     ItemLojaComponent,
-    FuncionarioScreenComponent
+    FuncionarioScreenComponent,
   ],
   imports: [
     BrowserModule,
