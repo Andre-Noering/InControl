@@ -21,15 +21,18 @@ public class PessoaService {
     private PessoaRepository pessoaRepository;
     @Autowired
     private FuncionarioService funcionarioService;
-
+    @Autowired
+    private LojaService lojaService;
 
     public List<PessoaDTO> getClientes(String razao_social){
-        List<PessoaEntity> pessoas= pessoaRepository.findAll();
+        List<PessoaEntity> pessoas= lojaService.getByRazaoSocial(razao_social).getFuncionarios();
         pessoas.removeIf(pessoa -> funcionarioService.isFuncionario(pessoa.getId()));
         return pessoas.stream().map(pessoa-> {
             return new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSobrenome(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getLoja().getId());
         }).collect(Collectors.toList());
     }
+
+
     public PessoaEntity getPessoaById(Long id){
         return pessoaRepository.findById(id).orElseThrow(() ->new ResponseStatusException(HttpStatus.NOT_FOUND, "Pessoa não encontrado!"));
     }
@@ -53,6 +56,7 @@ public class PessoaService {
         newPessoa.setSobrenome(input.getSobrenome());
         newPessoa.setTelefone(input.getTelefone());
         newPessoa.setCpf(input.getCpf());
+        newPessoa.setLoja(lojaService.getById(input.getIdLoja()));
         return newPessoa;
     }
 
@@ -62,11 +66,16 @@ public class PessoaService {
         PessoaDTO pessoaDTO = new PessoaDTO();
         pessoaDTO.setIdPessoa(pessoaEntity.getId());
         pessoaDTO.setNome(pessoaEntity.getNome());
+        pessoaDTO.setSobrenome(pessoaEntity.getSobrenome());
+        pessoaDTO.setCpf(pessoaEntity.getCpf());
+        pessoaDTO.setTelefone(pessoaEntity.getTelefone());
+        pessoaDTO.setIdLoja(pessoaEntity.getLoja().getId());
         return pessoaDTO;
     }
 
     //POST
     public void save(@RequestBody PessoaDTO pessoaDTO) {
+
         pessoaRepository.save(build(pessoaDTO));
     }
 

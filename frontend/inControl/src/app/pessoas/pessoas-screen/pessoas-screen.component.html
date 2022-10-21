@@ -1,0 +1,12 @@
+<div class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Clientes</h2>
+    <div class="titulo1" style="height: 20%;">Nome</div><div class="titulo">Contato</div><div class="titulo">CPF</div>
+
+    <div *ngFor="let pessoa of pessoas">
+        <app-pessoas-list-item [pessoa]="pessoa" ></app-pessoas-list-item>
+    </div>
+    <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/pessoas/adicionar" class="add">+</button>
+</div>
+<button routerLink="/lojas/{{loja?.razao_social ?? ''}}" class="btn btn-primary">Voltar</button>
+
+

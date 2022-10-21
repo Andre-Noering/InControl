@@ -22,7 +22,7 @@
 .titulo1 {
     border-top-left-radius: 8px;
     display: inline-block;
-    width: 40%;
+    width: 50%;
     height: 100%;
     background-color: #7b87f1;
     text-align: center;
@@ -30,7 +30,7 @@
 }
 .titulo {
     display: inline-block;
-    width: 30%;
+    width: 25%;
     text-align: center;
     height: 100%;
     color: white;

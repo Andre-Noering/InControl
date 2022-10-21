@@ -21,6 +21,8 @@ import { AddFornecedorComponent } from './fornecedores/add-fornecedor/add-fornec
 import { ItemVendaScreenComponent } from './venda/itensvenda/item-venda-screen/item-venda-screen.component';
 import { AddItemVendaComponent } from './venda/itensvenda/add-item-venda/add-item-venda.component';
 import { PedidosCompraScreenComponent } from './pedidos-compra/pedidos-compra-screen/pedidos-compra-screen.component';
+import { PessoasScreenComponent } from './pessoas/pessoas-screen/pessoas-screen.component';
+import { AddPessoaComponent } from './pessoas/add-pessoa/add-pessoa.component';
 
 const routes: Routes = [
   {path: 'venda', component: ItemScreenComponent},
@@ -30,6 +32,8 @@ const routes: Routes = [
   {path: 'lojas', component: LojasScreenComponent},
   {path: 'lojas/:razao_social', component: ItemLojaComponent},
   {path: 'lojas/:razao_social/funcionarios', component: FuncionarioScreenComponent},
+  {path: 'lojas/:razao_social/pessoas', component: PessoasScreenComponent},
+  {path: 'lojas/:razao_social/pessoas/adicionar', component: AddPessoaComponent},
   {path: 'lojas/:razao_social/fornecedores', component: FornecedorScreenComponent},
   {path: 'lojas/:razao_social/pedidosCompra', component: PedidosCompraScreenComponent},
   {path: 'lojas/:razao_social/pedidosCompra/adicionar', component: PedidosCompraScreenComponent},

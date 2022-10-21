@@ -9,7 +9,6 @@
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
         <label for="selectFunc">Selecione o funcionário</label>
         <select name="selectFunc" formControlName="id_vendedor" id="selectFunc" style="width: 50%;">
-            <option></option>
             <option *ngFor="let funcionario of funcionarios" value="{{funcionario.idPessoa}}">
                 {{funcionario.nome}} {{funcionario.sobrenome}}
             </option>

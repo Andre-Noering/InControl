@@ -1,12 +1,20 @@
 .loja-item{
-    display: flex;
-    flex-direction: column;
+    display: inline-block;
     margin: 10px 5px;
+    height: 30%;
 }
-#adicionarLoja{
-    border: 1px solid blue;
-    border-radius: 6px;
-    background-color: #ffffff;
+
+button{
     padding: 0;
-    height: 170px;
+}
+
+i {
+    font-size: 100px;
+    color: #7b87f1;
+}
+
+i:hover {
+    color:#6270ec ;
+    transition-duration: 500ms;
+    cursor: pointer;
 }
