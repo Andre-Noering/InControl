@@ -25,6 +25,7 @@ public class FuncionarioService implements UserDetailsService {
 
     @Autowired
     private LojaService lojaService;
+    @Autowired PedidoCompraService pedidoCompraService;
 
 
     //GET
@@ -71,6 +72,11 @@ public class FuncionarioService implements UserDetailsService {
     public List<VendaDTO> getVendasFuncionario(Long id) {
         FuncionarioEntity funcionario = getFuncionarioById(id);
         return funcionario.getVendas().stream().map(venda -> new VendaDTO(venda.getId(), venda.getData(), venda.getPessoa().getId(), venda.getFuncionario().getId(), venda.getPessoa().getNome(), venda.getFuncionario().getNome(), vendaService.getValorTotal(venda.getId()))).collect(Collectors.toList());
+    }
+
+    public List<PedidoCompraDTO> getPedidosFuncionario(Long id) {
+        FuncionarioEntity funcionario = getFuncionarioById(id);
+        return funcionario.getPedidos().stream().map(pedido -> new PedidoCompraDTO(pedido.getId(), pedido.getData(), pedido.getFuncionario().getId(), pedido.getFuncionario().getNome(), pedidoCompraService.getValorTotal(pedido.getId()))).collect(Collectors.toList());
     }
 
 

@@ -1,8 +1,6 @@
 package com.entra21.LojaSimulator.view.service;
 
-import com.entra21.LojaSimulator.model.dto.ItemVendaDTO;
 import com.entra21.LojaSimulator.model.dto.PedidoCompraDTO;
-import com.entra21.LojaSimulator.model.entity.ItemVendaEntity;
 import com.entra21.LojaSimulator.model.entity.PedidoCompraEntity;
 import com.entra21.LojaSimulator.view.repository.PedidoCompraRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class PedidoCompraService {
@@ -27,6 +25,11 @@ public class PedidoCompraService {
 		return new PedidoCompraDTO(pedidoCompraEntity.getId(), pedidoCompraEntity.getData(), pedidoCompraEntity.getFuncionario().getId());
 	}
 
+	public Double getValorTotal(Long id){
+		AtomicReference<Double> valor = new AtomicReference<>(0.0);
+		this.getById(id).getPedidosCompra().stream().forEach(pedido -> valor.updateAndGet(v -> v + pedido.getItemFornecedor().getValorCompra()));
+		return valor.get();
+	}
 	//POST
 	public void save(PedidoCompraDTO pedidoCompraDTO){
 		PedidoCompraEntity pedido = new PedidoCompraEntity();

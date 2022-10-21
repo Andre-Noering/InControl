@@ -29,4 +29,6 @@ public class ItemVendaDTO {
         this.nome = nome;
         this.qtdeEstoque=qtdeEstoque;
     }
+
+    public ItemVendaDTO(){}
 }
