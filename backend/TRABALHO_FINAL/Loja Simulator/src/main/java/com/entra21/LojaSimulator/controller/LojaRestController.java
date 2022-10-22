@@ -16,7 +16,10 @@ public class LojaRestController {
     public LojaPayloadDTO getLoja(@PathVariable String razao_social){
         return lojaService.getDTOById(lojaService.getByRazaoSocial(razao_social).getId());
     }
-
+    @GetMapping("/itensFornecedor")
+    public List<ItemFornecedorDTO> getAll(@PathVariable String razao_social){
+        return lojaService.getAllItensFornecedores(razao_social);
+    }
     @GetMapping("/vendas")
     public List<VendaDTO> getVendas(@PathVariable String razao_social) {
         return lojaService.getAllVendas(razao_social);

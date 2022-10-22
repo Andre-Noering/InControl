@@ -24,9 +24,13 @@ public class GerenteRestController {
         return lojaService.getLojasByLogin(login);
     }
 
-    @PostMapping("/adicionar")
+    @PostMapping("/adicionarLoja")
     public void save(@RequestBody LojaPayloadDTO lojaDTO){
         lojaService.save(lojaDTO);
+    }
+    @PostMapping("/funcionario/adicionar")
+    public void adicionar(@RequestBody FuncionarioDTO funcionarioDTO){
+        funcionarioService.save(funcionarioDTO);
     }
 
     @PostMapping("/login")

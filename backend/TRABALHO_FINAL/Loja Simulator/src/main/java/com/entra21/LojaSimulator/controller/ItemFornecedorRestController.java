@@ -10,6 +10,8 @@ import com.entra21.LojaSimulator.view.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/ItemFornecedor")
 public class ItemFornecedorRestController {
@@ -17,6 +19,8 @@ public class ItemFornecedorRestController {
     private ItemFornecedorService itemFornecedorService;
     @Autowired
     private FornecedorService fornecedorService;
+
+
 
     @GetMapping("/{id}")
     public ItemFornecedorDTO itemFornecedorDTO(@RequestBody Long id){

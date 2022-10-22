@@ -23,7 +23,8 @@ public class LojaService {
 
     @Autowired
     private LojaRepository lojaRepository;
-
+    @Autowired
+    private ItemFornecedorService itemFornecedorService;
     @Autowired
     private ItemService itemService;
 
@@ -49,6 +50,16 @@ public class LojaService {
 
 
     //GET
+
+    public List<ItemFornecedorDTO> getAllItensFornecedores(String razao_social){
+        List<ItemFornecedorDTO> itensFim = new ArrayList<>();
+        List<FornecedorEntity> fornecedores = this.getByRazaoSocial(razao_social).getFornecedores();
+        List<List<ItemFornecedorDTO>> itensMeio = fornecedores.stream().map(fornecedor -> (fornecedor.getItens().stream().map(item -> itemFornecedorService.getDTOById(item.getId())).collect(Collectors.toList()))
+        ).collect(Collectors.toList());
+        itensMeio.forEach(itens -> itens.forEach(item -> itensFim.add(item)));
+        return itensFim;
+    }
+
     public List<ItemDTO> getItensById(Long id) {
         LojaEntity loja = getById(id);
         return loja.getItens().stream().map(item -> itemService.getDTOById(item.getId())).collect(Collectors.toList());

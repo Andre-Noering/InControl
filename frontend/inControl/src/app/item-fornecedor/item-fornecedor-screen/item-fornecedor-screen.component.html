@@ -1,0 +1,18 @@
+
+<i class="bi bi-arrow-left-circle-fill" routerLink="/lojas/{{loja?.razao_social ?? ''}}"></i>
+<div class="cont" style= "height: 50%;">
+    <h2 style="margin-bottom: 30px;">Itens de fornecedor</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 30%; border-radius: 0;" class="list-group-item">Preço</li>
+        <li style="width: 30%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Fornecedor</li>
+    </ul>
+
+    <div *ngFor="let itemFornecedor of itensFornecedor">
+        <app-item-fornecedor-list-item [itemFornecedor]="itemFornecedor"></app-item-fornecedor-list-item>
+    </div>
+    <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/itensFornecedor/adicionar">+</button>
+</div>
+
+
+
