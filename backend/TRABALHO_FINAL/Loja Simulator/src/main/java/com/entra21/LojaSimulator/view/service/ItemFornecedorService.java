@@ -30,7 +30,7 @@ public class ItemFornecedorService {
 
     public ItemFornecedorDTO getDTOById(Long id){
         ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
-        return new ItemFornecedorDTO(itemFornecedorEntity.getId(), itemFornecedorEntity.getValorCompra(), itemFornecedorEntity.getItem().getId(), itemFornecedorEntity.getFornecedor().getId());
+        return new ItemFornecedorDTO( itemFornecedorEntity.getValorCompra(),itemFornecedorEntity.getId(), itemFornecedorEntity.getItem().getId(), itemFornecedorEntity.getFornecedor().getId(), itemFornecedorEntity.getItem().getNome(), itemFornecedorEntity.getFornecedor().getRazaoSocial());
     }
 
     public FornecedorEntity getFornecedorById(Long id){
@@ -47,21 +47,21 @@ public class ItemFornecedorService {
 
 
     //POST
-//    public void save(ItemFornecedorDTO itemFornecedorDTO){
-//        ItemFornecedorEntity itemFornecedorEntity = new ItemFornecedorEntity();
-//        itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getId_fornecedor()));
-//        itemFornecedorEntity.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getId_item())));
-//        itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValor_compra());
-//        itemFornecedorEntity.setId(itemFornecedorDTO.getId());
-//        itemFornecedorEntity.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getId_fornecedor()));
-//        itemFornecedorRepository.save(itemFornecedorEntity);
-//    }
+    public void save(ItemFornecedorDTO itemFornecedorDTO){
+        ItemFornecedorEntity itemFornecedorEntity = new ItemFornecedorEntity();
+        itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getIdFornecedor()));
+        itemFornecedorEntity.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getIdItem())));
+        itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValorCompra());
+        itemFornecedorEntity.setId(itemFornecedorDTO.getId());
+        itemFornecedorEntity.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getIdFornecedor()));
+        itemFornecedorRepository.save(itemFornecedorEntity);
+    }
 
     //PUT
     public void update(ItemFornecedorDTO itemFornecedorDTO){
         ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(itemFornecedorDTO.getId());
-        if(itemFornecedorDTO.getValor_compra() !=null){
-            itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValor_compra());
+        if(itemFornecedorDTO.getValorCompra() !=null){
+            itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValorCompra());
         }
     }
 

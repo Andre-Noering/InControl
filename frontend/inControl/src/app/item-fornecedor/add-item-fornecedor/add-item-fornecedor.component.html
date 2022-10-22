@@ -1,1 +1,29 @@
-<p>add-item-fornecedor works!</p>
+<form [formGroup]="formItemFornecedor" (ngSubmit)="addItemForn()">
+    <div id="formulario-cadastro" class="container">
+        <h2>Cadastre um item de fornecedor </h2>
+        
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            <label for="selectForn">Selecione o fornecedor</label>
+            <select name="selectForn" formControlName="idFornecedor" id="selectForn" style="width: 50%;">
+                <option *ngFor="let fornecedor of fornecedores" value="{{fornecedor.id}}">
+                    {{fornecedor.razao_social}}
+                </option>
+            </select>
+            </div>
+
+            <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+                <label for="selectItem">Selecione o item</label>
+                <select name="selectItem" formControlName="idItem" id="selectItem" style="width: 50%;">
+                    <option *ngFor="let item of itens" value="{{item.id}}">
+                        {{item.nome}}
+                    </option>
+                </select>
+                </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="valorCompra">Valor de Compra</label>
+        <input formControlName="valorCompra" type="number" class="form-control" id="valorCompra" placeholder="Informe o valor do item" required >
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="margin-top: 3%; margin-bottom: 2%; ">Enviar</button>
+    </div>
+</form>

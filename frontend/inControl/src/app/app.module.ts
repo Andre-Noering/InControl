@@ -35,6 +35,8 @@ import { PessoasListItemComponent } from './pessoas/pessoas-list-item/pessoas-li
 import { PedidoCompraListItemComponent } from './pedidos-compra/pedido-compra-list-item/pedido-compra-list-item.component';
 import { AddPessoaComponent } from './pessoas/add-pessoa/add-pessoa.component';
 import { ItemFornecedorScreenComponent } from './item-fornecedor/item-fornecedor-screen/item-fornecedor-screen.component';
+import { ItemFornecedorListITemComponent } from './item-fornecedor/item-fornecedor-list-item/item-fornecedor-list-item.component';
+import { AddItemFornecedorComponent } from './item-fornecedor/add-item-fornecedor/add-item-fornecedor.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { ItemFornecedorScreenComponent } from './item-fornecedor/item-fornecedor
     PessoasListItemComponent,
     PedidoCompraListItemComponent,
     AddPessoaComponent,
-    ItemFornecedorScreenComponent
+    ItemFornecedorScreenComponent,
+    ItemFornecedorListITemComponent,
+    AddItemFornecedorComponent
   ],
   imports: [
     BrowserModule,
@@ -139,12 +143,12 @@ export type Item = {
 }
 
 export type ItemFornecedor = {
-  id:number;
+  id:number|null;
   idFornecedor:number;
   idItem:number;
   valorCompra:number;
-  nome_item:string;
-  nome_fornecedor:string;
+  nome_item:string|null;
+  nome_fornecedor:string|null;
 }
 
 

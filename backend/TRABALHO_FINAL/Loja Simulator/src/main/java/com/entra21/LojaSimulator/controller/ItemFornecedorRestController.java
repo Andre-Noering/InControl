@@ -37,10 +37,10 @@ public class ItemFornecedorRestController {
         return itemFornecedorService.getItemDTO(id);
     }
 
-//    @PostMapping("/save")
-//    public void saveItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
-//        itemFornecedorService.save(itemFornecedorDTO);
-//    }
+    @PostMapping("/save")
+    public void saveItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
+        itemFornecedorService.save(itemFornecedorDTO);
+    }
 
     @PutMapping("/put")
     public void putItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
