@@ -1,0 +1,43 @@
+i {
+    color: #7b87f1;
+    font-size: 50px;
+    margin-left: 15px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+i:hover {
+    color:#6270ec ;
+    transition-duration: 500ms;
+    cursor: pointer;
+}
+
+div {
+    width: 100%;
+    text-align: center;
+}
+
+.container {
+    padding: 30px;
+    width: 20%;
+    margin: auto;
+    background-color: white;
+    height: 400px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(216, 216, 216, 0.75);
+}
+
+button {
+    border: 0;
+    width: 80%;
+    margin-bottom: 20px;
+    background-color: #7b87f1;
+}
+
+button:hover{
+    background-color:#6270ec ;
+    transition-duration: 500ms;
+    cursor: pointer;
+}

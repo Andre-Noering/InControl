@@ -1,13 +1,3 @@
-.loja-item{
-    display: inline-block;
-    margin: 10px 5px;
-    height: 30%;
-}
-
-button{
-    padding: 0;
-}
-
 i {
     font-size: 100px;
     color: #7b87f1;
@@ -18,3 +8,5 @@ i:hover {
     transition-duration: 500ms;
     cursor: pointer;
 }
+
+

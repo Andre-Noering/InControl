@@ -1,12 +1,16 @@
+<i routerLink="/lojas/{{loja?.razao_social ?? ''}}" class="bi bi-arrow-left-circle-fill"></i>
 <div class="cont" style="margin-top:30px; height: 50%;">
     <h2 style="margin: 30px;">Clientes</h2>
-    <div class="titulo1" style="height: 20%;">Nome</div><div class="titulo">Contato</div><div class="titulo">CPF</div>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 50%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 25%; border-radius: 0;" class="list-group-item">Contato</li>
+        <li style="width: 25%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Cpf</li>
+    </ul>
 
     <div *ngFor="let pessoa of pessoas">
         <app-pessoas-list-item [pessoa]="pessoa" ></app-pessoas-list-item>
     </div>
     <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/pessoas/adicionar" class="add">+</button>
 </div>
-<button routerLink="/lojas/{{loja?.razao_social ?? ''}}" class="btn btn-primary">Voltar</button>
 
 
