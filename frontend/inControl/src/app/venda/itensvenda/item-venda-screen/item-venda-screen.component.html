@@ -10,7 +10,7 @@
     <div *ngFor="let itemVenda of itensVenda">
         <app-item-venda-list-item [itemVenda]="itemVenda" ></app-item-venda-list-item>
     </div>
-    <button class="add" style="border-radius: 0; margin-bottom: 0;"routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas/{{venda?.id ?? 0}}/itensVenda/adicionar">+</button>
+    <button class="add" style="border-radius: 0; margin-bottom: 0;"routerLink="/lojas/{{loja?.razao_social}}/vendas/{{venda?.id}}/itensVenda/adicionar">+</button>
     <button class="add" (click)="ativFinalizar()">Finalizar venda</button>
 </div>
 

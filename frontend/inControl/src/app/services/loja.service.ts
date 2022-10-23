@@ -19,9 +19,11 @@ export class LojaService {
         return this.http.get<Loja[]>(`/${this.user!.login}/lojas`);
     }   
     getByRazaoSocial(razao_social:string){
-      return this.http.get<Loja>(`${razao_social}`);
+      return this.http.get<Loja>(`/loja/${razao_social}`);
     }
-
+    getById(id:number){
+      return this.http.get<Loja>(`/loja/${id}/`);
+    }
     addLoja(loja:Loja){
         return this.http.post(`/adicionarLoja`, loja).subscribe(
             resultado => {

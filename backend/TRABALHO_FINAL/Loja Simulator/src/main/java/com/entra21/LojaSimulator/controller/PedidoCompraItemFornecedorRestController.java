@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("PCIF")
+@RequestMapping("/PCIF")
 public class PedidoCompraItemFornecedorRestController {
     @Autowired
     private PedidoCompraItemFornecedorService pedidoCompraItemFornecedorService;
@@ -16,7 +16,7 @@ public class PedidoCompraItemFornecedorRestController {
     public PedidoCompraItemFornecedorDTO getDTO(@PathVariable( "id")Long id){
         return pedidoCompraItemFornecedorService.getDTOById(id);
     }
-    @PostMapping( "/save-pedido-compra-item-fornecedor")
+    @PostMapping( "/save")
     public void saveVenda(@RequestBody PedidoCompraItemFornecedorDTO dto){
         pedidoCompraItemFornecedorService.save(dto);
     }

@@ -22,7 +22,6 @@ export class ItemVendaService {
     add(razao_social:string,item:ItemVenda){
         this.http.post(`/${razao_social}/vendas/${item.idVenda}/itens/adicionar`, item).subscribe(
             resultado => {
-              console.log(resultado);
             },
             erro => {
               if(erro.status == 400) {

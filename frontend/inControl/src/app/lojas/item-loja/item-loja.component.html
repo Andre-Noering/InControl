@@ -1,16 +1,27 @@
-
+<div *ngIf="gerente">
 <i class="bi bi-arrow-left-circle-fill" routerLink="/lojas"></i>
 <div>
     <h2>{{loja?.razao_social ?? ''}}</h2>
 </div>
 <div class="container">
-    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social ?? ''}}/estoque">Estoque</button>
-    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social ?? ''}}/funcionarios">Funcionários</button>
-    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social ?? ''}}/pessoas">Clientes</button>
-    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas">Vendas</button>
-    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social ?? ''}}/fornecedores">Fornecedores</button>
-    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social ?? ''}}/pedidosCompra">Pedidos de Compra</button>
-    <button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas/{{loja?.razao_social ?? ''}}/itensFornecedor">Itens de Fornecedores</button>
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/estoque">Estoque</button>
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/funcionarios">Funcionários</button>
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/pessoas">Clientes</button>
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/vendas">Vendas</button>
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/fornecedores">Fornecedores</button>
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/pedidosCompra">Pedidos de Compra</button>
+    <button class="btn btn-primary" style="margin: 5px 10px;" routerLink="/lojas/{{loja?.razao_social}}/itensFornecedor">Itens de Fornecedores</button>
 
 </div>
+</div>
 
+<div *ngIf="!gerente">
+    <i class="bi bi-arrow-left-circle-fill" routerLink="/lojas"></i>
+<div>
+    <h2>{{loja?.razao_social ?? ''}}</h2>
+</div>
+<div class="container">
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/vendas/{{funcionario?.idPessoa}}">Suas Vendas</button>
+    <button class="btn btn-primary"  routerLink="/lojas/{{loja?.razao_social}}/pedidosCompra/{{funcionario?.idPessoa}}">Seus Pedidos de Compra</button>
+</div>
+</div>

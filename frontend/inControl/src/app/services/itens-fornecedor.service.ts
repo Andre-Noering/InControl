@@ -17,10 +17,10 @@ export class ItemFornecedorService {
     }
 
     getAll(razao_social:string) {
-        return this.http.get<ItemFornecedor[]>(`/${razao_social}/itensFornecedor`);
+        return this.http.get<ItemFornecedor[]>(`/loja/${razao_social}/itensFornecedor`);
     }
     get(razao_social:string,id:number){
-      return this.http.get<Item>(`/${razao_social}/itens/item/${id}`)
+      return this.http.get<ItemFornecedor>(`/ItemFornecedor/${id}/item-fornecedor`)
     }
     add(item:ItemFornecedor){
         this.http.post(`/ItemFornecedor/save`, item).subscribe(

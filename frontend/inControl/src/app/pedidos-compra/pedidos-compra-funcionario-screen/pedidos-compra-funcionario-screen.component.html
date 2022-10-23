@@ -1,0 +1,16 @@
+<i class="bi bi-arrow-left-circle-fill" routerLink="/lojas/{{loja?.razao_social ?? ''}}"></i>
+<div *ngIf="!adicionando" class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Pedidos de Compra</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 60%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Data</li>
+        <li style="width: 40%; border-radius: 0;" class="list-group-item">Preço</li>
+    </ul>
+
+    <div *ngFor="let pedido of pedidos">
+        <app-pedido-compra-list-item [gerente]="false" [pedido]="pedido" ></app-pedido-compra-list-item>
+    </div>
+    <button class="add" (click)="adicionando=true">+</button>
+</div>
+<div *ngIf="adicionando">
+    <app-add-pedido-compra [gerente]="false" [funcionario]="funcionario"></app-add-pedido-compra>
+</div>

@@ -1,16 +1,11 @@
+<div *ngIf="!escolhendoItem">
 <form [formGroup]="formItemVenda" (ngSubmit)="addItemVenda()">
     <div id="formulario-cadastro" class="container">
         <h2>Cadastrar item da venda</h2>
-        
-        
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
-        <label for="idItem">Selecione o item</label>
+        <small *ngIf="!itemEscolhido" (click)="escolhendoItem=true">Selecione o item</small>
+        <small *ngIf="itemEscolhido" (click)="escolhendoItem=true">Item selecionado: {{item?.nome}}. Clique para alterar</small>
         <br>
-        <select name="idItem"  formControlName="idItem" id="idItem" style="width: 50%;">
-            <option *ngFor="let item of itens" value='{{item.id}}'>
-                {{item.nome}}
-            </option>
-        </select>
         </div>
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
             <label for="qtde">Quantidade vendida:</label>
@@ -18,8 +13,24 @@
         </div>
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
             <label for="valorUnitario">Valor unitario:</label>
-            <input type="number" id="valorUnitario" formControlName="valorUnitario" name="valorUnitario">
+            <input type="number" id="valorUnitario" formControlName="valorUnitario" name="valorUnitario" value="item?.valor ?? 0">
         </div>
         <button class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;">Enviar</button>
     </div>
 </form>
+</div>
+<div *ngIf="escolhendoItem">
+    <i class="bi bi-arrow-left-circle-fill" routerLink="/lojas/{{loja?.razao_social ?? ''}}"></i>
+<div class="cont" style= "height: 50%;">
+    <h2 style="margin-bottom: 30px;">Estoque</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 55%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 35%; border-radius: 0; " class="list-group-item">Quantidade em estoque</li>
+        <li style="width: 10%; border-radius:0; border-top-right-radius:8px;" class="list-group-item">Escolha</li>
+    </ul>
+    <div *ngFor="let item of itens">
+        <app-item-list-item [escolhendo]="true" [item]="item" (selecionado)="setItem($event); escolhendoItem=false;"></app-item-list-item>
+    </div>
+</div>
+</div>
+

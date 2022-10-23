@@ -1,9 +1,6 @@
 package com.entra21.LojaSimulator.controller;
 
-import com.entra21.LojaSimulator.model.dto.FuncionarioDTO;
-import com.entra21.LojaSimulator.model.dto.FuncionarioPayloadDTO;
-import com.entra21.LojaSimulator.model.dto.FuncionarioVendaDTO;
-import com.entra21.LojaSimulator.model.dto.VendaDTO;
+import com.entra21.LojaSimulator.model.dto.*;
 import com.entra21.LojaSimulator.view.service.FuncionarioService;
 import com.entra21.LojaSimulator.view.service.LojaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{razao_social}/funcionarios")
+@RequestMapping("/funcionarios")
 public class FuncionarioRestController {
     @Autowired
     private FuncionarioService funcionarioService;
@@ -20,17 +17,26 @@ public class FuncionarioRestController {
     private LojaService lojaService;
 
 
-    @GetMapping("/")
+    @GetMapping("/{razao_social}")
     public List<FuncionarioPayloadDTO> getFuncionarios(@PathVariable String razao_social){
         return lojaService.getFuncionariosByRazaoSocial(razao_social);
     }
-    @GetMapping("/vendas")
-    public List<VendaDTO> getFuncionarioVendaDTO(Long id){
+    @GetMapping("/vendas/{id}")
+    public List<VendaDTO> getFuncionarioVendaDTO(@PathVariable Long id){
         return funcionarioService.getVendasFuncionario(id);
     }
 
-    @GetMapping("/{id_funcionario}")
-    public FuncionarioDTO getFuncionarioDTO(@PathVariable("id_funcionario")Long id){
+    @GetMapping("/pedidos/{id}")
+    public List<PedidoCompraDTO> getFuncionarioPedidoDTO(@PathVariable Long id){
+        return funcionarioService.getPedidosFuncionario(id);
+    }
+
+    @GetMapping("/funcionario/{login}")
+    public FuncionarioDTO getFuncionarioDTOByLogin(@PathVariable String login){
+        return funcionarioService.getDTOById(funcionarioService.getIdByLogin(login));
+    }
+    @GetMapping("/funcionario/{id}/")
+    public FuncionarioDTO getFuncionarioDTOById(@PathVariable Long id){
         return funcionarioService.getDTOById(id);
     }
 

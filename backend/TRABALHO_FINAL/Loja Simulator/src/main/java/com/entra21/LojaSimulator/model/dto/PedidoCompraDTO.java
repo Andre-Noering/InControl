@@ -26,4 +26,5 @@ public class PedidoCompraDTO {
         this.nome_funcionario = nome_funcionario;
         this.valor = valor;
     }
+    public PedidoCompraDTO(){}
 }

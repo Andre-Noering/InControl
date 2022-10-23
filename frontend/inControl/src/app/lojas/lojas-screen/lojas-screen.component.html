@@ -1,4 +1,5 @@
-<div class="row row-cols-6">
+<div class="row row-cols-6" *ngIf="lojas!=[]">
+    <h2>Lojas gerenciadas por você: </h2>
     <div class="d-flex flex-direction-column col-2 col-sm-2 loja-item" *ngFor="let loja of lojas">
         <div class="loja" routerLink="/lojas/{{loja.razao_social}}" style="border: none; margin:0;">
             <app-lojas-list-item  [loja]="loja"></app-lojas-list-item>
@@ -6,5 +7,11 @@
     </div>
 
     <i routerLink="/adicionarLoja" class="bi bi-plus-square-fill"></i>   
+</div>
+<div class="row row-cols-6" *ngIf="lojaTrab!=null" style="border-top: 1px gray;">
+    <h2>Loja em que trabalha: </h2>
+    <div class="loja" routerLink="/lojas/{{lojaTrab?.razao_social}}" style="border: none; margin:0;">
+        <app-lojas-list-item  [loja]="lojaTrab"></app-lojas-list-item>
+    </div>
 </div>
 

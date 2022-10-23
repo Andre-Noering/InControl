@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ItemFornecedor } from 'src/app/app.module';
 
 @Component({
@@ -8,9 +8,16 @@ import { ItemFornecedor } from 'src/app/app.module';
 })
 export class ItemFornecedorListITemComponent implements OnInit {
   @Input() itemFornecedor: ItemFornecedor|null = null;
+  @Input() escolhendo:boolean = false;
+  @Output() selecionado = new EventEmitter<ItemFornecedor>();
+
+  
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  selectItem(){
+    this.selecionado.emit(this.itemFornecedor!);
+    this.escolhendo=false;
+  }
 }

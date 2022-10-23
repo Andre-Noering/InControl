@@ -37,6 +37,12 @@ import { AddPessoaComponent } from './pessoas/add-pessoa/add-pessoa.component';
 import { ItemFornecedorScreenComponent } from './item-fornecedor/item-fornecedor-screen/item-fornecedor-screen.component';
 import { ItemFornecedorListITemComponent } from './item-fornecedor/item-fornecedor-list-item/item-fornecedor-list-item.component';
 import { AddItemFornecedorComponent } from './item-fornecedor/add-item-fornecedor/add-item-fornecedor.component';
+import { PedidoCompraItemFornecedorScreenComponent } from './pedido-compra-item-fornecedor/pedido-compra-item-fornecedor-screen/pedido-compra-item-fornecedor-screen.component';
+import { AddPedidoCompraComponent } from './pedidos-compra/add-pedido-compra/add-pedido-compra.component';
+import { PedidoCompraItemFornecedorListItemComponent } from './pedido-compra-item-fornecedor/pedido-compra-item-fornecedor-list-item/pedido-compra-item-fornecedor-list-item.component';
+import { AddPedidoCompraItemFornecedorComponent } from './pedido-compra-item-fornecedor/add-pedido-compra-item-fornecedor/add-pedido-compra-item-fornecedor.component';
+import { PedidosCompraFuncionarioScreenComponent } from './pedidos-compra/pedidos-compra-funcionario-screen/pedidos-compra-funcionario-screen.component';
+import { VendasFuncionarioScreenComponent } from './vendas/vendas-funcionario-screen/vendas-funcionario-screen.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +78,13 @@ import { AddItemFornecedorComponent } from './item-fornecedor/add-item-fornecedo
     AddPessoaComponent,
     ItemFornecedorScreenComponent,
     ItemFornecedorListITemComponent,
-    AddItemFornecedorComponent
+    AddItemFornecedorComponent,
+    PedidoCompraItemFornecedorScreenComponent,
+    AddPedidoCompraComponent,
+    PedidoCompraItemFornecedorListItemComponent,
+    AddPedidoCompraItemFornecedorComponent,
+    PedidosCompraFuncionarioScreenComponent,
+    VendasFuncionarioScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -167,6 +179,15 @@ export type PedidoCompra = {
   id_funcionario: number;
   nome_funcionario: string;
   valor : number;
+}
+export type PedidoCompraItemFornecedor = {
+  id:number|null;
+  valor_unitario:number|null;
+  qtde:number|null;
+  idFornecedor:number|null;
+  idPedidoCompra:number|null;
+  nomeItem:string|null;
+  nomeFornecedor:string|null;
 }
 
 export type Fornecedor = {

@@ -8,23 +8,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/{razao_social}")
+@RequestMapping("/loja")
 public class LojaRestController {
     @Autowired
     LojaService lojaService;
-    @GetMapping
+
+    @GetMapping("/{id}/")
+    public LojaPayloadDTO getLojaById(@PathVariable Long id){
+        return lojaService.getDTOById(id);
+    }
+    @GetMapping("/{razao_social}")
     public LojaPayloadDTO getLoja(@PathVariable String razao_social){
         return lojaService.getDTOById(lojaService.getByRazaoSocial(razao_social).getId());
     }
-    @GetMapping("/itensFornecedor")
+    @GetMapping("/{razao_social}/itensFornecedor")
     public List<ItemFornecedorDTO> getAll(@PathVariable String razao_social){
         return lojaService.getAllItensFornecedores(razao_social);
     }
-    @GetMapping("/vendas")
+    @GetMapping("/{razao_social}/vendas")
     public List<VendaDTO> getVendas(@PathVariable String razao_social) {
         return lojaService.getAllVendas(razao_social);
     }
-    @GetMapping("/pedidos")
+    @GetMapping("/{razao_social}/pedidos")
     public List<PedidoCompraDTO> getPedidos(@PathVariable String razao_social){
         return lojaService.getAllPedidos(razao_social);
     }
@@ -34,7 +39,7 @@ public class LojaRestController {
         lojaService.update(lojaDTO);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{razao_social}/pedidos")
     public void delete(@PathVariable String razaoSocial){
         lojaService.deleteByRazaoSocial(razaoSocial);
     }

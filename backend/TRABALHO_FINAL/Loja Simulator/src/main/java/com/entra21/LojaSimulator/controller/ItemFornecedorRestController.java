@@ -33,7 +33,7 @@ public class ItemFornecedorRestController {
     }
 
     @GetMapping("/{id}/item-fornecedor")
-    public ItemDTO itemDTO(@RequestBody Long id){
+    public ItemDTO itemDTO(@PathVariable Long id){
         return itemFornecedorService.getItemDTO(id);
     }
 

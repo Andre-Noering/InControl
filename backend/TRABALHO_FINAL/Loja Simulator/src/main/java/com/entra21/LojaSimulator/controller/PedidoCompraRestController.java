@@ -18,16 +18,24 @@ public class PedidoCompraRestController {
 	public PedidoCompraDTO getDTO(@PathVariable( "id")Long id){
 		return pedidoCompraService.getDTOById(id);
 	}
+	@GetMapping("/{id}/itens")
+	public List<PedidoCompraItemFornecedorDTO> getItens(@PathVariable Long id){
+		return pedidoCompraService.getItens(id);
+	}
+	@PostMapping("/finalizar")
+	public void finalizar(@RequestBody Long id){
+		pedidoCompraService.finish(id);
+	}
 	@GetMapping("/{id}/valor-total")
 	public Double getValorTotal(@PathVariable Long id){
 		return getValorTotal(id);
 	}
 	@PostMapping( "/adicionar")
-	public void saveVenda(@RequestBody PedidoCompraDTO dto){
-		pedidoCompraService.save(dto);
+	public PedidoCompraDTO save(@RequestBody PedidoCompraDTO dto){
+		return pedidoCompraService.save(dto);
 	}
 	@PutMapping( "/update")
-	public void uptadeVenda(@RequestBody PedidoCompraDTO dto){
+	public void update(@RequestBody PedidoCompraDTO dto){
 		pedidoCompraService.update(dto);
 	}
 	@DeleteMapping( "/delete/{id}")
