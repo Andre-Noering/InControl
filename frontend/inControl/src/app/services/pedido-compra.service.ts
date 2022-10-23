@@ -17,7 +17,7 @@ export class PedidoCompraService {
     }
 
     getAll(razao_social:string) {
-        return this.http.get<PedidoCompra[]>(`/${razao_social}/pedidos`);
+        return this.http.get<PedidoCompra[]>(`/loja/${razao_social}/pedidos`);
     }
     getAllById(id:number) {
       return this.http.get<PedidoCompra[]>(`/funcionarios/pedidos/${id}`);

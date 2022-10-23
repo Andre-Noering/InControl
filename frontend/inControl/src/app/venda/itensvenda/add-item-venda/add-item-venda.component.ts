@@ -27,7 +27,7 @@ export class AddItemVendaComponent implements OnInit {
     valorUnitario:[0, Validators.required],
     qtde:[0, Validators.required],
   });
-
+ 
   constructor(
     private formBuilder:FormBuilder,
     private itemVendaService:ItemVendaService,

@@ -1,24 +1,17 @@
+<div *ngIf="!escolhendoItem && !escolhendoFornecedor">
 <form [formGroup]="formItemFornecedor" (ngSubmit)="addItemForn()">
     <div id="formulario-cadastro" class="container">
         <h2>Cadastre um item de fornecedor </h2>
         
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
-            <label for="selectForn">Selecione o fornecedor</label>
-            <select name="selectForn" formControlName="idFornecedor" id="selectForn" style="width: 50%;">
-                <option *ngFor="let fornecedor of fornecedores" value="{{fornecedor.id}}">
-                    {{fornecedor.razao_social}}
-                </option>
-            </select>
-            </div>
+            <small *ngIf="!fornecedorEscolhido" (click)="escolhendoFornecedor=true">Selecione o fornecedor</small>
+            <small *ngIf="fornecedorEscolhido" (click)="escolhendoFornecedor=true">Fornecedor selecionado: {{fornecedor?.razao_social}}. Clique para alterar</small>
+        </div>
 
-            <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
-                <label for="selectItem">Selecione o item</label>
-                <select name="selectItem" formControlName="idItem" id="selectItem" style="width: 50%;">
-                    <option *ngFor="let item of itens" value="{{item.id}}">
-                        {{item.nome}}
-                    </option>
-                </select>
-                </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            <small *ngIf="!itemEscolhido" (click)="escolhendoItem=true">Selecione o item</small>
+            <small *ngIf="itemEscolhido" (click)="escolhendoItem=true">Item selecionado: {{item?.nome}}. Clique para alterar</small>
+        </div>
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
         <label for="valorCompra">Valor de Compra</label>
         <input formControlName="valorCompra" type="number" class="form-control" id="valorCompra" placeholder="Informe o valor do item" required >
@@ -27,3 +20,34 @@
         <button type="submit" class="btn btn-primary" style="margin-top: 3%; margin-bottom: 2%; ">Enviar</button>
     </div>
 </form>
+</div>
+<div *ngIf="escolhendoItem && !escolhendoFornecedor">
+    <i class="bi bi-arrow-left-circle-fill" routerLink="/lojas/{{loja?.razao_social ?? ''}}"></i>
+<div class="cont" style= "height: 50%;">
+    <h2 style="margin-bottom: 30px;">Estoque</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 50%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 20%; border-radius: 0; " class="list-group-item">Quantidade em estoque</li>
+        <li style="width: 20%; border-radius: 0; " class="list-group-item">Valor</li>
+        <li style="width: 10%; border-radius:0; border-top-right-radius:8px;" class="list-group-item">Escolha</li>
+    </ul>
+    <div *ngFor="let item of itens">
+        <app-item-list-item [escolhendo]="true" [item]="item" (selecionado)="setItem($event); escolhendoItem=false;"></app-item-list-item>
+    </div>
+</div>
+</div>
+<div *ngIf="!escolhendoItem && escolhendoFornecedor">
+    <i class="bi bi-arrow-left-circle-fill" routerLink="/lojas/{{loja?.razao_social ?? ''}}"></i>
+<div class="cont" style= "height: 50%;">
+    <h2 style="margin-bottom: 30px;">Fornecedores</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Razão social</li>
+        <li style="width: 25%; border-radius: 0; " class="list-group-item">CNPJ</li>
+        <li style="width: 25%; border-radius: 0; " class="list-group-item">Contato</li>
+        <li style="width: 10%; border-radius:0; border-top-right-radius:8px;" class="list-group-item">Escolha</li>
+    </ul>
+    <div *ngFor="let fornecedor of fornecedores">
+        <app-fornecedor-list-item [escolhendo]="true" [fornecedor]="fornecedor" (selecionado)="setFornecedor($event); escolhendoFornecedor=false;"></app-fornecedor-list-item>
+    </div>
+</div>
+</div>
