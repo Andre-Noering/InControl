@@ -34,5 +34,8 @@ export class ItemService {
             }
           );
     }
+    delete(razao_social:string,id:number){
+      this.http.delete(`${razao_social}/itens/deletar/${id}`).subscribe(resultado => {})
+    }
     
 }

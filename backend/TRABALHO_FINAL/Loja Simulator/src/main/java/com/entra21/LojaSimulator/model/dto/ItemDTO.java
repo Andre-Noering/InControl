@@ -10,13 +10,15 @@ public class ItemDTO {
     private Double valor;
     private Integer qtdeEstoque;
     private Integer qtdeAlertaEstoque;
+    private boolean ativo;
 
     private Long idLoja;
-    public ItemDTO(Long id, String nome, Double valor, int qtde_estoque, int qtde_alerta_estoque) {
+    public ItemDTO(Long id, String nome, Double valor, int qtde_estoque, int qtde_alerta_estoque, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
         this.qtdeEstoque = qtde_estoque;
         this.qtdeAlertaEstoque = qtde_alerta_estoque;
+        this.ativo=ativo;
     }
 }

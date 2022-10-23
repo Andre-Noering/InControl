@@ -39,15 +39,16 @@ public class ItemService {
 	//Retorna todos os itens de uma loja
 	public List<ItemDTO> getAllByLoja(String razao_social) {
 		List<ItemEntity> listaItens = lojaService.getByRazaoSocial(razao_social).getItens();
+		listaItens.removeIf(item-> !item.getAtivo());
 		return listaItens.stream().map(item -> {
-			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtdeEstoque(), item.getQtdeAlertaEstoque());
+			return new ItemDTO(item.getId(), item.getNome(), item.getValor(), item.getQtdeEstoque(), item.getQtdeAlertaEstoque(), item.getAtivo());
 		}).collect(Collectors.toList());
 	}
 
 	//Retorna item pela id
 	public ItemDTO getDTOById(Long id) {
 		ItemEntity itemEntity = getItemById(id);
-		return new ItemDTO(itemEntity.getId(), itemEntity.getNome(), itemEntity.getValor(), itemEntity.getQtdeEstoque(), itemEntity.getQtdeAlertaEstoque());
+		return new ItemDTO(itemEntity.getId(), itemEntity.getNome(), itemEntity.getValor(), itemEntity.getQtdeEstoque(), itemEntity.getQtdeAlertaEstoque(), itemEntity.getAtivo());
 	}
 
 	//Retorna o valor do item pelo id
@@ -128,7 +129,8 @@ public class ItemService {
 
 	public void delete(Long id) {
 		ItemEntity itemEntity = getItemById(id);
-		itemRepository.delete(itemEntity);
+		itemEntity.setAtivo(false);
+		itemRepository.save(itemEntity);
 	}
 
 

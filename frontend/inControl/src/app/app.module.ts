@@ -132,6 +132,7 @@ export type Pessoa = {
   nome: string;
   sobrenome: string;
   telefone: string;
+  ativo:boolean;
   cpf: string;
   idLoja: number;
 }
@@ -148,6 +149,7 @@ export type Loja = {
 export type Item = {
   id:number;
   nome: string;
+  ativo:boolean;
   valor: number,
   qtdeEstoque: number,
   qtdeAlertaEstoque: number,
@@ -158,6 +160,7 @@ export type ItemFornecedor = {
   id:number|null;
   idFornecedor:number;
   idItem:number;
+  ativo:boolean;
   valorCompra:number;
   nome_item:string|null;
   nome_fornecedor:string|null;
@@ -194,6 +197,7 @@ export type Fornecedor = {
   id:number,
   razao_social: string;
   cnpj:string;
+  ativo:boolean;
   contato:string;
   idLoja:number;
 }

@@ -136,6 +136,12 @@ public class FuncionarioService implements UserDetailsService {
 
     }
 
+    public void delete(Long id){
+        FuncionarioEntity f = getFuncionarioById(id);
+        f.setAtivo(false);
+        funcionarioRepository.save(f);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         FuncionarioEntity en = funcionarioRepository.findByLogin(username);

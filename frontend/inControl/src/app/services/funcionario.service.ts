@@ -39,4 +39,13 @@ export class FuncionarioService {
             }
           );
     }
+    delete(id:number){
+      this.http.delete(`/funcionarios/delete/${id}`).pipe().subscribe(resultado => { },
+        erro => {
+          if(erro.status == 400) {
+            console.log(erro);
+          }
+        }
+      );;
+    }
 }

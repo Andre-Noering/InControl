@@ -33,7 +33,7 @@ public class FornecedorService {
     //GET
     public FornecedorPayloadDTO getDtoById(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
-        return new FornecedorPayloadDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja().getId());
+        return new FornecedorPayloadDTO(fornecedor.getId(),fornecedor.getRazaoSocial(), fornecedor.getCnpj(), fornecedor.getContato(), fornecedor.getLoja().getId(), fornecedor.getAtivo());
     }
 
     public List<ItemFornecedorEntity> getItensById(Long id) {
@@ -48,7 +48,8 @@ public class FornecedorService {
 
     public List<FornecedorPayloadDTO> getAllByLoja(String razao_social) {
         List<FornecedorEntity> listaFornecedores = fornecedorRepository.findAllByLoja_RazaoSocial(razao_social);
-        return listaFornecedores.stream().map(fornecedor -> new FornecedorPayloadDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja().getId())).collect(Collectors.toList());
+        listaFornecedores.removeIf(fornecedor-> !fornecedor.getAtivo());
+        return listaFornecedores.stream().map(fornecedor -> new FornecedorPayloadDTO(fornecedor.getId(),fornecedor.getRazaoSocial(),fornecedor.getCnpj(),fornecedor.getContato(),fornecedor.getLoja().getId(), fornecedor.getAtivo())).collect(Collectors.toList());
     }
 
     public String getContatoByRazaoSocial(String razao_social) {
@@ -95,10 +96,13 @@ public class FornecedorService {
 
     //DELETE
     public void deleteByRazaoSocial(String razaoSocial){
-        fornecedorRepository.deleteByRazaoSocial(razaoSocial);
+        FornecedorEntity f= this.getFornecedorByRazaoSocial(razaoSocial);
+        f.setAtivo(false);
+        fornecedorRepository.save(f);
     }
     public void delete(Long id) {
         FornecedorEntity fornecedor = getFornecedorById(id);
-        fornecedorRepository.delete(fornecedor);
+        fornecedor.setAtivo(false);
+        fornecedorRepository.save(fornecedor);
     }
 }

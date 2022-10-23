@@ -36,9 +36,9 @@ public class FornecedorRestController {
     }
 
 
-    @DeleteMapping("/{razao_social_fornecedor}")
-    public void delete(@PathVariable String razao_social_fornecedor){
-        fornecedorService.deleteByRazaoSocial(razao_social_fornecedor);
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        fornecedorService.delete(id);
     }
 
     @PostMapping("/adicionar")

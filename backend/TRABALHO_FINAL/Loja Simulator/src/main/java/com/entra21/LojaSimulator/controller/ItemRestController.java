@@ -41,8 +41,8 @@ public class ItemRestController {
 		itemService.update(itemDTO);
 	}
 
-	@DeleteMapping("/deletar")
-	public void delete(@RequestBody Long id){
+	@DeleteMapping("/deletar/{id}")
+	public void delete(@PathVariable Long id){
 		itemService.delete(id);
 	}
 

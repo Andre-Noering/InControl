@@ -38,4 +38,8 @@ export class FornecedorScreenComponent implements OnInit {
     })
   };
 }
+delete(fornecedor:Fornecedor){
+  this.fornecedorService.delete(this.loja?.razao_social!,fornecedor.id);
+  this.fornecedores = this.fornecedores.filter(forn => forn!=fornecedor);
+}
 }

@@ -27,8 +27,9 @@ public class PessoaService {
     public List<PessoaDTO> getClientes(String razao_social){
         List<PessoaEntity> pessoas= lojaService.getByRazaoSocial(razao_social).getFuncionarios();
         pessoas.removeIf(pessoa -> funcionarioService.isFuncionario(pessoa.getId()));
+        pessoas.removeIf(pessoa-> !pessoa.getAtivo());
         return pessoas.stream().map(pessoa-> {
-            return new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSobrenome(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getLoja().getId());
+            return new PessoaDTO(pessoa.getId(), pessoa.getNome(), pessoa.getSobrenome(), pessoa.getCpf(), pessoa.getTelefone(), pessoa.getLoja().getId(), pessoa.getAtivo());
         }).collect(Collectors.toList());
     }
 
@@ -91,7 +92,8 @@ public class PessoaService {
     //DELETE
     public void delete(Long id) {
         PessoaEntity pessoa = getPessoaById(id);
-        pessoaRepository.delete(pessoa);
+        pessoa.setAtivo(false);
+        pessoaRepository.save(pessoa);
     }
 
 

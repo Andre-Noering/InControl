@@ -34,5 +34,8 @@ export class ItemFornecedorService {
             }
           );
     }
+    delete(id:number){
+      this.http.delete(`/ItemFornecedor/deletar/${id}`).subscribe(resultado => {});
+    }
     
 }

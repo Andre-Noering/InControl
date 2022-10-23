@@ -22,4 +22,8 @@ export class ItemListItemComponent implements OnInit {
     this.escolhendo=false;
   }
 
+  deleteItem(){
+    this.selecionado.emit(this.item)
+  }
+
 }
