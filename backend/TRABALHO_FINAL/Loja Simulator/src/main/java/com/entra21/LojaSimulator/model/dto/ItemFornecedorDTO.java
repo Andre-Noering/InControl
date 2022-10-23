@@ -27,4 +27,7 @@ public class ItemFornecedorDTO {
         this.nome_item = nome_item;
         this.nome_fornecedor = nome_fornecedor;
     }
+    public ItemFornecedorDTO(){
+
+    }
 }

@@ -19,38 +19,24 @@ export class PedidoCompraService {
     getAll(razao_social:string) {
         return this.http.get<PedidoCompra[]>(`/${razao_social}/pedidos`);
     }
-
-    getValor(id:number) {
-        return this.http.get<number>(`/vendas/${id}`);
-    }
-
-    getVendedor(id:number) {
-        return this.http.get<Pessoa>(`/venda/vendedor/${id}`);
-    }
-
-    getCliente(id:number) {
-        return this.http.get<Pessoa>(`/venda/cliente/${id}`);
-    }
-
-    getVenda(id:number) {
-      return this.http.get<Venda>(`/venda/${id}`);
-    }
-    setVenda(venda: Venda){
-      console.log(venda);
-      return venda;
+    getAllById(id:number) {
+      return this.http.get<PedidoCompra[]>(`/funcionarios/pedidos/${id}`);
+  }
+    
+    getPedido(id:number) {
+      return this.http.get<PedidoCompra>(`/pedido-compra/${id}`);
     }
 
     finalizar(id:number){
-      console.log(id);
-      this.http.post(`/venda/finalizar`, id).subscribe(
+      this.http.post(`/pedido-compra/finalizar`, id).subscribe(
         sucesso=> {console.log(sucesso);},
        erro => {
         console.log(erro);
       })
     }
 
-    add(venda:Venda){
-      return this.http.post<Venda>(`/venda/adicionar`, venda);
+    add(pedido:PedidoCompra){
+      return this.http.post<PedidoCompra>(`/pedido-compra/adicionar`, pedido);
     }
     
 }

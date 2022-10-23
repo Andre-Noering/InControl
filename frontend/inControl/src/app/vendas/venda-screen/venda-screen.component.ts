@@ -27,7 +27,6 @@ export class VendaScreenComponent{
         this.loja = resultado;
         this.vendaService.getAll(resultado.razao_social).pipe().subscribe(vendas => {
           this.vendas = vendas;
-          console.log(this.vendas);
         });
       },
       erro => {

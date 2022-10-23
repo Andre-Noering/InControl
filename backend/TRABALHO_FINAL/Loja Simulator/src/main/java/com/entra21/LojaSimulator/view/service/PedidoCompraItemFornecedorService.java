@@ -34,7 +34,7 @@ public class PedidoCompraItemFornecedorService {
 
     public PedidoCompraItemFornecedorDTO getDTOById(Long id) {
         PedidoCompraItemFornecedorEntity entity = getPedidoCompraItemFornecedorById(id);
-        return new PedidoCompraItemFornecedorDTO(entity.getId(), entity.getValorUnitario(), entity.getQuantidade(), entity.getItemFornecedor(), entity.getPedidoCompra());
+        return new PedidoCompraItemFornecedorDTO(entity.getId(), entity.getValorUnitario(), entity.getQuantidade(), entity.getItemFornecedor().getId(), entity.getPedidoCompra().getId());
     }
 
     public ItemFornecedorEntity getItemFornecedorById(Long id){
@@ -52,8 +52,8 @@ public class PedidoCompraItemFornecedorService {
         newPedidoCompraItemFornecedor.setId(input.getId());
         newPedidoCompraItemFornecedor.setQuantidade(input.getQtde());
         newPedidoCompraItemFornecedor.setValorUnitario(input.getValor_unitario());
-        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getItemFornecedor().getId()));
-        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getPedidoCompra().getId()));
+        newPedidoCompraItemFornecedor.setItemFornecedor(itemFornecedorService.getItemFornecedorById(input.getIdFornecedor()));
+        newPedidoCompraItemFornecedor.setPedidoCompra(pedidoCompraService.getById(input.getIdPedidoCompra()));
         pedidoCompraItemFornecedorRepository.save(newPedidoCompraItemFornecedor);
     }
 

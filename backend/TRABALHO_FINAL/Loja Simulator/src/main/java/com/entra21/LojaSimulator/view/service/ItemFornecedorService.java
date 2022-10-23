@@ -52,7 +52,6 @@ public class ItemFornecedorService {
         itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getIdFornecedor()));
         itemFornecedorEntity.setItem(itemService.build(itemService.getDTOById(itemFornecedorDTO.getIdItem())));
         itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValorCompra());
-        itemFornecedorEntity.setId(itemFornecedorDTO.getId());
         itemFornecedorEntity.setPedidosCompra(pedidoCompraItemFornecedorService.getAllByIdItemFornecedor(itemFornecedorDTO.getIdFornecedor()));
         itemFornecedorRepository.save(itemFornecedorEntity);
     }

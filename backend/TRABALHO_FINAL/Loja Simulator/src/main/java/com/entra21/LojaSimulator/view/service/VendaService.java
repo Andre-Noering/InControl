@@ -90,7 +90,8 @@ public class VendaService {
         newVenda.setData(vendaDTO.getData());
         newVenda.setPessoa(pessoaService.build(pessoaService.getDTOById(vendaDTO.getId_cliente())));
         newVenda.setFuncionario(funcionarioService.build(funcionarioService.getDTOById(vendaDTO.getId_vendedor())));
-        return getDTOById(vendaRepository.save(newVenda).getId());
+        newVenda=vendaRepository.save(newVenda);
+        return getDTOById(newVenda.getId());
     }
 
     public void finalizar(Long id){

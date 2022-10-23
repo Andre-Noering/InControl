@@ -10,6 +10,6 @@
     <div *ngFor="let pedido of pedidos">
         <app-pedido-compra-list-item [pedido]="pedido" ></app-pedido-compra-list-item>
     </div>
-    <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas/adicionar">+</button>
+    <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/pedidosCompra/adicionar">+</button>
 </div>
 

@@ -14,8 +14,11 @@ import { VendaService } from 'src/app/services/venda.service';
 })
 export class AddItemVendaComponent implements OnInit {
   loja:Loja | null = null;
-  venda: Venda | null = null;
+  escolhendoItem : boolean = false;
+  itemEscolhido: boolean = false;
   item: Item | null = null;
+  venda: Venda | null = null;
+  
   itens: Item[] = [];
 
   formItemVenda = this.formBuilder.group({
@@ -44,9 +47,7 @@ export class AddItemVendaComponent implements OnInit {
         this.loja = resultado;
         this.itemService.getAll(this.loja.razao_social).subscribe(resultado=> this.itens=resultado);
         this.vendaService.getVenda(params['id']).subscribe(resultado => {
-          console.log(resultado);
           this.venda=resultado;
-          console.log(this.venda);
             this.formItemVenda.get('idVenda')!.patchValue(this.venda!.id);
           ;},erro => {
             if(erro.status == 400) {
@@ -61,14 +62,19 @@ export class AddItemVendaComponent implements OnInit {
 
 
   addItemVenda(){
-    console.log(this.formItemVenda.value);
+    if(this.formItemVenda.get('qtde')?.value! > this.item?.qtdeEstoque!){
+      alert("A quantidade informada é maior que a quantidade de itens no estoque!")
+    } else {
     this.itemVendaService.add(this.loja!.razao_social,this.formItemVenda.value as ItemVenda);
     this.router.navigate([`/lojas/${this.loja?.razao_social ?? ''}/vendas/${this.venda?.id}/itensVenda`])
+    }
   }
 
 
-  setItem(item:any){
-    this.itemService.get(this.loja?.razao_social ?? '', item).subscribe(resultado => this.item=item);
-    console.log(item);
+  setItem(item:Item){
+    this.item=item;
+    this.formItemVenda.get('idItem')?.patchValue(item.id);
+    this.formItemVenda.get('valorUnitario')?.patchValue(item.valor)
+    this.itemEscolhido=true
   }
 }

@@ -8,6 +8,8 @@ import { PedidoCompra } from 'src/app/app.module';
 })
 export class PedidoCompraListItemComponent implements OnInit {
   @Input() pedido:PedidoCompra|null = null;
+  @Input() gerente:boolean=true;
+
   constructor() { }
 
   ngOnInit(): void {

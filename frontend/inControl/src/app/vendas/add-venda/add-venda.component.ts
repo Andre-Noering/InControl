@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Funcionario, Loja, Pessoa, Venda } from 'src/app/app.module';
@@ -15,6 +15,14 @@ import { VendaService } from 'src/app/services/venda.service';
   styleUrls: ['./add-venda.component.css']
 })
 export class AddVendaComponent implements OnInit {
+  @Input()   funcionario:Funcionario|null = null;
+  @Input()   gerente:boolean=true;
+  
+  funcEscolhido:boolean=false;
+  escolhendoFunc:boolean=false;
+  clienteEscolhido:boolean=false;
+  escolhendoCliente:boolean=false;
+  cliente:Pessoa|null = null;
   venda!:Venda|null;
   loja:Loja|null = null;
   funcionarios: Funcionario[] = [];
@@ -37,6 +45,9 @@ export class AddVendaComponent implements OnInit {
     private router:Router) {
    }
   ngOnInit(): void {
+    if(this.funcionario!=null){
+      this.setFuncionario(this.funcionario);
+    }
     this.route.params.subscribe(params => this.lojaService.getByRazaoSocial(params['razao_social']).subscribe(resultado => {
       this.loja = resultado;
       console.log(this.loja);
@@ -48,11 +59,22 @@ export class AddVendaComponent implements OnInit {
     setVenda(venda: Venda){
       this.venda = venda;
     }
+
     addVenda(){
       console.log(this.formVenda.value);
       this.vendaService.add(this.formVenda.value as Venda).subscribe(resultado=>{this.setVenda(resultado)
         ;
         this.router.navigate([`/lojas/${this.loja!.razao_social}/vendas/${this.venda!.id}/itensVenda`]);
       });
+    }
+    setFuncionario(funcionario:Funcionario){
+      this.formVenda.get('id_vendedor')?.patchValue(funcionario.idPessoa);
+      this.funcionario=funcionario;
+      this.funcEscolhido=true;
+    }
+    setCliente(cliente:Pessoa){
+      this.formVenda.get('id_cliente')?.patchValue(cliente.idPessoa);
+      this.cliente=cliente;
+      this.clienteEscolhido=true;
     }
 }

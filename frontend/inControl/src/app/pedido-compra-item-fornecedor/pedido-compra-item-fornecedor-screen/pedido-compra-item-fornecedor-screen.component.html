@@ -1,0 +1,15 @@
+<div class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Itens do Pedido</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 30%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 20%; border-radius: 0;" class="list-group-item">Preço</li>
+        <li style="width: 20%; border-radius: 0;" class="list-group-item">Quantidade</li> 
+        <li style="width: 30%; border-radius: 0;" class="list-group-item">Fornecedor</li>
+    </ul>
+    <div *ngFor="let pedidoCompraItem of pedidoCompraItens">
+        <app-pedido-compra-item-fornecedor-list-item [pedidoCompraItem]="pedidoCompraItem" ></app-pedido-compra-item-fornecedor-list-item>
+    </div>
+    <button class="add" style="border-radius: 0; margin-bottom: 0;"routerLink="/lojas/{{loja?.razao_social ?? ''}}/pedidosCompra/{{pedidoCompra?.id ?? 0}}/pedidoCompraItensFornecedor/adicionar">+</button>
+    <button class="add" (click)="ativFinalizar()">Finalizar pedido</button>
+</div>
+

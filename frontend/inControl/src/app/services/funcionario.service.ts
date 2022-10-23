@@ -17,11 +17,18 @@ export class FuncionarioService {
     }
 
     getAll(razao_social:string) {
-        return this.http.get<Funcionario[]>(`/${razao_social}/funcionarios/`);
+        return this.http.get<Funcionario[]>(`/funcionarios//${razao_social}`);
+    }
+
+    getByLogin(id:string){
+      return this.http.get<Funcionario>(`/funcionarios/funcionario/${id}`)
+    }
+    getById(id:number){
+      return this.http.get<Funcionario>(`/funcionarios/funcionario/${id}/`)
     }
 
     add(razao_social:string, funcionario:Funcionario){
-        this.http.post(`/${razao_social}/funcionarios/adicionar`, funcionario).subscribe(
+        this.http.post(`/funcionarios/adicionar`, funcionario).subscribe(
             resultado => {
               
             },

@@ -1,0 +1,50 @@
+<div *ngIf="!escolhendoFunc && gerente">
+    <form [formGroup]="formPedido" (ngSubmit)="addPedido()">
+    <div id="formulario-cadastro" class="container">
+        <h2>Cadastrar pedido de compra</h2>
+        
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="data">Data: </label>
+        <input formControlName="data" type="datetime-local" class="form-control" id="data"  placeholder="Informe a data da venda." required>
+        </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <small style="border: 1px solid black;" *ngIf="!funcEscolhido" (click)="escolhendoFunc=true">Selecione o funcionário</small>
+        <small style="border: 1px solid black;" *ngIf="funcEscolhido" (click)="escolhendoFunc=true">Funcionário escolhido: {{funcionario?.nome}} {{funcionario?.sobrenome}}. Clique para alterar</small>
+        </div>
+        <button class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;">Enviar</button>
+    </div>
+</form>
+</div>
+
+<div id="funcScreen" *ngIf="escolhendoFunc">
+    <i (click)="escolhendoFunc=false" class="bi bi-arrow-left-circle-fill"></i>
+    <div class="cont" style="margin-top:30px; height: 50%;">
+    <h2 style="margin: 30px;">Equipe</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 25%; border-radius: 0;" class="list-group-item">Ativo</li>
+        <li style="width: 25%; border-radius: 0; " class="list-group-item">Contato</li>
+        <li style="width: 10%; border-radius:0; border-top-right-radius:8px;" class="list-group-item">Escolha</li>
+    </ul>
+    <div id="funcionarioScreen" *ngFor="let funcionario of funcionarios">
+        <app-funcionario-list-item [escolhendo]="true" (selecionado)="setFuncionario($event); escolhendoFunc=false" [funcionario]="funcionario"></app-funcionario-list-item>
+    </div>
+</div>
+</div>
+
+<div *ngIf="!escolhendoFunc && !gerente">
+    <form [formGroup]="formPedido" (ngSubmit)="addPedido()">
+    <div id="formulario-cadastro" class="container">
+        <h2>Cadastrar pedido de compra</h2>
+        
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+        <label for="data">Data: </label>
+        <input formControlName="data" type="datetime-local" class="form-control" id="data"  placeholder="Informe a data da venda." required>
+        </div>
+        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
+            Funcionário: {{funcionario?.nome}} {{funcionario?.sobrenome}}
+        </div>
+        <button class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;">Enviar</button>
+    </div>
+</form>
+</div>

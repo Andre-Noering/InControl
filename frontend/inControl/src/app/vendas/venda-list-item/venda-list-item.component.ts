@@ -10,7 +10,7 @@ import { VendaService } from 'src/app/services/venda.service';
 export class VendaListItemComponent implements OnInit {
 
   @Input() venda: Venda | null = null;
-  
+  @Input() gerente:boolean=true;
   constructor(
     public vendaService:VendaService
   ) {

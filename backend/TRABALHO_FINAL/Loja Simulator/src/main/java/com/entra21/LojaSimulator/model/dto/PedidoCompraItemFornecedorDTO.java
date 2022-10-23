@@ -12,14 +12,16 @@ public class PedidoCompraItemFornecedorDTO {
     private Long id;
     private Double valor_unitario;
     private Integer qtde;
-    private ItemFornecedorEntity itemFornecedor;
-    private PedidoCompraEntity pedidoCompra;
+    private Long idFornecedor;
+    private Long idPedidoCompra;
+    private String nomeItem;
+    private String nomeFornecedor;
 
-    public PedidoCompraItemFornecedorDTO(Long id, Double valor_unitario, Integer qtde, ItemFornecedorEntity itemFornecedor, PedidoCompraEntity pedidoCompra) {
+    public PedidoCompraItemFornecedorDTO(Long id, Double valor_unitario, Integer qtde, Long itemFornecedor, Long pedidoCompra) {
         this.id = id;
         this.valor_unitario = valor_unitario;
         this.qtde = qtde;
-        this.itemFornecedor = itemFornecedor;
-        this.pedidoCompra = pedidoCompra;
+        this.idFornecedor = itemFornecedor;
+        this.idPedidoCompra = pedidoCompra;
     }
 }

@@ -1,0 +1,17 @@
+<i routerLink="/lojas/{{loja?.razao_social!}}" class="bi bi-arrow-left-circle-fill"></i>
+<div *ngIf="!adicionando" class="cont" style="margin-top:30px; height: 75%;">
+    <h2 style="margin: 30px;">Vendas de {{funcionario?.nome}} {{funcionario?.sobrenome}}</h2>
+    <ul style="width:100%" class="list-group list-group-horizontal">
+        <li style="width: 50%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Data</li>
+        <li style="width: 25%; border-radius: 0;" class="list-group-item">Valor</li>
+        <li style="width: 25%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Cliente</li>
+    </ul>
+
+    <div *ngFor="let venda of vendas">
+        <app-venda-list-item [gerente]="false" [venda]="venda" ></app-venda-list-item>
+    </div>
+    <button  class="add" (click)="adicionando=true">+</button>
+</div>
+<div *ngIf="adicionando">
+    <app-add-venda [gerente]="false" [funcionario]="funcionario"></app-add-venda>
+</div>

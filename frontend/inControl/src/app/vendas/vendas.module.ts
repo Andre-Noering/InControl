@@ -4,6 +4,7 @@ import { VendaListItemComponent } from './venda-list-item/venda-list-item.compon
 import { VendaScreenComponent } from './venda-screen/venda-screen.component';
 import { AddVendaComponent } from './add-venda/add-venda.component';
 import { SelectFuncionarioComponent } from './select-funcionario/select-funcionario.component';
+import { VendasFuncionarioScreenComponent } from './vendas-funcionario-screen/vendas-funcionario-screen.component';
 
 
 
@@ -12,7 +13,8 @@ import { SelectFuncionarioComponent } from './select-funcionario/select-funciona
     VendaListItemComponent,
     VendaScreenComponent,
     AddVendaComponent,
-    SelectFuncionarioComponent
+    SelectFuncionarioComponent,
+    VendasFuncionarioScreenComponent
   ],
   imports: [
     CommonModule

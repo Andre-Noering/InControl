@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { first } from 'rxjs';
-import { Loja, User } from 'src/app/app.module';
+import { Funcionario, Loja, User } from 'src/app/app.module';
 import { AuthenticationService } from 'src/app/helpers/auth.service';
+import { FuncionarioService } from 'src/app/services/funcionario.service';
 import { LojaService } from 'src/app/services/loja.service';
 
 @Component({
@@ -13,35 +14,34 @@ import { LojaService } from 'src/app/services/loja.service';
 export class LojasScreenComponent implements OnInit {
   @Input() loja: Loja|null=null;
 
+  lojaTrab:Loja|null = null;
   user: User | null = null;
-  itens: boolean = false;
-  funcionarios:boolean = false;
-  addItem:boolean = false;
+  funcionario: Funcionario | null = null;
   lojas: Loja[] = [];
   constructor(private http: HttpClient,
     private authenticationService: AuthenticationService,
-    private lojaService: LojaService) {
+    private lojaService: LojaService,
+    private funcionarioService: FuncionarioService) {
     this.authenticationService.user.subscribe(x => this.user = x);
-   }
-
-  ngOnInit(): void {
     this.lojaService.getAll(this.user!.login).pipe(first()).subscribe(lojas => {
       this.lojas = lojas;
       console.log(lojas);
   });
+  this.funcionarioService.getByLogin(this.user!.login).subscribe(resultado => {this.funcionario=resultado;
+    if(this.funcionario?.idLoja != null){
+    	this.lojaService.getById(this.funcionario.idLoja).subscribe(resultado=>this.lojaTrab=resultado);
+  }
+   },erro => {
+    if(erro.status == 400) {
+      console.log(erro);
+    }});
+  
+  }
+  ngOnInit(): void {
+    
   }
 
-  setLoja(loja:Loja|null){
-    this.loja=loja
-  }
-  setItens(valor:any){
-    this.itens=valor;
-  }
-  setFuncionarios(valor:any){
-    this.funcionarios=valor;
-  }
-  adicionando(valor:any){
-    this.addItem=valor;
-  }
+
+  
 
 }

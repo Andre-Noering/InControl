@@ -17,8 +17,11 @@ export class VendaService {
     }
 
     getAll(razao_social:string) {
-        return this.http.get<Venda[]>(`/${razao_social}/vendas`);
+        return this.http.get<Venda[]>(`/loja/${razao_social}/vendas`);
     }
+    getAllById(id:number) {
+      return this.http.get<Venda[]>(`/funcionarios/vendas/${id}`);
+  }
 
     getValor(id:number) {
         return this.http.get<number>(`/vendas/${id}`);
