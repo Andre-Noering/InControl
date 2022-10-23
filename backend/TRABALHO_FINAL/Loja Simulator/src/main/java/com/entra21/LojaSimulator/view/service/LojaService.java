@@ -56,7 +56,7 @@ public class LojaService {
         List<FornecedorEntity> fornecedores = this.getByRazaoSocial(razao_social).getFornecedores();
         List<List<ItemFornecedorDTO>> itensMeio = fornecedores.stream().map(fornecedor -> (fornecedor.getItens().stream().map(item -> itemFornecedorService.getDTOById(item.getId())).collect(Collectors.toList()))
         ).collect(Collectors.toList());
-        itensMeio.forEach(itens -> itens.forEach(item -> itensFim.add(item)));
+        itensMeio.forEach(itens -> itens.forEach(item -> {if(item.isAtivo()){ itensFim.add(item);}}));
         return itensFim;
     }
 
@@ -69,6 +69,7 @@ public class LojaService {
         LojaEntity loja = getByRazaoSocial(razao_social);
         List<PessoaEntity> listaGeral = loja.getFuncionarios();
         listaGeral.removeIf(pessoa -> !funcionarioService.isFuncionario(pessoa.getId()));
+        listaGeral.removeIf(pessoa-> !pessoa.getAtivo());
         return listaGeral.stream().map(func -> funcionarioService.getDTOwithAtivoById(func.getId())).collect(Collectors.toList());
     }
 

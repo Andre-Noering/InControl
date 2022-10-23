@@ -47,8 +47,8 @@ public class ItemFornecedorRestController {
         itemFornecedorService.update(itemFornecedorDTO);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteItemFornecedor(@RequestBody Long id){
+    @DeleteMapping("/deletar/{id}")
+    public void deleteItemFornecedor(@PathVariable Long id){
         itemFornecedorService.delete(id);
     }
 }

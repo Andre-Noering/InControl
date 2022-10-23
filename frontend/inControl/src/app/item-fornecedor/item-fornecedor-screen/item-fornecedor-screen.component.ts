@@ -38,5 +38,8 @@ export class ItemFornecedorScreenComponent{
         }
       }));
    }
-
+   delete(itemFornecedor:ItemFornecedor){
+    this.itemFornecedorService.delete(itemFornecedor.id!);
+    this.itensFornecedor = this.itensFornecedor.filter(item=> item!=itemFornecedor);
+   }
 }

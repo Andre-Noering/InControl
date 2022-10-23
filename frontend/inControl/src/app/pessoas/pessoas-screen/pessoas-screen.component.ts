@@ -22,6 +22,11 @@ export class PessoasScreenComponent implements OnInit {
       this.loja = resultado;
       this.pessoaService.getClientes(this.loja!.razao_social).pipe().subscribe(clientes => {
         this.pessoas = clientes;
+      },
+      erro => {
+        if(erro.status == 400) {
+          console.log(erro);
+        }
       });
     },
     erro => {
@@ -34,4 +39,8 @@ export class PessoasScreenComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  delete(pessoa:Pessoa){
+    this.pessoaService.delete(this.loja?.razao_social!, pessoa.idPessoa);
+    this.pessoas = this.pessoas.filter(pessoaLista=> pessoaLista!=pessoa);
+  }
 }

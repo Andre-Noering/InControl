@@ -17,6 +17,9 @@ public class PessoaEntity {
     @Column(name="nome", nullable = false)
     private String nome;
 
+    @Column(name = "ativo", nullable = false)
+    private Boolean ativo = true;
+
     @Column(name="sobrenome", nullable = false)
     private String sobrenome;
 

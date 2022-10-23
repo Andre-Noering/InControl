@@ -10,14 +10,15 @@ public class PessoaDTO {
     private String cpf;
     private String telefone;
     private Long idLoja;
-
-    public PessoaDTO(Long idPessoa, String nome, String sobrenome, String cpf, String telefone, Long idLoja) {
+    private boolean ativo;
+    public PessoaDTO(Long idPessoa, String nome, String sobrenome, String cpf, String telefone, Long idLoja, boolean ativo) {
         this.idPessoa = idPessoa;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.cpf = cpf;
         this.telefone = telefone;
         this.idLoja = idLoja;
+        this.ativo=ativo;
     }
     public PessoaDTO(){};
 }

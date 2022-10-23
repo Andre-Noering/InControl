@@ -30,12 +30,12 @@ public class PessoaRestController {
         pessoaService.save(pessoaDTO);
     }
 
-    @DeleteMapping( "/{id}")
+    @DeleteMapping("/{id}")
     public void deletePessoa(@PathVariable Long id) {
         pessoaService.delete(id);
     }
 
-    @PutMapping( "/update")
+    @PutMapping("/update")
     public void updatePessoa(@RequestBody PessoaDTO pessoaDTO){
         pessoaService.update(pessoaDTO);
     }

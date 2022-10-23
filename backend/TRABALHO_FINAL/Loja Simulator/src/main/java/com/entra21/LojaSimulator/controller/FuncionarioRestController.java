@@ -50,4 +50,9 @@ public class FuncionarioRestController {
         funcionarioService.save(funcionarioDTO);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public void deleteFuncionario(@PathVariable Long id){
+        funcionarioService.delete(id);
+    }
+
 }

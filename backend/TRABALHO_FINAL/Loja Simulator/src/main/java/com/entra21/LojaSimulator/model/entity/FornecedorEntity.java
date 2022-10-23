@@ -24,6 +24,9 @@ public class FornecedorEntity {
     @Column(name="contato", nullable = false)
     private String contato;
 
+    @Column(name = "ativo", nullable = false)
+    private Boolean ativo = true;
+
     @ManyToOne
     @JoinColumn(name="id_loja", referencedColumnName = "id", nullable = false)
     private LojaEntity loja;

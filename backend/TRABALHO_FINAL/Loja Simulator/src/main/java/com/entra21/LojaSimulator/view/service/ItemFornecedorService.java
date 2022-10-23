@@ -30,7 +30,7 @@ public class ItemFornecedorService {
 
     public ItemFornecedorDTO getDTOById(Long id){
         ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
-        return new ItemFornecedorDTO( itemFornecedorEntity.getValorCompra(),itemFornecedorEntity.getId(), itemFornecedorEntity.getItem().getId(), itemFornecedorEntity.getFornecedor().getId(), itemFornecedorEntity.getItem().getNome(), itemFornecedorEntity.getFornecedor().getRazaoSocial());
+        return new ItemFornecedorDTO( itemFornecedorEntity.getValorCompra(),itemFornecedorEntity.getId(), itemFornecedorEntity.getItem().getId(), itemFornecedorEntity.getFornecedor().getId(), itemFornecedorEntity.getItem().getNome(), itemFornecedorEntity.getFornecedor().getRazaoSocial(), itemFornecedorEntity.getAtivo());
     }
 
     public FornecedorEntity getFornecedorById(Long id){
@@ -67,7 +67,8 @@ public class ItemFornecedorService {
     //DELETE
     public void delete(Long id){
         ItemFornecedorEntity itemFornecedorEntity = getItemFornecedorById(id);
-        itemFornecedorRepository.delete(itemFornecedorEntity);
+        itemFornecedorEntity.setAtivo(false);
+        itemFornecedorRepository.save(itemFornecedorEntity);
     }
 
 

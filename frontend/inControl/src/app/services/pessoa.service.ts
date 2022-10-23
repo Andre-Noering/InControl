@@ -31,4 +31,7 @@ export class PessoaService {
             }
           );
     }
+    delete(razao_social:string, id:number){
+      this.http.delete(`${razao_social}/pessoas/${id}`).subscribe(resultado => {});
+    }
 }

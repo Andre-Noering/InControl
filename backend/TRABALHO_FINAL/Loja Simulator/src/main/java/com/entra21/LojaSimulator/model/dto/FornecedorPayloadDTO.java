@@ -9,13 +9,15 @@ public class FornecedorPayloadDTO {
     private String razao_social;
     private String cnpj;
     private String contato;
+    private boolean ativo;
     private Long idLoja;
 
-    public FornecedorPayloadDTO(Long id, String razao_social, String cnpj, String contato, Long loja) {
+    public FornecedorPayloadDTO(Long id, String razao_social, String cnpj, String contato, Long loja, boolean ativo) {
         this.id = id;
         this.razao_social = razao_social;
         this.cnpj = cnpj;
         this.contato = contato;
         this.idLoja = loja;
+        this.ativo=ativo;
     }
 }

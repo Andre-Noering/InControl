@@ -26,6 +26,9 @@ public class ItemEntity {
 	@Column(name="qtde_alerta_estoque", nullable = false)
 	private Integer qtdeAlertaEstoque;
 
+	@Column(name = "ativo", nullable = false)
+	private Boolean ativo = true;
+
 	@ManyToOne
 	@JoinColumn(name = "id_loja", referencedColumnName = "id", nullable = false)
 	private LojaEntity loja;

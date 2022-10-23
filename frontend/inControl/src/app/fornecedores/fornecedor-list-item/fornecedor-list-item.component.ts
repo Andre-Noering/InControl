@@ -20,5 +20,7 @@ export class FornecedorListItemComponent implements OnInit {
     this.selecionado.emit(this.fornecedor);
     this.escolhendo=false;
   }
-
+  deleteFornecedor(){
+    this.selecionado.emit(this.fornecedor);
+  }
 }

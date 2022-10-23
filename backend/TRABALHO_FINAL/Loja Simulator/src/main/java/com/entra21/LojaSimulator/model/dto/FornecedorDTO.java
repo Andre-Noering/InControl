@@ -9,6 +9,7 @@ public class FornecedorDTO {
     private String razao_social;
     private String cnpj;
     private String contato;
+
     private LojaEntity loja;
 
     public FornecedorDTO(Long id, String razao_social, String cnpj, String contato, LojaEntity loja) {

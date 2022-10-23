@@ -6,10 +6,11 @@ CREATE TABLE `fornecedor` (
   `cnpj` char(14) NOT NULL,
   `contato` varchar(50) NOT NULL,
   `id_loja` bigint NOT NULL,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   KEY `id_loja` (`id_loja`),
   CONSTRAINT `fornecedor_ibfk_1` FOREIGN KEY (`id_loja`) REFERENCES `loja` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.funcionario definition
@@ -34,10 +35,11 @@ CREATE TABLE `item` (
   `qtde_estoque` int NOT NULL,
   `qtde_alerta_estoque` int DEFAULT NULL,
   `id_loja` bigint NOT NULL,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   KEY `id_loja` (`id_loja`),
   CONSTRAINT `item_ibfk_1` FOREIGN KEY (`id_loja`) REFERENCES `loja` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.item_fornecedor definition
@@ -47,12 +49,13 @@ CREATE TABLE `item_fornecedor` (
   `id_fornecedor` bigint NOT NULL,
   `id_item` bigint NOT NULL,
   `valor_compra` decimal(8,2) NOT NULL,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   KEY `id_fornecedor` (`id_fornecedor`),
   KEY `id_item` (`id_item`),
   CONSTRAINT `item_fornecedor_ibfk_1` FOREIGN KEY (`id_fornecedor`) REFERENCES `fornecedor` (`id`),
   CONSTRAINT `item_fornecedor_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `item` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.item_venda definition
@@ -68,7 +71,7 @@ CREATE TABLE `item_venda` (
   KEY `id_item` (`id_item`),
   CONSTRAINT `item_venda_ibfk_1` FOREIGN KEY (`id_venda`) REFERENCES `venda` (`id`),
   CONSTRAINT `item_venda_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `item` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.loja definition
@@ -83,7 +86,7 @@ CREATE TABLE `loja` (
   PRIMARY KEY (`id`),
   KEY `id_funcionario` (`id_funcionario`),
   CONSTRAINT `loja_ibfk_1` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionario` (`id_pessoa`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.pedido_compra definition
@@ -95,7 +98,7 @@ CREATE TABLE `pedido_compra` (
   PRIMARY KEY (`id`),
   KEY `pedido_compra_FK` (`id_funcionario`),
   CONSTRAINT `pedido_compra_FK` FOREIGN KEY (`id_funcionario`) REFERENCES `funcionario` (`id_pessoa`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.pedido_compra_item_fornecedor definition
@@ -111,7 +114,7 @@ CREATE TABLE `pedido_compra_item_fornecedor` (
   KEY `id_pedido_compra` (`id_pedido_compra`),
   CONSTRAINT `pedido_compra_item_fornecedor_ibfk_1` FOREIGN KEY (`id_item_fornecedor`) REFERENCES `item_fornecedor` (`id`),
   CONSTRAINT `pedido_compra_item_fornecedor_ibfk_2` FOREIGN KEY (`id_pedido_compra`) REFERENCES `pedido_compra` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.pessoa definition
@@ -123,10 +126,11 @@ CREATE TABLE `pessoa` (
   `telefone` varchar(50) NOT NULL,
   `cpf` char(11) NOT NULL,
   `id_loja` bigint DEFAULT NULL,
+  `ativo` bit(1) NOT NULL DEFAULT b'1',
   PRIMARY KEY (`id`),
   KEY `id_loja` (`id_loja`),
   CONSTRAINT `pessoa_ibfk_1` FOREIGN KEY (`id_loja`) REFERENCES `loja` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- loja_simulator.venda definition
@@ -141,4 +145,4 @@ CREATE TABLE `venda` (
   KEY `venda_FK` (`id_vendedor`),
   CONSTRAINT `venda_FK` FOREIGN KEY (`id_vendedor`) REFERENCES `funcionario` (`id_pessoa`),
   CONSTRAINT `venda_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `pessoa` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

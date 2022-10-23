@@ -17,6 +17,9 @@ public class ItemFornecedorEntity {
     @Column(name = "valor_compra", nullable = false)
     private Double valorCompra;
 
+    @Column(name = "ativo", nullable = false)
+    private Boolean ativo = true;
+
     @ManyToOne
     @JoinColumn (name = "id_item", referencedColumnName = "id", nullable = false)
     private ItemEntity item;

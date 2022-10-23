@@ -18,4 +18,7 @@ export class PessoasListItemComponent implements OnInit {
     this.selecionado.emit(this.pessoa);
     this.escolhendo=false;
   }
+  deletePessoa(){
+    this.selecionado.emit(this.pessoa);
+  }
 }

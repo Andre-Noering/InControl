@@ -32,4 +32,9 @@ export class ItemScreenComponent {
         }
       }));
    }
+
+   delete(item:Item){
+    this.itemService.delete(this.loja?.razao_social!,item.id);
+    this.itens =  this.itens.filter(itemLista => itemLista!=item);
+  }
 }

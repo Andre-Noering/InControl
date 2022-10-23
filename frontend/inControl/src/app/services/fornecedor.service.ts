@@ -33,4 +33,7 @@ export class FornecedorService {
             }
         );
     }
+    delete(razao_social:string, id:number){
+      this.http.delete(`/${razao_social}/fornecedores/${id}`).subscribe(resultado => {});
+    }
 }
