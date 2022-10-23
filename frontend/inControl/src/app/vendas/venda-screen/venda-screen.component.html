@@ -11,6 +11,6 @@
     <div *ngFor="let venda of vendas">
         <app-venda-list-item [venda]="venda" ></app-venda-list-item>
     </div>
-    <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/vendas/adicionar">+</button>
+    <button class="add" routerLink="/lojas/{{loja?.razao_social}}/vendas/adicionar">+</button>
 </div>
 

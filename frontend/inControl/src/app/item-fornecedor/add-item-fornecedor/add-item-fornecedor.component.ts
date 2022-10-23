@@ -15,7 +15,12 @@ import { LojaService } from 'src/app/services/loja.service';
   styleUrls: ['./add-item-fornecedor.component.css']
 })
 export class AddItemFornecedorComponent implements OnInit {
-
+  escolhendoItem : boolean = false;
+  itemEscolhido: boolean = false;
+  fornecedor: Fornecedor | null = null;
+  escolhendoFornecedor : boolean = false;
+  fornecedorEscolhido: boolean = false;
+  item: Item | null = null;
   loja:Loja|null = null;
   fornecedores:Fornecedor[] = [];
   itens: Item[] = []
@@ -51,5 +56,16 @@ export class AddItemFornecedorComponent implements OnInit {
       this.itemFornService.add(this.formItemFornecedor.value as ItemFornecedor);
         this.router.navigate([`/lojas/${this.loja!.razao_social}/itensFornecedor`]);
       };
+
+      setItem(item:Item){
+        this.item=item;
+        this.formItemFornecedor.get('idItem')?.patchValue(item.id);
+        this.itemEscolhido=true
+      }
+      setFornecedor(fornecedor:Fornecedor){
+        this.fornecedor=fornecedor;
+        this.formItemFornecedor.get('idFornecedor')?.patchValue(fornecedor.id);
+        this.fornecedorEscolhido=true
+      }
     }
 

@@ -25,6 +25,11 @@ export class ItemFornecedorScreenComponent{
         this.loja = resultado;
         this.itemFornecedorService.getAll(this.loja!.razao_social).pipe().subscribe(itensFornecedor => {
           this.itensFornecedor = itensFornecedor;
+        }, 
+        erro => {
+          if(erro.status == 400) {
+            console.log(erro);
+          }
         });
       }, 
       erro => {

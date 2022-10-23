@@ -59,8 +59,8 @@ const routes: Routes = [
   {path: 'lojas/:razao_social/pedidosCompra', component: PedidosCompraScreenComponent},
   {path: 'lojas/:razao_social/pedidosCompra/adicionar', component: AddPedidoCompraComponent},
 
-  {path: 'lojas/:razao_social/pedidosCompra/:id', component: PedidosCompraFuncionarioScreenComponent},
-  {path: 'lojas/:razao_social/vendas/:id', component: VendasFuncionarioScreenComponent},
+  {path: 'lojas/:razao_social/pedidosCompra/funcionario/:id', component: PedidosCompraFuncionarioScreenComponent},
+  {path: 'lojas/:razao_social/vendas/funcionario/:id', component: VendasFuncionarioScreenComponent},
 
 
   {path: 'lojas/:razao_social/pedidosCompra/:id/pedidoCompraItensFornecedor', component: PedidoCompraItemFornecedorScreenComponent},

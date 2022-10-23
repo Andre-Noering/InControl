@@ -2,8 +2,10 @@
 <div class="cont" style= "height: 50%;">
     <h2 style="margin-bottom: 30px;">Estoque</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
-        <li style="width: 60%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
-        <li style="width: 40%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Quantidade</li>
+        <li style="width: 50%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 25%; border-radius: 0;  " class="list-group-item">Quantidade</li>
+        <li style="width: 25%; border-radius: 0; border-top-right-radius: 8px; "class="list-group-item">Valor</li>
+
     </ul>
     <div *ngFor="let item of itens">
         <app-item-list-item  [item]="item"></app-item-list-item>
