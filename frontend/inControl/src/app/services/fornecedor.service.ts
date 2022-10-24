@@ -18,9 +18,7 @@ export class FornecedorService {
     getAll(razao_social:string) {
         return this.http.get<Fornecedor[]>(`/${razao_social}/fornecedores`);
     }   
-    getByRazaoSocial(razao_social:string){
-      return this.http.get<Loja>(`${razao_social}`);
-    }
+    
 
     add(razao_social:string, fornecedor:Fornecedor){
         return this.http.post(`/${razao_social}/fornecedores/adicionar`, fornecedor).subscribe(
@@ -35,5 +33,8 @@ export class FornecedorService {
     }
     delete(razao_social:string, id:number){
       this.http.delete(`/${razao_social}/fornecedores/${id}`).subscribe(resultado => {});
+    }
+    edit(razao_social:string, fornecedor:Fornecedor){
+      this.http.put(`/${razao_social}/fornecedores/atualizar`, fornecedor).subscribe(result => {});
     }
 }

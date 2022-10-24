@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Loja, Pessoa } from 'src/app/app.module';
@@ -12,10 +12,13 @@ import { PessoaService } from 'src/app/services/pessoa.service';
   styleUrls: ['./add-pessoa.component.css']
 })
 export class AddPessoaComponent implements OnInit {
+  @Input() pessoa: Pessoa|null = null;
+  @Output() editado= new EventEmitter<Pessoa>();
 
   loja : Loja |null = null;
   
   formCadastro = this.formBuilder.group({
+    idPessoa:[0],
     nome:['', Validators.required],
     sobrenome:['', Validators.required],
     cpf:['', Validators.required],
@@ -41,10 +44,18 @@ export class AddPessoaComponent implements OnInit {
     })); }
 
   ngOnInit(): void {
+    if(this.pessoa!=null){
+      this.formCadastro.patchValue(this.pessoa);
+    }
   }
 
   adicionarPessoa(){
+    if(this.pessoa==null){
     this.pessoaService.add(this.loja!.razao_social,this.formCadastro.value as Pessoa);
     this.router.navigate([`/lojas/${this.loja?.razao_social ?? ''}/pessoas`])
+    } else {
+      this.pessoaService.edit(this.loja!.razao_social,this.formCadastro.value as Pessoa );
+      this.editado.emit(this.formCadastro.value as Pessoa);
+    }
   }
 }

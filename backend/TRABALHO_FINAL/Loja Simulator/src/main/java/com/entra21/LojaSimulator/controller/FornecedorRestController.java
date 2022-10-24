@@ -47,7 +47,7 @@ public class FornecedorRestController {
     }
 
     @PutMapping("/atualizar")
-    public void update(@RequestBody FornecedorDTO fornecedorDTO){
+    public void update(@RequestBody FornecedorPayloadDTO fornecedorDTO){
         fornecedorService.update(fornecedorDTO);
     }
 }

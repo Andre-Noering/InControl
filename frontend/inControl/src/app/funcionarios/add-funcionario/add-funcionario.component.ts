@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Funcionario, Gerente, Loja } from 'src/app/app.module';
@@ -13,9 +13,13 @@ import { LojaService } from 'src/app/services/loja.service';
   styleUrls: ['./add-funcionario.component.css']
 })
 export class AddFuncionarioComponent implements OnInit {
+  @Input() funcionario: Funcionario|null = null;
+  @Output() editado= new EventEmitter<Funcionario>();
+
   loja : Loja |null = null;
   
   formCadastro = this.formBuilder.group({
+    idPessoa:[0],
     nome:['', Validators.required],
     sobrenome:['', Validators.required],
     cpf:['', Validators.required],
@@ -42,10 +46,18 @@ export class AddFuncionarioComponent implements OnInit {
     })); }
 
   ngOnInit(): void {
-  }
+    if(this.funcionario!=null){
+      this.formCadastro.patchValue(this.funcionario);
+    }
+  } 
 
   adicionarFuncionario(){
+    if(this.funcionario==null){
     this.funcionarioService.add(this.loja!.razao_social,this.formCadastro.value as Funcionario);
     this.router.navigate([`/lojas/${this.loja?.razao_social ?? ''}/funcionarios`])
+    } else {
+      this.funcionarioService.edit(this.formCadastro.value as Funcionario);
+      this.editado.emit(this.formCadastro.value as Funcionario);
+    }
   }
 }

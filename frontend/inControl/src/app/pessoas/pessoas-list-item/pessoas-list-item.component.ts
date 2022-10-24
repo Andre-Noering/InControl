@@ -9,7 +9,10 @@ import { Pessoa } from 'src/app/app.module';
 export class PessoasListItemComponent implements OnInit {
   @Input() pessoa!:Pessoa;
   @Input() escolhendo:boolean = false;
+  @Output() delete = new EventEmitter<Pessoa>();
+  @Output() edit = new EventEmitter<Pessoa>();
   @Output() selecionado = new EventEmitter<Pessoa>();
+  @Output() editar = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit(): void {
@@ -19,6 +22,11 @@ export class PessoasListItemComponent implements OnInit {
     this.escolhendo=false;
   }
   deletePessoa(){
-    this.selecionado.emit(this.pessoa);
+    this.delete.emit(this.pessoa);
+  }
+  editPessoa(){
+    this.edit.emit(this.pessoa)
+    this.editar.emit(true);
   }
 }
+ 

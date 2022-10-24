@@ -12,8 +12,10 @@ import { LojaService } from 'src/app/services/loja.service';
   templateUrl: './item-fornecedor-screen.component.html',
   styleUrls: ['./item-fornecedor-screen.component.css']
 })
-export class ItemFornecedorScreenComponent{
+export class ItemFornecedorScreenComponent implements OnInit{
   loja:Loja|null=null;
+  editando:boolean=false;
+  itemFornecedor: ItemFornecedor|null = null;
   itensFornecedor:ItemFornecedor[] = [];
 
   constructor(private http: HttpClient,
@@ -37,9 +39,28 @@ export class ItemFornecedorScreenComponent{
           console.log(erro);
         }
       }));
+     
    }
+  ngOnInit(): void {
+    
+  }
    delete(itemFornecedor:ItemFornecedor){
     this.itemFornecedorService.delete(itemFornecedor.id!);
     this.itensFornecedor = this.itensFornecedor.filter(item=> item!=itemFornecedor);
    }
-}
+   edit(itemFornecedor:ItemFornecedor){
+    this.editando=true;
+    this.itemFornecedor=itemFornecedor;
+    
+  }
+  editado(itemFornecedor:ItemFornecedor){
+    this.itemFornecedor= itemFornecedor;
+    this.editando = false;
+    this.itensFornecedor = this.itensFornecedor.map(itemFornecedorL=> {
+      if(itemFornecedorL.id==itemFornecedor.id){
+        return itemFornecedor;
+      }
+      return itemFornecedorL;
+    })
+  }
+} 

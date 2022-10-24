@@ -113,10 +113,10 @@ public class ItemService {
 	public void update(ItemDTO itemDTO) {
 		ItemEntity itemEntity = getItemById(itemDTO.getId());
 		if (itemEntity.getNome() != null) {
-			itemEntity.setNome(itemEntity.getNome());
+			itemEntity.setNome(itemDTO.getNome());
 		}
 		if (itemEntity.getValor() != null) {
-			itemEntity.setValor(itemEntity.getValor());
+			itemEntity.setValor(itemDTO.getValor());
 		}
 		if (itemDTO.getQtdeEstoque() != null) {
 			itemEntity.setQtdeEstoque(itemDTO.getQtdeEstoque());
@@ -124,6 +124,7 @@ public class ItemService {
 		if (itemDTO.getQtdeAlertaEstoque() != null) {
 			itemEntity.setQtdeAlertaEstoque(itemDTO.getQtdeAlertaEstoque());
 		}
+		itemRepository.save(itemEntity);
 	}
 
 

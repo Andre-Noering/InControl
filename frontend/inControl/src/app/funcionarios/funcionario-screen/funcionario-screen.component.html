@@ -1,18 +1,19 @@
 <i routerLink="/lojas/{{loja?.razao_social ?? ''}}" class="bi bi-arrow-left-circle-fill"></i>
-<div class="cont" style="margin-top:30px; height: 50%;">
+<div *ngIf="!editando" class="cont" style="margin-top:30px; height: 50%;">
     <h2 style="margin: 30px;">Equipe</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
-        <li style="width: 53%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
-        <li style="width: 40%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Contato</li>
+        <li style="width: 50%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 36%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Contato</li>
     </ul>
 
     <div *ngFor="let funcionario of funcionarios">
-        <app-funcionario-list-item (selecionado)="delete($event)" [funcionario]="funcionario" ></app-funcionario-list-item>
+        <app-funcionario-list-item (edit)="edit($event)" (delete)="delete($event)" [funcionario]="funcionario" ></app-funcionario-list-item>
     </div>
-    <div style="width: 93%;">
+    <div style="width: 86%;">
         <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/funcionarios/adicionar" class="add">+</button>
     </div>
 </div>
+<app-add-funcionario (editado)="editado($event)" *ngIf="editando" [funcionario]="funcionario"></app-add-funcionario>
 
 
 

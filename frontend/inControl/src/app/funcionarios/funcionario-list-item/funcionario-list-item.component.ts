@@ -10,7 +10,10 @@ import { FuncionarioService } from 'src/app/services/funcionario.service';
 export class FuncionarioListItemComponent implements OnInit {
   @Input() funcionario!:Funcionario;
   @Input() escolhendo:boolean = false;
+  @Output() delete = new EventEmitter<Funcionario>();
+  @Output() edit = new EventEmitter<Funcionario>();
   @Output() selecionado = new EventEmitter<Funcionario>();
+  @Output() editar = new EventEmitter<boolean>();
   constructor(private funcionarioService:FuncionarioService) { }
 
   ngOnInit(): void {
@@ -20,6 +23,10 @@ export class FuncionarioListItemComponent implements OnInit {
     this.escolhendo=false;
   }
   deleteFunc(){
-    this.selecionado.emit(this.funcionario);
+    this.delete.emit(this.funcionario);
+  }
+  editFunc(){
+    this.edit.emit(this.funcionario)
+    this.editar.emit(true);
   }
 }

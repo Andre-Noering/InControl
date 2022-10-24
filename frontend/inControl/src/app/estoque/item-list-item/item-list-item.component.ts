@@ -10,7 +10,10 @@ export class ItemListItemComponent implements OnInit {
 
   @Input() item!:Item;
   @Input() escolhendo:boolean = false;
+  @Output() delete = new EventEmitter<Item>();
+  @Output() edit = new EventEmitter<Item>();
   @Output() selecionado = new EventEmitter<Item>();
+  @Output() editar = new EventEmitter<boolean>();
 
   
   constructor() { }
@@ -23,7 +26,10 @@ export class ItemListItemComponent implements OnInit {
   }
 
   deleteItem(){
-    this.selecionado.emit(this.item)
+    this.delete.emit(this.item)
   }
-
+  editItem(){
+    this.edit.emit(this.item)
+    this.editar.emit(true);
+  }
 }

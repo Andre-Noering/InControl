@@ -37,5 +37,8 @@ export class ItemService {
     delete(razao_social:string,id:number){
       this.http.delete(`${razao_social}/itens/deletar/${id}`).subscribe(resultado => {})
     }
+    edit(razao_social:string, item:Item){
+      this.http.put(`/${razao_social}/itens/atualizar`,item).subscribe(resultado => {});
+    }
     
 }
