@@ -1,7 +1,7 @@
 <form [formGroup]="formFornecedor" (ngSubmit)="addFornecedor()">
     <div id="formulario-cadastro" class="container">
-        <h2>Cadastrar fornecedor</h2>
-        
+        <h2 *ngIf="fornecedor==null">Cadastrar fornecedor</h2>
+        <h2 *ngIf="fornecedor!=null">Editar fornecedor</h2>
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
         <label for="razao_social">Razão social</label>
         <input formControlName="razao_social" type="text" class="form-control" id="razao_social"  placeholder="Informe a razão social." required>
