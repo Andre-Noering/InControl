@@ -82,15 +82,18 @@ public class FornecedorService {
 
 
     //PUT
-    public void update(FornecedorDTO fornecedorDTO) {
+    public void update(FornecedorPayloadDTO fornecedorDTO) {
         FornecedorEntity fornecedor = getFornecedorById(fornecedorDTO.getId());
         if (fornecedorDTO.getRazao_social() != null) {
             fornecedor.setRazaoSocial(fornecedorDTO.getRazao_social());
         }
+        if (fornecedorDTO.getCnpj()!=null){
+            fornecedor.setCnpj(fornecedorDTO.getCnpj());
+        }
         if (fornecedorDTO.getContato() != null) {
             fornecedor.setContato(fornecedorDTO.getContato());
         }
-        save(getDtoById(fornecedor.getId()));
+        fornecedorRepository.save(fornecedor);
     }
 
 

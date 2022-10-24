@@ -37,5 +37,8 @@ export class ItemFornecedorService {
     delete(id:number){
       this.http.delete(`/ItemFornecedor/deletar/${id}`).subscribe(resultado => {});
     }
+    edit(itemFornecedor:ItemFornecedor){
+      this.http.put(`/ItemFornecedor/atualizar`, itemFornecedor).subscribe(resultado =>{});
+    }
     
 }

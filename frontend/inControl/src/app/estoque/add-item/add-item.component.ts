@@ -11,9 +11,12 @@ import { LojaService } from 'src/app/services/loja.service';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent {
+  @Input() item:Item|null = null;
+  @Output() editado= new EventEmitter<Item>();
   loja:Loja | null = null;
 
   formItem = this.formBuilder.group({
+    id:[0],
     nome:['', Validators.required],
     valor:[0, Validators.required],
     qtdeEstoque:[0, Validators.required],
@@ -32,6 +35,9 @@ export class AddItemComponent {
   }
 
   ngOnInit(): void {
+    if(this.item!=null){
+      this.formItem.patchValue(this.item);
+    }
     this.route.params.subscribe(params => {
       this.lojaService.getByRazaoSocial(params['razao_social']).subscribe(resultado => {
         this.loja = resultado;
@@ -45,7 +51,12 @@ export class AddItemComponent {
     })
   }
   addItem(){
+    if(this.item==null){
     this.itemService.add(this.loja!.razao_social,this.formItem.value as Item);
     this.router.navigate([`/lojas/${this.loja?.razao_social ?? ''}/estoque`])
+    } else {
+      this.itemService.edit(this.loja!.razao_social, this.formItem.value as Item);
+      this.editado.emit(this.formItem.value as Item);
+    }
   }
 }

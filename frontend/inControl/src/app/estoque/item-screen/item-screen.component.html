@@ -1,19 +1,20 @@
 <i class="bi bi-arrow-left-circle-fill" routerLink="/lojas/{{loja?.razao_social ?? ''}}"></i>
-<div class="cont" style= "height: 50%;">
+<div *ngIf="!editando" class="cont" style= "height: 50%;">
     <h2 style="margin-bottom: 30px;">Estoque</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
-        <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
-        <li style="width: 26%; border-radius: 0;  " class="list-group-item">Quantidade</li>
+        <li style="width: 37%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 22%; border-radius: 0;  " class="list-group-item">Quantidade</li>
         <li style="width: 27%; border-radius: 0; border-top-right-radius: 8px; "class="list-group-item">Valor</li>
 
     </ul>
     <div *ngFor="let item of itens">
-        <app-item-list-item (selecionado)="delete($event)" [item]="item"></app-item-list-item>
+        <app-item-list-item (edit)="edit($event)" (delete)="delete($event)" [item]="item"></app-item-list-item>
     </div>
-    <div style="width: 93%;">
+    <div style="width: 86%;">
         <button class="add" routerLink="/lojas/{{loja?.razao_social ?? ''}}/estoque/adicionar">+</button>
     </div>
 </div>
+<app-add-item (editado)="editado($event)" *ngIf="editando" [item]="item"></app-add-item>
 
 
 

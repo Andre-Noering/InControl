@@ -1,18 +1,20 @@
 <i routerLink="/lojas/{{loja?.razao_social ?? ''}}" class="bi bi-arrow-left-circle-fill"></i>
-<div class="cont" style="margin-top:30px; height: 50%;">
+<div *ngIf="!editando" class="cont" style="margin-top:30px; height: 50%;">
     <h2 style="margin: 30px;">Clientes</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
-        <li style="width: 43%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
-        <li style="width: 25%; border-radius: 0;" class="list-group-item">Contato</li>
-        <li style="width: 25%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Cpf</li>
+        <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 23%; border-radius: 0;" class="list-group-item">Contato</li>
+        <li style="width: 23%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Cpf</li>
     </ul>
 
     <div *ngFor="let pessoa of pessoas">
-        <app-pessoas-list-item (selecionado)="delete($event)" [pessoa]="pessoa" ></app-pessoas-list-item>
+        <app-pessoas-list-item (edit)="edit($event)" (delete)="delete($event)" [pessoa]="pessoa" ></app-pessoas-list-item>
     </div>
-    <div style="width: 93%;">
+    <div style="width: 86%;">
         <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/pessoas/adicionar" class="add">+</button>
     </div>
 </div>
+<app-add-pessoa (editado)="editado($event)" *ngIf="editando" [pessoa]="pessoa"></app-add-pessoa>
+
 
 

@@ -13,6 +13,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ItemScreenComponent {
   loja: Loja | null = null;
+  editando:boolean=false;
+  item:Item|null=null;
   user: User | null = null;
   itens: Item[] = [];
   constructor(private http: HttpClient,
@@ -41,5 +43,20 @@ export class ItemScreenComponent {
    delete(item:Item){
     this.itemService.delete(this.loja?.razao_social!,item.id);
     this.itens =  this.itens.filter(itemLista => itemLista!=item);
+  }
+  edit(item:Item){
+    this.editando=true;
+    this.item=item;
+    
+  }
+  editado(item:Item){
+    this.item= item;
+    this.editando = false;
+    this.itens = this.itens.map(itemL=> {
+      if(itemL.id==item.id){
+        return item;
+      }
+      return itemL;
+    })
   }
 }

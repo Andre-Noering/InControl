@@ -34,4 +34,7 @@ export class PessoaService {
     delete(razao_social:string, id:number){
       this.http.delete(`${razao_social}/pessoas/${id}`).subscribe(resultado => {});
     }
+    edit(razao_social:string, pessoa: Pessoa){
+      this.http.put(`${razao_social}/pessoas/update`, pessoa).subscribe(resultado=> {});
+    }
 }

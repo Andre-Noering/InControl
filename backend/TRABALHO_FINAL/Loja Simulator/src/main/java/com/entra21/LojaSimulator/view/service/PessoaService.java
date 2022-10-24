@@ -87,6 +87,7 @@ public class PessoaService {
         pessoaEntity.setCpf(pessoaDTO.getCpf());
         pessoaEntity.setSobrenome(pessoaDTO.getSobrenome());
         pessoaEntity.setTelefone(pessoaDTO.getTelefone());
+        pessoaRepository.save(pessoaEntity);
     }
 
     //DELETE

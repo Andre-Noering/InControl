@@ -40,7 +40,7 @@ public class FuncionarioRestController {
         return funcionarioService.getDTOById(id);
     }
 
-    @PutMapping("/alteracao-funcionario/{id}")
+    @PutMapping("/atualizar")
     public void updateFuncionarioDTO(@RequestBody FuncionarioDTO funcionarioDTO){
         funcionarioService.update(funcionarioDTO);
     }

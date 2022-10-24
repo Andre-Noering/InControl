@@ -42,7 +42,7 @@ public class ItemFornecedorRestController {
         itemFornecedorService.save(itemFornecedorDTO);
     }
 
-    @PutMapping("/put")
+    @PutMapping("/atualizar")
     public void putItemFornecedor(@RequestBody ItemFornecedorDTO itemFornecedorDTO){
         itemFornecedorService.update(itemFornecedorDTO);
     }

@@ -12,6 +12,9 @@ import { LojaService } from 'src/app/services/loja.service';
 export class FornecedorScreenComponent implements OnInit {
   @Input() loja:Loja | null = null;
   
+  fornecedor: Fornecedor|null = null;
+  editando: boolean=false;
+
   fornecedores: Fornecedor[] = [];
   constructor(
     private fornecedorService: FornecedorService,
@@ -22,6 +25,11 @@ export class FornecedorScreenComponent implements OnInit {
       this.loja = resultado;
       this.fornecedorService.getAll(this.loja!.razao_social).pipe().subscribe(fornecedores => {
         this.fornecedores = fornecedores;
+      },
+      erro => {
+        if(erro.status == 400) {
+          console.log(erro);
+        }
       });
     },
     erro => {
@@ -41,5 +49,19 @@ export class FornecedorScreenComponent implements OnInit {
 delete(fornecedor:Fornecedor){
   this.fornecedorService.delete(this.loja?.razao_social!,fornecedor.id);
   this.fornecedores = this.fornecedores.filter(forn => forn!=fornecedor);
+}
+edit(fornecedor:Fornecedor){
+  this.editando=true;
+  this.fornecedor=fornecedor;
+}
+editado(fornecedor:Fornecedor){
+  this.fornecedor= fornecedor;
+  this.editando = false;
+  this.fornecedores = this.fornecedores.map(fornecedorL=> {
+    if(fornecedorL.id==fornecedor.id){
+      return fornecedor;
+    }
+    return fornecedorL;
+  })
 }
 }

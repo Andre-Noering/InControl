@@ -9,7 +9,10 @@ import { ItemFornecedor } from 'src/app/app.module';
 export class ItemFornecedorListITemComponent implements OnInit {
   @Input() itemFornecedor: ItemFornecedor|null = null;
   @Input() escolhendo:boolean = false;
+  @Output() delete = new EventEmitter<ItemFornecedor>();
+  @Output() edit = new EventEmitter<ItemFornecedor>();
   @Output() selecionado = new EventEmitter<ItemFornecedor>();
+  @Output() editar = new EventEmitter<boolean>();
 
   
   constructor() { }
@@ -22,5 +25,9 @@ export class ItemFornecedorListITemComponent implements OnInit {
   }
   deleteItem(){
     this.selecionado.emit(this.itemFornecedor!);
+  }
+  editPessoa(){
+    this.edit.emit(this.itemFornecedor!)
+    this.editar.emit(true);
   }
 }

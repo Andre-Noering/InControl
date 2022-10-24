@@ -62,7 +62,15 @@ public class ItemFornecedorService {
         if(itemFornecedorDTO.getValorCompra() !=null){
             itemFornecedorEntity.setValorCompra(itemFornecedorDTO.getValorCompra());
         }
+        if(itemFornecedorDTO.getIdItem()!=null){
+            itemFornecedorEntity.setItem(itemService.getItemById(itemFornecedorDTO.getIdItem()));
+        }
+        if(itemFornecedorDTO.getIdFornecedor()!=null){
+            itemFornecedorEntity.setFornecedor(fornecedorService.getFornecedorById(itemFornecedorDTO.getIdFornecedor()));
+        }
+        itemFornecedorRepository.save(itemFornecedorEntity);
     }
+
 
     //DELETE
     public void delete(Long id){

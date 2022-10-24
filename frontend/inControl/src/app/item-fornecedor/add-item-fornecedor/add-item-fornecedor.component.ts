@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Fornecedor, Item, ItemFornecedor, Loja } from 'src/app/app.module';
@@ -15,6 +15,9 @@ import { LojaService } from 'src/app/services/loja.service';
   styleUrls: ['./add-item-fornecedor.component.css']
 })
 export class AddItemFornecedorComponent implements OnInit {
+  @Input() itemFornecedor: ItemFornecedor|null = null;
+  @Output() editado= new EventEmitter<ItemFornecedor>();
+
   escolhendoItem : boolean = false;
   itemEscolhido: boolean = false;
   fornecedor: Fornecedor | null = null;
@@ -25,7 +28,7 @@ export class AddItemFornecedorComponent implements OnInit {
   fornecedores:Fornecedor[] = [];
   itens: Item[] = []
   formItemFornecedor = this.formBuilder.group({
-    id:[null],
+    id:[0],
     valorCompra:[0, Validators.required],
     idFornecedor:[0, Validators.required],
     idItem:[0,Validators.required],
@@ -42,8 +45,13 @@ export class AddItemFornecedorComponent implements OnInit {
     private lojaService: LojaService,
     private route: ActivatedRoute,
     private router:Router) {
-   }
+   } 
   ngOnInit(): void {
+    if(this.itemFornecedor!=null){
+      this.formItemFornecedor.patchValue(this.itemFornecedor);
+      this.itemEscolhido = true;
+      this.fornecedorEscolhido = true;
+    }
     this.route.params.subscribe(params => this.lojaService.getByRazaoSocial(params['razao_social']).subscribe(resultado => {
       this.loja = resultado;
       console.log(this.loja);
@@ -53,18 +61,34 @@ export class AddItemFornecedorComponent implements OnInit {
       
   }
     addItemForn(){
+      if(this.itemFornecedor==null){
       this.itemFornService.add(this.formItemFornecedor.value as ItemFornecedor);
         this.router.navigate([`/lojas/${this.loja!.razao_social}/itensFornecedor`]);
+      } else {
+        this.itemFornService.edit(this.formItemFornecedor.value as ItemFornecedor);
+        this.editado.emit(this.formItemFornecedor.value as ItemFornecedor);
+      }
       };
 
       setItem(item:Item){
         this.item=item;
         this.formItemFornecedor.get('idItem')?.patchValue(item.id);
+        if(this.itemFornecedor!=null){
+          this.itemFornecedor!.nome_item = item.nome;
+          this.formItemFornecedor.get('nome_item')?.patchValue(this.itemFornecedor.nome_item);
+          this.formItemFornecedor.get('idItem')?.patchValue(item.id);
+        }
         this.itemEscolhido=true
       }
       setFornecedor(fornecedor:Fornecedor){
         this.fornecedor=fornecedor;
         this.formItemFornecedor.get('idFornecedor')?.patchValue(fornecedor.id);
+        if(this.itemFornecedor!=null){
+          this.itemFornecedor!.nome_fornecedor = fornecedor.razao_social;
+          this.formItemFornecedor.get('nome_fornecedor')?.patchValue(this.itemFornecedor.nome_fornecedor);
+          this.formItemFornecedor.get('idFornecedor')?.patchValue(fornecedor.id);
+
+        }
         this.fornecedorEscolhido=true
       }
     }

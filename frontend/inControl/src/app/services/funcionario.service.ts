@@ -48,4 +48,7 @@ export class FuncionarioService {
         }
       );;
     }
+    edit(funcionario:Funcionario){
+      this.http.put(`/funcionarios/atualizar`, funcionario).subscribe(resultado=> {});
+    }
 }

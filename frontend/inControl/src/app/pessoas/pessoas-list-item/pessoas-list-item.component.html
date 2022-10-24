@@ -1,7 +1,8 @@
 <ul *ngIf="!escolhendo" style="width:100%" class="list-group list-group-horizontal">
-    <li style="width: 43%; border-radius: 0;"class="list-group-item">{{pessoa?.nome ?? ''}} {{pessoa?.sobrenome ?? ''}}</li>
-    <li style="width: 25%; border-radius: 0;" class="list-group-item">{{pessoa?.telefone ?? ''}}</li>
-    <li style="width: 25%; border-radius: 0;" class="list-group-item">{{pessoa?.cpf ?? ''}}</li>
+    <li style="width: 40%; border-radius: 0;"class="list-group-item">{{pessoa?.nome ?? ''}} {{pessoa?.sobrenome ?? ''}}</li>
+    <li style="width: 23%; border-radius: 0;" class="list-group-item">{{pessoa?.telefone ?? ''}}</li>
+    <li style="width: 23%; border-radius: 0;" class="list-group-item">{{pessoa?.cpf ?? ''}}</li>
+    <li style="width: 7%; padding-top: 1.2%;"><small style="cursor: pointer;" (click)="editPessoa()"><i class="bi bi-pencil"></i></small></li>
     <li style="width: 7%; border-radius: 0; padding-top: 1.2%;"><small style="cursor: pointer;" (click)="deletePessoa()"><i class="bi bi-trash3"></i></small></li>
 </ul>
 
