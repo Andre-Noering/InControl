@@ -1,14 +1,14 @@
 <ul *ngIf="!escolhendo" style="width:100%" class="list-group list-group-horizontal">
-    <li style="width: 40%; border-radius: 0;"class="list-group-item">{{fornecedor.razao_social}}</li>
+    <li style="width: 33%; border-radius: 0;"class="list-group-item">{{fornecedor.razao_social}}</li>
     <li style="width: 30%; border-radius: 0;" class="list-group-item">{{fornecedor.cnpj}}</li>
     <li style="width: 30%; border-radius: 0;" class="list-group-item">{{fornecedor.contato}}</li>
-    <li style="width: 10%; border-radius: 0;"><small style="cursor: pointer;" (click)="deleteFornecedor()">🗑️</small></li>
+    <li style="width: 7%; padding-top: 1.5%;" ><small style="cursor: pointer;" (click)="deleteFornecedor()" id="lixeira"><i class="bi bi-trash3"></i></small></li>
 </ul>
 <ul *ngIf="escolhendo" style="width:100%" class="list-group list-group-horizontal">
     <li style="width: 40%; border-radius: 0;"class="list-group-item">{{fornecedor.razao_social}}</li>
-    <li style="width: 25%; border-radius: 0;" class="list-group-item">{{fornecedor.cnpj}}</li>
+    <li style="width: 28%; border-radius: 0;" class="list-group-item">{{fornecedor.cnpj}}</li>
     <li style="width: 25%; border-radius: 0;" class="list-group-item">{{fornecedor.contato}}</li>
-    <li style="width: 10%; border-radius: 0;"><small (click)="selectFornecedor()">+</small></li>
+    <li style="width: 7%; padding-top: 1.2%;"><small (click)="selectFornecedor()"><i class="bi bi-plus-square"></i></small></li>
 
 </ul>
 

@@ -2,13 +2,16 @@
 <div class="cont" style="margin-top:30px; height: 50%;">
     <h2 style="margin: 30px;">Fornecedores</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
-        <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Razão Social</li>
+        <li style="width: 33%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Razão Social</li>
         <li style="width: 30%; border-radius: 0;" class="list-group-item">Cnpj</li>
-        <li style="width: 30%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Contato</li>
+        <li style="width: 30%; border-radius: 0; border-top-right-radius: 8px;" class="list-group-item">Contato</li>
     </ul>
     <div *ngFor="let fornecedor of fornecedores">
         <app-fornecedor-list-item (selecionado)="delete($event)" [fornecedor]="fornecedor" ></app-fornecedor-list-item>
     </div>
-    <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/fornecedores/adicionar" class="add">+</button>
+    <div style="text-align: start;">
+        <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/fornecedores/adicionar" class="add">+</button>
+    </div>
+    
 </div>
 

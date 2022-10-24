@@ -2,14 +2,16 @@
 <div class="cont" style="margin-top:30px; height: 50%;">
     <h2 style="margin: 30px;">Equipe</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
-        <li style="width: 50%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 53%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
         <li style="width: 40%; border-radius: 0;  border-top-right-radius: 8px;" class="list-group-item">Contato</li>
     </ul>
 
     <div *ngFor="let funcionario of funcionarios">
         <app-funcionario-list-item (selecionado)="delete($event)" [funcionario]="funcionario" ></app-funcionario-list-item>
     </div>
-    <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/funcionarios/adicionar" class="add">+</button>
+    <div style="width: 93%;">
+        <button routerLink="/lojas/{{loja?.razao_social ?? ''}}/funcionarios/adicionar" class="add">+</button>
+    </div>
 </div>
 
 
