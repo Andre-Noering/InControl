@@ -42,7 +42,22 @@ export class ItemFornecedorScreenComponent implements OnInit{
      
    }
   ngOnInit(): void {
-    
+    this.route.params.subscribe(params => this.lojaService.getByRazaoSocial(params['razao_social']).subscribe(resultado => {
+      this.loja = resultado;
+      this.itemFornecedorService.getAll(this.loja!.razao_social).pipe().subscribe(itensFornecedor => {
+        this.itensFornecedor = itensFornecedor;
+      }, 
+      erro => {
+        if(erro.status == 400) {
+          console.log(erro);
+        }
+      });
+    }, 
+    erro => {
+      if(erro.status == 400) {
+        console.log(erro);
+      }
+    }));
   }
    delete(itemFornecedor:ItemFornecedor){
     this.itemFornecedorService.delete(itemFornecedor.id!);
