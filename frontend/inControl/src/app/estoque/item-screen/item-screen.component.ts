@@ -24,6 +24,11 @@ export class ItemScreenComponent {
         this.loja = resultado;
         this.itemService.getAll(this.loja!.razao_social).pipe().subscribe(itens => {
           this.itens = itens;
+        }, 
+        erro => {
+          if(erro.status == 400) {
+            console.log(erro);
+          }
         });
       }, 
       erro => {
