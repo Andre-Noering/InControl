@@ -26,10 +26,9 @@
 <div class="cont" style= "height: 50%;">
     <h2 style="margin-bottom: 30px;">Estoque</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
-        <li style="width: 50%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
-        <li style="width: 20%; border-radius: 0; " class="list-group-item">Quantidade em estoque</li>
-        <li style="width: 20%; border-radius: 0; " class="list-group-item">Valor</li>
-        <li style="width: 10%; border-radius:0; border-top-right-radius:8px;" class="list-group-item">Escolha</li>
+        <li style="width: 43%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
+        <li style="width: 25%; border-radius: 0; " class="list-group-item">Quantidade em estoque</li>
+        <li style="width: 25%; border-radius: 0; border-top-right-radius: 8px;" class="list-group-item">Valor</li>
     </ul>
     <div *ngFor="let item of itens">
         <app-item-list-item [escolhendo]="true" [item]="item" (selecionado)="setItem($event); escolhendoItem=false;"></app-item-list-item>
@@ -42,9 +41,8 @@
     <h2 style="margin-bottom: 30px;">Fornecedores</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
         <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Razão social</li>
-        <li style="width: 25%; border-radius: 0; " class="list-group-item">CNPJ</li>
-        <li style="width: 25%; border-radius: 0; " class="list-group-item">Contato</li>
-        <li style="width: 10%; border-radius:0; border-top-right-radius:8px;" class="list-group-item">Escolha</li>
+        <li style="width: 28%; border-radius: 0; " class="list-group-item">CNPJ</li>
+        <li style="width: 25%; border-radius: 0; border-top-right-radius: 8px;" class="list-group-item">Contato</li>
     </ul>
     <div *ngFor="let fornecedor of fornecedores">
         <app-fornecedor-list-item [escolhendo]="true" [fornecedor]="fornecedor" (selecionado)="setFornecedor($event); escolhendoFornecedor=false;"></app-fornecedor-list-item>
