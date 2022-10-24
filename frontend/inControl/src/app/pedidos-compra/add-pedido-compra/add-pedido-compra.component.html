@@ -1,6 +1,6 @@
 <div *ngIf="!escolhendoFunc && gerente">
     <form [formGroup]="formPedido" (ngSubmit)="addPedido()">
-    <i routerLink="/lojas/{{loja?.razao_social ?? ''}}/pedidosCompra" class="bi bi-arrow-left-circle-fill"></i>
+    <i routerLink="/lojas/{{loja?.razao_social ?? ''}}/pedidosCompra" class="bi bi-arrow-left-circle-fill voltar"></i>
     <div id="formulario-cadastro" class="container">
         <h2>Cadastrar pedido de compra</h2>
         
@@ -8,9 +8,9 @@
         <label for="data">Data: </label>
         <input formControlName="data" type="datetime-local" class="form-control" id="data"  placeholder="Informe a data da venda." required>
         </div>
-        <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
-        <small style="border: 1px solid black;" *ngIf="!funcEscolhido" (click)="escolhendoFunc=true">Selecione o funcionário</small>
-        <small style="border: 1px solid black;" *ngIf="funcEscolhido" (click)="escolhendoFunc=true">Funcionário escolhido: {{funcionario?.nome}} {{funcionario?.sobrenome}}. Clique para alterar</small>
+        <div class="form-group" style="margin-left: 10%; margin-right: 10%;">
+        <small style="border: 1px solid black; border-radius: 5px; padding: 2px;" *ngIf="!funcEscolhido" (click)="escolhendoFunc=true">Selecione o funcionário</small>
+        <small style="border: 1px solid black; border-radius: 5px; padding: 2px;" *ngIf="funcEscolhido" (click)="escolhendoFunc=true">Funcionário escolhido: {{funcionario?.nome}} {{funcionario?.sobrenome}} <i class="bi bi-search"></i></small>
         </div>
         <button class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;">Enviar</button>
     </div>
@@ -18,7 +18,7 @@
 </div>
 
 <div id="funcScreen" *ngIf="escolhendoFunc">
-    <i (click)="escolhendoFunc=false" class="bi bi-arrow-left-circle-fill"></i>
+    <i (click)="escolhendoFunc=false" class="bi bi-arrow-left-circle-fill voltar"></i>
     <div class="cont" style="margin-top:30px; height: 50%;">
     <h2 style="margin: 30px;">Equipe</h2>
     <ul style="width:100%" class="list-group list-group-horizontal">
