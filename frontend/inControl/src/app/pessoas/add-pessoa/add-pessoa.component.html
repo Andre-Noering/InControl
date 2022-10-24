@@ -1,7 +1,7 @@
 <form [formGroup]="formCadastro" (ngSubmit)="adicionarPessoa()">
     <div id="formulario-cadastro" class="container">
-        <h2>Cadastrar Cliente</h2>
-        
+        <h2 *ngIf="pessoa==null">Cadastrar Cliente</h2>
+        <h2 *ngIf="pessoa!=null">Editar cadastro de Cliente</h2>
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
         <label for="Nome">Nome</label>
         <input formControlName="nome" type="text" class="form-control" id="Nome"  placeholder="Informe o nome" required>

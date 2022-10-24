@@ -1,8 +1,8 @@
 <div *ngIf="!escolhendoItem && !escolhendoFornecedor">
 <form [formGroup]="formItemFornecedor" (ngSubmit)="addItemForn()">
     <div id="formulario-cadastro" class="container">
-        <h2>Cadastre um item de fornecedor </h2>
-        
+        <h2 *ngIf="itemFornecedor==null">Cadastre um item de fornecedor </h2>
+        <h2 *ngIf="itemFornecedor!=null">Editar um item de fornecedor </h2>
         <div *ngIf="itemFornecedor==null" class="form-group" style="margin-left: 20%; margin-right: 20%;">
             <small *ngIf="!fornecedorEscolhido" (click)="escolhendoFornecedor=true">Selecione o fornecedor</small>
             <small *ngIf="fornecedorEscolhido" (click)="escolhendoFornecedor=true">Fornecedor selecionado: {{fornecedor?.razao_social}}. Clique para alterar</small>
