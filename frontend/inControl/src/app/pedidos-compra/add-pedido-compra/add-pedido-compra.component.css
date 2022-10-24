@@ -73,7 +73,7 @@ button:hover{
     color: white;
 }
 
-i {
+i.voltar {
     color: #7b87f1;
     font-size: 50px;
     margin-left: 15px;
