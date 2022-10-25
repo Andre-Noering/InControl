@@ -1,4 +1,4 @@
-<div class="row row-cols-12" *ngIf="lojas!=[]" style="text-align: center; align-items: center; justify-content: center;">
+<div class="row row-cols-12" *ngIf="lojas!=[]" style="text-align: center; align-items: center; justify-content: center; margin-top: 50px;">
     <h2 style="text-align: center;">Lojas gerenciadas por você: </h2>
     <div class="d-flex flex-direction-column col-2 col-sm-2 loja-item" *ngFor="let loja of lojas" style="align-items: center; justify-content: center; padding-top: 2%;">
         <div class="loja" routerLink="/lojas/{{loja.razao_social}}" style="border: none; margin:0;">
@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <i routerLink="/adicionarLoja" class="bi bi-plus-square-fill"></i>   
+    <i routerLink="/adicionarLoja" class="bi bi-plus-square-fill" style="margin: 20px;"></i>   
 </div>
 <div class="row row-cols-6" *ngIf="lojaTrab!=null" style="border-top: 1px gray;">
     <h2>Loja em que trabalha: </h2>
