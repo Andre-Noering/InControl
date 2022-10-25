@@ -51,6 +51,7 @@ public class FuncionarioService implements UserDetailsService {
         dto.setSenha(funcionario.getSenha());
         dto.setCpf(funcionario.getCpf());
         dto.setAtivo(funcionario.getAtivo());
+        dto.setNumLojas(funcionario.getLojas().size());
         dto.setSobrenome(funcionario.getSobrenome());
         dto.setTelefone(funcionario.getTelefone());
         if(funcionario.getLoja()!=null){

@@ -20,8 +20,8 @@ export class FuncionarioService {
         return this.http.get<Funcionario[]>(`/funcionarios//${razao_social}`);
     }
 
-    getByLogin(id:string){
-      return this.http.get<Funcionario>(`/funcionarios/funcionario/${id}`)
+    getByLogin(login:string){
+      return this.http.get<Funcionario>(`/funcionarios/funcionario/${login}`)
     }
     getById(id:number){
       return this.http.get<Funcionario>(`/funcionarios/funcionario/${id}/`)
