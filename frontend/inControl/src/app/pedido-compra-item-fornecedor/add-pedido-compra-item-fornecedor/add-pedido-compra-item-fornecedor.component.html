@@ -26,8 +26,7 @@
     <ul style="width:100%" class="list-group list-group-horizontal">
         <li style="width: 40%; border-radius: 0; border-top-left-radius: 8px; "class="list-group-item">Nome</li>
         <li style="width: 25%; border-radius: 0;" class="list-group-item">Preço</li>
-        <li style="width: 25%; border-radius: 0; " class="list-group-item">Fornecedor</li>
-        <li style="width: 10%; border-radius:0; border-top-right-radius:8px;" class="list-group-item">Escolha</li>
+        <li style="width: 25%; border-radius: 0; border-top-right-radius: 8px; " class="list-group-item">Fornecedor</li>
     </ul>
     <div *ngFor="let item of itens">
         <app-item-fornecedor-list-item [escolhendo]="true" [itemFornecedor]="item" (selecionado)="setItem($event); escolhendoItem=false;"></app-item-fornecedor-list-item>

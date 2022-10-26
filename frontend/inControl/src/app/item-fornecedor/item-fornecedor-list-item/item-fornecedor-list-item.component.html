@@ -3,14 +3,14 @@
     <li style="width: 21%; border-radius: 0;" class="list-group-item">R${{itemFornecedor?.valorCompra}}</li>
     <li style="width: 25%; border-radius: 0;"  class="list-group-item">{{itemFornecedor?.nome_fornecedor}}</li>
     <li style="width: 7%; padding-top: 1.2%;"><small style="cursor: pointer;" (click)="editPessoa()"><i class="bi bi-pencil"></i></small></li>
-    <li style="width: 7%; padding-top: 1.2%;"><small style="cursor: pointer;" (click)="deleteItem()"><i class="bi bi-trash3"></i></small></li>
+    <li style="width: 7%; padding-top: 1.2%; list-style: none;"><small style="cursor: pointer;" (click)="deleteItem()"><i class="bi bi-trash3"></i></small></li>
 </ul>
 
 <ul *ngIf="escolhendo" style="width:100%" class="list-group list-group-horizontal">
     <li style="width: 40%; border-radius: 0;"class="list-group-item">{{itemFornecedor?.nome_item}}</li>
     <li style="width: 25%; border-radius: 0;" class="list-group-item">R${{itemFornecedor?.valorCompra}}</li>
     <li style="width: 25%; border-radius: 0;"  class="list-group-item">{{itemFornecedor?.nome_fornecedor}}</li>
-    <li style="width: 10%; border-radius: 0;"><small (click)="selectItem()">+</small></li>
+    <li style="width: 7%; padding-top: 1.2%;"><small (click)="selectItem()"><i class="bi bi-plus-square"></i>    </small></li>
 </ul>
 
 
