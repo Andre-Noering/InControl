@@ -31,7 +31,8 @@ export class AddLojaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.formLoja.get('id_funcionario')?.patchValue(this.authenticationService.userValue.id);
+    console.log(this.authenticationService.userValue)
+    this.formLoja.get('id_funcionario')?.patchValue(this.authenticationService.userValue.idPessoa);
   }
 
   addLoja(){

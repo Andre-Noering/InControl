@@ -43,6 +43,7 @@ import { PedidoCompraItemFornecedorListItemComponent } from './pedido-compra-ite
 import { AddPedidoCompraItemFornecedorComponent } from './pedido-compra-item-fornecedor/add-pedido-compra-item-fornecedor/add-pedido-compra-item-fornecedor.component';
 import { PedidosCompraFuncionarioScreenComponent } from './pedidos-compra/pedidos-compra-funcionario-screen/pedidos-compra-funcionario-screen.component';
 import { VendasFuncionarioScreenComponent } from './vendas/vendas-funcionario-screen/vendas-funcionario-screen.component';
+import { ContaScreenComponent } from './conta-screen/conta-screen.component';
 
 @NgModule({
   declarations: [
@@ -84,7 +85,8 @@ import { VendasFuncionarioScreenComponent } from './vendas/vendas-funcionario-sc
     PedidoCompraItemFornecedorListItemComponent,
     AddPedidoCompraItemFornecedorComponent,
     PedidosCompraFuncionarioScreenComponent,
-    VendasFuncionarioScreenComponent
+    VendasFuncionarioScreenComponent,
+    ContaScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -100,7 +102,7 @@ import { VendasFuncionarioScreenComponent } from './vendas/vendas-funcionario-sc
 })
 export class AppModule { }
 export type User = {
-  id: number;
+  idPessoa: number;
   login: string;
   password: string;
   authdata?: string;

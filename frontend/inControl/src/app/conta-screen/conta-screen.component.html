@@ -1,0 +1,17 @@
+<div *ngIf="!editando">
+<div class="card" style=" height: 200px; width:80%; margin: auto; margin-top: 20px;"> 
+    <h3 style=" margin:auto; margin-right: 5%; margin-top: 3%;margin-bottom: 0; padding-bottom: 0;" > Telefone: {{funcionario?.telefone}}</h3>
+    <h1 style=" margin:auto; margin-left: 5%; margin-top: 0; margin-bottom: 0;">{{funcionario?.nome}} {{funcionario?.sobrenome}}</h1>
+    <h3 style=" margin:auto; margin-right: 5%; margin-top: 0; padding-top: 0;" > CPF: {{funcionario?.cpf}}</h3>
+</div>
+
+<div class="card" style="height: 150px; width:80%; margin: auto; margin-top:2%; ">
+    <div style="display: inline; margin: auto; width: 100%;">
+    <button class="btn btn-primary" style="width:25%; margin-left: 5%; height: 75px; font-size: 30px;" (click)="editando=true">Atualizar cadastro</button>
+    <button class="btn btn-primary" style="width:25%; margin: auto; margin-left: 7.5%; height: 75px; font-size: 30px;"  routerLink="/adicionarLoja">Cadastrar loja</button>
+    <button class="btn btn-primary" style="width:25%;  margin: auto; margin-left: 7.5%; height: 75px; font-size: 30px;"  routerLink="/lojas">Minhas lojas</button>
+</div>
+</div>
+</div>
+
+<app-cadastro-screen (editado)="editado($event)" *ngIf="editando" [funcionario] = "funcionario"></app-cadastro-screen>

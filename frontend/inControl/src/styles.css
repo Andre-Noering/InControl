@@ -12,6 +12,7 @@ body, #tela-login {
     font-family: ;
     font-size: 1.1em;
     color: black;
+    overflow-x: hidden;
   }
 
 .navbar{

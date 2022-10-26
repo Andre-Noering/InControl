@@ -4,13 +4,13 @@ import lombok.Data;
 
 @Data
 public class FuncionarioDTO extends PessoaDTO{
-    private Long id;
+    private Long idPessoa;
     private String login;
     private String senha;
     private boolean ativo;
 
     public FuncionarioDTO(Long id, String login, String senha) {
-        this.id=id;
+        this.idPessoa=id;
         this.login = login;
         this.senha = senha;
     }

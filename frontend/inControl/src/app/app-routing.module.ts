@@ -30,12 +30,14 @@ import { AddPedidoCompraItemFornecedorComponent } from './pedido-compra-item-for
 import { AddPedidoCompraComponent } from './pedidos-compra/add-pedido-compra/add-pedido-compra.component';
 import { PedidosCompraFuncionarioScreenComponent } from './pedidos-compra/pedidos-compra-funcionario-screen/pedidos-compra-funcionario-screen.component';
 import { VendasFuncionarioScreenComponent } from './vendas/vendas-funcionario-screen/vendas-funcionario-screen.component';
+import { ContaScreenComponent } from './conta-screen/conta-screen.component';
 
 const routes: Routes = [
   {path: 'venda', component: ItemScreenComponent},
   {path: '', component: LandingPageComponent},
   {path: 'login', component: LoginScreenComponent},
   {path: 'cadastro', component: CadastroScreenComponent},
+  {path:'conta', component: ContaScreenComponent},
   {path: 'lojas', component: LojasScreenComponent},
   {path: 'lojas/:razao_social', component: ItemLojaComponent},
 

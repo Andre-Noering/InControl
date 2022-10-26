@@ -1,6 +1,9 @@
-<form [formGroup]="formCadastro" (ngSubmit)="cadastro()" >
-    <div id="formulario-cadastro" class="container" style="margin-bottom: 100px;">
-        <h2>Cadastre-se</h2>
+
+<form [formGroup]="formCadastro" (ngSubmit)="cadastro()">
+    <div id="formulario-cadastro" class="container">
+        <h2 *ngIf="funcionario==null">Cadastre-se</h2>
+        <h2 *ngIf="funcionario!=null">Editar seu cadastro</h2>
+
         
         <div class="form-group" style="margin-left: 20%; margin-right: 20%;">
         <label for="Nome">Nome</label>
