@@ -1,3 +1,5 @@
+
+
 #home {
 	background: #010c6d;
 	color: white;
@@ -6,8 +8,8 @@
 
 body, #tela-login {
     height: 100%;
-    background-color: #f3f3f3;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #f5f5f5;
+    font-family: ;
     font-size: 1.1em;
     color: black;
     overflow-x: hidden;
