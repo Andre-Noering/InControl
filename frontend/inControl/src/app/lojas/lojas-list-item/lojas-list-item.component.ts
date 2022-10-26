@@ -9,6 +9,7 @@ import { Loja } from 'src/app/app.module';
 export class LojasListItemComponent implements OnInit {
 
   @Input() loja!:Loja;
+  @Input() cargo!:string;
   
   constructor() { }
 

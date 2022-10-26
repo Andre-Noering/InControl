@@ -14,6 +14,8 @@ import { LojaService } from 'src/app/services/loja.service';
 export class LojasScreenComponent implements OnInit {
   @Input() loja: Loja|null=null;
 
+  ger:string = "Gerente";
+  func:string="Funcionario";
   lojaTrab:Loja|null = null;
   user: User | null = null;
   funcionario: Funcionario | null = null;

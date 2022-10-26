@@ -35,4 +35,7 @@ export class CadastroService {
           );
         
     }
+    edit(funcionario:Gerente){
+      this.http.put(`/funcionarios/atualizar`,funcionario).subscribe(resultado=> {});
+    }
 }

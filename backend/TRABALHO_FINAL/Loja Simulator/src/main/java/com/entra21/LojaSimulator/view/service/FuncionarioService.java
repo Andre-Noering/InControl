@@ -44,14 +44,12 @@ public class FuncionarioService implements UserDetailsService {
     public FuncionarioDTO getDTOById(Long id) {
         FuncionarioEntity funcionario = getFuncionarioById(id);
         FuncionarioDTO dto = new FuncionarioDTO();
-        dto.setId(funcionario.getId());
         dto.setIdPessoa(funcionario.getId());
         dto.setNome(funcionario.getNome());
         dto.setLogin(funcionario.getLogin());
         dto.setSenha(funcionario.getSenha());
         dto.setCpf(funcionario.getCpf());
         dto.setAtivo(funcionario.getAtivo());
-        dto.setNumLojas(funcionario.getLojas().size());
         dto.setSobrenome(funcionario.getSobrenome());
         dto.setTelefone(funcionario.getTelefone());
         if(funcionario.getLoja()!=null){
@@ -89,7 +87,7 @@ public class FuncionarioService implements UserDetailsService {
     //Build do funcionário
     public FuncionarioEntity build(FuncionarioDTO funcionarioDTO){
         FuncionarioEntity newFuncionario = new FuncionarioEntity();
-        newFuncionario.setId(funcionarioDTO.getId());
+        newFuncionario.setId(funcionarioDTO.getIdPessoa());
         newFuncionario.setAtivo(funcionarioDTO.isAtivo());
         newFuncionario.setNome(funcionarioDTO.getNome());
         newFuncionario.setSobrenome(funcionarioDTO.getSobrenome());
@@ -105,7 +103,7 @@ public class FuncionarioService implements UserDetailsService {
     //Metodo Save - Criando um funcionario
     public void save(FuncionarioDTO funcionarioDTO){
         FuncionarioEntity funcionarioEntity = new FuncionarioEntity();
-        funcionarioEntity.setId(funcionarioDTO.getId());
+        funcionarioEntity.setId(funcionarioDTO.getIdPessoa());
         funcionarioEntity.setNome(funcionarioDTO.getNome());
         funcionarioEntity.setSobrenome(funcionarioDTO.getSobrenome());
         funcionarioEntity.setTelefone(funcionarioDTO.getTelefone());
@@ -121,7 +119,7 @@ public class FuncionarioService implements UserDetailsService {
 
     //PUT
     public void update(FuncionarioDTO funcionarioDTO){
-        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getId());
+        FuncionarioEntity funcionarioEntity = getFuncionarioById(funcionarioDTO.getIdPessoa());
             if (funcionarioDTO.getCpf() != null){
                 funcionarioEntity.setCpf(funcionarioDTO.getCpf());
             }
@@ -134,12 +132,19 @@ public class FuncionarioService implements UserDetailsService {
             if (funcionarioDTO.getTelefone() != null){
                 funcionarioEntity.setCpf(funcionarioDTO.getTelefone());
             }
-
+            if (funcionarioDTO.getLogin()!=null){
+                funcionarioEntity.setLogin(funcionarioEntity.getLogin());
+            }
+            if(funcionarioDTO.getSenha()!=null){
+                funcionarioEntity.setSenha(funcionarioDTO.getSenha());
+            }
+            funcionarioRepository.save(funcionarioEntity);
     }
 
     public void delete(Long id){
         FuncionarioEntity f = getFuncionarioById(id);
         f.setAtivo(false);
+        f.setLogin("");
         funcionarioRepository.save(f);
     }
 

@@ -102,7 +102,7 @@ import { ContaScreenComponent } from './conta-screen/conta-screen.component';
 })
 export class AppModule { }
 export type User = {
-  id: number;
+  idPessoa: number;
   login: string;
   password: string;
   authdata?: string;
@@ -127,7 +127,6 @@ export type Funcionario = {
   login: string;
   senha:string;
   idLoja:number;
-  numLojas:number|null;
 }
 
 export type Pessoa = {

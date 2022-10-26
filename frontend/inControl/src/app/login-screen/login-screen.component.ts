@@ -31,7 +31,7 @@ export class LoginScreenComponent implements OnInit {
     .subscribe(
         data => {
           console.log("caiu")
-          this.router.navigate(['']);
+          this.router.navigate(['/conta']);
         },
         error => {
             alert("Usuário ou senha incorreto!")

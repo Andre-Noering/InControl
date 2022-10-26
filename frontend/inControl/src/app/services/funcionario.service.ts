@@ -49,6 +49,12 @@ export class FuncionarioService {
       );;
     }
     edit(funcionario:Funcionario){
-      this.http.put(`/funcionarios/atualizar`, funcionario).subscribe(resultado=> {});
+      this.http.put(`/funcionarios/atualizar`, funcionario).subscribe(resultado=> {},
+        erro => {
+          if(erro.status == 400) {
+            console.log(erro);
+          }
+        }
+      );
     }
 }

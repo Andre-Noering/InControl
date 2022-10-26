@@ -1,17 +1,17 @@
-<div class="row row-cols-12" *ngIf="lojas!=[]" style="text-align: center; align-items: center; justify-content: center; margin-top: 50px;">
-    <h2 style="text-align: center;">Lojas gerenciadas por você: </h2>
-    <div class="d-flex flex-direction-column col-2 col-sm-2 loja-item" *ngFor="let loja of lojas" style="align-items: center; justify-content: center; padding-top: 2%;">
-        <div class="loja" routerLink="/lojas/{{loja.razao_social}}" style="border: none; margin:0;">
-            <app-lojas-list-item  [loja]="loja"></app-lojas-list-item>
+<div class="row row-cols-12"  style="text-align: center; align-items: center; justify-content: center; margin-top: 50px;">
+    <h2 style="text-align: center;">Suas lojas: </h2>
+    <div class="d-flex flex-direction-column col-3 col-sm-3 loja-item" *ngFor="let loja of lojas" style="align-items: center; justify-content: center; padding-top: 2%;">
+        <div class="loja" routerLink="/lojas/{{loja?.razao_social}}" style="width: 100%; border: none; margin:0;">
+            <app-lojas-list-item [cargo]="ger" [loja]="loja"></app-lojas-list-item>
         </div>
     </div>
-
+    <div style="width: 100%; height:1px; border-top: 5px solid white;"> </div>
+    <div *ngIf="lojaTrab!=null"  class="d-flex flex-direction-column col-3 col-sm-3 loja-item" style="align-items: center; justify-content: center; padding-top: 2%;" routerLink="/lojas/{{loja?.razao_social}}" style="border: none; margin:0;">
+        <div class="loja">
+        <app-lojas-list-item routerLink="/lojas/{{lojaTrab?.razao_social}}" [cargo]="func" [loja]="lojaTrab" style="border: none; margin:0;"></app-lojas-list-item>
+    </div>
+    </div>
     <i routerLink="/adicionarLoja" class="bi bi-plus-square-fill" style="margin: 20px;"></i>   
 </div>
-<div class="row row-cols-6" *ngIf="lojaTrab!=null" style="border-top: 1px gray;">
-    <h2>Loja em que trabalha: </h2>
-    <div class="loja" routerLink="/lojas/{{lojaTrab?.razao_social}}" style="border: none; margin:0;">
-        <app-lojas-list-item  [loja]="lojaTrab"></app-lojas-list-item>
-    </div>
-</div>
+
 
