@@ -1,7 +1,6 @@
 
 <nav style="height: 11%;margin: 0;" class="navbar navbar-expand-sm ">
   <div class="container"> 
-  <a routerLink=""><img src="..\assets\img\Logo.png" alt="" style="width: 50px; height: 50px; justify-content: left !important"></a> 
    <a class="navbar-brand">
      </a>
    <button class="navbar-toggler" data-toggle="collapse" data-target="#nav-principal">
@@ -26,10 +25,10 @@
         <span class="nav-link">|</span>
       </li>
        <li class="nav-item" *ngIf="user != null">
-        <a routerLink="/lojas" class="nav-link">Minhas lojas</a>
+        <a id="link" routerLink="/lojas" class="nav-link">Minhas lojas</a>
        </li>
        <li class="nav-item" *ngIf="user != null">
-        <button type="button" id="btn-entrar" class="btn ml-4" (click)="logout()">Sair</button>
+        <button type="button" style="margin-top: 2px;" id="btn-entrar" class="btn ml-4" (click)="logout()">Sair</button>
       </li>
      </ul>
    </div>

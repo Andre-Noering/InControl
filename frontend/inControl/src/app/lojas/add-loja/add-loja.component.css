@@ -29,6 +29,7 @@ input:active{
     height: 40%; 
     margin-top: 2%; 
     text-align: center; 
+    margin-bottom: 20px;
 }
 
 .form-group {
